@@ -298,24 +298,25 @@ FALLBACK_RGB = {"aluminum": (204, 204, 206), "steel": (140, 140, 142), "chrome":
                 "glass": (200, 220, 230), "rubber": (40, 40, 40), "unknown": (153, 153, 153)}
 
 
-# The real robot is black / dark grey all over (anodised aluminium and dark
-# printed parts); only the actuators and the RealSense cameras keep the colours
-# Fusion gives them. Fusion's appearance colours are unreliable for the rest
-# ("ABS (White)" reads back as 0,0,0), so the team's statement wins. Finish
-# (metallic / roughness) still follows the material class, so machined and
-# printed parts catch the light differently.
+# The parts the team makes (CNC and printed, plus the fasteners) are black /
+# dark grey on the real robot; every purchased component (actuators, cameras,
+# computer, IMU, batteries, boards) keeps the colour Fusion gives it. Fusion's
+# appearance colours are unreliable for the team's own parts ("ABS (White)"
+# reads back as 0,0,0), so the team's statement wins there. Finish (metallic /
+# roughness) still follows the material class.
 ROBOT_RGB = (42, 42, 44)
-KEEP_FUSION_COLOUR_KEYS = ("intelrealsense", "d435", "d436",                      # cameras
-                           "robstride", "r06", "3_1_02_090", "feetech", "fl46",   # actuators and their internals
-                           "gr-2202", "00mini", "double_helix_pinion")
+# Purchased components that also deserve extra mesh detail in the viewer.
+KEEP_FUSION_COLOUR_KEYS = ("intelrealsense", "d435", "d436", "robstride", "r06", "3_1_02_090", "feetech",
+                           "fl46", "gr-2202", "00mini", "double_helix_pinion", "minisforum")
 
 
-def look_for(row: dict) -> tuple[list[float], float, float, str]:
-    """(linear rgb, metallic, roughness, class) for a tree row."""
+def look_for(row: dict, own: bool = True) -> tuple[list[float], float, float, str]:
+    """(linear rgb, metallic, roughness, class) for a tree row. own=True for the
+    team's own parts and the fasteners (robot colour), False for purchased
+    components (Fusion colour)."""
     metallic, rough, cls = material_look(row.get("appearance", ""), row.get("material", ""))
     rgb = row.get("color_rgb", "")
-    ident = " ".join((row.get("fusion_name", ""), row.get("path", ""))).lower()
-    if not any(k in ident for k in KEEP_FUSION_COLOUR_KEYS):
+    if own:
         rgb = "%d,%d,%d" % ROBOT_RGB
     try:
         srgb = tuple(int(x) for x in rgb.split(","))
@@ -671,11 +672,21 @@ def main() -> int:
         if fn not in file_cls or CLASS_RANK[o["cls"]] > CLASS_RANK[file_cls[fn]]:
             file_cls[fn] = o["cls"]
     caps = {"part": a.part_faces, "vendor": a.vendor_faces, "hardware": a.hardware_faces}
+    # Actuators and cameras keep their own colours and are what a reader looks at
+    # first, so they get four times the vendor cap (the housings carry the detail).
+    detailed = {o["row"]["file_name"] for o in occ
+                if any(k in " ".join((o["row"].get("fusion_name", ""), o["row"].get("path", ""))).lower()
+                       for k in KEEP_FUSION_COLOUR_KEYS)}
+
+    def cap_for(fn: str) -> int:
+        c = caps[file_cls[fn]]
+        return c * 4 if fn in detailed and file_cls[fn] == "vendor" else c
+
     for _round in range(4):
         total = 0
         for o in occ:
             fn = o["row"]["file_name"]
-            m, _ = store.get(fn, caps[file_cls[fn]])
+            m, _ = store.get(fn, cap_for(fn))
             total += len(m.faces) if m is not None else 0
         print(f"caps {caps}: {total} faces over all occurrences (target {a.total_faces})")
         if total <= a.total_faces:
@@ -701,7 +712,7 @@ def main() -> int:
         return w
 
     def add_single(o: dict, key: str, mat_prefix: str, into: dict):
-        m, _ = store.get(o["row"]["file_name"], caps[file_cls[o["row"]["file_name"]]])
+        m, _ = store.get(o["row"]["file_name"], cap_for(o["row"]["file_name"]))
         if m is None:
             empty.append(o["path"])
             return
@@ -709,7 +720,7 @@ def main() -> int:
         n = counts[key]
         counts[key] += 1
         node = f"{mat_prefix}{key}#{n}"
-        rgb, metallic, rough, _cls = look_for(o["row"])
+        rgb, metallic, rough, _cls = look_for(o["row"], own=(o["cls"] != "vendor"))
         enc = writer.add_mesh(node, pbr_material(node, rgb, metallic, rough), make_prims(w, not a.normals),
                               a.qbits, a.level)
         faces_by_cls[o["cls"]] += enc["n_faces"]
@@ -726,11 +737,11 @@ def main() -> int:
     for o in occ:
         if o["cls"] != "hardware":
             continue
-        m, _ = store.get(o["row"]["file_name"], caps[file_cls[o["row"]["file_name"]]])
+        m, _ = store.get(o["row"]["file_name"], cap_for(o["row"]["file_name"]))
         if m is None:
             empty.append(o["path"])
             continue
-        rgb, metallic, rough, cls = look_for(o["row"])
+        rgb, metallic, rough, cls = look_for(o["row"], own=True)   # fasteners: robot colour
         key = (tuple(rgb), metallic, rough)
         g = hardware.setdefault(key, {"V": [], "F": [], "n": 0, "off": 0, "cls": cls, "rgb": rgb,
                                       "metallic": metallic, "rough": rough})
@@ -873,9 +884,9 @@ def main() -> int:
         print(f"  {len(empty)} occurrences had no geometry left after cleaning: {empty[:8]}")
     over = []
     for fn, cls in file_cls.items():
-        m, _ = store.get(fn, caps[cls])
-        if m is not None and len(m.faces) > caps[cls] * 1.3:
-            over.append(f"{fn}: {len(m.faces)} faces for a cap of {caps[cls]}")
+        m, _ = store.get(fn, cap_for(fn))
+        if m is not None and len(m.faces) > cap_for(fn) * 1.3:
+            over.append(f"{fn}: {len(m.faces)} faces for a cap of {cap_for(fn)}")
     if over:
         print(f"  {len(over)} meshes stayed above their cap (topology kept): {over[:8]}")
     if size > 3 * 2**20:
