@@ -1,0 +1,36 @@
+# FAQ
+
+**Can I build it today?** No; see the [home page](../index.md) blockers.
+
+**What does it cost?** At least {{ bom_total() }} in parts; see
+[Cost and time](../before-you-start/cost-and-time.md).
+
+**How long does it take?** **TODO**{ .dh-missing }: not measured.
+
+**Can I build only a camera module?** About 0.58 kg, two axes and about
+$600 in hardware per module (project README) **UNVERIFIED**{ .dh-unverified }.
+
+!!! missing "MISSING — Camera module interface for another robot: mounting, power, bus"
+    *Owner: hardware lead.*
+
+<figure markdown>
+  ![Visible-reachable workspace volumes compared across six humanoid platforms](../assets/images/workspace.webp){ loading=lazy }
+  <figcaption>Visible-reachable workspace across six humanoid platforms.</figcaption>
+</figure>
+
+**Can I substitute the D436 or the RobStride actuators?** **TODO**{ .dh-missing }:
+no alternate is recorded. See [Sourcing](../bom/sourcing.md).
+
+**Do I need a 5-axis mill?** **TODO**{ .dh-missing }: unknown. See
+[Skills and shop access](../before-you-start/skills-and-shop.md).
+
+**Do I need a GPU?** Not on the robot; the planner needs a separate CUDA machine.
+
+**Will the published policy run on my build?** Only if joint order, directions
+and calibration match; that contract is **TODO**{ .dh-missing }, see
+[Software](../software.md).
+
+**Where do I get help?** The GitHub issue trackers of the three repositories.
+
+!!! missing "MISSING — Issue template, contribution guide, support policy; what to do with an out-of-tolerance part; kits; build-log review"
+    *Owner: PI + hardware lead.*

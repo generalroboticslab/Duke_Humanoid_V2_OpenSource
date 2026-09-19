@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "hardware-site",
+      "runtimeExecutable": "hardware-site/.venv/bin/python",
+      "runtimeArgs": [
+        "-m",
+        "mkdocs",
+        "serve",
+        "-f",
+        "hardware-site/mkdocs.yml",
+        "-a",
+        "127.0.0.1:8321"
+      ],
+      "port": 8321
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+# Torso and waist
+
+Build the torso that limbs and camera columns bolt to.
+
+!!! abstract "At a glance"
+    - **You will:** build frame and waist; mount electronics, packs and covers.
+    - **Parts:** RobStride 03 ×1 ([Actuators](../bom/actuators.md)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/cnc-parts.md)); electronics in steps 5–8 ([Electronics](../bom/electronics.md)).
+    - **Before this:** [Arm](arm.md).
+
+> **Figure** <span class="pending-figure">not produced yet</span> —
+> `assets/assembly/torso-exploded.png`: the torso exploded, every item labelled
+> in its mounting position.
+
+!!! missing "MISSING — torso fasteners, torques, mounts and retention"
+    - Per step: screws, torque, Loctite 222 use, plate join order and location,
+      squareness tolerance.
+    - No electronics item has a mount in any parts list.
+    - Computer thermal clearance and port orientation are unrecorded.
+
+    *Owner: hardware lead, from the computer-aided design (CAD) and a photographed build.*
+
+<figure markdown>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
+    poster="../../assets/exploded/body-frame-poster.webp" aria-label="Exploded view of the torso plate frame"><source src="../../assets/exploded/body-frame.mp4" type="video/mp4"><a href="../../assets/exploded/body-frame.mp4">MP4</a></video>
+  <figcaption>Frame: plates, four ribbed rails, internal spine, both shoulder-pitch actuators, waist actuator.</figcaption>
+</figure>
+
+{{ step(1, "Configure and label the waist actuator") }}
+
+Set the RobStride 03 to Controller Area Network (CAN) ID 1 on the bench. Label it `waist`.
+
+| Joint | Actuator | CAN ID | Bus | Model limit |
+| --- | --- | --- | --- | --- |
+| `waist` | RobStride 03 | 1 | `can22` (shared with both `shoulder_1`) | ±90° |
+
+✅ **Check:** Answers at ID 1; labelled.
+
+{{ step(2, "Assemble the plate frame") }}
+
+<div class="parts-needed" markdown>
+
+| | |
+| --- | --- |
+| `CNC_body01_x1_bottom_plate` | **TODO**{ .dh-missing } |
+| `CNC_body02_x2_side_plate` | **TODO**{ .dh-missing } |
+| `CNC_body04_x4_front_plate` — probably the four ribbed rails **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } |
+
+</div>
+
+Square the frame before anything goes in: every limb and camera references it.
+
+!!! unverified "UNVERIFIED — machined-part sheet also lists `B1`–`B3` and `B5_body_shelf` plates"
+    Probably duplicates of the `CNC_body` plates: do not order both. The CAD's
+    internal spine has no `CNC_body` ID. *Owner: hardware lead.*
+
+✅ **Check:** Flat on a surface plate, square, no racking when pushed.
+
+{{ step(3, "Install the waist actuator") }}
+
+Seat it in the bottom plate's round opening, driver board up, output down into
+the pelvis through a flange, a ring and a coupler.
+
+<figure markdown>
+  ![Waist actuator in the torso bottom plate](../assets/photos/body-box-waist-actuator.webp){ loading=lazy }
+  <figcaption>Waist actuator at the centre of the bottom plate.</figcaption>
+</figure>
+
+!!! missing "MISSING — waist: part IDs of the flange, ring and coupler; whether the ring is a bearing"
+    *Owner: hardware lead.*
+
+✅ **Check:** Turns freely, no axial play; square to the pelvis at zero.
+
+{{ step(4, "Fit the top plate") }}
+
+<div class="parts-needed" markdown>
+
+| | |
+| --- | --- |
+| `CNC_body03_x1_top_plate` | **TODO**{ .dh-missing } |
+
+</div>
+
+It is the datum for both camera columns: yaw axes at y = ±65 mm, z = 0.52 m in
+the base frame ([Head and camera gimbal](head-and-camera-gimbal.md)).
+
+✅ **Check:** Flat and square to the frame.
+
+<figure markdown>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
+    poster="../../assets/exploded/body-front-poster.webp" aria-label="Exploded view of the torso front electronics bay"><source src="../../assets/exploded/body-front.mp4" type="video/mp4"><a href="../../assets/exploded/body-front.mp4">MP4</a></video>
+  <figcaption>Front bay, identifications <strong class="dh-unverified">UNVERIFIED</strong>: six CAN adapters, mini PC on the spine, two distribution bars, inertial measurement unit (IMU) on the top plate.</figcaption>
+</figure>
+
+{{ step(5, "Mount the computer") }}
+
+<div class="parts-needed" markdown>
+
+| | |
+| --- | --- |
+| MINISFORUM X1-470 mini PC | 1 |
+
+</div>
+
+Retain it against walking shock, with intake, exhaust and ports clear.
+
+<figure markdown>
+  ![Computer in printed T-brackets](../assets/photos/body-computer-mount.webp){ loading=lazy }
+  <figcaption>Computer in printed T-brackets on a crossbar above the waist. Same mount on the finished robot: <strong class="dh-unverified">UNVERIFIED</strong>.</figcaption>
+</figure>
+
+✅ **Check:** Does not move when shaken; vents and ports clear.
+
+<figure markdown>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
+    poster="../../assets/exploded/body-back-poster.webp" aria-label="Exploded view of the torso rear bay with two upright packs"><source src="../../assets/exploded/body-back.mp4" type="video/mp4"><a href="../../assets/exploded/body-back.mp4">MP4</a></video>
+  <figcaption>Rear bay: two packs upright behind the spine, terminal strip below. No pack retention is drawn.</figcaption>
+</figure>
+
+{{ step(6, "Mount the battery packs") }}
+
+<div class="parts-needed" markdown>
+
+| | |
+| --- | --- |
+| Zeee 6S 22.2 V 10000 mAh LiPo | 2 |
+
+</div>
+
+!!! danger "Keep both packs disconnected"
+    Until [Pre-power checks](../electrical/pre-power-checks.md) pass. See
+    [Safety](../before-you-start/safety.md).
+
+Stand the packs upright, side by side, in the rear bay. They run **in series**
+(one pack's + to the other's −) through a surge protector to the 48 V bus:
+44.4 V nominal, 50.4 V full (computed). *Source: team power wiring diagram.*
+
+!!! missing "MISSING — SAFETY — battery pack retention, swap path and lead protection"
+    *Owner: hardware lead + electrical.*
+
+✅ **Check:** Packs cannot shift, no lead is taut or on an edge, each pack comes out.
+
+{{ step(7, "Mount the CAN adapters, hubs and power parts") }}
+
+<div class="parts-needed" markdown>
+
+| | |
+| --- | --- |
+| CANable PRO V2.0 — `can9`, `can21`–`can25` | 6 |
+| Vention USB hub | 3 |
+| Waveshare ST/SC bus servo driver board | 2 |
+| Buck converters: DC 20–60 V to 12 V ×1, 48 V to 12 V ×2 | 3 **UNVERIFIED**{ .dh-unverified } |
+| Distribution block pairs, upper and lower body | 2 |
+| Surge protector (pack lead), 10 A fuse (computer branch) | 1 each |
+| TVS diode M1.5KE62CA | 10 |
+
+</div>
+
+Label each CAN adapter with its bus first: a udev rule binds bus name to USB
+serial. Wire per [Power system](../electrical/power-system.md) and
+[CAN bus](../electrical/can-bus.md). The power diagram draws one buck converter
+(computer only), the bill of materials (BOM) three.
+
+✅ **Check:** Every adapter bus-labelled; no board hangs on its cable; no converter's heat path blocked.
+
+{{ step(8, "Mount the IMU") }}
+
+<div class="parts-needed" markdown>
+
+| | |
+| --- | --- |
+| SYD Dynamics TransducerM TM171, 40 × 34 × 12.6 mm, USB-C | 1 |
+
+</div>
+
+Mount it rigidly: the control stack treats its orientation as a constant.
+
+<figure markdown>
+  ![IMU on a printed X-bracket](../assets/photos/body-imu-mount.webp){ loading=lazy }
+  <figcaption>IMU on a printed X-bracket on a machined plate. Same mount on the finished robot: <strong class="dh-unverified">UNVERIFIED</strong>.</figcaption>
+</figure>
+
+!!! unverified "UNVERIFIED — IMU screws: M3 (team log) vs Ø2.10 mm holes on 30 × 31 mm (vendor drawing)"
+    *Owner: hardware lead.*
+
+!!! missing "MISSING — IMU location and orientation in the base frame, and how to verify them"
+    *Owner: hardware lead + controls.*
+
+✅ **Check:** Rigid, with axes checked against the robot frame.
+
+{{ step(9, "Fit the disconnect and emergency stop") }}
+
+!!! missing "MISSING — SAFETY — no e-stop, main disconnect or pre-charge in the BOM or power diagram"
+    The run scripts assume a physical e-stop. Specify device, what it cuts,
+    rating and location.
+    *Owner: hardware lead + electrical + Safety sign-off.*
+
+<figure markdown>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1248" height="702"
+    poster="../../assets/exploded/body-cover-poster.webp" aria-label="Exploded view of the torso front and back covers"><source src="../../assets/exploded/body-cover.mp4" type="video/mp4"><a href="../../assets/exploded/body-cover.mp4">MP4</a></video>
+  <figcaption>Front and back covers: each a perforated frame plus a perforated panel.</figcaption>
+</figure>
+
+{{ step(10, "Fit the front and back covers") }}
+
+!!! missing "MISSING — torso covers: material, structural or not, fasteners, what comes off for a pack swap"
+    *Owner: hardware lead.*
+
+✅ **Check:** Nothing inside moves when the torso is tilted; the waist still turns.
