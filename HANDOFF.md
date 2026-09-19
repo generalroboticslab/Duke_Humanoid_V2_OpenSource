@@ -1,36 +1,37 @@
 # Handoff — Duke Humanoid V2 hardware release site
 
-Last worked on: 2026-09-19 (macOS). Continue on Windows from this repo. Read `CLAUDE.md` for the working rules.
+Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` for the working rules.
 
 ## Status
 
 | Item | State |
 |---|---|
 | Site (`hardware-site/`, MkDocs Material) | 50 pages, ~22,500 words, English, `mkdocs build --strict` clean |
-| Punch list (`docs/reference/todo.md`, generated) | **179 open items, 54 block release** — every gap is a red MISSING/UNVERIFIED box |
+| Punch list (`docs/reference/todo.md`, generated) | **170 open items, 52 block release** — every gap is a red MISSING/UNVERIFIED box |
 | Images still needed (`docs/assets/MANIFEST.md`, generated) | 112, incl. the whole-robot exploded view (`assets/images/exploded-overview.png`, not yet made) |
 | Exploded-view animations | 9 web MP4s in `docs/assets/exploded/`, embedded on the assembly pages |
 | Wiring diagrams | `hardware/*.jpg` → `docs/assets/wiring/`, on the electrical pages |
-| CAD downloads | Mechanism ready, **no files yet**: drop exports into `hardware-site/docs/files/…` (see below) |
+| CAD downloads | 34 files live: 31 per-part STEP, 2 SLS STL, whole-robot STEP (zip); `.f3z` as release asset `cad-v2.1-rc1`. Still missing: PDF drawings, 3MF plates, STL for the two ABS plates. Raw export + `tree.csv` in `cad/humanoid_2.1_latest_2026-09-19_1423/` |
 | Local preview | `http://localhost:8321/duke_humanoid_v2/` — the `/duke_humanoid_v2/` prefix is intentional (`site_url`) |
 
 ## What the team must supply (blocking)
 
-1. **CAD from Fusion 360** (`humanoid_2.1_latest`, project humanoid/humanoid_v2/v2.1):
-   - first update the out-of-date linked components (⚠️ icon → Get Latest);
-   - `.f3z` (include linked designs) and whole-robot STEP → `docs/files/assembly/`;
-   - one STEP per part → `docs/files/step/<part_id>_rev01.step`;
-   - one 3MF (or STL) per printed part → `docs/files/print/`; slicer plates → `docs/files/plates/`;
-   - PDF drawings from `humanoid_2.1_latest_Drawing` → `docs/files/drawings/`.
-   Then run `python tools/gen_cad_manifest.py` — download links appear in the parts tables automatically.
-   **`<part_id>` must equal the `part_id` in `docs/data/*.csv`.** Prefer the Fusion component names and
-   rename the CSV IDs to match (the site's CNC IDs and the team's 32-part list currently disagree).
-   **Before exporting, confirm the recorded CAD errors are fixed:** Motor04 shaft and knee need M5 holes
-   (CAD had M4); design error on the RS03 shaft bearing retainer above the knee.
+1. **CAD, remaining** (`humanoid_2.1_latest`, project humanoid/humanoid_v2/v2.1; done 2026-09-19: linked
+   components updated, STEP/STL/f3z exported with `tools/fusion_export/`, staged with `tools/stage_cad_export.py`):
+   - PDF drawings from `humanoid_2.1_latest_Drawing` → `docs/files/drawings/<part_id>_rev01.pdf`;
+   - slicer plates (3MF) → `docs/files/plates/`; the `.f3z` must be re-released on the public repo.
+   - Naming: Fusion names are `CNC_<sub><NN>_x<qty>_<desc>` and match the site IDs (see `ALIASES` in
+     `stage_cad_export.py`). Team must settle: `CNC_arm06`, `CNC_arm09`, `CNC_leg18` are in the quote sheet but
+     not in Fusion (arm09 is `elbow_roll_output_shaft` there); `CNC_arm12_wrist_pitch` is in neither; `CNC_leg09`,
+     `leg10`, `leg11` each have two differently named components; `leg03` is x4 in one place and x5 in another.
+     `arm05` and `arm11` are SLS nylon (`3DP_`), not CNC. The team's `01_m03_shaft` list is not used in Fusion.
+   - Whether the recorded CAD errors are fixed in this export is still unknown: Motor04 shaft and knee need
+     M5 holes (CAD had M4); design error on the RS03 shaft bearing retainer above the knee.
 2. **Whole-robot exploded view** (image or animation) — the 9 animations are per subassembly only.
 3. **Decisions** (each is a red box on the site): hardware + docs licence; e-stop / main disconnect (none in the
    power diagram; run scripts assume one); fuse, surge protector, distribution blocks missing from the BOM;
-   1 vs 3 × 48V→12V converters; aluminium 6061 vs 7075; fastener schedule and torques; battery retention.
+   1 vs 3 × 48V→12V converters; fastener schedule and torques; battery retention. (Fusion says all CNC parts
+   are Aluminum 6061, so 6061 vs 7075 is settled unless the shop used something else.)
 4. **Hardware revision id**: Fusion says `2.1`, MJCF is `humanoid_v21` → fill the revision box with v2.1.
 
 ## Repo layout
