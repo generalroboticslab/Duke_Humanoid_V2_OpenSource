@@ -18,13 +18,14 @@ Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` 
 
 1. **CAD, remaining** (`humanoid_2.1_latest`, project humanoid/humanoid_v2/v2.1; done 2026-09-19: linked
    components updated, STEP/STL/f3z exported with `tools/fusion_export/`, staged with `tools/stage_cad_export.py`):
-   - PDF drawings from `humanoid_2.1_latest_Drawing` → `docs/files/drawings/<part_id>_rev01.pdf`;
-   - slicer plates (3MF) → `docs/files/plates/`; the `.f3z` must be re-released on the public repo.
-   - Naming: Fusion names are `CNC_<sub><NN>_x<qty>_<desc>` and match the site IDs (see `ALIASES` in
-     `stage_cad_export.py`). Team must settle: `CNC_arm06`, `CNC_arm09`, `CNC_leg18` are in the quote sheet but
-     not in Fusion (arm09 is `elbow_roll_output_shaft` there); `CNC_arm12_wrist_pitch` is in neither; `CNC_leg09`,
-     `leg10`, `leg11` each have two differently named components; `leg03` is x4 in one place and x5 in another.
-     `arm05` and `arm11` are SLS nylon (`3DP_`), not CNC. The team's `01_m03_shaft` list is not used in Fusion.
+   - Only an overall-dimensions drawing exists (staged as `humanoid_2.1_latest_overall_rev01.pdf`); there are no
+     per-part drawings, so machined parts are ordered from STEP. Slicer plates (3MF) → `docs/files/plates/`
+     if the team has them; the `.f3z` must be re-released on the public repo.
+   - Naming: Fusion names are `CNC_<sub><NN>_x<qty>_<desc>` and match the site IDs (`ALIASES` in
+     `stage_cad_export.py`). Resolved from geometry: `leg09`–`leg12` and `leg03` duplicates are the same parts
+     under two names; `arm09` = `elbow_roll_output_shaft`. Still open (red boxes): `CNC_arm06`, `CNC_leg18`,
+     `CNC_arm12` are quoted but not in Fusion; `arm05`/`arm11` are quoted as CNC but are SLS nylon in Fusion;
+     the `*_protection` covers have no filament grade and left/right copies share one component name.
    - Whether the recorded CAD errors are fixed in this export is still unknown: Motor04 shaft and knee need
      M5 holes (CAD had M4); design error on the RS03 shaft bearing retainer above the knee.
 2. **Whole-robot exploded view** (image or animation) — the 9 animations are per subassembly only.
