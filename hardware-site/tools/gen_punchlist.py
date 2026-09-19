@@ -33,6 +33,7 @@ Usage:  python tools/gen_punchlist.py
 from __future__ import annotations
 
 import os
+import posixpath
 import re
 import sys
 import unicodedata
@@ -54,6 +55,7 @@ SKIP = {"data/README.md", "reference/todo.md", "assets/MANIFEST.md"}
 BLOCK_RE = re.compile(r'^([ \t]*)(!!!|\?\?\?\+?)\s+(missing|unverified)\s+"((?:MISSING|UNVERIFIED)[^"]*)"\s*$')
 STEP_RE = re.compile(r'\{\{\s*step\(\s*([0-9]+)\s*,\s*"([^"]*)"')
 H_RE = re.compile(r'^(#{1,4})\s+(.*)$')
+JINJA_RE = re.compile(r'^\s*\{%-?\s*(if|elif|else|endif)\b')
 
 SECTIONS = [
     ("before-you-start/", "Before you start"),
@@ -110,6 +112,20 @@ SECTION_NOTE = {
 # extraction
 # --------------------------------------------------------------------------- #
 
+def jinja_true(line: str) -> bool | None:
+    """Evaluate the two page conditions that depend on files, so a block in the
+    branch that MkDocs does not render is not counted as an open item."""
+    m = re.search(r'\{%-?\s*if\s+(.+?)\s*-?%\}', line)
+    cond = m.group(1) if m else ""
+    if cond == "cad_count()":
+        p = DOCS / "data" / "cad-files.csv"
+        return p.is_file() and len(p.read_text(encoding="utf-8").strip().splitlines()) > 1
+    m = re.fullmatch(r'data_file_exists\("([^"]+)"\)', cond)
+    if m:
+        return (DOCS / "data" / m.group(1)).is_file()
+    return None
+
+
 def extract() -> list[dict]:
     out: list[dict] = []
     for root, _, files in os.walk(DOCS):
@@ -117,12 +133,38 @@ def extract() -> list[dict]:
             if not fn.endswith(".md"):
                 continue
             path = Path(root) / fn
-            rel = str(path.relative_to(DOCS))
+            # POSIX form on every OS: SKIP, SECTIONS and BLOCKING_PAGES are
+            # written with '/'. On Windows str() gives backslashes, nothing
+            # matches, and the list ends up scanning itself.
+            rel = path.relative_to(DOCS).as_posix()
             if rel in SKIP or rel.startswith("data/"):
                 continue
             lines = path.read_text(encoding="utf-8").split("\n")
             ctx_heading = ctx_step = ""
+            # Context saved at each Jinja `{% if %}`. A heading inside the `if`
+            # branch is not rendered when the `else` branch is, so a block in
+            # the `else` branch must not link to it.
+            jinja_stack: list[tuple[str, str]] = []
+            # True/False when the condition is one this script can evaluate
+            # (cad_count(), data_file_exists("x.csv")), None when it cannot.
+            branch_stack: list[bool | None] = []
             for i, line in enumerate(lines):
+                jm = JINJA_RE.match(line)
+                if jm:
+                    kw = jm.group(1)
+                    if kw == "if":
+                        jinja_stack.append((ctx_heading, ctx_step))
+                        branch_stack.append(jinja_true(line))
+                    elif kw in ("elif", "else") and jinja_stack:
+                        ctx_heading, ctx_step = jinja_stack[-1]
+                        if branch_stack:
+                            branch_stack[-1] = None if branch_stack[-1] is None else not branch_stack[-1]
+                    elif kw == "endif" and jinja_stack:
+                        jinja_stack.pop()
+                        branch_stack.pop()
+                    continue
+                if any(b is False for b in branch_stack):
+                    continue   # this branch is not rendered, so its blocks are not open items
                 h = H_RE.match(line)
                 if h and h.group(1) != "#":
                     ctx_heading, ctx_step = h.group(2).strip(), ""
@@ -320,7 +362,7 @@ def render(items: list[dict]) -> str:
     w("")
     w("| Blocker | Where it is tracked |")
     w("| --- | --- |")
-    w("| No robot CAD is published — the only `.step` files in the repositories are perception fixtures | [CAD downloads](../fabrication/cad-downloads.md) |")
+    w("| No drawings, print plates or native Fusion archive — per-part and whole-robot STEP are published | [CAD downloads](../fabrication/cad-downloads.md) |")
     w("| No fastener schedule — every screw, nut, washer and bearing is one placeholder row | [Fasteners and hardware](../bom/fasteners-and-hardware.md) |")
     w("| No torque values and no threadlocker grade, anywhere | [Assembly](../assembly/index.md), [Tools](../assembly/tools.md) |")
     w("| No hardware licence and no documentation licence | [Citation and licence](citation-and-license.md) |")
@@ -340,7 +382,7 @@ def render(items: list[dict]) -> str:
         w("| Page | What is missing | Who can supply it | Blocks release |")
         w("| --- | --- | --- | :-: |")
         for it in sorted(its, key=lambda x: (x["file"], x["line"])):
-            rel = os.path.relpath(it["file"], "reference").replace(os.sep, "/")
+            rel = posixpath.relpath(it["file"], "reference")
             ctx = it["context"]
             m = re.match(r"Step (\d+) — (.*)", ctx)
             if m:
@@ -414,9 +456,9 @@ def main() -> int:
         it["_block"] = blocking(it)
         it["_owner"] = owner_text(it)
         it["_roles"] = roles(it)
-    OUT.write_text(render(items), encoding="utf-8")
+    OUT.write_text(render(items), encoding="utf-8", newline="\n")
     nblock = sum(1 for i in items if i["_block"])
-    print(f"{OUT.relative_to(SITE)}: {len(items)} open items, {nblock} blocking")
+    print(f"{OUT.relative_to(SITE).as_posix()}: {len(items)} open items, {nblock} blocking")
     return 0
 
 

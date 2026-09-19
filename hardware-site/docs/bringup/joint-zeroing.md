@@ -7,7 +7,18 @@ Record each joint's encoder reading at the model's zero pose.
 
 ## Set zeros
 
-!!! missing "MISSING — Zero pose: figure, per-joint table, holding method or fixture, joint order"
+The zero pose is the deploy model at all-zero joint angles: deploy assumes
+encoder 0 equals model `qpos` 0. The model is `robot.xml` in the
+`HumanoidRmaVelEstArmFlashSacv159bMixedArmsCam` run directory
+(`humanoid_site.DEPLOY_MODEL_TASK`). Joint order and IDs:
+[actuator map](../electrical/can-bus.md#the-actuator-map).
+
+| Joint | Zero as the software defines it |
+|---|---|
+| `cam_yaw_*`, `cam_pitch_*` | Camera looks straight ahead (gimbal FK assumption) |
+| `left_wrist_1`, `right_wrist_1` | The model sets `ref` −π/2 (left), +π/2 (right) to keep encoder 0 at `qpos` 0, 90° from the upstream model's wrist_1 zero ("working pose") |
+
+!!! missing "MISSING — Zero pose: figure, physical per-joint description for legs, waist and arms, holding method or fixture"
     *Owner: hardware lead + controls lead.*
 
 The wrist encoders wrap at ±π. Keep the wrists' zero well away from the wrap

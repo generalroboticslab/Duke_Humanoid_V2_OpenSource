@@ -105,19 +105,21 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
     python humanoid_config.py --zero  # 10 % torque
     ```
 
-2. Check gravity torque:
+2. Check gravity torque with `real_env` up (`--torque-limit 0.4 --grav-comp`),
+   the robot hung with legs straight and hands off the arms:
 
     ```bash
-    python humanoid_mass_check.py
+    python humanoid_mass_check.py  # 3 s average; --seconds 10 for longer
     ```
 
 | Check | Pass |
 | --- | --- |
 | Zero pose reached | Matches the [zero pose](joint-zeroing.md#set-zeros) **TODO**{ .dh-missing } |
-| Residual, `shoulder_2`, `shoulder_3`, `elbow`, `wrist_1` | **TODO**{ .dh-missing } |
+| Arm static | `arm is static — measurement valid`: each arm joint's mean velocity ≤ 0.02 rad/s, the script's default `--vel-tol` |
+| Residual, `shoulder_2`, `shoulder_3`, `elbow`, `wrist_1` | `MATCH`: each ≤ 0.35 N·m, the script's default `--tol` |
 | Residual pattern | Not growing from wrist to shoulder |
 
-!!! missing "MISSING — A5 acceptable gravity-torque residual per joint"
+!!! missing "MISSING — A5 reference residual per joint measured on the reference robot"
     *Owner: controls lead.*
 
 ## A6. Check perception
@@ -139,7 +141,8 @@ Procedure: [Camera calibration](camera-calibration.md).
 ## A7. Test grippers
 
 Per torque level, high to low: squeeze, settle, hold, then tug for 8 s as a
-carry would.
+carry would. Run with the end-effector service up and a cube between the
+fingers of the tested side.
 
 1. Left:
 
@@ -156,11 +159,12 @@ carry would.
 | Check | Pass |
 | --- | --- |
 | Open and close | Full travel, both |
+| Hold levels | Script default ladder 300, 250, 200, 150 after a 350 squeeze |
 | Lowest zero-slip level | Recorded per side |
 | Carry and park torque | About 1.5× that level |
 | Symmetry, cycle endurance | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A7 reference no-slip levels, test object, asymmetry limit, endurance test"
+!!! missing "MISSING — A7 reference no-slip level per side, test-cube size and mass, asymmetry limit, endurance test"
     *Owner: controls lead.*
 
 ## A8. Hold whole-body posture
@@ -196,9 +200,23 @@ refusal, straighten the hang; never widen the envelope.
 
 ## A9. Test arm transit
 
-```bash
-python humanoid_stage_walk_test.py  # front, side, rear, side, front at 0.025 rad/s
-```
+1. Start `real_env` with arm motors only, 20 % torque and no IK:
+
+    ```bash
+    python -u humanoid_real_env.py --task <deploy-task> \
+      --torque-limit 0.2 --enable-motor arm --no-use-ik --arm-sender-ip 127.0.0.1
+    ```
+
+2. Bring the tested arm to the front station (the operator's staged glide does
+   it). The power-on pose is not the front station; the test aborts if any
+   joint of the tested arm is more than 0.15 rad away.
+3. Stop the operator; the test binds port 9874.
+4. Walk one arm; the other arm is frozen at its start position:
+
+    ```bash
+    python humanoid_stage_walk_test.py --arm left  # front, side, rear, side, front at 0.025 rad/s
+    python humanoid_stage_walk_test.py --arm right
+    ```
 
 Biggest hop about 89 s, out-and-back about 4.5 min **UNVERIFIED**{ .dh-unverified }.
 
@@ -208,9 +226,6 @@ Biggest hop about 89 s, out-and-back about 4.5 min **UNVERIFIED**{ .dh-unverifie
 | Contact | None with torso, other arm or itself |
 | Ctrl+C | Arm crawls back to the power-on pose |
 | Margins | Audit gives ≥ 40° to joint limits, ≥ 49.9 mm clearance; confirm on your build |
-
-!!! missing "MISSING — A9 launch conditions: prerequisites, arm selection, torque and motor group"
-    *Owner: controls lead.*
 
 ## A10. Reach and grasp
 

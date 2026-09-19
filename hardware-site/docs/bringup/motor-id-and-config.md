@@ -91,17 +91,69 @@ python humanoid_config.py  # type, bus voltage, position, limits per motor; noth
     every other check.
 
 ```bash
-python humanoid_test_motor.py  # 0.1 rad sine at 300 Hz on the arm joints; no flags
+python humanoid_test_motor.py  # 0.1 rad sine at 300 Hz on indices 13-30; no flags
 ```
+
+The script enables all 31 motors (kp 10, kd 5) and drives `motor_setup`
+indices 13–30: the 14 arm joints (13–26) and the 4 camera-gimbal joints
+(27–30). The waist and legs (0–12) are enabled with a zero position
+reference. *Source: `deploy/control/humanoid_test_motor.py` lines 30–48;
+`humanoid_config.py` lines 27–61; `hardware_bindings/motor/py_motor.py`
+line 304.*
 
 ✅ **Check:** every actuator answers at its ID and bus, reads back unchanged
 after a power cycle, and the smoke test moves the expected joints the expected
 way, quietly.
 
-!!! unverified "UNVERIFIED — Smoke-test joints: index 13 onward may include the 4 gimbal joints"
-    *Owner: controls lead.*
-
 ## Confirm directions
 
-!!! missing "MISSING — SAFETY — Positive direction and travel limits of all 31 joints: table, figure, per-joint check"
+The deployed model sets the joint ranges below, in `motor_setup` order. Deploy
+reads them as its joint limits and clamps IK and gaze targets to them. They are
+software limits, not measured mechanical stops.
+
+| Index | Joint | Model min (rad) | Model max (rad) |
+| --- | --- | --- | --- |
+| 0 | `waist` | -1.5708 | 1.5708 |
+| 1 | `left_hip_1` | -1.8326 | 1.8326 |
+| 2 | `left_hip_2` | -1.8326 | 0.523599 |
+| 3 | `left_hip_3` | -1.5708 | 1.5708 |
+| 4 | `left_knee` | -2.26893 | 2.26893 |
+| 5 | `left_ankle_1` | -0.872665 | 0.872665 |
+| 6 | `left_ankle_2` | -1.0472 | 1.0472 |
+| 7 | `right_hip_1` | -1.8326 | 1.8326 |
+| 8 | `right_hip_2` | -0.523599 | 1.8326 |
+| 9 | `right_hip_3` | -1.5708 | 1.5708 |
+| 10 | `right_knee` | -2.26893 | 2.26893 |
+| 11 | `right_ankle_1` | -0.872665 | 0.872665 |
+| 12 | `right_ankle_2` | -1.0472 | 1.0472 |
+| 13 | `left_shoulder_1` | -3.14159 | 3.14159 |
+| 14 | `left_shoulder_2` | -3.14159 | 0.523599 |
+| 15 | `left_shoulder_3` | -3.14159 | 3.14159 |
+| 16 | `left_elbow` | -2.18166 | 2.18166 |
+| 17 | `left_wrist_1` | -3.14159 | 3.14159 |
+| 18 | `left_wrist_2` | -1.6057 | 1.6057 |
+| 19 | `left_wrist_3` | -1.5708 | 1.5708 |
+| 20 | `right_shoulder_1` | -3.14159 | 3.14159 |
+| 21 | `right_shoulder_2` | -0.523599 | 3.14159 |
+| 22 | `right_shoulder_3` | -3.14159 | 3.14159 |
+| 23 | `right_elbow` | -2.18166 | 2.18166 |
+| 24 | `right_wrist_1` | -3.14159 | 3.14159 |
+| 25 | `right_wrist_2` | -1.6057 | 1.6057 |
+| 26 | `right_wrist_3` | -1.5708 | 1.5708 |
+| 27 | `cam_yaw_left` | -4.7124 | 4.7124 |
+| 28 | `cam_pitch_left` | -1.5708 | 1.5708 |
+| 29 | `cam_yaw_right` | -4.7124 | 4.7124 |
+| 30 | `cam_pitch_right` | -1.5708 | 1.5708 |
+
+*Source: `deploy/control/legged_env_bundle/mj_envs/deploy/runs/HumanoidRmaVelEstArmFlashSacv159bMixedArmsCam/robot.xml`
+lines 156–449 (the default `MJCF_MODEL_PATH`, `humanoid_site.py` lines 159–171);
+`humanoid_base.py` line 51; `humanoid_real_env.py` lines 1105, 1718.*
+
+!!! missing "MISSING — SAFETY — Positive direction and mechanical travel limits of all 31 joints: figure, per-joint check"
+    The models disagree on one axis sign: the deployed `robot.xml` sets
+    `left_wrist_2_joint` axis `1 0 0` (line 280), while
+    `simulation/asset/duke_v2/humanoid_v21/humanoid_v21.xml` sets `-1 0 0`
+    (line 186). Physical positive direction and hard-stop angles per joint are
+    unmeasured.
+
     *Owner: controls lead. Blocks [Acceptance tests](acceptance-tests.md).*

@@ -151,7 +151,7 @@ PRN = [
 
 def write(name, rows):
     with open(os.path.join(OUT, name), "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=COLS)
+        w = csv.DictWriter(fh, fieldnames=COLS, lineterminator="\n")
         w.writeheader()
         w.writerows([{k: (v.strip() if isinstance(v, str) else v) for k, v in r.items()} for r in rows])
     tot = sum(Decimal(r["unit_cost_usd"]) * Decimal(r["qty_per_robot"])

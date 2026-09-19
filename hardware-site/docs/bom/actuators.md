@@ -27,7 +27,13 @@ Check each on arrival: [Incoming inspection](../fabrication/incoming-inspection.
 and buses: [CAN bus](../electrical/can-bus.md). Connectors:
 [Cables and connectors](cables-and-connectors.md#actuator-side-connectors).
 
-!!! unverified "UNVERIFIED — RS05 on wrist_3 and the four camera joints comes from the code only; not checked on the robot"
+The team BOM also lists 6 RS05 (`duke-humanoid-v2_BOM_sheet1_main.csv`, row 7).
+The CAD-derived head-camera note names RS05 as the yaw and pitch motors
+(`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITION_top_plate__head_cameras.md`),
+and the Cartesian-hand model's base group includes `CNC_arm13_x2_RS05_shaft_coupler`
+(`simulation/asset/duke_v2/cartesian_hand_v3/source/groups.json`).
+
+!!! unverified "UNVERIFIED — RS05 on wrist_3 and the four camera joints is not checked on the robot"
     *Owner: hardware lead + controls lead.*
 
 ## Motor data
@@ -46,6 +52,7 @@ and buses: [CAN bus](../electrical/can-bus.md). Connectors:
 - Max torque and torque constant equal `MAX_TORQUE` and `MOTOR_TORQUE_CONSTANTS` in `py_motor.py`; the control code clamps to max torque.
 - RS02, RS03, RS04 (manuals): 48 VDC rated, 24–60 VDC operating; CAN at 1 Mbps; 14-bit single-turn absolute encoder; reduction 7.75:1 (RS02) and 9:1 (RS03, RS04).
 - Current-limit defaults, resistance and back-EMF: [Power system](../electrical/power-system.md).
+- Deploy sets the `0x700B` torque limit of every motor to one ratio of its max torque. The ratio comes from `--torque-limit` (default 0.1; the `OPERATIONS.md` robot launch uses 0.8), and the operator steps it by 0.1 between 0.1 and 0.8. The four camera motors follow the same ratio (`deploy/control/humanoid_real_env.py`: `torque_limit`, `[TORQUE_UP]`/`[TORQUE_DOWN]`, `_apply_group_torque_limits`).
 
 !!! missing "MISSING — RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot"
     *Owner: hardware lead + controls lead.*

@@ -44,5 +44,5 @@ ROWS = [
   "Meaningless. It is 2.5x the machined total, which is how that column is known to hold line totals."),
 ]
 with open(OUT, "w", newline="", encoding="utf-8") as fh:
-    w = csv.writer(fh); w.writerow(COLS); w.writerows(ROWS)
+    w = csv.writer(fh, lineterminator="\n"); w.writerow(COLS); w.writerows(ROWS)
 print("wrote", OUT, len(ROWS), "rows")

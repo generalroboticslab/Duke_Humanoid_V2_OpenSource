@@ -38,9 +38,20 @@ close every red box with them first.
         Scripts: `humanoid_nav_step_test.py`, `humanoid_joint_monkey_hw.py`.
         *Owner: electrical lead. Blocks [First power-on](../bringup/first-power-on.md).*
 
-6. **Follow the power sequence.**
+6. **Follow the power sequence.** After power-on, start the software in the
+   order of deploy's runbook (`deploy/control/docs/OPERATIONS.md`, section 2)
+   and pass each check before the next step:
 
-    !!! missing "MISSING — SAFETY — Power-on and power-off order (computer, USB-CAN adapters, motor bus, camera gimbals, gripper service), with a check at each step"
+    1. Run `python humanoid_setup_can.py`. All six CAN buses (can9, can21 to
+       can25) must report ERROR-ACTIVE. A bus stuck in ERROR-WARNING means
+       power-cycle again; if it recurs, inspect the harness.
+    2. Start the camera server. If a camera drops to USB2 after a power
+       cycle, replug it or move ports until `lsusb -t` shows 5000M.
+    3. Start the gripper service and wait for both `Connected left/right hand`.
+    4. Start `humanoid_real_env.py` and let it run for two minutes, watching
+       for `██ WATCHDOG ██`, before anything else.
+
+    !!! missing "MISSING — SAFETY — Physical power-on and power-off order (computer, USB-CAN adapters, motor bus, camera gimbals), with a check at each step, and the software shutdown order before power-off"
         *Owner: electrical lead. Blocks [Pre-power checks](../electrical/pre-power-checks.md).*
 
 7. **Isolate before touching.** Disconnect the packs and move them away before
@@ -102,8 +113,30 @@ With no clutch, a limb closes on a hand with full commanded torque.
 - Do not change the torque limit, protection temperature or over-temperature time.
 - Mechanical end stops on any joint: **UNVERIFIED**{ .dh-unverified }.
 
-!!! missing "MISSING — SAFETY — Configured per-joint torque limits, and a pinch-point diagram (knee, elbow, hip-roll/thigh, waist, gripper jaws, camera gimbals)"
-    *Owner: controls lead for the torques, hardware lead for the geometry.*
+Deploy sets each RobStride joint's run-time torque limit (drive parameter
+0x700B) to a per-motor-type ceiling times one global ratio. These are software
+settings, not measured joint torques.
+
+| Deploy motor type | Ceiling (Nm) | Joints |
+| --- | --- | --- |
+| R04 | 120 | Left and right knee |
+| R03 | 60 | Waist; hip 1, 2, 3; ankle 1; shoulder 1 |
+| R06 | 36 | Ankle 2; shoulder 2 |
+| R02 | 17 | Shoulder 3; elbow; wrist 1 |
+| R00 | 14 | Wrist 2 |
+| R05 | 5.5 | Wrist 3; the four camera gimbal motors |
+
+*Source: `deploy/control/hardware_bindings/motor/py_motor.py` (`MAX_TORQUE`,
+`set_max_torque_ratio`); joint-to-type map in `deploy/control/humanoid_config.py`.*
+
+- The motor controller starts at a ratio of 0.05; `humanoid_real_env.py`
+  defaults to 0.1, and the runbook's T3 command passes `--torque-limit 0.8`
+  (96 Nm at the knee, computed).
+- The torque-up and torque-down commands step the ratio by 0.1 between 0.1 and
+  0.8. The camera gimbals follow the same ratio as the body.
+
+!!! missing "MISSING — SAFETY — Pinch-point diagram (knee, elbow, hip-roll/thigh, waist, gripper jaws, camera gimbals)"
+    *Owner: hardware lead for the geometry.*
 
 ### Falls
 

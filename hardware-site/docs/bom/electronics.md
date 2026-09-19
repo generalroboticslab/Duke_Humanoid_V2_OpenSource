@@ -22,7 +22,17 @@ lines (MPN: manufacturer part number).
 | `EL_TVS_DIODE` | Transient-voltage-suppression (TVS) diode across power and ground at each distribution-block pair |
 | `EL_BUCK_48V_12V`, `EL_BUCK_12V_ENC` | 48 V→12 V conversion; conflict under [Power path](#power-path) |
 
-!!! missing "MISSING — computer configuration (RAM, storage, OS, power input), camera firmware version, IMU orientation and frame, peripherals needed at bring-up"
+What the deploy stack configures or assumes for the computer and the IMU:
+
+| Item | Deploy configures or assumes | Source (deploy repo) |
+| --- | --- | --- |
+| Compute split | Every process runs on the robot computer (no CUDA needed) except the cuRobo plan/MPC server, which runs on a GPU machine with CUDA; the runbook allows the roles to share one box or not | `control/docs/OPERATIONS.md`, section 0 |
+| CPU cores | The runbook's `taskset` core lists are written for 24 logical CPUs; re-derive them on any other machine | `control/docs/OPERATIONS.md`, section 0 |
+| Python | 3.12 required | `control/docs/SETUP.md`, section 1 |
+| Operator console | Any laptop with ssh and a browser | `control/docs/OPERATIONS.md`, section 0 |
+| IMU frame | Deploy applies no mounting rotation: `humanoid_base.py` builds `IMU()` without a `rotation_offset` and writes its quaternion straight into the base orientation; the model's `imu_site` sits at the `base_link` origin, unrotated | `control/humanoid_base.py`; deploy `robot.xml` (`humanoid_site.MJCF_MODEL_PATH`) |
+
+!!! missing "MISSING — computer RAM, storage, OS release and rated input power; camera firmware version; physical IMU mounting position and orientation; bring-up peripherals beyond the operator laptop and the GPU machine"
     *Owner: electrical lead.*
 
 !!! unverified "UNVERIFIED — IMU mounting screw: M3 (team log) vs Ø2.10 flange holes on 30 × 31 mm centres (vendor drawing)"

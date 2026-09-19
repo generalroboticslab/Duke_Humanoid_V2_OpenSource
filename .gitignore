@@ -18,3 +18,9 @@ __pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+
+# Raw Fusion exports (tools/fusion_export). Only tree.csv and export.log are kept;
+# the release files live in hardware-site/docs/files/ under their part_id names.
+cad/*/assembly/
+cad/*/step/
+cad/*/print/
