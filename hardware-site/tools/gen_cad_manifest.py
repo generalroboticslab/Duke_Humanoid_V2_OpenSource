@@ -7,6 +7,7 @@ Put files here, named after the part IDs in docs/data/*.csv:
     docs/files/drawings/<part_id>_rev<NN>.pdf    drawing per machined part
     docs/files/plates/<name>.3mf                 slicer projects, ready to print
     docs/files/assembly/<name>.(step|f3z)        whole-robot STEP and the native Fusion 360 archive
+    docs/files/assembly/<name>.step.zip          the whole-robot STEP zipped when it is over 95 MB
 
 `_rev<NN>` is optional. Writes docs/data/cad-files.csv (read by the cad_* macros, which
 put a download link next to every part) and docs/files/SHA256SUMS.txt.
@@ -35,7 +36,7 @@ KINDS = {
     "print": {".3mf", ".stl"},
     "drawings": {".pdf"},
     "plates": {".3mf"},
-    "assembly": {".step", ".stp", ".f3z", ".f3d"},
+    "assembly": {".step", ".stp", ".f3z", ".f3d", ".zip"},   # .zip: a whole-robot STEP over 95 MB, zipped
 }
 MAX_FILE = 95 * 1024 * 1024
 MAX_TOTAL = 900 * 1024 * 1024
@@ -58,18 +59,20 @@ def main() -> int:
             if path.name.startswith(".") or not path.is_file():
                 continue
             if path.suffix.lower() not in exts:
-                errors.append(f"{path.relative_to(SITE)}: {path.suffix} does not belong in files/{kind}/")
+                errors.append(f"{path.relative_to(SITE).as_posix()}: {path.suffix} does not belong in files/{kind}/")
                 continue
             size = path.stat().st_size
             total += size
             if size > MAX_FILE:
-                errors.append(f"{path.relative_to(SITE)}: {size / 2**20:.1f} MB is over the 95 MB limit — zip or split it")
-            m = NAME.match(path.stem)
+                errors.append(f"{path.relative_to(SITE).as_posix()}: {size / 2**20:.1f} MB is over the 95 MB limit — zip or split it")
+            stem = path.stem[:-5] if path.stem.lower().endswith(".step") else path.stem
+            m = NAME.match(stem)
             rows.append({
                 "part_id": m.group("part"),
                 "rev": m.group("rev") or "",
                 "kind": kind,
-                "format": path.suffix.lower().lstrip(".").upper(),
+                "format": ("STEP (zip)" if path.stem.lower().endswith(".step")
+                           else path.suffix.lower().lstrip(".").upper()),
                 "path": f"files/{kind}/{path.name}",
                 "bytes": size,
                 "sha256": sha256(path),
@@ -78,13 +81,15 @@ def main() -> int:
         errors.append(f"total {total / 2**20:.0f} MB is over the 900 MB budget for a GitHub Pages site")
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    with OUT.open("w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["part_id", "rev", "kind", "format", "path", "bytes", "sha256"])
+    with OUT.open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["part_id", "rev", "kind", "format", "path", "bytes", "sha256"],
+                           lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
-    SUMS.write_text("".join(f"{r['sha256']}  {r['path'][len('files/'):]}\n" for r in rows))
+    SUMS.write_text("".join(f"{r['sha256']}  {r['path'][len('files/'):]}\n" for r in rows),
+                    encoding="utf-8", newline="\n")
 
-    print(f"{OUT.relative_to(SITE)}: {len(rows)} files, {total / 2**20:.1f} MB")
+    print(f"{OUT.relative_to(SITE).as_posix()}: {len(rows)} files, {total / 2**20:.1f} MB")
     for e in errors:
         print(f"ERROR: {e}", file=sys.stderr)
     return 1 if errors else 0

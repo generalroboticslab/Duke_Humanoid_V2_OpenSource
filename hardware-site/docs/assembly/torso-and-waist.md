@@ -182,7 +182,15 @@ Mount it rigidly: the control stack treats its orientation as a constant.
 !!! unverified "UNVERIFIED — IMU screws: M3 (team log) vs Ø2.10 mm holes on 30 × 31 mm (vendor drawing)"
     *Owner: hardware lead.*
 
-!!! missing "MISSING — IMU location and orientation in the base frame, and how to verify them"
+Deploy assumes the IMU axes match the robot base frame. It opens the IMU with
+no mounting-rotation offset and writes the IMU orientation directly as the base
+orientation (`deploy/control/humanoid_base.py`, lines 158 and 247); the model
+places `imu_site` at the `base_link` origin with no rotation.
+
+To watch the live IMU orientation, run `python hardware_bindings/imu/py_imu.py`
+from `deploy/control/`: it serves a 3D frame view on port 8080.
+
+!!! missing "MISSING — IMU physical position relative to the `base_link` origin, which way it faces, and a pass/fail axis-alignment check"
     *Owner: hardware lead + controls.*
 
 ✅ **Check:** Rigid, with axes checked against the robot frame.

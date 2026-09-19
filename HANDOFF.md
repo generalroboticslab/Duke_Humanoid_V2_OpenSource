@@ -56,8 +56,10 @@ py -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\mkdocs serve -a 127.0.0.1:8321
 ```
-`.claude/launch.json` points at `hardware-site/.venv/bin/python` (macOS); on Windows change it to
-`hardware-site/.venv/Scripts/python.exe`. Line endings are forced to LF by `.gitattributes`.
+`.claude/launch.json` has two entries: `hardware-site` (Windows, `.venv/Scripts/python.exe`) and
+`hardware-site-macos` (`.venv/bin/python`). Line endings are forced to LF by `.gitattributes`, and every
+generator in `tools/` now writes LF and POSIX paths on both systems (before 2026-09-19 `gen_punchlist.py`
+and `gen_image_manifest.py` produced wrong counts on Windows because they compared backslash paths).
 
 ## Publishing (later)
 

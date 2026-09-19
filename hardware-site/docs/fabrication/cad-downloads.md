@@ -48,7 +48,10 @@ Checksums for every file: [SHA256SUMS.txt](../files/SHA256SUMS.txt){ download=""
     *Owner: hardware lead.*
 {% endif %}
 
-!!! missing "MISSING — Fusion 360 version the files come from, and STEP AP214 or AP242"
+All STEP files are AP214 (`AUTOMOTIVE_DESIGN`), written by Fusion 360 build 2705.1.15 from the
+`humanoid_2.1_latest` design. The whole-robot STEP is zipped because it is over GitHub's file-size limit.
+
+!!! missing "MISSING — native Fusion 360 archive (`.f3z`, linked designs included) in the whole-robot table"
     *Owner: hardware lead.*
 
 Known CAD errors are listed in the [CNC guide](cnc-guide.md#known-cad-errors). No hardware or

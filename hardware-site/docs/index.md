@@ -36,7 +36,7 @@ are open gaps, listed on [Open items](reference/todo.md).
 !!! missing "Not yet: a second robot cannot be built"
     | Blocker | Tracked on |
     | --- | --- |
-    | No robot CAD published | [CAD downloads](fabrication/cad-downloads.md) |
+    | No drawings, print plates or native Fusion archive (part and whole-robot STEP are published) | [CAD downloads](fabrication/cad-downloads.md) |
     | No fastener schedule | [Fasteners](bom/fasteners-and-hardware.md) |
     | No torque values (threadlocker: Loctite 222) | [Assembly](assembly/index.md) |
     | No hardware or documentation licence | [Citation and licence](reference/citation-and-license.md) |

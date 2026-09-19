@@ -26,19 +26,18 @@ RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these
 The six joints share one Controller Area Network (CAN) bus: `can24` left, `can23` right.
 New units share a default ID: set each on the bench alone ([Motor ID and config](../bringup/motor-id-and-config.md)).
 
-| Joint | Axis | Actuator | ID L / R | Model limit L | Model limit R |
+| Joint | Model axis | Actuator | ID L / R | Model limit L | Model limit R |
 | --- | --- | --- | --- | --- | --- |
-| `hip_1` | pitch **UNVERIFIED**{ .dh-unverified } | RobStride 03 | 31 / 41 | ±105° | ±105° |
+| `hip_1` | pitch | RobStride 03 | 31 / 41 | ±105° | ±105° |
 | `hip_2` | roll | RobStride 03 | 32 / 42 | −105° to +30° | −30° to +105° |
-| `hip_3` | yaw **UNVERIFIED**{ .dh-unverified } | RobStride 03 | 33 / 43 | ±90° | ±90° |
+| `hip_3` | yaw | RobStride 03 | 33 / 43 | ±90° | ±90° |
 | `knee` | — | RobStride 04 | 34 / 44 | ±130° | ±130° |
 | `ankle_1` | pitch | RobStride 03 | 35 / 45 | ±50° | ±50° |
 | `ankle_2` | roll | RobStride 06 | 36 / 46 | ±60° | ±60° |
 
-*Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); limits from `humanoid_v21.xml`.*
+*Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); axes (at zero pose) and limits from `humanoid_v21.xml`.*
 
-!!! unverified "UNVERIFIED — `hip_1` pitch, `hip_3` yaw: inferred from joint order"
-    *Owner: hardware lead.*
+The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 
 !!! missing "MISSING — leg mechanical hard stops: whether any exist, and where"
     *Owner: hardware lead.*

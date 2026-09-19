@@ -39,10 +39,7 @@ Set each ID on the bench, one at a time. Label joint, ID **and bus**:
 | `wrist_2` | pitch | RobStride 00 | 15 / 25 | `can9` / `can21` | ±92° |
 | `wrist_3` | yaw | RobStride 05 | 16 / 26 | `can9` / `can21` | ±90° |
 
-*Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); limits from `humanoid_v21.xml`.*
-
-!!! unverified "UNVERIFIED — arm axis names are inferred from joint order and part names"
-    *Owner: hardware lead, from the CAD.*
+*Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); limits from `humanoid_v21.xml`; axes from the repo `README.md` (Hardware), which names joints 1–7 shoulder pitch/roll/yaw, elbow, wrist roll/pitch/yaw.*
 
 !!! missing "MISSING — arm hard stops, and the real travel of the four ±180° joints with cabling fitted"
     *Owner: hardware lead.*

@@ -31,7 +31,7 @@ def extract_figures() -> dict[str, dict]:
             if not fn.endswith(".md"):
                 continue
             path = Path(root) / fn
-            rel = str(path.relative_to(DOCS))
+            rel = path.relative_to(DOCS).as_posix()   # '/' on every OS; SKIP uses '/'
             if rel in SKIP or rel.startswith("data/"):
                 continue
             txt = path.read_text(encoding="utf-8")
@@ -261,6 +261,6 @@ w("`cnc-parts.csv` adds its render to this list automatically. Figures that are"
 w("named on a page but have no placeholder yet are the one hand-maintained part,")
 w("in the `EXTRA` table at the top of that script.")
 w("")
-OUT.write_text("\n".join(L) + "\n", encoding="utf-8")
-print(f"{OUT.relative_to(SITE)}: {total} images missing "
+OUT.write_text("\n".join(L) + "\n", encoding="utf-8", newline="\n")
+print(f"{OUT.relative_to(SITE).as_posix()}: {total} images missing "
       f"({len(placed)} placed, {len(EXTRA)} named, {fam_total} per-part)")

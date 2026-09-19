@@ -9,8 +9,13 @@
 
 **Can I build only a camera module?** About 0.58 kg, two axes and about
 $600 in hardware per module (project README) **UNVERIFIED**{ .dh-unverified }.
+On the reference robot, each module's yaw and pitch actuators are RobStride 05
+units on the shared `can25` bus, fed from the 48 V upper-body power
+distribution block; each D436 connects to the onboard PC over USB (team wiring
+and power diagrams). Deploy configures IDs 5 and 6 for the right module and 7
+and 8 for the left (`deploy/control/humanoid_config.py`).
 
-!!! missing "MISSING — Camera module interface for another robot: mounting, power, bus"
+!!! missing "MISSING — Camera module interface for another robot: mounting"
     *Owner: hardware lead.*
 
 <figure markdown>

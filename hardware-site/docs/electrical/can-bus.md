@@ -48,21 +48,21 @@ Whether the first D436, `can9` and `can25` plug into the hub or the computer is
     | 24 | `right_wrist_1` | 24 | `can21` | RS02 |
     | 25 | `right_wrist_2` | 25 | `can21` | RS00 |
     | 26 | `right_wrist_3` | 26 | `can21` | RS05 |
-    | 27 | `cam_yaw_right` | 5 | `can25` | RS05 |
-    | 28 | `cam_pitch_right` | 6 | `can25` | RS05 |
-    | 29 | `cam_yaw_left` | 7 | `can25` | RS05 |
-    | 30 | `cam_pitch_left` | 8 | `can25` | RS05 |
+    | 27 | `cam_yaw_left` | 7 | `can25` | RS05 |
+    | 28 | `cam_pitch_left` | 8 | `can25` | RS05 |
+    | 29 | `cam_yaw_right` | 5 | `can25` | RS05 |
+    | 30 | `cam_pitch_right` | 6 | `can25` | RS05 |
 
-    *Source: `control/humanoid_config.py`.*
+    *Source: `control/humanoid_config.py` (index = `motor_setup_dict`
+    order; the deployed MJCF `robot.xml` and the policy's `controlled_joints`
+    list the same order, left camera first). Ignore the stale `#27`–`#30`
+    comments on the camera lines there.*
 
 - Program IDs per [Motor ID and config](../bringup/motor-id-and-config.md).
   IDs are unique robot-wide; keep them so.
 - `can22` spans both blocks: waist on lower-body power, both `shoulder_1` on
   upper-body power.
 - `can12` and `can19` in `humanoid_config.py` are unused.
-
-!!! unverified "UNVERIFIED — Camera joint indices: source comments put right at 27–28, left at 29–30 (used above); the written order puts left first. Check the MJCF joint order"
-    *Owner: controls lead.*
 
 ## Wire and terminate each bus
 

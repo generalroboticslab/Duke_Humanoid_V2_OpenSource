@@ -130,7 +130,7 @@ for pid in order:
 
 def write(path, rows_):
     with open(path, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=COLS)
+        w = csv.DictWriter(fh, fieldnames=COLS, lineterminator="\n")
         w.writeheader()
         w.writerows(rows_)
 
