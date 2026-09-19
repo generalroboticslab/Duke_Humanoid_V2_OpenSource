@@ -59,6 +59,7 @@ mechanical stops.
 
 | | |
 | --- | --- |
+| Overall size | 1256 mm tall standing, camera masts included; 346 mm across the shoulders; torso 483 mm; foot 235 mm long ([overall drawing](../files/drawings/humanoid_2.1_latest_overall_rev01.pdf)) |
 | Computer | MINISFORUM X1-470 mini PC |
 | IMU | SYD Dynamics TransducerM TM171, 9-axis AHRS, 40 × 34 × 12.6 mm, USB-C |
 | Cameras | 2 × Intel RealSense D436 |
@@ -67,7 +68,7 @@ mechanical stops.
 | Battery | 2 × Zeee 6S 10000 mAh LiPo in series: 44.4 V nominal, 50.4 V full |
 | Fuse | 10 A, computer branch only |
 | Control | 50 Hz policy, 200 Hz motor loop; cuRobo planner on a separate CUDA machine |
-| Structure | Machined aluminium, 6061 or 7075 **UNVERIFIED**{ .dh-unverified } (repo comments say 6061) |
+| Structure | Machined aluminium 6061 (the Fusion material on every `CNC_` component; repo comments agree) |
 | Hardware | Torx button-head M4×12 and M3×12; main bearing 50 × 65 × 7 mm; Loctite 222. Motor04 shaft and knee need M5 where the CAD has M4 **UNVERIFIED**{ .dh-unverified } |
 | Model mass | 34.5 kg in `humanoid_v21.xml`: `base_link` 9.30, waist 2.32, each leg 7.45, each arm 3.99 (with the 0.17 kg end-effector attachment); per-link CoM and inertia in its `<inertial>` entries. Head camera module 1.158 kg (`head_cam/cam_fusion_info.py`); gripper with flange ≈ 346 g (`parallel_gripper/README.md`) |
 | Model foot contact | Six parallel capsules per foot, radius 7 mm, 221 mm segment, axes 11.6 mm apart across 58 mm (`humanoid_v21.xml`, `foot_*_collision0`–`5`) |

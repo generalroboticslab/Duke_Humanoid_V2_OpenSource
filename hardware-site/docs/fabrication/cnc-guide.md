@@ -11,7 +11,7 @@ Have the machined parts made and check a first article.
 
 | Item | Value |
 | --- | --- |
-| Material | Aluminium, 6061 or 7075 (repo comments suggest hard-anodized 6061) |
+| Material | Aluminium 6061, the Fusion material on every `CNC_` component (repo comments suggest hard-anodized) |
 | General tolerance | 0.03 mm on radius and length, 0.06 mm on diameter; ± or total band not stated **UNVERIFIED**{ .dh-unverified } |
 | Walls | ≥ 1 mm; structural walls ≥ 4 mm |
 | Blind holes | End in a standard cone |
@@ -22,9 +22,6 @@ Have the machined parts made and check a first article.
 
 !!! missing "MISSING — SAFETY — per part: alloy and temper, tolerances on bearing seats, journals, dowel holes and mating faces, finish per face, thread specs, turned or 5-axis"
     *Owner: hardware lead, from the CAD and the machining quotations.*
-
-!!! unverified "UNVERIFIED — aluminium grade: 6061 or 7075"
-    *Owner: hardware lead.*
 
 ## Known CAD errors
 
@@ -57,10 +54,10 @@ interfaces first:
 ## Order the parts
 
 1. **Freeze the revision:** make every part from one release tag.
-2. **Send one archive:** STEP per part, PDF drawings (unpublished:
-   [CAD downloads](cad-downloads.md)), a parts table (ID,
+2. **Send one archive:** STEP per part ([CAD downloads](cad-downloads.md)), a parts table (ID,
    quantity, material, finish) and a cover sheet (general tolerance, default
-   finish, deadline, contact).
+   finish, deadline, contact). There are no per-part drawings: the reference parts were
+   made from STEP alone.
 
     !!! missing "MISSING — reference-build machine shop, what it was sent, quote, lead time, setup cost (material was priced with JLCPCB CNC)"
         *Owner: hardware lead.*

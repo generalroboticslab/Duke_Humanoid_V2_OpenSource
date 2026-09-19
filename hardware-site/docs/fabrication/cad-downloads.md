@@ -26,7 +26,8 @@ Open in your slicer. Units are millimetres.
 
 ### Drawings (PDF)
 
-Send with the STEP to the machine shop.
+One drawing exists: the whole-robot overall dimensions. There are no per-part drawings, so
+machined parts are ordered from the STEP files with the shop's default tolerances.
 
 {{ cad_table("drawings") }}
 
