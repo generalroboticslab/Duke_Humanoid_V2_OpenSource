@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **169 open items** across **41 pages**, of which **52 block the public release**.
+Every unresolved item on this site, in one table: **171 open items** across **41 pages**, of which **52 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -22,23 +22,23 @@ that is not here.
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
 | Before you start | 22 | 15 |
-| Bill of materials | 21 | 5 |
-| Fabrication | 14 | 3 |
+| Bill of materials | 22 | 5 |
+| Fabrication | 15 | 3 |
 | Assembly | 46 | 5 |
 | Electrical | 26 | 12 |
 | Bring-up | 25 | 7 |
 | Reference | 13 | 5 |
 | Top level | 2 | 0 |
-| **Total** | **169** | **52** |
+| **Total** | **171** | **52** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 169.
+more than 171.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Hardware lead | 102 | 27 |
+| Hardware lead | 104 | 27 |
 | Electrical lead | 46 | 23 |
 | Controls lead | 31 | 7 |
 | Perception lead | 8 | 1 |
@@ -101,8 +101,8 @@ in this list makes a build harder; these make it impossible.
 | [cables-and-connectors → Wire gauge](../bom/cables-and-connectors.md#wire-gauge) | Wire gauge of the 48 V riser, the ground returns, the motor branches and the CAN wire | electrical lead | **yes** |
 | [cables-and-connectors → Not in this list](../bom/cables-and-connectors.md#not-in-this-list) | Parts-list rows for EC5 connectors, Ethernet cable, heat-shrink, bulk wire (gauge, rating, colour, length), CAN termination resistors and GH1.25 cable housings | electrical lead | no |
 | [cables-and-connectors → Not in this list](../bom/cables-and-connectors.md#not-in-this-list) | Two design-log parts with no role: Amazon B0774VBJ3J and connector-housing kit B0BHZTQ1WV | electrical lead | no |
-| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | Per-robot quantity of every row checked against CAD, and one part-ID scheme matching the CAD filenames | hardware lead, from the CAD | no |
-| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | This list vs the team's 32-part CNC list: arm05–arm10 name the same parts shifted by one ID; counts (team vs this list) leg02 7 vs 8, leg12 4 vs 5, arm07 4 vs 2, arm10 2 vs 4; arm11–arm13 and the *not in team list* rows are absent from it | hardware lead, from the CAD | no |
+| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | `CNC_arm06_RS02_shaft_coupler`, `CNC_leg18_foot_plate` and `CNC_arm12_wrist_pitch` are in the machining quote but not in the Fusion model; `CNC_arm05` and `CNC_arm11` are quoted as machined but are SLS nylon in Fusion (see Printed parts) | hardware lead | no |
+| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | The team's 32-part CNC list names `arm05`–`arm10` shifted by one ID from the Fusion names used here; the *not in team list* rows (`01_…`–`22_…`, `B1`–`B5`) are in neither the team list nor the Fusion model and … | hardware lead | no |
 | [electronics → Where each part goes](../bom/electronics.md#where-each-part-goes) | Computer RAM, storage, OS release and rated input power; camera firmware version; physical IMU mounting position and orientation; bring-up peripherals beyond the operator laptop and the GPU machine | electrical lead | no |
 | [electronics → Where each part goes](../bom/electronics.md#where-each-part-goes) | IMU mounting screw: M3 (team log) vs Ø2.10 flange holes on 30 × 31 mm centres (vendor drawing) | hardware lead | no |
 | [electronics → Power path](../bom/electronics.md#power-path) | 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | **yes** |
@@ -110,7 +110,8 @@ in this list makes a build harder; these make it impossible.
 | [fasteners-and-hardware](../bom/fasteners-and-hardware.md) | Fastener schedule from CAD: every screw (thread, length, head, drive, qty), bearings and fits per location, dowel pins, retaining rings, shims, threadlocker locations, torque per size and joint, purchase links | hardware lead, from the CAD | **yes** |
 | [fasteners-and-hardware → Screwing into an actuator](../bom/fasteners-and-hardware.md#screwing-into-an-actuator) | Retaining compound and grease type per bearing and sliding surface | hardware lead | **yes** |
 | [index](../bom/index.md) | Allowance for tax, scrap and re-machining in the robot cost | hardware lead | no |
-| [printed-parts](../bom/printed-parts.md) | List of printed parts: one row per part with a CAD-matching ID, FDM or SLS, material grade, structural or not, cost and vendor | hardware lead | **yes** |
+| [printed-parts](../bom/printed-parts.md) | For every printed part: filament or powder grade (the covers only carry a Fusion material name such as `hip3_protection`), structural or cosmetic, print orientation and infill, cost and vendor | hardware lead | **yes** |
+| [printed-parts](../bom/printed-parts.md) | Quantities are Fusion occurrence counts, and left and right copies of a cover share one component name, so one STL may serve both sides or one side may need a mirrored print | hardware lead, from the CAD | no |
 | [sourcing](../bom/sourcing.md) | Quoted lead times, with the quote date, for machining, the D436 and the RobStride actuators | hardware lead | no |
 | [sourcing → Supply-risk parts](../bom/sourcing.md#supply-risk-parts) | An alternate for the D436 and for each RobStride model, or what a substitution requires | hardware lead + perception lead | no |
 | [sourcing → Vendors](../bom/sourcing.md#vendors) | Manufacturer part numbers for the marketplace lines | hardware lead | no |
@@ -122,6 +123,7 @@ in this list makes a build harder; these make it impossible.
 | --- | --- | --- | :-: |
 | [cnc-guide → Material and design rules](../fabrication/cnc-guide.md#material-and-design-rules) | Per part: alloy and temper, tolerances on bearing seats, journals, dowel holes and mating faces, finish per face, thread specs, turned or 5-axis | hardware lead, from the CAD and the machining quotations | **yes** |
 | [cnc-guide → Known CAD errors](../fabrication/cnc-guide.md#known-cad-errors) | CAD errors: Motor04 shaft and knee need M5 holes, CAD has M4; RS03 shaft bearing retainer above the knee is a design error (enlarged by hand). Whether the released CAD is corrected is unknown | hardware lead | **yes** |
+| [cnc-guide → Order the parts](../fabrication/cnc-guide.md#order-the-parts) | Whether the reference parts were ordered from STEP alone or with drawings that were not kept | hardware lead | no |
 | [cnc-guide → Order the parts](../fabrication/cnc-guide.md#order-the-parts) | Reference-build machine shop, what it was sent, quote, lead time, setup cost (material was priced with JLCPCB CNC) | hardware lead | no |
 | [cnc-guide → Order the parts](../fabrication/cnc-guide.md#order-the-parts) | Which machined parts need spares, and how many | hardware lead | no |
 | [cnc-guide → Order the parts](../fabrication/cnc-guide.md#order-the-parts) | Decision on registering the machined parts with one service and publishing its part numbers | hardware lead | no |

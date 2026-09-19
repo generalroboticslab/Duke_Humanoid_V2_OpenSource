@@ -33,13 +33,17 @@ ALIASES = {
     "CNC_arm01_shoulder_roll_front_bearing": "CNC_arm01_shoulder_roll_front_bearing_retainer",
     "CNC_arm02_shoulder_roll_back_bearing": "CNC_arm02_shoulder_roll_back_bearing_retainer",
     "CNC_arm04_shoulder_roll_support_shaft": "CNC_arm04_shoulder_elbow_support_shaft",
-    "CNC_arm05_RS02_shaft_bearing": "3DP_arm05_RS02_shaft_bearing_retainer",
     "CNC_arm07_elbow_front_bearing": "CNC_arm07_elbow_front_bearing_retainer",
     "CNC_arm08_elbow_back_bearing": "CNC_arm08_elbow_back_bearing_retainer",
-    "CNC_arm11_wrist_roll": "3DP_arm11_wrist_roll",
     "CNC_leg12_lower_leg_bearing": "CNC_leg12_lower_leg_bearing_cap",
+    "CNC_arm09_elbow_output_shaft": "CNC_arm09_elbow_roll_output_shaft",
 }
 PRINTED_PREFIX = "3DP_"
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gen_printed import PRINTED  # noqa: E402  (fusion name, part_id, ...)
+ALIASES.update({pid: name.split("|")[0] for name, pid, _, _ in PRINTED})
+PRINTED_IDS = {pid for _, pid, _, _ in PRINTED}
+MAX_FILE = 95 * 1024 * 1024
 
 
 def strip_qty(name: str) -> str:
@@ -69,16 +73,18 @@ def main() -> int:
     by_stripped: dict[str, list[dict]] = {}
     for r in tree:
         by_stripped.setdefault(strip_qty(r["file_name"]), []).append(r)
+        if r["fusion_name"] != r["file_name"]:
+            by_stripped.setdefault(r["fusion_name"], []).append(r)
 
     plan, missing = [], []
     for pid in site_ids():
         key = ALIASES.get(pid, pid)
-        cands = by_stripped.get(key, [])
+        cands = by_stripped.get(key) or by_stripped.get(strip_qty(key), [])
         if not cands:
             missing.append(pid)
             continue
         src = cands[0]["file_name"]
-        printed = key.startswith(PRINTED_PREFIX)
+        printed = pid in PRINTED_IDS or key.startswith(PRINTED_PREFIX)
         plan.append((pid, src, printed, sum(int(c["qty"]) for c in cands)))
 
     print(f"{len(plan)} site parts matched to Fusion components, {len(missing)} not in the CAD:")
@@ -114,10 +120,20 @@ def main() -> int:
             shutil.copy2(s, d)
             copied += 1
     for s in sorted((exp / "assembly").glob("*")):
-        if s.suffix.lower() in (".step", ".stp", ".f3z", ".f3d"):
-            d = FILES / "assembly" / f"{s.stem}_rev{a.rev}{s.suffix.lower()}"
-            shutil.copy2(s, d)
-            copied += 1
+        if s.suffix.lower() not in (".step", ".stp", ".f3z") or s.name.endswith(".f3z.f3d"):
+            continue
+        d = FILES / "assembly" / f"{s.stem}_rev{a.rev}{s.suffix.lower()}"
+        if s.stat().st_size > MAX_FILE:
+            if s.suffix.lower() in (".step", ".stp"):
+                import zipfile
+                with zipfile.ZipFile(str(d) + ".zip", "w", zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+                    z.write(s, d.name)
+                print(f"  zipped (over 95 MB): {d.name}.zip")
+            else:
+                print(f"  skipped (over 95 MB, publish as a release asset): {s.name}")
+            continue
+        shutil.copy2(s, d)
+        copied += 1
     print(f"\ncopied {copied} files into docs/files/")
     for x in absent:
         print(f"  export missing: {x}")

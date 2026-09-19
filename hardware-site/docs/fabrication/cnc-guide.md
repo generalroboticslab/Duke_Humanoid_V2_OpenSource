@@ -56,8 +56,11 @@ interfaces first:
 1. **Freeze the revision:** make every part from one release tag.
 2. **Send one archive:** STEP per part ([CAD downloads](cad-downloads.md)), a parts table (ID,
    quantity, material, finish) and a cover sheet (general tolerance, default
-   finish, deadline, contact). There are no per-part drawings: the reference parts were
-   made from STEP alone.
+   finish, deadline, contact). There are no per-part drawings in the CAD.
+
+!!! unverified "UNVERIFIED — whether the reference parts were ordered from STEP alone or with drawings that were not kept"
+    *Owner: hardware lead.*
+
 
     !!! missing "MISSING — reference-build machine shop, what it was sent, quote, lead time, setup cost (material was priced with JLCPCB CNC)"
         *Owner: hardware lead.*

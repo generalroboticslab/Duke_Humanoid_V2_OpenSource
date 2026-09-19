@@ -23,6 +23,8 @@ $ python tools/gen_image_manifest.py# figure gaps    -> docs/assets/MANIFEST.md
 | `audit_sheet2.py` | the machined sheet | nothing; prints the arithmetic check |
 | `gen_punchlist.py` | every `!!! missing` and `!!! unverified` block in `docs/` | `docs/reference/todo.md` |
 | `gen_image_manifest.py` | figure placeholders in `docs/`, plus `part_id` columns | `docs/assets/MANIFEST.md` |
+| `gen_printed.py` | the newest `cad/*/tree.csv` (after `gen_sheet1.py`) | `printed-parts.csv`: one row per printed Fusion component, plus the three material rows |
+| `stage_cad_export.py` | a `cad/<export>/` folder from `fusion_export` | copies STEP/STL/overall drawing into `docs/files/` as `<part_id>_rev01.<ext>`; zips a whole-robot STEP over 95 MB; skips the `.f3z` (release asset) |
 | `fusion_export/` | the open Fusion 360 design (run it *inside* Fusion: Utilities > Add-Ins > Scripts) | `tree.csv` (every component: qty, material, mass, size), whole-robot STEP + `.f3z`, one STEP and STL per leaf part, into a dated folder you choose. Rename to `<part_id>_rev01.<ext>`, copy into `docs/files/`, then run `gen_cad_manifest.py` |
 | `gen_cad_manifest.py` | files under `docs/files/` | `docs/data/cad-files.csv`, `docs/files/SHA256SUMS.txt`; fails on files over GitHub's limits |
 

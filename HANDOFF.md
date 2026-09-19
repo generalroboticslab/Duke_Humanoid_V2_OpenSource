@@ -7,11 +7,11 @@ Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` 
 | Item | State |
 |---|---|
 | Site (`hardware-site/`, MkDocs Material) | 50 pages, ~22,500 words, English, `mkdocs build --strict` clean |
-| Punch list (`docs/reference/todo.md`, generated) | **170 open items, 52 block release** — every gap is a red MISSING/UNVERIFIED box |
+| Punch list (`docs/reference/todo.md`, generated) | **171 open items, 52 block release** — every gap is a red MISSING/UNVERIFIED box |
 | Images still needed (`docs/assets/MANIFEST.md`, generated) | 112, incl. the whole-robot exploded view (`assets/images/exploded-overview.png`, not yet made) |
 | Exploded-view animations | 9 web MP4s in `docs/assets/exploded/`, embedded on the assembly pages |
 | Wiring diagrams | `hardware/*.jpg` → `docs/assets/wiring/`, on the electrical pages |
-| CAD downloads | 34 files live: 31 per-part STEP, 2 SLS STL, whole-robot STEP (zip); `.f3z` as release asset `cad-v2.1-rc1`. Still missing: PDF drawings, 3MF plates, STL for the two ABS plates. Raw export + `tree.csv` in `cad/humanoid_2.1_latest_2026-09-19_1423/` |
+| CAD downloads | 86 files live (120 MB): 32 CNC STEP, 27 printed parts (STEP + STL, incl. covers from the `*_protection` materials), whole-robot STEP (zip), overall-dimensions PDF; `.f3z` (319 MB) as release asset `cad-v2.1-rc1`. No per-part drawings exist. Raw export + `tree.csv` in `cad/humanoid_2.1_latest_2026-09-19_1423/` |
 | Local preview | `http://localhost:8321/duke_humanoid_v2/` — the `/duke_humanoid_v2/` prefix is intentional (`site_url`) |
 
 ## What the team must supply (blocking)

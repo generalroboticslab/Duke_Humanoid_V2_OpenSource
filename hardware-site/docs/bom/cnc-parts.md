@@ -41,8 +41,13 @@
 [CNC guide](../fabrication/cnc-guide.md); check them with
 [Incoming inspection](../fabrication/incoming-inspection.md).
 
-!!! missing "MISSING — per-robot quantity of every row checked against CAD, and one part-ID scheme matching the CAD filenames"
-    *Owner: hardware lead, from the CAD.*
+The part IDs are the Fusion component names without their `_x<qty>` token, so every row with a
+download link is checked against the CAD. Fusion occurrence counts per robot: `leg02` 7, `leg03` 5,
+`leg09` 2, `leg10` 2, `leg11` 2, `leg12` 4, `arm04` 4, `arm10` 4, `body04` 4, all other linked rows 2 (body plates 1).
+Rows with no download link are not in the Fusion model.
+
+!!! unverified "UNVERIFIED — `CNC_arm06_RS02_shaft_coupler`, `CNC_leg18_foot_plate` and `CNC_arm12_wrist_pitch` are in the machining quote but not in the Fusion model; `CNC_arm05` and `CNC_arm11` are quoted as machined but are SLS nylon in Fusion (see Printed parts)"
+    *Owner: hardware lead.*
 
 **Flags:**
 
@@ -50,5 +55,5 @@
 - *not in team list*: absent from the team's 32-part CNC list; may duplicate a current part.
 - *no unit cost*: the lot price does not divide evenly.
 
-!!! unverified "UNVERIFIED — this list vs the team's 32-part CNC list: arm05–arm10 name the same parts shifted by one ID; counts (team vs this list) leg02 7 vs 8, leg12 4 vs 5, arm07 4 vs 2, arm10 2 vs 4; arm11–arm13 and the *not in team list* rows are absent from it"
-    *Owner: hardware lead, from the CAD.*
+!!! unverified "UNVERIFIED — the team's 32-part CNC list names `arm05`–`arm10` shifted by one ID from the Fusion names used here; the *not in team list* rows (`01_…`–`22_…`, `B1`–`B5`) are in neither the team list nor the Fusion model and are probably an older numbering of the same parts"
+    *Owner: hardware lead.*
