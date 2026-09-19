@@ -255,3 +255,7 @@
 .md-typeset .dh-part-row.dh-selected td { background: rgba(217, 31, 20, .18); }
 .md-typeset .dh-part-row.dh-flash td { animation: dh-flash 1.6s ease-out; }
 @keyframes dh-flash { 0%, 60% { background: rgba(217, 31, 20, .45); } 100% { background: rgba(217, 31, 20, .18); } }
+
+/* eye (hide / show the selected part) and "Show hidden (N)" buttons in the viewer bar */
+.md-typeset .dh-viewer-bar .dh-eye, .md-typeset .dh-viewer-bar .dh-unhide { display: inline-flex; align-items: center; gap: .35em; }
+.md-typeset .dh-viewer-bar .dh-eye:disabled { opacity: .45; cursor: default; }

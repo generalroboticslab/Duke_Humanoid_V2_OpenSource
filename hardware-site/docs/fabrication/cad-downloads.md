@@ -33,7 +33,9 @@ or purchased).
 
 1. Click **Preview** in a row below: that file's part or module turns red and the camera frames it; a whole-robot file shows the complete robot.
 2. Click a component on the robot: the info box names it, lists its module chain and its downloads, and the page jumps to its row.
-3. Drag to orbit, scroll to zoom, **Show all** to reset.
+3. The selected part shows through other parts as a translucent red ghost. **Hide selected** takes it out of the
+   view, like the eye in Fusion, so you can see what sits behind it; **Show hidden** brings everything back.
+4. Drag to orbit, scroll to zoom, **Show all** to reset.
 
 ## Files
 

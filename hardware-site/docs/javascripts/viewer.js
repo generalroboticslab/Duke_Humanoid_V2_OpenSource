@@ -40,17 +40,57 @@
  *   mv.getCameraOrbit() -> {theta, phi, radius}   radians, radians, metres
  *   mv.cameraTarget = "Xm Ym Zm" | "auto auto auto";  mv.cameraOrbit = "Arad Brad Rm"
  *   mv.updateHotspot({name, position})            moves a <button slot="hotspot-…"> child
+ *   material.setAlphaMode("BLEND" | "OPAQUE")     fallback only, see below
+ *
+ * The public scene graph exposes materials only, so hiding a part and the x-ray ghost go
+ * through the three.js scene behind the element. Checked in the 3.5.0 bundle
+ * (cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.js, line numbers from it;
+ * the site loads model-viewer.min.js, which keeps Symbol("scene") and every name used here):
+ *   mv[Symbol("scene")]      own property of the element, `this[$scene] = new ModelScene(…)`
+ *                            in the constructor (l. 60339 `const $scene = Symbol('scene')`,
+ *                            l. 60438); ModelScene extends the three.js Scene (l. 59340)
+ *   scene.queueRender()      l. 59414, marks the scene dirty; the renderer's animation loop
+ *                            (l. 56533) draws the next frame — called after every change here
+ *   scene.hitFromPoint()     l. 59989: raycaster.intersectObject(scene, true), then the first
+ *                            hit with `hit.object.visible && !hit.object.userData.noHit`;
+ *                            mv.materialFromPoint (l. 58669) and positionAndNormalFromPoint
+ *                            (l. 60000) are built on it
+ *   three.js intersect()     l. 38817: an object is raycast only when
+ *                            `object.layers.test(raycaster.layers)`, both masks layer 0
+ * Hiding therefore sets `mesh.layers.set(1)` (the camera draws layer 0 only, and the raycaster
+ * tests layer 0 only, so a hidden mesh is neither drawn nor picked: a click where it was selects
+ * the part behind it) plus `mesh.visible = false`, which the hitFromPoint filter honours as well.
+ * Restoring is layers.set(0) and visible = true.
+ * Meshes are matched by MATERIAL name, not by object name: GLTFLoader renames nodes and meshes
+ * (PropertyBinding.sanitizeNodeName drops "[ ] . : /", l. 36673, and numbers duplicates, l. 44082),
+ * while the material keeps the glTF name as written (l. 44067). tools/glb_tools.py gives node,
+ * mesh and material of an occurrence the same name, so material.name is the mesh id.
+ * X-ray ghost of the selection: one clone per selected mesh (mesh.clone() shares the geometry)
+ * with its own cloned material — color RED, transparent = true, opacity GHOST_ALPHA,
+ * depthWrite = false, depthTest = true, depthFunc = GreaterDepth, renderOrder 1000, a no-op
+ * raycast() and userData.noHit, added to mesh.parent so it carries the same transform, removed
+ * from its parent and material-disposed on deselect, on hide and on "Show all". GreaterDepth is
+ * the three.js constant 6 (l. 61; 5 is GreaterEqualDepth), so the ghost is drawn only where the
+ * part is behind other geometry, and the directly visible surface keeps the solid red.
+ * Without the scene (symbol gone in a future model-viewer), parts are hidden by a transparent
+ * material instead, ghosts are skipped, and a console.warn says hidden parts still block clicks.
  */
 (function () {
   "use strict";
 
   // Same values as the legend swatches .dh-sw-* in stylesheets/extra.css.
   const RED = "#d91f14";         // selected
+  const GHOST_OPACITY = 0.35;   // x-ray ghost of the selected part where it is occluded
+  const EYE_OFF = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M2 5.3 3.3 4l16.7 16.7-1.3 1.3-3-3A11 11 0 0 1 12 20C7 20 2.7 16.9 1 12.5c.8-1.9 2-3.6 3.5-4.9L2 5.3m9.9 2.3.6 0A4.5 4.5 0 0 1 16.4 12c0 .2 0 .4-.1.6l-4.4-4.4c.1-.2 0-.6 0-.6M12 5c5 0 9.3 3.1 11 7.5a12 12 0 0 1-3.5 4.7l-1.4-1.4A9.9 9.9 0 0 0 20.8 12.5 9.8 9.8 0 0 0 12 7c-.9 0-1.8.1-2.6.4L7.8 5.8C9.1 5.3 10.5 5 12 5Z"/></svg>';
+  const EYE_ON = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0-4.5c5 0 9.3 3.1 11 7.5-1.7 4.4-6 7.5-11 7.5S2.7 16.4 1 12c1.7-4.4 6-7.5 11-7.5M3.2 12a9.8 9.8 0 0 0 17.6 0 9.8 9.8 0 0 0-17.6 0Z"/></svg>';
   const AMBER = "#f2a61a";       // hovered or focused row (the row hover colour)
   const DRAG_PX = 6;             // pointer travel beyond which a click was an orbit drag
   const MIN_RADIUS_M = 0.35;     // never closer than this when framing a target
   const FRAME_FACTOR = 4.5;      // camera distance = bounding-sphere radius x this
   const SAME_SURFACE_M = 0.002;  // a part this close behind the backdrop is the surface that was clicked
+  const GHOST_ALPHA = 0.35;      // x-ray clone of the selection, drawn where it is occluded
+  const GHOST_ORDER = 1000;      // the ghosts are drawn after the model
+  const GREATER_DEPTH = 6;       // three.js GreaterDepth: keep only fragments behind the depth buffer
   const AXES = ["x", "y", "z"];
   // docs/data/<csv> -> the page that lists it (vendor-map.json gives `bom_file`; `page` overrides).
   const BOM_PAGES = {
@@ -146,6 +186,13 @@
     mv.dataset.ready = "1";
     const box = document.getElementById("dh-viewer-info");
     const reset = document.getElementById("dh-viewer-reset");
+    // Eye button (hide / show the selected target) and "Show hidden (N)", next to "Show all".
+    const eye = document.createElement("button");
+    eye.type = "button"; eye.className = "md-button dh-eye"; eye.disabled = true;
+    eye.innerHTML = EYE_OFF + "<span>Hide selected</span>";
+    const unhide = document.createElement("button");
+    unhide.type = "button"; unhide.className = "md-button dh-unhide"; unhide.hidden = true;
+    reset.after(eye, unhide);
     const base = mv.dataset.base || "";
     const homeOrbit = mv.getAttribute("camera-orbit") || "auto auto auto";
 
@@ -267,8 +314,8 @@
     function repaint() {
       if (!materials) return;
       const want = new Map();
-      hovered.forEach((t) => t.nodes.forEach((n) => want.set(n, AMBER)));
-      if (selected) selected.nodes.forEach((n) => want.set(n, RED));   // selection wins over hover
+      hovered.forEach((t) => t.nodes.forEach((n) => { if (!hidden.has(n)) want.set(n, AMBER); }));
+      if (selected) selected.nodes.forEach((n) => { if (!hidden.has(n)) want.set(n, RED); });   // selection wins over hover
       current.forEach((c, n) => { if (!want.has(n)) setColor(n, null); });
       want.forEach((c, n) => { if (current.get(n) !== c) setColor(n, c); });
       current = want;
@@ -277,8 +324,88 @@
       if (on) hovered.add(t); else hovered.delete(t);
       repaint();
     }
+    // ---- three.js access: hide meshes (Fusion's eye) and x-ray the selection -------------
+    // model-viewer keeps its ModelScene under Symbol(scene). Hidden meshes move to render
+    // layer 1: the camera draws layer 0 only and the raycaster behind materialFromPoint tests
+    // object.layers, so a hidden part neither shows nor blocks clicks. The x-ray ghost is a
+    // clone of each selected mesh with a translucent red MeshStandardMaterial whose depthFunc
+    // is GreaterDepth (6): it is drawn only where the part lies behind other geometry.
+    function threeScene() {
+      const sym = Object.getOwnPropertySymbols(mv).find((s) => s.description === "scene");
+      const scene = sym && mv[sym];
+      return scene && typeof scene.traverse === "function" ? scene : null;
+    }
+    let meshMap = null;   // node name -> three.js Mesh
+    function meshOf(node) {
+      if (!meshMap) {
+        const scene = threeScene();
+        if (!scene) return null;
+        meshMap = new Map();
+        scene.traverse((o) => { if (o.isMesh && o.name) meshMap.set(o.name, o); });
+      }
+      return meshMap.get(node) || null;
+    }
+    function rerender() {
+      const scene = threeScene();
+      if (scene && typeof scene.queueRender === "function") scene.queueRender();
+    }
+    const hidden = new Set();      // node names hidden with the eye button
+    const ghosts = new Map();      // node name -> ghost mesh
+    function updateEye() {
+      const t = selected;
+      const allHidden = t && t.nodes.size > 0 && Array.from(t.nodes).every((n) => hidden.has(n));
+      eye.disabled = !t || !t.nodes.size || !threeScene();
+      eye.innerHTML = (allHidden ? EYE_ON : EYE_OFF) + `<span>${allHidden ? "Show selected" : "Hide selected"}</span>`;
+      eye.setAttribute("aria-label", allHidden ? "Show the selected part again" : "Hide the selected part");
+      unhide.hidden = hidden.size === 0;
+      unhide.textContent = `Show hidden (${hidden.size})`;
+      unhide.setAttribute("aria-label", `Show the ${hidden.size} hidden parts again`);
+    }
+    function setHidden(nodes, on) {
+      nodes.forEach((n) => {
+        const m = meshOf(n);
+        if (!m) return;
+        m.layers.set(on ? 1 : 0);
+        if (on) hidden.add(n); else hidden.delete(n);
+      });
+      refreshGhosts();
+      repaint();
+      updateEye();
+      rerender();
+    }
+    function clearGhosts() {
+      ghosts.forEach((g) => { if (g.parent) g.parent.remove(g); g.material.dispose(); });
+      ghosts.clear();
+    }
+    function refreshGhosts() {
+      clearGhosts();
+      if (!selected) return;
+      selected.nodes.forEach((n) => {
+        if (hidden.has(n)) return;
+        const m = meshOf(n);
+        if (!m || !m.parent || !m.material) return;
+        const g = m.clone();
+        const mat = m.material.clone();
+        mat.color.set(RED);          // three.js Color.set takes the CSS hex string
+        mat.transparent = true;
+        mat.opacity = GHOST_OPACITY;
+        mat.depthWrite = false;
+        mat.depthTest = true;
+        mat.depthFunc = 6;          // THREE.GreaterDepth: only the occluded fragments pass
+        mat.metalness = 0; mat.roughness = 1;
+        g.material = mat;
+        g.renderOrder = 1000;
+        g.raycast = () => {};       // never picked
+        g.name = "ghost:" + n;
+        m.parent.add(g);
+        ghosts.set(n, g);
+      });
+      rerender();
+    }
+
     function bindModel() {
       if (materials || !mv.model) return;
+      meshMap = null;
       materials = new Map();
       originals = new Map();
       mv.model.materials.forEach((m) => {
@@ -461,7 +588,15 @@
       t.rows.forEach((tr) => tr.classList.add("dh-selected"));
       box.innerHTML = infoHtml(t);
       box.hidden = false;
+      refreshGhosts();
+      updateEye();
     }
+    eye.addEventListener("click", () => {
+      if (!selected || !selected.nodes.size) return;
+      const allHidden = Array.from(selected.nodes).every((n) => hidden.has(n));
+      setHidden(Array.from(selected.nodes), !allHidden);
+    });
+    unhide.addEventListener("click", () => setHidden(Array.from(hidden), false));
 
     // ---- clicks on the model ----------------------------------------------------------
     // With a backdrop (older scenes) a part's surface and the backdrop's coincide, and on
@@ -520,7 +655,10 @@
 
     reset.addEventListener("click", () => {
       selected = null;
+      clearGhosts();
+      if (hidden.size) setHidden(Array.from(hidden), false);
       repaint();
+      updateEye();
       mv.cameraTarget = "auto auto auto";
       mv.cameraOrbit = homeOrbit;
       document.querySelectorAll(".dh-part-row.dh-selected").forEach((tr) => tr.classList.remove("dh-selected"));
