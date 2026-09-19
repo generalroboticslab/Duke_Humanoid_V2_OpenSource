@@ -75,5 +75,20 @@ mechanical stops.
 | Commanded velocity | Full stick ±1.0 m/s forward and lateral, ±0.7 rad/s yaw, the trained command range (`humanoid_real_env.py` `VEL_SCALE_*`); `gamepad.py` publisher caps x 0.3 m/s, y 0.25 m/s, yaw 0.2 rad/s |
 | Gaze slew | Reference capped at 1.5 rad/s (`humanoid_auto_operator.py` `GAZE_SLEW_RATE`); failsafe return to zero at 0.75 rad/s (`humanoid_real_env.py`) |
 
+## Mass properties (Fusion model)
+
+CAD masses from the Fusion model `humanoid_2.1_latest` (export of 2026-09-19 16:46, `tree.csv`: each
+component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
+[Mass properties](part-index.md#mass-properties).
+
+| | |
+| --- | --- |
+| Whole model | 35.27 kg: the sum of the top-level components (lower body, torso, both arms, both grippers); the model has no root-level mass |
+| Lower body (`v2.1_lower_body_latest`) | 17.51 kg, of which left leg (`v2.1_lower_leg_L_copy`) 5.53 kg and right leg (`v2.1_lower_leg_R`) 5.70 kg **UNVERIFIED**{ .dh-unverified } (the two leg designs differ by 174 g: only the right copy carries the shank covers `Component42`/`Component43`, 2 × 44.7 g, and `ankle_top_cover`, 61.4 g; the remaining 23 g are not accounted for) |
+| Torso (`body_LATEST`) | 7.85 kg, including the electronics tray with everything mounted on it (`3DP_body_05_x1_interior_plate` subtree, 4.64 kg) and both camera columns (`twincities_v2_nolock`, 0.59 kg each; the code repo's `head_cam/cam_fusion_info.py` gives 579.1 g per side, 1 158.3 g for both) **UNVERIFIED**{ .dh-unverified } |
+| Arm (each, with wrist) | Left 4.61 kg, right 4.60 kg; wrist module (`001_*_wrist_long_latest`) 0.87 kg of each |
+| Gripper (each, `dovetail_umi_gripper`) | 0.35 kg (351.1 g, with servo, servo board, buck converter and mounting flange); the code repo's `parallel_gripper/README.md` gives ≈ 346 g with flange (gripper 324 g + flange 22 g) for its `ParallelGripper0710` STEP; whether the Fusion `dovetail_umi_gripper` is that revision is not recorded **UNVERIFIED**{ .dh-unverified } |
+| Against the MJCF | The 34.5 kg model mass above counts body, waist, legs and arms only; the Fusion sum without grippers and camera columns is 33.4 kg **UNVERIFIED**{ .dh-unverified } |
+
 !!! missing "MISSING — Unspecified: mechanical stops, as-built mass breakdown, measured CoM and inertia, physical foot geometry, current draw and runtime, payload, measured walking speed, measured gimbal range and slew rate, IP rating, robot temperature range, noise"
     *Owner: hardware lead + controls lead.*

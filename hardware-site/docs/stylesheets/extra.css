@@ -179,3 +179,60 @@
   font-style: normal;
   white-space: nowrap;
 }
+
+/* --- interactive part viewer (fabrication/cad-downloads) --- */
+/* The model shows the Fusion appearances; only RED / AMBER in docs/javascripts/viewer.js are painted. */
+.md-typeset .dh-viewer-block { margin: 0 0 1rem; }
+#dh-viewer {
+  display: block; width: 100%; max-width: 100%; height: min(520px, 80vh);
+  background: var(--md-code-bg-color); border-radius: .2rem;
+  --min-hotspot-opacity: .55;   /* axis labels behind the model stay readable */
+}
+.dh-viewer-bar { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin: .4rem 0 .3rem; font-size: .8rem; }
+.dh-viewer-legend { display: inline-flex; flex-wrap: wrap; gap: .3rem .9rem; align-items: center; color: var(--md-default-fg-color--light); }
+.dh-viewer-legend i { display: inline-block; width: .8em; height: .8em; margin-right: .3em; border-radius: .15em; vertical-align: -.05em; }
+.dh-sw-amber { background: #f2a61a; }
+.dh-sw-red { background: #d91f14; }
+.md-typeset .dh-viewer-note { margin: 0 0 1rem; font-size: .7rem; color: var(--md-default-fg-color--light); }
+#dh-viewer-info { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; padding: .4rem .6rem; border-left: .2rem solid #d91f14; background: var(--md-code-bg-color); line-height: 1.7; }
+
+/* Axis labels: <button slot="hotspot-x|y|z"> children of the viewer, positioned by viewer.js
+   from parts.json (class dh-axis-on once a tip position is known). X red, Y green, Z blue. */
+.md-typeset .dh-axis, .dh-axis {
+  display: none; align-items: center; justify-content: center;
+  width: 1.3rem; height: 1.3rem; padding: 0; margin: 0;
+  border: .1rem solid var(--md-default-bg-color); border-radius: 50%;
+  font: 700 .65rem/1 var(--md-text-font-family, sans-serif); color: #fff;
+  box-shadow: var(--md-shadow-z1); cursor: default; pointer-events: none;
+}
+.md-typeset .dh-axis.dh-axis-on, .dh-axis.dh-axis-on { display: inline-flex; }
+.dh-axis-x { background: #e53935; }
+.dh-axis-y { background: #43a047; }
+.dh-axis-z { background: #1e88e5; }
+
+/* Row buttons, built by viewer.js: Preview (locate on the robot) and the Download link. */
+.md-typeset .dh-preview, .md-typeset a.dh-dl, .md-typeset .dh-chip {
+  display: inline-flex; align-items: center; gap: .3em; vertical-align: middle;
+  padding: .05em .55em; border-radius: .2rem; border: .05rem solid transparent;
+  font-family: inherit; font-size: .7rem; font-weight: 600; line-height: 1.7; white-space: nowrap;
+  text-decoration: none; cursor: pointer;
+}
+.md-typeset .dh-preview {
+  margin-right: .45em; background: transparent;
+  color: var(--md-primary-fg-color); border-color: var(--md-primary-fg-color);
+}
+.md-typeset .dh-preview:hover, .md-typeset .dh-preview:focus-visible { background: rgba(242, 166, 26, .22); border-color: #f2a61a; outline: none; }
+.md-typeset a.dh-dl { background: var(--md-primary-fg-color); color: var(--md-primary-bg-color); }
+.md-typeset a.dh-dl:hover, .md-typeset a.dh-dl:focus-visible { background: var(--md-accent-fg-color); color: var(--md-accent-bg-color); outline: none; }
+.md-typeset a.dh-dl svg { flex: none; }
+.md-typeset .dh-chip { padding: 0 .45em; background: var(--md-default-fg-color--lightest); color: var(--md-default-fg-color); }
+.md-typeset .dh-chip:hover, .md-typeset .dh-chip:focus-visible { background: rgba(242, 166, 26, .3); outline: none; }
+.md-typeset table:not([class]) td .dh-preview + a.dh-dl { margin-left: 0; }
+
+.md-typeset .dh-part-row { cursor: pointer; }
+.md-typeset .dh-part-row:hover td { background: rgba(242, 166, 26, .18); }
+.md-typeset .dh-part-row:focus-visible { outline: none; }
+.md-typeset .dh-part-row:focus-visible td { box-shadow: inset 0 0 0 .15rem var(--md-accent-fg-color); }
+.md-typeset .dh-part-row.dh-selected td { background: rgba(217, 31, 20, .18); }
+.md-typeset .dh-part-row.dh-flash td { animation: dh-flash 1.6s ease-out; }
+@keyframes dh-flash { 0%, 60% { background: rgba(217, 31, 20, .45); } 100% { background: rgba(217, 31, 20, .18); } }

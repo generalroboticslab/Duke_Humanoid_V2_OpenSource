@@ -1,47 +1,105 @@
 # CAD downloads
 
-Download the manufacturing files. Each part's files are also linked from its row in the parts lists.
+Download the CAD at the level you need: the whole robot, one module, or one part (machined, printed
+or purchased).
 
 !!! abstract "At a glance"
-    - **You will:** download the files for the parts you are making, and check them.
+    - **You will:** download the files for what you are making or checking, and verify each one.
+    - **Three levels:** [whole robot](#whole-robot) · [modules](#modules) (one sub-assembly each) · [parts](#parts) (one component each, machined, printed or purchased).
     - **Parts lists:** [CNC parts](../bom/cnc-parts.md) · [Printed parts](../bom/printed-parts.md).
     - **Before this:** [Bill of materials](../bom/index.md).
+
+!!! unverified "UNVERIFIED — redistribution terms of the vendor CAD models (RobStride, Feetech, Intel RealSense, SYD Dynamics, MINISFORUM) included in the whole-robot and module files"
+    *Owner: PI + hardware lead.*
+
+## Find a part on the robot
+
+<div class="dh-viewer-block">
+<model-viewer id="dh-viewer" data-base="../../" src="../../assets/viewer/robot.glb" camera-controls
+  camera-orbit="35deg 75deg auto" min-camera-orbit="auto auto 0.3m" max-camera-orbit="auto auto 6m"
+  interaction-prompt="none" shadow-intensity="0.6" exposure="1.1" loading="eager"
+  alt="Duke Humanoid V2, every component in its Fusion 360 appearance">
+  <button slot="hotspot-x" class="dh-axis dh-axis-x" type="button" tabindex="-1" data-position="0m 0m 0m" aria-label="X axis">X</button>
+  <button slot="hotspot-y" class="dh-axis dh-axis-y" type="button" tabindex="-1" data-position="0m 0m 0m" aria-label="Y axis">Y</button>
+  <button slot="hotspot-z" class="dh-axis dh-axis-z" type="button" tabindex="-1" data-position="0m 0m 0m" aria-label="Z axis">Z</button>
+</model-viewer>
+<div class="dh-viewer-bar">
+  <button id="dh-viewer-reset" class="md-button" type="button">Show all</button>
+  <span class="dh-viewer-legend"><span>Colours are the Fusion appearances</span><span><i class="dh-sw-amber"></i>hovered row</span><span><i class="dh-sw-red"></i>selected</span></span>
+  <div id="dh-viewer-info" hidden></div>
+</div>
+<p class="dh-viewer-note">Axes are the STEP file axes (right-handed, Z up).</p>
+</div>
+
+1. Click **Preview** in a row below: that file's part or module turns red and the camera frames it; a whole-robot file shows the complete robot.
+2. Click a component on the robot: the info box names it, lists its module chain and its downloads, and the page jumps to its row.
+3. Drag to orbit, scroll to zoom, **Show all** to reset.
 
 ## Files
 
 {% if cad_count() %}
-Files are named `<part_id>_rev<NN>`, matching the parts lists. Left and right parts are separate files.
+Part files are named `<part_id>_rev<NN>`, matching the parts lists; left and right parts are separate files.
+Module and purchased-part files carry the Fusion 360 component name.
 
-### Parts (STEP)
+### Whole robot
+
+Assembly STEP, and the Fusion 360 archive (`.f3z`) for editing. Both contain every module and part below.
+
+{{ cad_table("assembly") }}
+
+### Modules
+
+One STEP per sub-assembly, its parts assembled, in the sub-assembly's own coordinates: lower body, torso, arms, gripper, legs, camera
+columns, wrists, the hip, knee, shoulder and elbow modules, the electronics tray, and the vendor assemblies
+used at those levels. Use these to rebuild one joint or to check fits. Depth 0 is directly under the robot.
+
+{% if cad_count("modules") %}
+{{ cad_table_modules() }}
+{% else %}
+!!! missing "MISSING — module STEP files (one per sub-assembly) are not published yet"
+    *Owner: hardware lead.*
+{% endif %}
+
+### Parts
+
+One file per component, in the component's own coordinates.
+
+#### Machined and printed parts (STEP)
 
 For machining, or to edit or re-mesh a part.
 
 {{ cad_table("step") }}
 
-### Printable meshes (3MF / STL)
+#### Printable meshes (3MF / STL)
 
 Open in your slicer. Units are millimetres.
 
 {{ cad_table("print") }}
 
-### Drawings (PDF)
+#### Purchased parts (STEP)
+
+Vendor models as placed in the Fusion design (motors, servos, camera, IMU, computer, bearings, fasteners).
+Buy these parts; the files are for fit checks only.
+
+{% if cad_count("vendor") %}
+{{ cad_table("vendor", "Component") }}
+{% else %}
+!!! missing "MISSING — purchased-part STEP files (motors, servos, camera, IMU, computer) are not published yet"
+    *Owner: hardware lead.*
+{% endif %}
+
+#### Drawings (PDF)
 
 One drawing exists: the whole-robot overall dimensions. There are no per-part drawings, so
 machined parts are ordered from the STEP files with the shop's default tolerances.
 
 {{ cad_table("drawings") }}
 
-### Ready-to-print plates
+#### Ready-to-print plates
 
 Slicer projects with orientation, supports and settings already set.
 
 {{ cad_table("plates") }}
-
-### Whole robot
-
-Assembly STEP, and the Fusion 360 archive (`.f3z`) for editing.
-
-{{ cad_table("assembly") }}
 
 Checksums for every file: [SHA256SUMS.txt](../files/SHA256SUMS.txt){ download="" }.
 {% else %}

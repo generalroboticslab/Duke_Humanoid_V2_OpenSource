@@ -10,7 +10,7 @@ FILE_DESCRIPTION(
 
 FILE_NAME(
 /* name */ 'CNC_leg07_x2_hip_roll_support_shaft.step',
-/* time_stamp */ '2026-09-19T14:31:06-04:00',
+/* time_stamp */ '2026-09-19T16:53:54-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -27235,7 +27235,7 @@ SOLID_ANGLE_UNIT()
 #25170=PRODUCT_DEFINITION_SHAPE('',$,#25173);
 #25171=SHAPE_REPRESENTATION('',(#11067),#25163);
 #25172=PRODUCT_DEFINITION_CONTEXT('part definition',#25177,'design');
-#25173=PRODUCT_DEFINITION('2026-09-19-14-31-05-486',
+#25173=PRODUCT_DEFINITION('2026-09-19-16-53-53-326',
 'CNC_leg07_x2_hip_roll_support_shaft',#25174,#25172);
 #25174=PRODUCT_DEFINITION_FORMATION('',$,#25179);
 #25175=PRODUCT_RELATED_PRODUCT_CATEGORY(
@@ -27246,7 +27246,7 @@ SOLID_ANGLE_UNIT()
 #25177=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #25178=PRODUCT_CONTEXT('part definition',#25177,'mechanical');
-#25179=PRODUCT('2026-09-19-14-31-05-486',
+#25179=PRODUCT('2026-09-19-16-53-53-326',
 'CNC_leg07_x2_hip_roll_support_shaft',$,(#25178));
 #25180=PRESENTATION_STYLE_ASSIGNMENT((#25181));
 #25181=SURFACE_STYLE_USAGE(.BOTH.,#25182);

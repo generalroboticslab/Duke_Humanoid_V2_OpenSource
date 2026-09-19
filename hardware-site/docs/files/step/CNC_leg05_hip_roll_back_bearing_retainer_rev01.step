@@ -10,7 +10,7 @@ FILE_DESCRIPTION(
 
 FILE_NAME(
 /* name */ 'CNC_leg05_x2_hip_roll_back_bearing_retainer.step',
-/* time_stamp */ '2026-09-19T14:31:03-04:00',
+/* time_stamp */ '2026-09-19T16:53:51-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -18989,7 +18989,7 @@ SOLID_ANGLE_UNIT()
 #17678=PRODUCT_DEFINITION_SHAPE('',$,#17681);
 #17679=SHAPE_REPRESENTATION('',(#8197),#17671);
 #17680=PRODUCT_DEFINITION_CONTEXT('part definition',#17685,'design');
-#17681=PRODUCT_DEFINITION('2026-09-19-14-31-03-538',
+#17681=PRODUCT_DEFINITION('2026-09-19-16-53-50-614',
 'CNC_leg05_x2_hip_roll_back_bearing_retainer',#17682,#17680);
 #17682=PRODUCT_DEFINITION_FORMATION('',$,#17687);
 #17683=PRODUCT_RELATED_PRODUCT_CATEGORY(
@@ -19000,7 +19000,7 @@ SOLID_ANGLE_UNIT()
 #17685=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #17686=PRODUCT_CONTEXT('part definition',#17685,'mechanical');
-#17687=PRODUCT('2026-09-19-14-31-03-538',
+#17687=PRODUCT('2026-09-19-16-53-50-614',
 'CNC_leg05_x2_hip_roll_back_bearing_retainer',$,(#17686));
 #17688=PRESENTATION_STYLE_ASSIGNMENT((#17689));
 #17689=SURFACE_STYLE_USAGE(.BOTH.,#17690);

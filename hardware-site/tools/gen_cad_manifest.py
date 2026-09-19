@@ -8,9 +8,14 @@ Put files here, named after the part IDs in docs/data/*.csv:
     docs/files/plates/<name>.3mf                 slicer projects, ready to print
     docs/files/assembly/<name>.(step|f3z)        whole-robot STEP and the native Fusion 360 archive
     docs/files/assembly/<name>.step.zip          the whole-robot STEP zipped when it is over 95 MB
+    docs/files/modules/<module_id>_rev<NN>.step  one STEP per sub-assembly (docs/data/modules.csv),
+                                                 `.step.zip` when it is over 95 MB
+    docs/files/vendor/<file_name>.step           one STEP per vendor component (docs/data/vendor-parts.csv),
+                                                 `.step.zip` when it is over 95 MB
 
 `_rev<NN>` is optional. Writes docs/data/cad-files.csv (read by the cad_* macros, which
-put a download link next to every part) and docs/files/SHA256SUMS.txt.
+put a download link next to every part; `part_id` is the module_id for a module file
+and the export file name for a vendor file) and docs/files/SHA256SUMS.txt.
 
 Fails (exit 1) if any file exceeds 95 MB (GitHub rejects files over 100 MB) or the total
 exceeds 900 MB (a GitHub Pages site may not exceed 1 GB).
@@ -37,6 +42,8 @@ KINDS = {
     "drawings": {".pdf"},
     "plates": {".3mf"},
     "assembly": {".step", ".stp", ".f3z", ".f3d", ".zip"},   # .zip: a whole-robot STEP over 95 MB, zipped
+    "modules": {".step", ".stp", ".zip"},                     # .zip: a module STEP over 95 MB, zipped
+    "vendor": {".step", ".stp", ".zip"},                      # .zip: a vendor STEP over 95 MB, zipped
 }
 MAX_FILE = 95 * 1024 * 1024
 MAX_TOTAL = 900 * 1024 * 1024
@@ -65,13 +72,14 @@ def main() -> int:
             total += size
             if size > MAX_FILE:
                 errors.append(f"{path.relative_to(SITE).as_posix()}: {size / 2**20:.1f} MB is over the 95 MB limit — zip or split it")
-            stem = path.stem[:-5] if path.stem.lower().endswith(".step") else path.stem
+            zipped = path.suffix.lower() == ".zip" and path.stem.lower().endswith(".step")
+            stem = path.stem[:-5] if zipped else path.stem      # a Fusion name may itself end in .STEP
             m = NAME.match(stem)
             rows.append({
                 "part_id": m.group("part"),
                 "rev": m.group("rev") or "",
                 "kind": kind,
-                "format": ("STEP (zip)" if path.stem.lower().endswith(".step")
+                "format": ("STEP (zip)" if zipped
                            else path.suffix.lower().lstrip(".").upper()),
                 "path": f"files/{kind}/{path.name}",
                 "bytes": size,

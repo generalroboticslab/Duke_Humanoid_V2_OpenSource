@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'CNC_leg02_x7_RS03_shaft_coupler.step',
-/* time_stamp */ '2026-09-19T14:33:05-04:00',
+/* name */ 'CNC_leg02_x7_RS03_shaft_coupler~3.step',
+/* time_stamp */ '2026-09-19T17:00:14-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -16132,7 +16132,7 @@ SOLID_ANGLE_UNIT()
 #14721=PRODUCT_DEFINITION_SHAPE('',$,#14724);
 #14722=SHAPE_REPRESENTATION('',(#6227),#14714);
 #14723=PRODUCT_DEFINITION_CONTEXT('part definition',#14728,'design');
-#14724=PRODUCT_DEFINITION('2026-09-19-14-33-04-665',
+#14724=PRODUCT_DEFINITION('2026-09-19-17-00-14-048',
 'CNC_leg02_x7_RS03_shaft_coupler',#14725,#14723);
 #14725=PRODUCT_DEFINITION_FORMATION('',$,#14730);
 #14726=PRODUCT_RELATED_PRODUCT_CATEGORY(
@@ -16142,7 +16142,7 @@ SOLID_ANGLE_UNIT()
 #14728=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #14729=PRODUCT_CONTEXT('part definition',#14728,'mechanical');
-#14730=PRODUCT('2026-09-19-14-33-04-665',
+#14730=PRODUCT('2026-09-19-17-00-14-048',
 'CNC_leg02_x7_RS03_shaft_coupler',$,(#14729));
 #14731=PRESENTATION_STYLE_ASSIGNMENT((#14733));
 #14732=PRESENTATION_STYLE_ASSIGNMENT((#14734));

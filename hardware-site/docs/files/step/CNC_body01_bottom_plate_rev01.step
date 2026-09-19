@@ -10,7 +10,7 @@ FILE_DESCRIPTION(
 
 FILE_NAME(
 /* name */ 'CNC_body01_x1_bottom_plate.step',
-/* time_stamp */ '2026-09-19T14:29:31-04:00',
+/* time_stamp */ '2026-09-19T16:51:07-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -61079,7 +61079,7 @@ SOLID_ANGLE_UNIT()
 #53492=PRODUCT_DEFINITION_SHAPE('',$,#53495);
 #53493=SHAPE_REPRESENTATION('',(#25769),#53485);
 #53494=PRODUCT_DEFINITION_CONTEXT('part definition',#53499,'design');
-#53495=PRODUCT_DEFINITION('2026-09-19-14-29-30-328',
+#53495=PRODUCT_DEFINITION('2026-09-19-16-51-06-760',
 'CNC_body01_x1_bottom_plate',#53496,#53494);
 #53496=PRODUCT_DEFINITION_FORMATION('',$,#53501);
 #53497=PRODUCT_RELATED_PRODUCT_CATEGORY('CNC_body01_x1_bottom_plate',
@@ -61089,7 +61089,7 @@ SOLID_ANGLE_UNIT()
 #53499=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #53500=PRODUCT_CONTEXT('part definition',#53499,'mechanical');
-#53501=PRODUCT('2026-09-19-14-29-30-328','CNC_body01_x1_bottom_plate',$,
+#53501=PRODUCT('2026-09-19-16-51-06-760','CNC_body01_x1_bottom_plate',$,
 (#53500));
 #53502=PRESENTATION_STYLE_ASSIGNMENT((#53503));
 #53503=SURFACE_STYLE_USAGE(.BOTH.,#53504);

@@ -10,7 +10,7 @@ FILE_DESCRIPTION(
 
 FILE_NAME(
 /* name */ 'Component5.step',
-/* time_stamp */ '2026-09-19T14:33:33-04:00',
+/* time_stamp */ '2026-09-19T17:01:21-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -7297,7 +7297,7 @@ SOLID_ANGLE_UNIT()
 #6780=PRODUCT_DEFINITION_SHAPE('',$,#6783);
 #6781=SHAPE_REPRESENTATION('',(#2944),#6773);
 #6782=PRODUCT_DEFINITION_CONTEXT('part definition',#6787,'design');
-#6783=PRODUCT_DEFINITION('2026-09-19-14-33-33-258','FusionComponent',#6784,
+#6783=PRODUCT_DEFINITION('2026-09-19-17-01-20-955','FusionComponent',#6784,
 #6782);
 #6784=PRODUCT_DEFINITION_FORMATION('',$,#6789);
 #6785=PRODUCT_RELATED_PRODUCT_CATEGORY('FusionComponent',
@@ -7307,7 +7307,7 @@ SOLID_ANGLE_UNIT()
 #6787=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #6788=PRODUCT_CONTEXT('part definition',#6787,'mechanical');
-#6789=PRODUCT('2026-09-19-14-33-33-258','FusionComponent',$,(#6788));
+#6789=PRODUCT('2026-09-19-17-01-20-955','FusionComponent',$,(#6788));
 #6790=PRESENTATION_STYLE_ASSIGNMENT((#6791));
 #6791=SURFACE_STYLE_USAGE(.BOTH.,#6792);
 #6792=SURFACE_SIDE_STYLE('',(#6793));

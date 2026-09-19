@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'Component45.step',
-/* time_stamp */ '2026-09-19T14:32:25-04:00',
+/* name */ 'Component45~2.step',
+/* time_stamp */ '2026-09-19T16:56:02-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -9862,7 +9862,7 @@ SOLID_ANGLE_UNIT()
 #9019=PRODUCT_DEFINITION_SHAPE('',$,#9022);
 #9020=SHAPE_REPRESENTATION('',(#3712),#9012);
 #9021=PRODUCT_DEFINITION_CONTEXT('part definition',#9026,'design');
-#9022=PRODUCT_DEFINITION('2026-09-19-14-32-25-487','Component45',#9023,
+#9022=PRODUCT_DEFINITION('2026-09-19-16-56-02-203','Component45',#9023,
 #9021);
 #9023=PRODUCT_DEFINITION_FORMATION('',$,#9028);
 #9024=PRODUCT_RELATED_PRODUCT_CATEGORY('Component45','Component45',(#9028));
@@ -9871,7 +9871,7 @@ SOLID_ANGLE_UNIT()
 #9026=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #9027=PRODUCT_CONTEXT('part definition',#9026,'mechanical');
-#9028=PRODUCT('2026-09-19-14-32-25-487','Component45',$,(#9027));
+#9028=PRODUCT('2026-09-19-16-56-02-203','Component45',$,(#9027));
 #9029=PRESENTATION_STYLE_ASSIGNMENT((#9031));
 #9030=PRESENTATION_STYLE_ASSIGNMENT((#9032));
 #9031=SURFACE_STYLE_USAGE(.BOTH.,#9033);

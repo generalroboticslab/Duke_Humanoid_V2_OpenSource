@@ -10,7 +10,7 @@ FILE_DESCRIPTION(
 
 FILE_NAME(
 /* name */ 'CNC_leg01_x2_hip_center_back.step',
-/* time_stamp */ '2026-09-19T14:30:57-04:00',
+/* time_stamp */ '2026-09-19T16:53:44-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -28028,7 +28028,7 @@ SOLID_ANGLE_UNIT()
 #25186=PRODUCT_DEFINITION_SHAPE('',$,#25189);
 #25187=SHAPE_REPRESENTATION('',(#11101),#25179);
 #25188=PRODUCT_DEFINITION_CONTEXT('part definition',#25193,'design');
-#25189=PRODUCT_DEFINITION('2026-09-19-14-30-57-231',
+#25189=PRODUCT_DEFINITION('2026-09-19-16-53-43-902',
 'CNC_leg01_x2_hip_center_back',#25190,#25188);
 #25190=PRODUCT_DEFINITION_FORMATION('',$,#25195);
 #25191=PRODUCT_RELATED_PRODUCT_CATEGORY('CNC_leg01_x2_hip_center_back',
@@ -28038,7 +28038,7 @@ SOLID_ANGLE_UNIT()
 #25193=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #25194=PRODUCT_CONTEXT('part definition',#25193,'mechanical');
-#25195=PRODUCT('2026-09-19-14-30-57-231','CNC_leg01_x2_hip_center_back',
+#25195=PRODUCT('2026-09-19-16-53-43-902','CNC_leg01_x2_hip_center_back',
 $,(#25194));
 #25196=PRESENTATION_STYLE_ASSIGNMENT((#25197));
 #25197=SURFACE_STYLE_USAGE(.BOTH.,#25198);

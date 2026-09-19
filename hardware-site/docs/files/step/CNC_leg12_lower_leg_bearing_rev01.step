@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'CNC_leg12_x4_lower_leg_bearing_cap.step',
-/* time_stamp */ '2026-09-19T14:32:12-04:00',
+/* name */ 'CNC_leg12_x4_lower_leg_bearing_cap~2.step',
+/* time_stamp */ '2026-09-19T16:55:51-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',

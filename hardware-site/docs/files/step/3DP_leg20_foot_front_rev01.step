@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'foot_front.step',
-/* time_stamp */ '2026-09-19T14:32:21-04:00',
+/* name */ 'foot_front~2.step',
+/* time_stamp */ '2026-09-19T16:55:58-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -2204,7 +2204,7 @@ SOLID_ANGLE_UNIT()
 #2092=PRODUCT_DEFINITION_SHAPE('',$,#2095);
 #2093=SHAPE_REPRESENTATION('',(#1067),#2085);
 #2094=PRODUCT_DEFINITION_CONTEXT('part definition',#2099,'design');
-#2095=PRODUCT_DEFINITION('2026-09-19-14-32-21-857','foot_front',#2096,#2094);
+#2095=PRODUCT_DEFINITION('2026-09-19-16-55-58-779','foot_front',#2096,#2094);
 #2096=PRODUCT_DEFINITION_FORMATION('',$,#2101);
 #2097=PRODUCT_RELATED_PRODUCT_CATEGORY('foot_front','foot_front',(#2101));
 #2098=APPLICATION_PROTOCOL_DEFINITION('international standard',
@@ -2212,7 +2212,7 @@ SOLID_ANGLE_UNIT()
 #2099=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #2100=PRODUCT_CONTEXT('part definition',#2099,'mechanical');
-#2101=PRODUCT('2026-09-19-14-32-21-857','foot_front',$,(#2100));
+#2101=PRODUCT('2026-09-19-16-55-58-779','foot_front',$,(#2100));
 #2102=PRESENTATION_STYLE_ASSIGNMENT((#2104));
 #2103=PRESENTATION_STYLE_ASSIGNMENT((#2105));
 #2104=SURFACE_STYLE_USAGE(.BOTH.,#2106);

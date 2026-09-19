@@ -25,6 +25,11 @@ from typing import Any, Callable, Iterable
 # priced rows. Must stay visually obvious; never substitute a guess.
 PENDING = '<strong class="pending-figure">NOT YET PUBLISHED</strong>'
 
+# Inline markers for a fact the sources do not give, or give inconsistently.
+# Same classes as the page-level admonitions (docs/stylesheets/extra.css).
+TODO = "**TODO**{ .dh-missing }"
+UNVERIFIED = "**UNVERIFIED**{ .dh-unverified }"
+
 # Columns the cost macros rely on. See docs/data/README.md for the full contract.
 COL_QTY = "qty_per_robot"
 COL_UNIT = "unit_cost_usd"
@@ -275,24 +280,121 @@ def define_env(env):
             key=lambda r: order[r["kind"]],
         )
         if not rows:
-            return "**TODO**{ .dh-missing }"
+            return TODO
         return " · ".join(_link(r, r["format"]) for r in rows)
 
     @env.macro
-    def cad_table(kind: str | None = None) -> str:
-        """A table of every published file of one kind, each a download link."""
+    def cad_table(kind: str | None = None, id_label: str = "Part") -> str:
+        """A table of every published file of one kind, each a download link.
+
+        The page script (``docs/javascripts/viewer.js``) adds a Preview button
+        to every row whose link is a ``files/`` download, so the table stays
+        plain Markdown here. ``id_label`` names the id column (``Part`` for
+        part files, ``Component`` for the purchased-part files, whose id is
+        the Fusion component name).
+        """
         rows = [r for r in _cad_rows() if kind is None or r["kind"] == kind]
         if not rows:
             return PENDING
-        out = ["| File | Part | Format | Size |", "| --- | --- | --- | ---: |"]
+        out = [f"| File | {id_label} | Format | Size |", "| --- | --- | --- | ---: |"]
         for r in rows:
             name = r["path"].rsplit("/", 1)[-1]
             out.append(f"| {_link(r, name)} | `{r['part_id']}` | {r['format']} | {int(r['bytes']) / 2**20:.1f} MB |")
         return "\n".join(out)
 
     @env.macro
+    def cad_table_modules() -> str:
+        """The module (sub-assembly) STEP files, one row each.
+
+        Rows come from ``cad-files.csv`` (``kind == "modules"``, files under
+        ``docs/files/modules/``). When ``docs/data/modules.csv`` exists (from
+        the Fusion ``modules.csv``: ``module_id``, ``fusion_name``,
+        ``english_name``, ``class`` (module / vendor), ``depth``, ``qty``,
+        ``children``, ``mass_g``, ``path``, ``file``) each row also shows the
+        name, the depth below the robot (0 = directly under it), the number of
+        components and the CAD mass; without it the table has the same columns
+        as ``cad_table``. A file with no ``modules.csv`` row gets red TODOs.
+        """
+        rows = [r for r in _cad_rows() if r["kind"] == "modules"]
+        if not rows:
+            return PENDING
+        meta: dict[str, dict[str, str]] = {}
+        for m in _read(os.path.join(_data_dir(env), "modules.csv")):
+            stem = (m.get("file") or "").rsplit("/", 1)[-1]
+            stem = stem[:-5] if stem.lower().endswith(".step") else stem
+            for key in (stem, m.get("module_id", ""), m.get("fusion_name", "")):
+                if key and key not in meta:
+                    meta[key] = m
+        if not meta:
+            return cad_table("modules", "Module")
+        out = ["| File | Module | Fusion component | Depth | Components | CAD mass | Size |",
+               "| --- | --- | --- | ---: | ---: | ---: | ---: |"]
+        for r in rows:
+            name = r["path"].rsplit("/", 1)[-1]
+            m = meta.get(r["part_id"], {})
+            mass = _num(m.get("mass_g"))
+            qty = _num(m.get("qty"))
+            title = m.get("english_name") or m.get("fusion_name") or TODO
+            if ((m.get("class") or "").strip().lower() == "vendor"
+                    and not any(w in title.lower() for w in ("vendor", "purchased"))):
+                title += " (purchased assembly)"
+            if qty and qty > 1:
+                title += f" ×{qty:g}"
+            comp = f"`{m['fusion_name']}`" if m.get("fusion_name") else f"`{r['part_id']}`"
+            depth = m.get("depth", "")
+            out.append(
+                f"| {_link(r, name)} | {title} | {comp} | {depth if depth != '' else TODO} "
+                f"| {m.get('children') or TODO} "
+                f"| {_fmt_num(mass) + '&nbsp;g' if mass is not None else TODO} | {int(r['bytes']) / 2**20:.1f} MB |"
+            )
+        return "\n".join(out)
+
+    @env.macro
     def cad_count(kind: str | None = None) -> int:
         return sum(1 for r in _cad_rows() if kind is None or r["kind"] == kind)
+
+    # ----------------------------------------------------------------- #
+    # mass properties from the Fusion model: docs/data/part-properties.csv,
+    # written by tools/gen_part_properties.py (column contract in
+    # docs/data/README.md). CAD-derived, never measured.
+    # ----------------------------------------------------------------- #
+
+    def _props_row(part_id: str) -> dict[str, str] | None:
+        for r in _read(os.path.join(_data_dir(env), "part-properties.csv")):
+            if r.get(COL_ID, "").strip() == part_id:
+                return r
+        return None
+
+    def _fmt_num(value: float) -> str:
+        """One decimal, as in the CSV, without a trailing ``.0``."""
+        text = f"{value:.1f}"
+        return text[:-2] if text.endswith(".0") else text
+
+    @env.macro
+    def part_props(part_id: str) -> str:
+        """``70.6 g · 79.5 × 79.5 × 45.5 mm`` for one part, or a red TODO.
+
+        Mass is the CAD mass (the material assigned in Fusion); size is the
+        axis-aligned bounding box in the part's own STEP/STL frame. Both are
+        read from ``part-properties.csv``. A part with only one of the two
+        gets a TODO for the other; a size the STL and the Fusion component
+        disagree on (see the CSV ``notes``) carries an UNVERIFIED mark.
+        """
+        row = _props_row(part_id)
+        if row is None:
+            return TODO
+        mass = _num(row.get("mass_g"))
+        dims = [_num(row.get(f"bbox_{axis}_mm")) for axis in "xyz"]
+        if mass is None and None in dims:
+            return TODO
+        mass_text = f"{_fmt_num(mass)}&nbsp;g" if mass is not None else TODO
+        if None in dims:
+            size_text = TODO
+        else:
+            size_text = "&nbsp;×&nbsp;".join(_fmt_num(d) for d in dims) + "&nbsp;mm"
+            if "differs from the Fusion bounding box" in row.get("notes", ""):
+                size_text += " " + UNVERIFIED
+        return f"{mass_text} · {size_text}"
 
     # ----------------------------------------------------------------- #
     # assembly page furniture

@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'CNC_leg14_x2_ankle_pitch_back.step',
-/* time_stamp */ '2026-09-19T14:31:43-04:00',
+/* name */ 'CNC_leg14_x2_ankle_pitch_back~2.step',
+/* time_stamp */ '2026-09-19T16:55:11-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',

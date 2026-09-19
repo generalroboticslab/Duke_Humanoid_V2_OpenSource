@@ -50,6 +50,13 @@ theme:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/viewer-dock.css
+
+extra_javascript:
+  - path: https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js
+    type: module
+  - javascripts/viewer.js
+  - javascripts/viewer-dock.js
 
 extra:
   # Consumed by main.py. Keep release-wide constants here, never in page prose.

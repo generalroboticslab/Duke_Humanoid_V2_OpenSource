@@ -24,3 +24,6 @@ Thumbs.db
 cad/*/assembly/
 cad/*/step/
 cad/*/print/
+cad/*/modules/
+cad/*/viewer/
+cad/_scratch/

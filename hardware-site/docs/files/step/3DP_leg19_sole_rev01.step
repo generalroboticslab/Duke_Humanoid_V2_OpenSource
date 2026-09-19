@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'symmetric_sole.step',
-/* time_stamp */ '2026-09-19T14:31:56-04:00',
+/* name */ 'symmetric_sole~2.step',
+/* time_stamp */ '2026-09-19T16:55:27-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -4864,7 +4864,7 @@ SOLID_ANGLE_UNIT()
 #4632=PRODUCT_DEFINITION_SHAPE('',$,#4635);
 #4633=SHAPE_REPRESENTATION('',(#2286),#4625);
 #4634=PRODUCT_DEFINITION_CONTEXT('part definition',#4639,'design');
-#4635=PRODUCT_DEFINITION('2026-09-19-14-31-55-944','symmetric_sole',#4636,
+#4635=PRODUCT_DEFINITION('2026-09-19-16-55-27-057','symmetric_sole',#4636,
 #4634);
 #4636=PRODUCT_DEFINITION_FORMATION('',$,#4641);
 #4637=PRODUCT_RELATED_PRODUCT_CATEGORY('symmetric_sole',
@@ -4874,7 +4874,7 @@ SOLID_ANGLE_UNIT()
 #4639=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #4640=PRODUCT_CONTEXT('part definition',#4639,'mechanical');
-#4641=PRODUCT('2026-09-19-14-31-55-944','symmetric_sole',$,(#4640));
+#4641=PRODUCT('2026-09-19-16-55-27-057','symmetric_sole',$,(#4640));
 #4642=PRESENTATION_STYLE_ASSIGNMENT((#4644));
 #4643=PRESENTATION_STYLE_ASSIGNMENT((#4645));
 #4644=SURFACE_STYLE_USAGE(.BOTH.,#4646);

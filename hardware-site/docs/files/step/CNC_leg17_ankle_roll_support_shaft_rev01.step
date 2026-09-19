@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'CNC_leg17_x2_ankle_roll_support_shaft.step',
-/* time_stamp */ '2026-09-19T14:32:00-04:00',
+/* name */ 'CNC_leg17_x2_ankle_roll_support_shaft~2.step',
+/* time_stamp */ '2026-09-19T16:55:38-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
