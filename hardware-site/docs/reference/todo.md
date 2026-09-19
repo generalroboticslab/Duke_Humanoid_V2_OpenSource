@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **171 open items** across **42 pages**, of which **53 block the public release**.
+Every unresolved item on this site, in one table: **170 open items** across **41 pages**, of which **52 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -23,22 +23,22 @@ that is not here.
 | --- | ---: | ---: |
 | Before you start | 22 | 15 |
 | Bill of materials | 21 | 5 |
-| Fabrication | 16 | 4 |
+| Fabrication | 15 | 3 |
 | Assembly | 46 | 5 |
 | Electrical | 26 | 12 |
 | Bring-up | 25 | 7 |
 | Reference | 13 | 5 |
 | Top level | 2 | 0 |
-| **Total** | **171** | **53** |
+| **Total** | **170** | **52** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 171.
+more than 170.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Hardware lead | 104 | 28 |
+| Hardware lead | 103 | 27 |
 | Electrical lead | 46 | 23 |
 | Controls lead | 31 | 7 |
 | Perception lead | 8 | 1 |
@@ -120,7 +120,6 @@ in this list makes a build harder; these make it impossible.
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [cad-downloads → Files](../fabrication/cad-downloads.md#files) | Native Fusion 360 archive (`.f3z`, linked designs included) in the whole-robot table | hardware lead | **yes** |
 | [cnc-guide → Material and design rules](../fabrication/cnc-guide.md#material-and-design-rules) | Per part: alloy and temper, tolerances on bearing seats, journals, dowel holes and mating faces, finish per face, thread specs, turned or 5-axis | hardware lead, from the CAD and the machining quotations | **yes** |
 | [cnc-guide → Material and design rules](../fabrication/cnc-guide.md#material-and-design-rules) | Aluminium grade: 6061 or 7075 | hardware lead | no |
 | [cnc-guide → Known CAD errors](../fabrication/cnc-guide.md#known-cad-errors) | CAD errors: Motor04 shaft and knee need M5 holes, CAD has M4; RS03 shaft bearing retainer above the knee is a design error (enlarged by hand). Whether the released CAD is corrected is unknown | hardware lead | **yes** |

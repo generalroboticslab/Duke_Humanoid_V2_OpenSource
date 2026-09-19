@@ -63,6 +63,9 @@ and `gen_image_manifest.py` produced wrong counts on Windows because they compar
 
 ## Publishing (later)
 
+The 319 MB `.f3z` is a release asset (`cad-v2.1-rc1`) on this private repo; the link on the CAD downloads page
+only works for collaborators until the release is re-created on the public repo.
+
 `.github/workflows/docs.yml` builds with `--strict` and deploys GitHub Pages from `main`. `site_url` is still
 `https://generalroboticslab.github.io/duke_humanoid_v2/` — change it (and the Pages source) when the final
 home of the site is decided. This private repo cannot serve Pages on a free plan; publish from the public one.
