@@ -1,3 +1,22 @@
+/* Duke colours: Duke Navy Blue #012169 as the primary (header, buttons, links),
+   Duke Royal Blue #00539B as the accent (hover, focus, active). */
+[data-md-color-primary="custom"] {
+  --md-primary-fg-color: #012169;
+  --md-primary-fg-color--light: #1c3d8f;
+  --md-primary-fg-color--dark: #001247;
+  --md-primary-bg-color: #ffffff;
+  --md-primary-bg-color--light: #ffffffb3;
+}
+[data-md-color-accent="custom"] {
+  --md-accent-fg-color: #00539b;
+  --md-accent-fg-color--transparent: #00539b1a;
+  --md-accent-bg-color: #ffffff;
+  --md-accent-bg-color--light: #ffffffb3;
+}
+[data-md-color-scheme="slate"][data-md-color-primary="custom"] {
+  --md-typeset-a-color: #5b8ddb;   /* readable navy-family link colour on the dark scheme */
+}
+
 /* Duke Humanoid V2 hardware site — minimal additions on top of Material.
    Four things only: a parts table, a step badge, a checkpoint callout, and a
    marker for figures that are not published yet. Everything else is the theme. */

@@ -9,8 +9,8 @@ FILE_DESCRIPTION(
 /* implementation_level */ '2;1');
 
 FILE_NAME(
-/* name */ 'half-bearing_35x47x7_6807_4.0kN_29g.step',
-/* time_stamp */ '2026-09-19T16:54:53-04:00',
+/* name */ 'c.step',
+/* time_stamp */ '2026-09-19T17:44:55-04:00',
 /* author */ (''),
 /* organization */ (''),
 /* preprocessor_version */ 'ST-DEVELOPER v20.2',
@@ -685,7 +685,7 @@ SOLID_ANGLE_UNIT()
 #632=PRODUCT_DEFINITION_SHAPE('',$,#635);
 #633=SHAPE_REPRESENTATION('',(#357),#625);
 #634=PRODUCT_DEFINITION_CONTEXT('part definition',#639,'design');
-#635=PRODUCT_DEFINITION('2026-09-19-16-54-53-096',
+#635=PRODUCT_DEFINITION('2026-09-19-17-44-55-090',
 'half-bearing_35x47x7_6807_4.0kN_29g',#636,#634);
 #636=PRODUCT_DEFINITION_FORMATION('',$,#641);
 #637=PRODUCT_RELATED_PRODUCT_CATEGORY(
@@ -696,7 +696,7 @@ SOLID_ANGLE_UNIT()
 #639=APPLICATION_CONTEXT(
 'Core Data for Automotive Mechanical Design Process');
 #640=PRODUCT_CONTEXT('part definition',#639,'mechanical');
-#641=PRODUCT('2026-09-19-16-54-53-096',
+#641=PRODUCT('2026-09-19-17-44-55-090',
 'half-bearing_35x47x7_6807_4.0kN_29g',$,(#640));
 #642=PRESENTATION_STYLE_ASSIGNMENT((#643));
 #643=SURFACE_STYLE_USAGE(.BOTH.,#644);
