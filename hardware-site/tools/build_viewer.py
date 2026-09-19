@@ -298,14 +298,16 @@ FALLBACK_RGB = {"aluminum": (204, 204, 206), "steel": (140, 140, 142), "chrome":
                 "glass": (200, 220, 230), "rubber": (40, 40, 40), "unknown": (153, 153, 153)}
 
 
-# The real robot is one colour all over, the light grey Fusion reports for the
-# shoulder-yaw covers (160,160,160); only the RealSense cameras keep their own
-# colours. Fusion's appearance colours are unreliable anyway ("ABS (White)"
-# reads back as 0,0,0), so the team's statement wins. Finish (metallic /
-# roughness) still follows the material class, so machined and printed parts
-# catch the light differently.
-ROBOT_RGB = (160, 160, 160)
-CAMERA_KEYS = ("intelrealsense", "d435", "d436")
+# The real robot is black / dark grey all over (anodised aluminium and dark
+# printed parts); only the actuators and the RealSense cameras keep the colours
+# Fusion gives them. Fusion's appearance colours are unreliable for the rest
+# ("ABS (White)" reads back as 0,0,0), so the team's statement wins. Finish
+# (metallic / roughness) still follows the material class, so machined and
+# printed parts catch the light differently.
+ROBOT_RGB = (42, 42, 44)
+KEEP_FUSION_COLOUR_KEYS = ("intelrealsense", "d435", "d436",                      # cameras
+                           "robstride", "r06", "3_1_02_090", "feetech", "fl46",   # actuators and their internals
+                           "gr-2202", "00mini", "double_helix_pinion")
 
 
 def look_for(row: dict) -> tuple[list[float], float, float, str]:
@@ -313,7 +315,7 @@ def look_for(row: dict) -> tuple[list[float], float, float, str]:
     metallic, rough, cls = material_look(row.get("appearance", ""), row.get("material", ""))
     rgb = row.get("color_rgb", "")
     ident = " ".join((row.get("fusion_name", ""), row.get("path", ""))).lower()
-    if not any(k in ident for k in CAMERA_KEYS):
+    if not any(k in ident for k in KEEP_FUSION_COLOUR_KEYS):
         rgb = "%d,%d,%d" % ROBOT_RGB
     try:
         srgb = tuple(int(x) for x in rgb.split(","))
