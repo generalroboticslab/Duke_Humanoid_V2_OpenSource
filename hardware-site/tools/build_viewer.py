@@ -61,7 +61,8 @@ parts.json: {"parts": {part_id: [{node, path, center, radius}]},
              "info": {part_id | "vendor:"+file_name: {desc, kind, qty, material, team_ref,
                       mass_g, bbox, fusion_name, appearance, module_path}},
                       (team_ref: the line of the team BOM the part comes from, "" for a
-                       part the team BOM does not list)
+                       part the team BOM does not list; purchased components carry the
+                       ref of the BOM line vendor-parts.csv maps their file_name to)
              "hardware": {"hardware:k": {n, desc}},
              "axes": {"x": [..], "y": [..], "z": [..]},
              "modules": {module_file_name: {name, path, path_prefix, mass_g, depth, qty,
@@ -152,6 +153,34 @@ class PartLookup:
 def read_csv(path: Path) -> list[dict]:
     with open(path, encoding="utf-8-sig", newline="") as fh:
         return list(csv.DictReader(fh))
+
+
+def team_refs() -> tuple[dict[str, str], dict[str, str]]:
+    """(part_id -> team BOM line, Fusion file_name -> team BOM line).
+
+    The team's spreadsheet numbers every line (`E3`, `C21`, `P20`, `H1`) and that
+    number is what the team calls the part, so the viewer shows it first. gen_bom.py
+    writes it into the `team_ref` column of every parts CSV in docs/data/; a purchased
+    component is keyed in the model by its Fusion file name, which vendor-parts.csv
+    maps to the BOM part_id. Blank means the team BOM has no line for the part."""
+    data = SITE / "docs" / "data"
+    by_pid: dict[str, str] = {}
+    for f in sorted(data.glob("*.csv")):
+        rows = read_csv(f)
+        if not rows or "part_id" not in rows[0] or "team_ref" not in rows[0]:
+            continue
+        for r in rows:
+            ref = (r.get("team_ref") or "").strip()
+            if ref and r.get("part_id"):
+                by_pid.setdefault(r["part_id"], ref)
+    by_file: dict[str, str] = {}
+    vp = data / "vendor-parts.csv"
+    if vp.is_file():
+        for r in read_csv(vp):
+            ref = by_pid.get((r.get("part_id") or "").strip(), "")
+            if ref and r.get("file_name"):
+                by_file.setdefault(r["file_name"], ref)
+    return by_pid, by_file
 
 
 def fnum(s: str, default: float = 0.0) -> float:
@@ -834,6 +863,7 @@ def main() -> int:
             return module_of(row["path"], prefixes)
         return row["path"].rpartition("+")[0]
 
+    ref_by_pid, ref_by_file = team_refs()
     info: dict[str, dict] = {}
     for f in ("cnc-parts.csv", "printed-parts.csv"):
         for r in read_csv(SITE / "docs" / "data" / f):
@@ -846,6 +876,7 @@ def main() -> int:
             rows_by_pid[o["pid"]] = o["row"]
     for pid, row in rows_by_pid.items():
         d = info.setdefault(pid, {"desc": row["fusion_name"], "kind": "part", "qty": row["qty"], "material": ""})
+        d.setdefault("team_ref", ref_by_pid.get(pid, ""))
         d.update(material=d.get("material") or row["material"], mass_g=fnum(row["mass_g"]),
                  bbox=[fnum(row[k]) for k in ("bbox_x_mm", "bbox_y_mm", "bbox_z_mm")],
                  fusion_name=row["fusion_name"], appearance=row["appearance"], module_path=mod_path(row))
@@ -853,7 +884,8 @@ def main() -> int:
     for fn in vendor:
         row = tree.by_file[fn]
         info["vendor:" + fn] = {"desc": row["fusion_name"], "kind": "vendor", "qty": row["qty"],
-                                "material": row["material"], "mass_g": fnum(row["mass_g"]),
+                                "material": row["material"], "team_ref": ref_by_file.get(fn, ""),
+                                "mass_g": fnum(row["mass_g"]),
                                 "bbox": [fnum(row[k]) for k in ("bbox_x_mm", "bbox_y_mm", "bbox_z_mm")],
                                 "fusion_name": row["fusion_name"], "appearance": row["appearance"],
                                 "module_path": mod_path(row)}
@@ -873,6 +905,10 @@ def main() -> int:
           f"vendor: {sum(len(v) for v in vendor.values())} meshes for {len(vendor)} components; "
           f"hardware: {len(hw_info)} merged meshes for {sum(v['n'] for v in hw_info.values())} occurrences")
     print(f"  {rel(pj)}: {pj.stat().st_size / 1024:.0f} KB; axes tips (m) {tips}")
+    n_ref = sum(1 for k, v in info.items() if v.get("team_ref"))
+    n_vref = sum(1 for k, v in info.items() if k.startswith("vendor:") and v.get("team_ref"))
+    print(f"  team BOM refs: {n_ref}/{len(info)} info entries ({n_vref}/{sum(1 for k in info if k.startswith('vendor:'))} "
+          f"purchased components, via vendor-parts.csv)")
     if mapped:
         hows = defaultdict(int)
         for o in occ:

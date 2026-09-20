@@ -1,5 +1,10 @@
 # Assembly
 
+<figure markdown>
+  ![The robot with both camera columns and both grippers lifted off](../assets/exploded/team/15-whole-robot.webp){ loading=lazy }
+  <figcaption>The subassemblies below: torso, two legs and two arms assembled; the two camera columns and two grippers lifted off. Part labels on the pages that follow are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
+
 Build the robot (31 RobStride-driven joints, Feetech bus servos in the grippers; 36 kg, 1.2 m) as these bench subassemblies, in this order:
 
 1. [Tools](tools.md), once.
@@ -43,10 +48,6 @@ Then [Electrical](../electrical/index.md) and [Bring-up](../bringup/index.md).
 
 No step figure exists **TODO**{ .dh-missing }. Name them
 `assets/assembly/<page>-step-NN.png`, showing only that step's parts.
-
-> **Figure** <span class="pending-figure">not produced yet</span> —
-> `assets/images/exploded-overview.png`: the whole robot exploded into its
-> subassemblies, each labelled with its page.
 
 > **Figure** <span class="pending-figure">not produced yet</span> —
 > `assets/assembly/subassembly-map.png`: the build order as a diagram.

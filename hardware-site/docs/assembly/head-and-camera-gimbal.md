@@ -23,9 +23,6 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
 
     *Owner: hardware lead.*
 
-> **Figure** <span class="pending-figure">not produced yet</span> —
-> `assets/assembly/head-exploded.png`: one column exploded, labelled, axes drawn.
-
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../../assets/exploded/twincities-poster.webp" aria-label="Exploded view of one camera gimbal column"><source src="../../assets/exploded/twincities.mp4" type="video/mp4"><a href="../../assets/exploded/twincities.mp4">MP4</a></video>
@@ -57,6 +54,11 @@ line 38; `deploy/control/docs/auto_operator_safety_contract.md`, SAFE-GAZE-003).
     A swap fails silently. *Owner: hardware lead + controls.*
 
 ✅ **Check:** IDs 5 to 8 answer on can25; both serials assigned.
+
+<figure markdown>
+  ![One camera gimbal column exploded, parts labelled with team BOM ids](../assets/exploded/team/14-camera-gimbal.webp){ loading=lazy }
+  <figcaption>Steps 2–7, one of two identical columns: base P16, neck P17, arms P18 and P19, actuators E5, camera E14, bearing H5. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
 
 {{ step(2, "Install the yaw actuator in the mount") }}
 

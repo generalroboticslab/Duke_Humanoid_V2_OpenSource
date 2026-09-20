@@ -6,15 +6,17 @@ Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` 
 
 | Item | State |
 |---|---|
-| Site (`hardware-site/`, MkDocs Material) | 50 pages, English, `mkdocs build --strict` clean |
-| Punch list (`docs/reference/todo.md`, generated) | **184 open items, 56 block release** — every gap is a red MISSING/UNVERIFIED box |
-| Images still needed (`docs/assets/MANIFEST.md`, generated) | 89, incl. the whole-robot exploded view (`assets/images/exploded-overview.png`, not yet made) |
+| Site (`hardware-site/`, MkDocs Material) | 50 pages, English, `mkdocs build --strict` exits 0 with zero `WARNING` |
+| Punch list (`docs/reference/todo.md`, generated) | **184 open items across 42 pages, 56 block release** — every gap is a red MISSING/UNVERIFIED box |
+| Images still needed (`docs/assets/MANIFEST.md`, generated) | **83** (the generator's split: 2 placed, 26 named, 55 per-part). The whole-robot exploded view is no longer among them: the booklet's page 15 fills it on the home page and on `assembly/index.md` |
+| Team exploded-view booklet | `reference/team/duke_humanoid_v2_hardware.pdf` (Eric Lu, 2026-09-19, 15 pages). Its pages are rendered to `docs/assets/exploded/team/NN-<name>.webp` (2400 × 1350) and **published as the site's assembly figures** (`docs/assembly/*.md`; page 15, the whole robot, opens the home page and `assembly/index.md`). The PDF itself is staged as `docs/files/drawings/duke_humanoid_v2_exploded_views_rev01.pdf` (untracked until committed) and indexed in `cad-files.csv`. Pages 08 and 12 read "switch A ↔ B": on the other leg / arm the covers labelled A and B swap sides (confirmed by the user) |
 | Exploded-view animations | 9 web MP4s in `docs/assets/exploded/`, embedded on the assembly pages |
 | Wiring diagrams | `hardware/*.jpg` → `docs/assets/wiring/`, on the electrical pages |
-| CAD downloads (`docs/files/`) | 86 files live (120 MB) **from the 14:23 export**: 32 CNC STEP, 27 printed parts (STEP + STL), whole-robot STEP (zip), overall-dimensions PDF; `.f3z` (319 MB) as release asset `cad-v2.1-rc1`. Must be re-staged from the 16:46 export (unique file names, 45 printed parts now). No per-part drawings exist |
-| Authoritative CAD export | `cad/humanoid_2.1_latest_2026-09-19_1646/` — `fusion_export` re-run started 16:46 (the 16:07 run never wrote `assembly/`, `step/` or `print/`): `tree.csv` complete (629 components with Fusion mass, centre of mass, inertia, appearance colour, unique `file_name`; same values as the 16:07 tree except the pose-dependent bounding boxes of 16 subassemblies and 2 mixed components), whole-robot STEP + `.f3z` written 16:51, `step/` + `print/` being written at 16:55, no `export.log` yet. `<1607>/modules/` holds the 128 module STEPs + `modules.csv` from a 16:42 run of `fusion_export_modules`, but that run wrote no `joints.csv` / `transforms.csv` (its log has no `wrote joints.csv` line, so Fusion ran a copy of the script from before those writers were added): re-run it on `<1646>/` |
-| BOM source | **The team's BOM spreadsheet `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` (2026-09-19, WIP) is the parts list** ("以团队的为准"). `tools/gen_bom.py` writes all six parts CSVs from it (114 rows, $12,345.9485 = the sheet's own SUM cell), maps each line to the CAD part IDs the viewer and `docs/files/` key on, and records the sheet line in a `team_ref` column shown on every BOM table. 53 rows have no usable cost (the sheet's 30 zero-priced printed lines and 9 blank hardware lines, plus 13 rows the sheet has no line for): they carry a **blank** cost in the CSV and render a red TODO, never `$0.00`. The two-sheet CSV source and `gen_sheet1.py` / `gen_cnc.py` / `gen_recon.py` / `audit_sheet2.py` / `bom-reconciliation.csv` / `test-fixtures.csv` are superseded and deleted |
-| Parts data (generated) | `docs/data/printed-parts.csv` 49 rows: 45 printed parts from the Fusion tree, `P39` (a team BOM line with no CAD match yet) and 3 material rows; `docs/data/part-properties.csv` 76 rows from the 16:46 tree (Fusion mass / COM / inertia; volumes fill in as `print/*.stl` appear — re-run after `export.log`); `docs/data/joints.csv` not written yet (needs the modules export with the joints writer) |
+| CAD downloads (`docs/files/`) | **329 files, 706 MB** (672.9 MiB as `gen_cad_manifest.py` prints it): 1 whole-robot STEP (zip, 34 MB), 80 module STEPs (481 MB), 76 part STEPs (77 MB), 45 printed-part STLs (51 MB), 125 vendor files (55 MB) — all from the canonical export — and 2 PDFs under `drawings/` (overall dimensions 2.6 MB, the exploded-view booklet 6.2 MB). Numbers from `docs/data/cad-files.csv`, which matches the folder file for file (generator re-run, no diff). `.f3z` (319 MB) is the release asset `cad-v2.1-rc1`: the 14:23 export's archive (sha256 `f440621d…`, the hash on the CAD downloads page). No per-part drawings exist |
+| Canonical CAD export | `cad/humanoid_2.1_latest_2026-09-19_1607/` — **complete**. The 16:46 `fusion_export` run's output was merged into this folder (its `export.log` still names `…_1646/`, which no longer exists). It holds `tree.csv` (629 components with Fusion mass, COM, inertia, appearance colour and a unique `file_name`), `assembly/` (whole-robot STEP 194 MB and the script's archive export, a 1.2 MB `humanoid_2.1_latest.f3z.f3d` — the 319 MB `.f3z` exists only in `…_1423/assembly/`), `step/` (410), `print/` (408), `modules/` (128 + `modules.csv`), `joints.csv` (1205 joints; `export_joints.log` says "from 630 components", the file's `component` column holds 62 distinct names), `transforms.csv` (2088 occurrences), and the logs `export.log`, `export_modules.log`, `export_joints.log`, `export_missing.log`, `export_cameras.log` |
+| BOM source | **The team's spreadsheet `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` (2026-09-19, WIP) is the parts list** — the team's sheet wins over every other source. `tools/gen_bom.py` writes all six parts CSVs and `team-map.csv` from it, maps each line to the CAD part IDs the viewer and `docs/files/` key on, and records the sheet line in a `team_ref` column shown first on every BOM table. Rows the sheet does not price carry a **blank** cost and render a red TODO, never `$0.00`. The two-sheet CSV source and `gen_sheet1.py` / `gen_cnc.py` / `gen_recon.py` / `audit_sheet2.py` / `bom-reconciliation.csv` / `test-fixtures.csv` are superseded and deleted |
+| Parts data (generated, `docs/data/`) | `cnc-parts.csv` 35, `printed-parts.csv` 48, `electronics.csv` 14, `actuators.csv` 6, `fasteners.csv` 9, `cables-connectors.csv` 1; `part-properties.csv` 76 (volume filled on 71), `joints.csv` 1205, `modules.csv` 128, `vendor-parts.csv` 287, `cad-files.csv` 329; `team-map.csv` 100 (from `gen_bom.py`: one row per team BOM line with the booklet page that labels it, the CAD count and a `status`: 77 settled, 23 open) |
+| 3D viewer (`docs/assets/viewer/`) | `robot.glb` (2.3 MB, Draco), `parts.json`, `downloads.json`, `vendor-map.json`. Fusion appearance colours (own parts black-grey, purchased parts in their Fusion colours), joint axes, preview and download per part, hide/show the selection (Fusion-style eye) and an x-ray ghost where it is occluded |
 | Local preview | `http://localhost:8321/duke_humanoid_v2/` — the `/duke_humanoid_v2/` prefix is intentional (`site_url`) |
 
 ## CAD export pipeline — three download levels
@@ -22,116 +24,115 @@ Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` 
 Principle (the user's): everything visible in the Fusion model is downloadable at three levels — **whole
 robot** (`assembly/`), **module** (`modules/`: every sub-assembly down to two levels below the root, vendor
 assemblies included) and **part** (`step/` + `print/`: every component with bodies, vendor parts included).
-The 3D viewer shows the Fusion appearance colours (`color_rgb` in `tree.csv`); hover and selection are the
-only colour changes. `hardware-site/tools/README.md` documents every script.
+`hardware-site/tools/README.md` documents every script.
 
-Folders under `cad/` (`.gitignore` ignores `cad/*/assembly/`, `step/` and `print/` only — `modules/`,
-`viewer/`, `modules.csv` and `transforms.csv` are not ignored yet):
+Folders under `cad/` (`.gitignore` ignores `cad/*/assembly/`, `step/`, `print/`, `modules/`, `viewer/` and
+`cad/_scratch/`; tracked are `tree.csv`, `joints.csv`, `transforms.csv`, `modules.csv`, the logs and
+`…_1423/drawings/`):
 
-- `humanoid_2.1_latest_2026-09-19_1423/` — OLD, complete (317 STEP/STL, whole-robot STEP and `.f3z`) but the
-  export wrote one file per component *name*, so same-named components overwrote each other. Has `viewer/`
-  (`context.stl`, `occurrences.csv`, `parts/`) and `transforms.csv` in the old naming. The files in
-  `docs/files/` come from here.
-- `humanoid_2.1_latest_2026-09-19_1607/` — `tree.csv` + the module export (`modules/` 128 STEPs, `modules.csv`,
-  `export_modules.log`; no `joints.csv` with a `component` column, no `transforms.csv`); its `fusion_export` run
-  produced no STEP/STL.
-- `humanoid_2.1_latest_2026-09-19_1646/` — **authoritative**. `fusion_export` re-run in progress (see the status
-  table). Site data is generated from its `tree.csv`.
+- `humanoid_2.1_latest_2026-09-19_1423/` — OLD. Complete (317 STEP/STL) but the export wrote one file per
+  component *name*, so same-named components overwrote each other. Has `viewer/` (`context.stl`,
+  `occurrences.csv`, `parts/`) and a `transforms.csv` in the old naming. Nothing on the site comes from it.
+- `humanoid_2.1_latest_2026-09-19_1607/` — **canonical**. All site data and every staged file come from here.
 - `_scratch/` — Draco / decimation experiments for the viewer (`reencode_glb.py`: DracoPy q14 level 10 takes
   the 15 MB GLB to 1.6 MB; `decim_compare.py`: pymeshlab quadric collapse is ~10× more accurate than
   fast_simplification at equal face count).
 
-Fusion scripts (`hardware-site/tools/fusion_export*/`, run inside Fusion, in this order, same dated folder):
+Fusion scripts that exist now (`hardware-site/tools/fusion_export*/`, run inside Fusion, all into one dated
+folder): `fusion_export` (tree, whole robot, per-part STEP + STL), `fusion_export_modules` (module STEPs +
+`joints.csv` + `transforms.csv`), `fusion_export_joints` (joints and transforms only, 30 s),
+`fusion_export_missing` (re-export the STLs that failed on Windows' 260-character path limit),
+`fusion_export_cameras` (RealSense components as whole-occurrence STLs, mesh bodies included),
+`fusion_export_viewer` (optional) and `fusion_export_transforms` (superseded by the first two, kept for the
+14:23 export). Run order and outputs: `hardware-site/tools/README.md`.
 
-1. `fusion_export` → `tree.csv`, `assembly/<design>.step` + `.f3z`, `step/<file_name>.step` and
-   `print/<file_name>.stl` for every component with bodies, a root-only (empty) `joints.csv`, `export.log`
-   when done. `file_name` is unique per component (`name`, `name~2`, …) and recorded in `tree.csv`.
-2. `fusion_export_modules` → `modules/<file_name>.step`, `modules.csv`, `joints.csv` (per component, with a
-   `component` column; origin and axis in that component's frame; limits in rad/cm), `transforms.csv` (with
-   the `file_name` of `tree.csv`), `export_modules.log`.
-3. `fusion_export_transforms` (superseded by 1 + 2) and `fusion_export_viewer` (optional: `build_viewer.py`
-   can place `print/*.stl` with `transforms.csv` instead).
+Site-side, in order: `gen_bom.py` → `gen_printed.py` → `gen_part_properties.py <export>` → `gen_modules.py <export>`
+→ `gen_vendor_map.py <export>` → `stage_cad_export.py <export> --apply` → `gen_cad_manifest.py` →
+`build_viewer.py` → `gen_punchlist.py` → `gen_image_manifest.py` → `mkdocs build --strict`.
 
-Site-side, in order: `gen_printed.py` → `gen_part_properties.py <export>` → `stage_cad_export.py <export> --apply`
-→ `gen_cad_manifest.py` → `build_viewer.py` → `gen_punchlist.py` → `mkdocs build --strict`.
-
-### Findings from the 16:07 / 16:46 `tree.csv` (2026-09-19; identical mass, COM and inertia values)
+### Findings from `tree.csv` (2026-09-19)
 
 - **Fusion's `getXYZMomentsOfInertia()` is about the component-frame origin, not the centre of mass**, with
-  tensor-form products (`ixy` = −∫xy dm). Verified numerically against trimesh on four parts' STLs from the
-  14:23 export (e.g. `CNC_arm13`: Fusion Ixx 381 692 = STL about origin 382 472, not the 3 223 about the COM).
-  `fusion_export.py`'s docstring and the `tree.csv` column comment say "about the COM" — wrong, not fixed
-  (not this lane). `gen_part_properties.py` shifts to the COM (parallel-axis) and keeps the raw values in
-  `*_origin` columns. Because `tree.csv` rounds mass to 0.1 g, the shift is uncertain by ±0.05 g × |COM|²;
-  the row notes state the bound and the page has an UNVERIFIED box. Fix: have `fusion_export.py` write
-  `mass_g` to 0.001 g (or take the tensor about the COM inside Fusion) and re-run `gen_part_properties.py`.
+  tensor-form products (`ixy` = −∫xy dm). Verified numerically against trimesh on four parts' STLs (e.g.
+  `CNC_arm13`: Fusion Ixx 381 692 = STL about origin 382 472, not the 3 223 about the COM).
+  `fusion_export.py`'s docstring and the `tree.csv` column comment say "about the COM" — wrong, not fixed.
+  `gen_part_properties.py` shifts to the COM (parallel-axis) and keeps the raw values in `*_origin` columns.
+  Because `tree.csv` rounds mass to 0.1 g, the shift is uncertain by ±0.05 g × |COM|²; the row notes state the
+  bound and the page has an UNVERIFIED box. Fix: have `fusion_export.py` write `mass_g` to 0.001 g (or take the
+  tensor about the COM inside Fusion) and re-run `gen_part_properties.py`.
 - The left and right arm designs, and the two leg designs, are separate linked designs, so most parts are 2–3
   Fusion components (`name`, `name~2`, `name_1`, `name (1)`); `gen_printed.py` sums their quantities and
   `gen_part_properties.py` compares the copies (`CNC_leg12` copies differ in the sign of the COM z; the
   `3DP_arm06` copies differ in COM by ~2 mm). The bounding box and COM of a component that carries children
-  follow the pose of those children: the 16:07 tree gave `3DP_arm06~2` a 40 × 385 × 166.6 mm box, the 16:46
-  tree 40 × 55 × 71.2 mm like the left copy — not a stray body.
-- Newly listed printed parts (45 rows; the last commit had 27): the end-effector attachment `v15_right_end_effector_attachment`
-  (SLS nylon, both wrists), ankle covers `Component46`/`47` (`ANKLE_1_PROTECTION`), shoulder-yaw cover C (the
-  `shoulder_yaw_protection` group's own body), the gripper's `base`, `custom_umi_gripper v6` (finger), `rail`,
+  follow the pose of those children.
+- Printed parts listed: 45 from the Fusion tree, incl. the end-effector attachment
+  `v15_right_end_effector_attachment` (SLS nylon, both wrists), ankle covers `Component46`/`47`
+  (`ANKLE_1_PROTECTION`), shoulder-yaw cover C, the gripper's `base`, `custom_umi_gripper v6` (finger), `rail`,
   `apriltag_holder`, `Component9` (pinion), `apriltag` (tile), and the camera-column `gimbal_mount`,
-  `gimbal_neck`, `gimbal_arm`, `Component92`. Materials `rail`/`Base`/`Neck`/`Arm` are custom names →
-  material/process blank + UNVERIFIED box. `3DP_body05` is `PLA (for Bambu H2D)` → PLA, FDM.
+  `gimbal_neck`, `gimbal_arm`, `Component92`. Materials `rail` / `Base` / `Neck` / `Arm` are custom Fusion names
+  → material and process blank + UNVERIFIED box. `3DP_body05` is `PLA (for Bambu H2D)` → PLA, FDM.
 - The gripper's `cnc_flange` of the code repo **is** `CNC_arm13_RS05_shaft_coupler` (Aluminum 6061, 22.05 g
   there, 22.1 g here; the code repo's Ixx about the COM, 5647.755, is the tree's Izz 5647.8 — the disc axis is
-  x in the code repo's frame and z in Fusion's, and the COM lies on that axis so the origin shift leaves it). The gripper rack `double_helix_rack_30teeth_6mm v2` has **no
+  x in the code repo's frame and z in Fusion's). The gripper rack `double_helix_rack_30teeth_6mm v2` has **no
   geometry** (its only child `Component115` is empty) → MISSING box on Printed parts.
-- Not listed, noted on Printed parts: `Hub` (Bambu PAHT-CF material, inside `Vention USB Hub`),
-  `ankle_top_cover` (Steel, right leg only), the gripper root's own body. Torso spine, battery holders, IMU
-  bracket, computer T-brackets are not in the Fusion tree at all.
+- Not listed, noted on Printed parts: `Hub` (Bambu PAHT-CF, inside `Vention USB Hub`), `ankle_top_cover`
+  (Steel, right leg only), the gripper root's own body. Torso spine, battery holders, IMU bracket and computer
+  T-brackets are not in the Fusion tree at all.
+- **The Fusion model carries no joint limits**: of the 1205 joints in `joints.csv` (1162 rigid, 37 revolute,
+  4 slider, 2 planar) exactly one has a limit value. Limits must come from the team or from the MJCF.
 - Model masses (CAD) on Full specifications: 35.27 kg total (lower body 17.51, torso 7.85, arms 4.61/4.60,
   grippers 0.35 each); 33.4 kg without grippers and camera columns vs 34.5 kg in the MJCF → UNVERIFIED.
 
 ### Next steps, in order
 
-1. Wait for `export.log` in `<1646>/` (whole-robot STEP and `.f3z` are done; ~410 STEP + STL follow).
-2. Run `fusion_export_modules` in Fusion on `<1646>/` (the current script writes `joints.csv` and
-   `transforms.csv` before the module STEPs; check the log for `wrote joints.csv`).
-3. `python tools/gen_part_properties.py ../cad/humanoid_2.1_latest_2026-09-19_1646` → volumes fill in and
-   `docs/data/joints.csv` appears (the Joints table on `reference/part-index.md` renders and its MISSING box
-   leaves the punch list); then `python tools/gen_punchlist.py`.
-4. `python tools/stage_cad_export.py ../cad/humanoid_2.1_latest_2026-09-19_1646 --apply` →
-   `python tools/gen_cad_manifest.py` (closes the shank-cover box on Printed parts; ~18 more STEP+STL; watch
-   the 95 MB / 900 MB limits). `stage_cad_export.py` stages site parts only — module STEPs and vendor parts
-   need a staging rule and a page section (viewer/downloads lane).
-5. `build_viewer.py` from `<1646>/print/` + `transforms.csv` with the appearance colours and Draco.
+1. Commit the two untracked generated outputs: the staged booklet PDF
+   `docs/files/drawings/duke_humanoid_v2_exploded_views_rev01.pdf` (already listed in `cad-files.csv` and
+   `SHA256SUMS.txt`) and `docs/data/team-map.csv`.
+2. Close the shank-cover MISSING box on Printed parts (`3DP_legP09` / `3DP_legP10`): the canonical export has
+   unique file names, so re-check whether the staged files are still byte-identical to `3DP_armP05` / `06`.
+3. Answer the open mapping questions in the UNVERIFIED boxes on `docs/bom/cnc-parts.md` and
+   `docs/bom/printed-parts.md` (see *What the team must supply*).
+4. Re-run `gen_punchlist.py` and `gen_image_manifest.py` after every page change, then
+   `mkdocs build --strict`.
+5. `stage_cad_export.py` stages site parts, modules and vendor parts; watch the GitHub limits
+   (95 MB/file, 900 MB total, both as `gen_cad_manifest.py` measures them in MiB — the staged tree is at 672.9 MiB
+   (706 MB), the largest file 70.1 MiB (73.5 MB); `stage_cad_export.py` has its own 700 MB budget for `docs/files/`).
 
 ## What the team must supply (blocking)
 
-1. **CAD, remaining** (`humanoid_2.1_latest`, project humanoid/humanoid_v2/v2.1): only an overall-dimensions
-   drawing exists (staged as `humanoid_2.1_latest_overall_rev01.pdf`); there are no per-part drawings, so
-   machined parts are ordered from STEP. Slicer plates (3MF) → `docs/files/plates/` if the team has them; the
-   `.f3z` must be re-released on the public repo.
-   - Naming: Fusion names are `CNC_<sub><NN>_x<qty>_<desc>` and match the site IDs (`ALIASES` in
-     `stage_cad_export.py`). Resolved from geometry: `leg09`–`leg12` and `leg03` duplicates are the same parts
-     under two names; `arm09` = `elbow_roll_output_shaft`. Still open (red boxes): `CNC_arm06`, `CNC_leg18`,
-     `CNC_arm12` are quoted but not in Fusion; `arm05`/`arm11` are quoted as CNC but are SLS nylon in Fusion;
-     the `*_protection` covers have no filament grade; the gripper and camera-column parts have custom
-     material names (`rail`, `Base`, `Neck`, `Arm`).
-   - Whether the recorded CAD errors are fixed in this export is still unknown: Motor04 shaft and knee need
-     M5 holes (CAD had M4); design error on the RS03 shaft bearing retainer above the knee.
-2. **Whole-robot exploded view** (image or animation) — the 9 animations are per subassembly only.
-3. **Decisions** (each is a red box on the site): hardware + docs licence; e-stop / main disconnect (none in the
-   power diagram; run scripts assume one); fuse, surge protector, distribution blocks missing from the BOM;
-   1 vs 3 × 48V→12V converters; fastener schedule and torques; battery retention. (Fusion says all CNC parts
-   are Aluminum 6061, so 6061 vs 7075 is settled unless the shop used something else.)
-4. **Hardware revision id**: Fusion says `2.1`, MJCF is `humanoid_v21` → fill the revision box with v2.1.
+1. **Licence** — hardware and docs licence is undecided; a red box on the site.
+2. **E-stop / main disconnect** — none in the power diagram, but the run scripts assume one. `MISSING — SAFETY`.
+3. **Joint limits** — the Fusion model has none (see above). Needed for the joint table and the specs page.
+4. **Open BOM questions** (each is a red box on the page named):
+   - `RS06` count: the team BOM lists 2, the robot has four RS06 joints (`docs/bom/actuators.md`).
+   - **Fastener schedule**: every screw (thread, length, head, drive, qty), fits, dowel pins, retaining rings,
+     shims, threadlocker locations and torques. `MISSING — SAFETY` on `docs/bom/fasteners-and-hardware.md`.
+   - **Bearings**: `H2` (35 × 44 × 5 mm) — the team BOM buys 18, Fusion places 26; `H5` (10 × 15 × 4 mm, 2 off)
+     has no component named for it in Fusion.
+   - **AprilTag count**: team BOM line `P15` buys 12 tiles, Fusion places 16 (eight per gripper) — 12 or 16?
+     (`docs/bom/printed-parts.md`).
+   - **Torso plates** `3DP_body06`–`09`: PLA in the team BOM vs `ABS Plastic 60%infill` in Fusion.
+   - **Cables and connectors**: the team BOM has no lines for XT30 / XT30(2+2) / GH1.25 / EC5, loom, Ethernet,
+     heat-shrink, bulk wire or CAN termination resistors; wire gauges are `MISSING — SAFETY`.
+   - Machined parts with no team BOM line: `CNC_arm05`, `CNC_arm06`, `CNC_arm11` (SLS nylon in Fusion),
+     `CNC_arm12_wrist_pitch` (in neither the BOM nor the model), `CNC_arm13_RS05_shaft_coupler`.
+   - Electronics: fuse and holder, battery charger, surge protector MPN, distribution terminals; 1 vs 3
+     48 V→12 V converters; battery retention.
+5. **CAD, remaining**: no per-part drawings — `docs/files/drawings/` holds only the overall-dimensions drawing
+   (`humanoid_2.1_latest_overall_rev01.pdf`) and the exploded-view booklet — so machined parts are ordered from STEP. Slicer plates (3MF) →
+   `docs/files/plates/` if the team has them; the `.f3z` must be re-released on the public repo. Whether the
+   recorded CAD errors are fixed in this export is still unknown: Motor04 shaft and knee need M5 holes (CAD had
+   M4); design error on the RS03 shaft bearing retainer above the knee.
+6. **Hardware revision id**: Fusion says `2.1`, MJCF is `humanoid_v21` → fill the revision box with v2.1.
 
 ## Repo layout
 
-- `hardware-site/` — site. `tools/` regenerates everything derived (see `tools/README.md`): BOM generators
-  (`gen_bom.py`, reads `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`), `gen_printed.py`,
-  `gen_part_properties.py`, `stage_cad_export.py`, `gen_cad_manifest.py` (also enforces GitHub limits: 95
-  MB/file, 900 MB total), `build_viewer.py`, `gen_punchlist.py`, `gen_image_manifest.py`, and the four Fusion
-  scripts.
-- `hardware/` — team power & data wiring diagrams (source of truth).
-- `reference/bom/` — team BOM spreadsheets; `reference/_meta/cad-trees/` — evidence for `CAD_RELEASE_COMPARISON.md`.
-  The rest of `reference/` (mirrors of Asimov/OpenArm/ToddlerBot/Berkeley, clones of our repos, papers; 4.4 GB)
+- `hardware-site/` — site. `tools/` regenerates everything derived (see `tools/README.md`).
+- `hardware/` — team power & data wiring diagrams (source of truth for the electrical pages).
+- `reference/bom/` — the team's BOM spreadsheet (the parts list).
+- `reference/team/` — the team's exploded-view booklet `duke_humanoid_v2_hardware.pdf` (the assembly figures).
+- `reference/_meta/cad-trees/` — evidence for `CAD_RELEASE_COMPARISON.md`.
+- The rest of `reference/` (mirrors of Asimov/OpenArm/ToddlerBot/Berkeley, clones of our repos, papers; 4.4 GB)
   is **not in git**. Reclone `github.com/generalroboticslab/duke_humanoid_v2` (with submodules) into
   `reference/duke-humanoid-v2/repo/` if a page needs re-verifying against code (the gripper facts above come
   from `simulation/asset/duke_v2/parallel_gripper/`).
@@ -159,6 +160,9 @@ Set `PYTHONIOENCODING=utf-8` when a generator prints `×` or `·` to a cp1252 co
 The 319 MB `.f3z` is a release asset (`cad-v2.1-rc1`) on this private repo; the link on the CAD downloads page
 only works for collaborators until the release is re-created on the public repo.
 
-`.github/workflows/docs.yml` builds with `--strict` and deploys GitHub Pages from `main`. `site_url` is still
+`hardware-site/.github/workflows/docs.yml` builds with `--strict` and deploys GitHub Pages from `main`. It is written
+for a repository whose root holds `hardware-site/` (`working-directory: hardware-site`, `paths: hardware-site/**`),
+and GitHub Actions only reads `<repo root>/.github/workflows/`, so it does not run from where it sits now — move it
+when publishing. `site_url` is still
 `https://generalroboticslab.github.io/duke_humanoid_v2/` — change it (and the Pages source) when the final
 home of the site is decided. This private repo cannot serve Pages on a free plan; publish from the public one.

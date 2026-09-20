@@ -7,10 +7,6 @@ Build the torso that limbs and camera columns bolt to.
     - **Parts:** RobStride 03 ×1 ([Actuators](../bom/actuators.md)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/cnc-parts.md)); electronics in steps 5–8 ([Electronics](../bom/electronics.md)).
     - **Before this:** [Arm](arm.md).
 
-> **Figure** <span class="pending-figure">not produced yet</span> —
-> `assets/assembly/torso-exploded.png`: the torso exploded, every item labelled
-> in its mounting position.
-
 !!! missing "MISSING — torso fasteners, torques, mounts and retention"
     - Per step: screws, torque, Loctite 222 use, plate join order and location,
       squareness tolerance.
@@ -34,6 +30,11 @@ Set the RobStride 03 to Controller Area Network (CAN) ID 1 on the bench. Label i
 | `waist` | RobStride 03 | 1 | `can22` (shared with both `shoulder_1`) | ±90° |
 
 ✅ **Check:** Answers at ID 1; labelled.
+
+<figure markdown>
+  ![Torso frame exploded, parts labelled with team BOM ids](../assets/exploded/team/01-torso-frame.webp){ loading=lazy }
+  <figcaption>Steps 2–4: plates C0–C3, interior plate (spine) P0, actuators E3, bearings H0. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
 
 {{ step(2, "Assemble the plate frame") }}
 
@@ -89,6 +90,11 @@ the base frame ([Head and camera gimbal](head-and-camera-gimbal.md)).
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../../assets/exploded/body-front-poster.webp" aria-label="Exploded view of the torso front electronics bay"><source src="../../assets/exploded/body-front.mp4" type="video/mp4"><a href="../../assets/exploded/body-front.mp4">MP4</a></video>
   <figcaption>Front bay, identifications <strong class="dh-unverified">UNVERIFIED</strong>: six CAN adapters, mini PC on the spine, two distribution bars, inertial measurement unit (IMU) on the top plate.</figcaption>
+</figure>
+
+<figure markdown>
+  ![Torso electronics exploded, parts labelled with team BOM ids](../assets/exploded/team/02-electronics-tray.webp){ loading=lazy }
+  <figcaption>Steps 5–8, both sides of the torso: computer E0, packs E7, CAN adapters E13, hubs E16, IMU E17, surge protector E18, distribution blocks E19, voltage checkers E20. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
 </figure>
 
 {{ step(5, "Mount the computer") }}
@@ -206,6 +212,11 @@ from `deploy/control/`: it serves a 3D frame view on port 8080.
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1248" height="702"
     poster="../../assets/exploded/body-cover-poster.webp" aria-label="Exploded view of the torso front and back covers"><source src="../../assets/exploded/body-cover.mp4" type="video/mp4"><a href="../../assets/exploded/body-cover.mp4">MP4</a></video>
   <figcaption>Front and back covers: each a perforated frame plus a perforated panel.</figcaption>
+</figure>
+
+<figure markdown>
+  ![Torso printed plates exploded, parts labelled with team BOM ids](../assets/exploded/team/03-torso-printed-plates.webp){ loading=lazy }
+  <figcaption>Printed torso plates: covers P1, front plate P2, back plate P3. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
 </figure>
 
 {{ step(10, "Fit the front and back covers") }}

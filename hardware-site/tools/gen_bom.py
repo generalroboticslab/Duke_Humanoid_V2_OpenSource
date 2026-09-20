@@ -35,8 +35,18 @@ What this script will not do
   BOM". A spreadsheet row with no CAD match keeps its ``team_ref`` as its
   ``part_id`` and says "no CAD match yet".
 
-Run order: ``gen_bom.py`` (this file, writes all six CSVs, reads the newest
-``cad/*/tree.csv`` for the printed parts) then ``gen_cad_manifest.py``,
+What settles the mapping
+------------------------
+The team's exploded-view booklet ``reference/team/duke_humanoid_v2_hardware.pdf``
+(15 pages, rendered as ``docs/assets/exploded/team/NN-*.webp``) labels the parts
+of every assembly with the spreadsheet's own ids, so it is the evidence for
+which CAD component each id is. ``BOOKLET`` below records, per id, the page(s)
+that label it and what the label points at; ``OPEN`` records the ids the
+booklet does **not** settle. Both are written to ``docs/data/team-map.csv``
+together with the CAD counts, one row per spreadsheet line.
+
+Run order: ``gen_bom.py`` (this file, writes all six CSVs and
+``team-map.csv``, reads the newest ``cad/*/tree.csv``) then ``gen_cad_manifest.py``,
 ``gen_punchlist.py``, ``gen_image_manifest.py``. ``gen_printed.py`` is now the
 ``PRINTED`` mapping module (Fusion component -> ``part_id``) that this script,
 ``stage_cad_export.py``, ``build_viewer.py`` and ``gen_part_properties.py``
@@ -89,6 +99,171 @@ VENDORS = {
 }
 
 # --------------------------------------------------------------------------- #
+# The team's exploded-view booklet: what each label points at.
+#
+# reference/team/duke_humanoid_v2_hardware.pdf, 15 pages, rendered as
+# docs/assets/exploded/team/NN-<name>.webp. Page numbers below are the
+# booklet's own (01-torso-frame = p.1 ... 15-whole-robot = p.15). Each entry
+# describes what the label points at in the picture and nothing else: what is
+# visible, never what is inferred from it. `—` means no page labels that id.
+# --------------------------------------------------------------------------- #
+BOOKLET: dict[str, tuple[str, str]] = {
+    # --- electronics -------------------------------------------------------
+    "E0": ("p.2", "the one large light box standing against the printed spine inside the torso"),
+    "E1": ("p.9", "the small actuator at the wrist, one per arm"),
+    "E2": ("p.9", "the three medium actuators of one arm (shoulder_3, elbow and wrist_1): "
+                  "six positions for two arms, which is this line's count"),
+    "E3": ("p.1, p.4, p.5", "three actuators in the torso plus four per leg (hip 1 and hip 2 on p.4, "
+                            "hip 3 and ankle on p.5): eleven positions, which is this line's count"),
+    "E4": ("p.5", "the wide actuator at the knee, one per leg"),
+    "E5": ("p.9, p.14", "the short cylinder at the wrist (one per arm) and two per camera gimbal: "
+                        "six positions, which is this line's count"),
+    "E6": ("p.5, p.9", "the actuator at the ankle roll (one per leg) and at the shoulder (one per arm): "
+                       "four positions, against this line's quantity of 2"),
+    "E7": ("p.2", "two prismatic packs beside the torso"),
+    "E8": ("—", "not labelled in the booklet"),
+    "E9": ("—", "not labelled in the booklet"),
+    "E10": ("p.13", "the green driver board above the gripper body, one per gripper"),
+    "E11": ("—", "not labelled in the booklet"),
+    "E12": ("p.13", "the grey converter on its plate beside the gripper body, one per gripper"),
+    "E13": ("p.2", "six light boxes with a black connector, in two columns in the tray"),
+    "E14": ("p.14", "the camera on the gimbal, one per column"),
+    "E15": ("p.13", "the red and grey servo inside the gripper body, one per gripper"),
+    "E16": ("p.2", "three port strips on the spine"),
+    "E17": ("p.2", "the small module on the top plate of the torso"),
+    "E18": ("p.2", "the stepped light block beside the torso"),
+    "E19": ("p.2", "two small terminal blocks in the tray"),
+    "E20": ("p.2", "two small blocks beside the torso"),
+    # --- machined ----------------------------------------------------------
+    "C0": ("p.1", "the rectangular plate closing the top of the torso, one off"),
+    "C1": ("p.1", "the plate closing the bottom of the torso, with the large round bore, one off"),
+    "C2": ("p.1", "the two tall side plates"),
+    "C3": ("p.1", "four identical cross braces between the plates"),
+    "C4": ("p.4, p.5", "the toothed ring in front of the H0 bearing on the output of the waist actuator "
+                       "(p.4, the unlabelled actuator marked Body) and of the hip-1 (p.4) and hip-3 (p.5) "
+                       "actuator of each leg: five positions, which is this line's count"),
+    "C5": ("p.4, p.5, p.9", "the square coupler plate on the output of the same five RS03 joints (waist, "
+                            "hip 1 and hip 3 of each leg) and of the shoulder-1 RS03 of each arm: seven "
+                            "positions, which is this line's count"),
+    "C6": ("p.4", "the ring bracket carrying the hip-1 actuator, one per leg"),
+    "C7": ("p.4", "the flanged ring in front of the hip-2 actuator, one per leg"),
+    "C8": ("p.4", "the forked bracket behind the hip-2 actuator, one per leg"),
+    "C9": ("p.5", "the shaft arm on the driven side of the hip-3 joint, one per leg"),
+    "C10": ("p.5", "the shaft arm on the support side of the hip-3 joint, one per leg"),
+    "C11": ("p.5", "the ring bracket in front of the knee actuator, one per leg"),
+    "C12": ("p.5", "the round cover behind the knee actuator, one per leg"),
+    "C13": ("p.5", "the long shank arm on the driven side, one per leg"),
+    "C14": ("p.5", "the long shank arm on the support side, one per leg"),
+    "C15": ("p.5", "two small rings at the lower end of the shank arms, two per leg, which is this line's 4"),
+    "C16": ("p.5", "the ring bracket at the ankle-pitch joint, one per leg"),
+    "C17": ("p.5", "the forked retainer behind the ankle-pitch actuator, one per leg"),
+    "C18": ("p.5", "the ring on the RS06 ankle-roll actuator, one per leg"),
+    "C19": ("p.5", "the short shaft arm on the driven side of the ankle roll, one per leg"),
+    "C20": ("p.5", "the short shaft arm on the support side of the ankle roll, one per leg"),
+    "C21": ("p.5", "the flat foot plate, one per leg"),
+    "C22": ("p.9", "the ring plate in front of the shoulder-roll actuator, one per arm"),
+    "C23": ("p.9", "the forked retainer behind the shoulder-roll actuator, one per arm"),
+    "C24": ("p.9", "the flat shaft bracket at the shoulder, one per arm"),
+    "C25": ("p.9", "the same rectangular bracket twice per arm, once at the shoulder and once at the "
+                   "elbow, which is this line's name and its count of 4"),
+    "C26": ("p.9", "the flat shaft bracket at the elbow, one per arm"),
+    "C27": ("p.9", "the same round dished cover twice per arm, one in the shoulder joint stack and one "
+                   "in the elbow joint stack, which is this line's name and its count of 4"),
+    "C28": ("p.9", "the ring plate in front of the elbow actuator, one per arm"),
+    "C29": ("p.9", "the forked retainer behind the elbow actuator, one per arm"),
+    # --- printed -----------------------------------------------------------
+    "P0": ("p.1", "the interior spine that stands inside the torso frame, one off"),
+    "P1": ("p.3", "two identical window frames, one on the front face and one on the back"),
+    "P2": ("p.3", "the perforated removable panel on one face of the torso"),
+    "P3": ("p.3", "the perforated removable panel on the other face of the torso"),
+    "P4": ("p.9", "the cone on the output of the first and of the third RS02 actuator of the arm "
+                  "(shoulder_3 and wrist_1), two per arm"),
+    "P5": ("p.9", "the square coupler block between the shoulder cone and the elbow actuator, one per arm"),
+    "P6": ("p.9", "the barrel at the wrist roll, one per arm"),
+    "P7": ("p.9", "the wrist housing of the arm drawn on p.9"),
+    "P8": ("p.9", "the end-effector plate below the wrist, one per arm"),
+    "P9": ("p.11", "the wrist housing of the mirrored arm: the same shape as P7 on p.9"),
+    "P10": ("p.13", "the gripper body, one per gripper"),
+    "P11": ("p.13", "the long slide arm with the rack teeth cut along it, two per gripper"),
+    "P12": ("p.13", "the double-helix pinion on the servo, one per gripper"),
+    "P13": ("p.13", "the curved ribbed finger pad, two per gripper"),
+    "P14": ("p.13", "the flat tag holder, two per gripper"),
+    "P15": ("p.13", "eight square tiles per gripper, at six label positions (two of them point at a pair): "
+                    "sixteen for two grippers, against this line's 12"),
+    "P16": ("p.14", "the wide tripod base at the foot of the column"),
+    "P17": ("p.14", "the neck above the lower gimbal actuator"),
+    "P18": ("p.14", "the thicker of the two gimbal arms: bent, ending in the bolt-circle pad that sits on "
+                    "the actuator face"),
+    "P19": ("p.14", "the thinner of the two gimbal arms: flat, ending in a plain disc beside the H5 bearing"),
+    "P20": ("p.6", "one of the four curved vented covers around the hip-1 and hip-3 motors of one leg"),
+    "P21": ("p.6", "one of the four curved vented covers around the hip-1 and hip-3 motors of one leg"),
+    "P22": ("p.6", "one of the two curved covers around the hip-2 motor of one leg"),
+    "P23": ("p.6", "one of the two curved covers around the hip-2 motor of one leg"),
+    "P24": ("p.6", "one of the four curved vented covers around the hip-1 and hip-3 motors of one leg"),
+    "P25": ("p.6", "one of the four curved vented covers around the hip-1 and hip-3 motors of one leg"),
+    "P26": ("p.6", "one of the two curved covers around the knee motor of one leg"),
+    "P27": ("p.6", "one of the two curved covers around the knee motor of one leg"),
+    "P28": ("p.6", "two long flat straps with an eye at each end, one on each side of the shank of one leg, "
+                   "which is this line's 4 over two legs"),
+    "P29": ("p.6", "one of the two curved covers around the ankle-roll motor of one leg"),
+    "P30": ("p.6", "one of the two curved covers around the ankle-roll motor of one leg"),
+    "P31": ("p.6", "the small teardrop cap at the front of the foot, one per leg"),
+    "P32": ("p.6", "the wedge sole under the foot plate, one per leg"),
+    "P33": ("p.10", "one of the two curved covers around the shoulder-pitch motor of one arm"),
+    "P34": ("p.10", "one of the two curved covers around the shoulder-pitch motor of one arm"),
+    "P35": ("p.10", "two curved vented covers labelled P35 on one arm, both drawn at the shoulder end: "
+                    "with P36's two they are the four halves of the two-piece roll cover, which is this "
+                    "line's 4 over two arms"),
+    "P36": ("p.10", "two curved vented covers labelled P36 on one arm, both drawn at the forearm end, "
+                    "which is this line's 4 over two arms"),
+    "P37": ("p.10", "one of the two curved covers around the elbow motor of one arm"),
+    "P38": ("p.10", "one of the two curved covers around the elbow motor of one arm"),
+    "P39": ("p.10", "four smooth flat covers per arm, two on the shoulder-roll shaft and two on the elbow "
+                    "shaft: eight for two arms, which is this line's count"),
+    # --- hardware ----------------------------------------------------------
+    "H0": ("p.1, p.4, p.5", "the large bearing at the RS03 joints of the torso and of the legs"),
+    "H1": ("p.5", "the bearing at the knee joint, one per leg"),
+    "H2": ("p.5, p.9", "the bearings at the shank and at every arm joint"),
+    "H3": ("p.5", "the bearings at the ankle, two per leg"),
+    "H4": ("p.9", "the small bearing under the wrist housing, one per arm"),
+    "H5": ("p.14", "the small bearing on the support side of the gimbal, one per column"),
+    "H6": ("—", "screws are not labelled in the booklet"),
+    "H7": ("—", "screws are not labelled in the booklet"),
+    "H8": ("—", "screws are not labelled in the booklet"),
+}
+
+# What the booklet does NOT settle, one line per team BOM id. Everything else
+# is `settled` in docs/data/team-map.csv.
+OPEN: dict[str, str] = {
+    "C25": "Unit price: the team BOM's 57.56 is exactly twice the retired machining quote's 28.78 for the "
+           "same part. A drawing cannot price a part.",
+    "E6": "Count: the booklet shows the actuator at four joints (ankle roll and shoulder, both sides), the "
+          "team BOM buys 2.",
+    "P20": "Which of the four hip covers this line is, and whether Hip 1 has a cover of its own: the "
+           "booklet draws four covers over two motors that do not all look alike, the 2026-09-19 CAD "
+           "holds one two-piece design for all eight pieces, and neither names a line.",
+    "P21": "Which of the four hip covers this line is (see P20).",
+    "P22": "Which half of the hip-2 cover is A and which is B.",
+    "P23": "Which half of the hip-2 cover is A and which is B.",
+    "P24": "Which of the four hip covers this line is (see P20).",
+    "P25": "Which of the four hip covers this line is (see P20).",
+    "P26": "Which half of the knee cover is A and which is B.",
+    "P27": "Which half of the knee cover is A and which is B.",
+    "P29": "Which half of the ankle-roll cover is Top and which is Bot.",
+    "P30": "Which half of the ankle-roll cover is Top and which is Bot.",
+    "P33": "Which half of the shoulder-pitch cover is A and which is B.",
+    "P34": "Which half of the shoulder-pitch cover is A and which is B.",
+    "P35": "Which Fusion half is Front and which is Back; the booklet labels P35 twice at the shoulder "
+           "end and P36 twice at the forearm end, so the two lines may split by joint rather than by half.",
+    "P36": "Which Fusion half is Front and which is Back (see P35).",
+    "P37": "Which half of the elbow cover is A and which is B.",
+    "P38": "Which half of the elbow cover is A and which is B.",
+    "H6": "Quantity: the team BOM gives none, and screws are not labelled in the booklet.",
+    "H7": "Quantity: the team BOM gives none, and screws are not labelled in the booklet.",
+    "H8": "Quantity: the team BOM gives none, and screws are not labelled in the booklet.",
+}
+
+# --------------------------------------------------------------------------- #
 # purchased parts: Electronics (E0-E20) and Hardware (H0-H8)
 #
 # (team_ref, csv, part_id, subassembly, description, mpn, extra note). The
@@ -113,7 +288,8 @@ PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
     ("E6", ACT_FILE, "ACT_RS06", "actuators", "RobStride 06 quasi-direct-drive actuator", "RobStride 06",
      "QUANTITY CONFLICT: the team BOM lists 2, but the robot has four RS06 joints (ankle_2 and "
      "shoulder_2 on both sides, from `deploy/control/humanoid_config.py` and the CAN bus list), "
-     "so two more are needed than the team BOM buys. UNVERIFIED. " + RS_ALT),
+     "so two more are needed than the team BOM buys. The team's booklet shows the same four: p.5 "
+     "labels E6 at the ankle roll of one leg and p.9 at the shoulder of one arm. " + RS_ALT),
     # --- electronics -------------------------------------------------------
     ("E0", EL_FILE, "EL_COMPUTE_MINIPC", "electronics", "MINISFORUM X1-470 mini PC (onboard computer)", "X1-470",
      "Module (III) on the hardware overview figure. The 2026-09-19 link is the X1-Pro-470 listing; "
@@ -186,8 +362,16 @@ CNC_MAP: list[tuple[str, str, str]] = [
     ("C1", "CNC_body01_bottom_plate", ""),                   # Body Plate - Bottom 64.03 x1 = quote CNC_body01_x1_bottom_plate
     ("C2", "CNC_body02_side_plate", ""),                     # Body Plate - Side 109.14 x2 = quote CNC_body02_x2_side_plate
     ("C3", "CNC_body04_front_plate", ""),                    # Body Plate - Front/Back 47.08 x4 = quote CNC_body04_x4_front_plate
-    ("C4", "CNC_leg03_RS03_shaft_bearing_retainer", ""),     # Robstride 03 Bearing Retainer 49.34 x5 = quote CNC_leg03_x5 49.34 x5
+    ("C4", "CNC_leg03_RS03_shaft_bearing_retainer",
+     "Booklet p.4 and p.5: the toothed ring in front of the H0 bearing on the output of the waist "
+     "actuator (p.4, the unlabelled actuator marked Body) and of the hip-1 (p.4) and hip-3 (p.5) "
+     "actuator of each leg: five positions, which is the team BOM's 5 and the Fusion tree's 5."),
+    # Robstride 03 Bearing Retainer 49.34 x5 = quote CNC_leg03_x5 49.34 x5
     ("C5", "CNC_leg02_RS03_shaft_coupler",
+     "Booklet p.4, p.5 and p.9: the square coupler plate on the output of the waist actuator and of "
+     "the hip-1 and hip-3 actuator of each leg (the same joints as C4) and of the shoulder-1 actuator "
+     "of each arm: seven positions, which is the team BOM's 7 and the Fusion tree's 7 (5 in "
+     "`hip_center`, 1 in the right leg's `knee_assembly`, 1 in the left arm). "
      "The quote carries this part as two lots (6 pcs at 274.02 and 2 pcs at 100.26, 374.28 for 8); "
      "the team BOM prices it at 46.785 each, which is that 374.28 divided by 8, for 7 pieces."),
     # Robstride 03 Output Shaft 46.785 x7; quote name CNC_leg02_x7_RS03_shaft_coupler
@@ -201,7 +385,8 @@ CNC_MAP: list[tuple[str, str, str]] = [
     ("C13", "CNC_leg10_knee_output_shank", ""),              # Shank Shaft 113.29 x2 = quote CNC_leg10_x2
     ("C14", "CNC_leg11_knee_support_shank", ""),             # Shank Support 50.05 x2 = quote CNC_leg11_x2
     ("C15", "CNC_leg12_lower_leg_bearing",
-     "The quote's name says x4 and its lot was 5 pieces; the team BOM says 4."),
+     "Booklet p.5 labels two rings at the lower end of the shank arms of one leg, which is the team "
+     "BOM's 4 and the Fusion tree's 4. The quote's name says x4 and its lot was 5 pieces."),
     # Shank Joint Cap 16.50 x4 = quote CNC_leg12_x4_lower_leg_bearing 16.50
     ("C16", "CNC_leg13_ankle_pitch_front", ""),              # Ankle Motor Bracket 78.82 x2 = quote CNC_leg13_x2
     ("C17", "CNC_leg14_ankle_pitch_back", ""),               # Ankle Bearing Retainer 95.85 x2 = quote CNC_leg14_x2
@@ -213,14 +398,18 @@ CNC_MAP: list[tuple[str, str, str]] = [
     ("C23", "CNC_arm02_shoulder_roll_back_bearing", ""),     # Shoulder Bearing Retainer 99.24 x2 = quote CNC_arm02_x2
     ("C24", "CNC_arm03_shoulder_roll_output_shaft", ""),     # Shoulder Shaft 31.72 x2 = quote CNC_arm03_x2
     ("C25", "CNC_arm04_shoulder_roll_support_shaft",
-     "MATCHED ON NAME AND QUANTITY ONLY: the quote prices this part (CNC_arm04_x4_shoulder_roll_support_shaft) "
-     "at 28.78 each for 4, exactly half the team BOM's 57.56 each for 4. Which of the two unit prices "
-     "holds is UNVERIFIED; the team BOM's is used here."),
+     "Booklet p.9 labels the same rectangular bracket twice per arm, once at the shoulder and once at "
+     "the elbow: four pieces, which is the team BOM's Shoulder/Elbow Support and the Fusion component "
+     "`CNC_arm04_x4_shoulder_elbow_support_shaft` (4 occurrences). PRICE CONFLICT: the quote prices it "
+     "at 28.78 each for 4, exactly half the team BOM's 57.56 each for 4. Which unit price holds is "
+     "UNVERIFIED; the team BOM's is used here."),
     # Shoulder/Elbow Support 57.56 x4
     ("C26", "CNC_arm09_elbow_output_shaft", ""),             # Elbow Shaft 31.42 x2 = quote CNC_arm09_x2
     ("C27", "CNC_arm10_r03_back_cover",
-     "The team BOM calls it a coupler, the CAD name is a back cover; price and quantity are the "
-     "quote's CNC_arm10_x4_r03_back_cover exactly. UNVERIFIED."),
+     "Booklet p.9 labels the same round dished cover twice per arm, once in the shoulder joint stack "
+     "and once in the elbow joint stack: four pieces, which is this line and the Fusion component "
+     "`CNC_arm10_x4_r03_back_cover` (4 occurrences). One part, two names: the team BOM calls it a "
+     "coupler, the CAD a back cover. Price and quantity are the quote's exactly."),
     # Shoulder/Elbow Coupler 54.25 x4 = quote CNC_arm10_x4 54.25 x4
     ("C28", "CNC_arm07_elbow_front_bearing", ""),            # Elbow Motor Bracket 57.94 x2 = quote CNC_arm07_x2
     ("C29", "CNC_arm08_elbow_back_bearing", ""),             # Elbow Bearing Retainer 65.65 x2 = quote CNC_arm08_x2
@@ -232,16 +421,21 @@ CNC_MAP: list[tuple[str, str, str]] = [
 # (part_id, subassembly, description, note)
 CNC_EXTRA: list[tuple[str, str, str, str]] = [
     ("CNC_arm05_RS02_shaft_bearing", "arm", "RS02 shaft bearing",
-     "In Fusion this part is the SLS nylon `3DP_arm05_RS02_shaft_bearing_retainer` (see Printed parts)."),
+     "NOT A MACHINED PART: booklet p.9 labels this cone `P4`, a printed line, and in Fusion it is the "
+     "SLS nylon `3DP_arm05_RS02_shaft_bearing_retainer` (see Printed parts)."),
     ("CNC_arm06_RS02_shaft_coupler", "arm", "RS02 shaft coupler",
-     "In Fusion this part is the SLS nylon `3DP_arm06_RS02_shaft_coupler` (see Printed parts)."),
+     "NOT A MACHINED PART: booklet p.9 labels this coupler block `P5`, a printed line, and in Fusion it "
+     "is the SLS nylon `3DP_arm06_RS02_shaft_coupler` (see Printed parts)."),
     ("CNC_arm11_wrist_roll", "arm", "wrist roll",
-     "In Fusion this part is the SLS nylon `3DP_arm11_wrist_roll` (see Printed parts)."),
+     "NOT A MACHINED PART: booklet p.9 labels this barrel `P6`, a printed line, and in Fusion it is the "
+     "SLS nylon `3DP_arm11_wrist_roll` (see Printed parts)."),
     ("CNC_arm12_wrist_pitch", "arm", "wrist pitch",
-     "Not in the Fusion model either: no CAD file, no mass."),
+     "Not in the Fusion model and not labelled anywhere in the booklet: no CAD file, no mass, no team "
+     "BOM line. Whether the part exists at all is UNVERIFIED."),
     ("CNC_arm13_RS05_shaft_coupler", "arm", "RS05 shaft coupler",
      "In Fusion it is the gripper's machined mounting flange inside `dovetail_umi_gripper` "
-     "(the code repo's `cnc_flange`, Aluminium 6061)."),
+     "(the code repo's `cnc_flange`, Aluminium 6061, 2 occurrences). The booklet's gripper page (p.13) "
+     "does not label it."),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -265,94 +459,134 @@ CNC_EXTRA: list[tuple[str, str, str, str]] = [
 PRINTED_MAP: list[tuple[tuple[str, ...], tuple[str, ...], str]] = [
     # ---- priced rows: mass-matched ---------------------------------------
     (("P0",), ("3DP_body05_interior_plate",),
-     "Matched by name and material: the plate that carries the PC, and the only `3DP_` component "
-     "with a PLA material in Fusion. Its weight cannot be checked against the export (see below). "
-     "UNVERIFIED."),  # PC Mount, PLA x1; weight 0.3175725 -> 317.6 g; Fusion mass 4637.4 g includes 36 children
+     "Booklet p.1: the one printed interior spine that stands inside the torso frame and carries the "
+     "computer, which is this component. Its weight cannot be checked against the export (see below)."),
+    # PC Mount, PLA x1; weight 0.3175725 -> 317.6 g; Fusion mass 4637.4 g includes 36 children
     (("P1",), ("3DP_body06_front_plate", "3DP_body08_back_plate"),
-     "One team BOM line of 2 pieces: its weight (73.888 g) is the CAD mass of the front plate "
+     "Booklet p.3: two identical window frames, one on the front face of the torso and one on the back, "
+     "which is this line's 2 pieces. Its weight (73.888 g) is the CAD mass of the front plate "
      "(73.9 g); the back plate is 73.2 g and is priced at the same rate here."),
     (("P2",), ("3DP_body07_front_plate_removable",),
-     ""),  # Front Plate, PLA x1; weight 0.096876586 -> 96.9 g = CAD mass of body07
+     "Booklet p.3: one of the two perforated removable panels of the torso; which face is the front is "
+     "settled by the weight, not by the drawing."),
+    # Front Plate, PLA x1; weight 0.096876586 -> 96.9 g = CAD mass of body07
     (("P3",), ("3DP_body09_back_plate_removable",),
-     ""),  # Back Plate, PLA x1; weight 0.113809991 -> 113.8 g = CAD mass of body09
+     "Booklet p.3: the other perforated removable panel of the torso."),
+    # Back Plate, PLA x1; weight 0.113809991 -> 113.8 g = CAD mass of body09
     (("P4",), ("3DP_arm05_RS02_shaft_bearing_retainer",),
-     ""),  # Arm Shaft Cover, Nylon 12 x4; weight 70.62 g = CAD 70.6 g, 4 occurrences
+     "Booklet p.9: the cone on the output of the first and of the third RS02 actuator of the arm "
+     "(shoulder_3 and wrist_1), two per arm, which is this line's 4 and the component's 4 occurrences. "
+     "The booklet draws it as a printed part, not a machined one."),  # Arm Shaft Cover, Nylon 12 x4; weight 70.62 g = CAD 70.6 g
     (("P5",), ("3DP_arm06_RS02_shaft_coupler",),
-     "The weight (64.6 g) is this part's STL volume in part-properties.csv (63.67 cm3) at the "
+     "Booklet p.9: the square coupler block between the shoulder cone and the elbow actuator, one per "
+     "arm. The weight (64.6 g) is this part's STL volume in part-properties.csv (63.67 cm3) at the "
      "density the other Nylon 12 lines imply (1.014 g/cm3); the Fusion mass, 67.5 g, includes "
      "the component's 6 child components."),  # Elbow Shaft Coupler, Nylon 12 x2; 2 occurrences
     (("P6",), ("3DP_arm11_wrist_roll",),
-     ""),  # Wrist Shaft, Nylon 12 x2; weight 72.10 g = CAD 72.1 g, 2 occurrences
+     "Booklet p.9: the barrel at the wrist roll, one per arm."),
+    # Wrist Shaft, Nylon 12 x2; weight 72.10 g = CAD 72.1 g, 2 occurrences
     (("P7", "P9"), ("3DP_arm14_wrist_block",),
      "The team BOM splits this component into a right-hand and a left-hand line of one piece each "
-     "(Wrist Housing R and L); both carry the same weight, 138.0 g, which is this part's CAD mass."),
+     "(Wrist Housing R and L); both carry the same weight, 138.0 g, which is this part's CAD mass. "
+     "Booklet p.9 labels the housing P7 on one arm and p.11 labels the same shape P9 on the mirrored "
+     "arm, so the two lines are one part built twice."),
     (("P8",), ("3DP_arm15_end_effector_attachment",),
-     ""),  # Wrist Output, Nylon 12 x2; weight 130.22 g = CAD 130.2 g, 2 occurrences
-    # ---- unpriced rows: matched on material group, count and name ---------
+     "Booklet p.9: the end-effector plate below the wrist, one per arm."),
+    # Wrist Output, Nylon 12 x2; weight 130.22 g = CAD 130.2 g, 2 occurrences
+    # ---- unpriced rows: settled by the booklet ---------------------------
     (("P10",), ("3DP_grip01_base",),
-     ""),  # Gripper Housing, PLA x2 = the 2 gripper bases
+     "Booklet p.13: the gripper body, one per gripper."),  # Gripper Housing, PLA x2
     (("P11",), ("3DP_grip03_rail",),
-     "The team BOM calls it a rack; the only matching CAD component is the gripper's slide rail "
-     "(4 off). The rack itself has no geometry in Fusion. UNVERIFIED."),
+     "Booklet p.13: the long slide arm with the rack teeth cut along it, two per gripper, which is "
+     "this line's 4 and this component's 4 occurrences. The team BOM calls it a rack because the "
+     "teeth are part of the arm; the separate Fusion component `double_helix_rack_30teeth_6mm v2` "
+     "holds no body."),
     (("P12",), ("3DP_grip05_pinion",),
-     ""),  # Gear, Nylon 12 x2 = the 2 double-helix pinions
+     "Booklet p.13: the double-helix pinion on the servo, one per gripper."),  # Gear, Nylon 12 x2
     (("P13",), ("3DP_grip02_finger",),
-     ""),  # UMI Fingers, TPU x4 = the 4 gripper fingers
+     "Booklet p.13: the curved ribbed finger pad, two per gripper."),  # UMI Fingers, TPU x4
     (("P14",), ("3DP_grip04_apriltag_holder",),
-     ""),  # AprilTag Housing, PLA x4 = the 4 AprilTag holders
+     "Booklet p.13: the flat tag holder, two per gripper."),  # AprilTag Housing, PLA x4
     (("P15",), ("3DP_grip06_apriltag_tile",),
-     "The team BOM lists 12 tiles; Fusion has 16 (eight per gripper). UNVERIFIED."),
+     "QUANTITY CONFLICT: booklet p.13 draws eight tiles on one gripper (six labels, two of which "
+     "point at a pair), which is the Fusion count of 16 for two grippers; the team BOM line says 12."),
     (("P16",), ("3DP_cam01_gimbal_mount",),
-     ""),  # Gimbal Base, PLA x2 = the 2 camera-column bases
+     "Booklet p.14: the wide tripod base at the foot of the column, one per column."),
     (("P17",), ("3DP_cam02_gimbal_neck",),
-     ""),  # Gimbal Neck, PLA x2 = the 2 camera-column necks
-    (("P18", "P19"), ("3DP_cam03_gimbal_arm", "3DP_cam04_gimbal_arm_link"),
-     "The team BOM's two remaining camera-column lines (Gimbal Shaft and Gimbal Support, 2 pieces "
-     "each) cover these two components (2 each). Which line is which part is UNVERIFIED."),
+     "Booklet p.14: the neck above the lower gimbal actuator, one per column."),
+    (("P18",), ("3DP_cam03_gimbal_arm",),
+     "Booklet p.14 draws two gimbal arms: P18 (Gimbal Shaft) is the thicker one, bent, ending in the "
+     "bolt-circle pad on the actuator face. Of the two Fusion arm components it is the heavier: "
+     "`gimbal_arm` is 16.5 g on its own (26.0 g with its child) against 9.5 g for the child."),
+    (("P19",), ("3DP_cam04_gimbal_arm_link",),
+     "Booklet p.14: P19 (Gimbal Support) is the thinner, flat arm that ends in a plain disc beside "
+     "the H5 bearing, which is the lighter Fusion component (`Component92`, 9.5 g)."),
     (("P20", "P21", "P24", "P25"),
      ("3DP_legP01_hip3_cover_a", "3DP_legP02_hip3_cover_b", "3DP_legP03_hip3_cover_c", "3DP_legP04_hip3_cover_d"),
-     "The team BOM's Hip 1 and Hip 3 protection lines (4 lines, 8 pieces) cover the four Fusion "
-     "components that carry the material `hip3_protection` (8 occurrences: 3, 3, 1, 1). Which line "
-     "is which cover, and the per-cover counts, are UNVERIFIED."),
+     "Booklet p.6 draws four curved vented covers on one leg, over the hip-1 and the hip-3 motor: "
+     "four lines of 2 = 8 pieces, which is the 8 occurrences of the four Fusion `hip3_protection` "
+     "components (3, 3, 1, 1, the last pair mirrored). In the 2026-09-19 export those four are one "
+     "two-piece design (identical mass and box) placed at four motors, all named `hip_pitch_motor`, "
+     "while the booklet's four covers do not all look alike. Whether Hip 1 has a cover of its own, "
+     "which line is which cover, and which pair is Hip 1, are UNVERIFIED."),
     (("P22", "P23"), ("3DP_legP05_hip2_cover_a", "3DP_legP06_hip2_cover_b"),
-     "The team BOM's Hip 2 protection A and B (2 pieces each) are the two Fusion components with "
-     "the material `hip2_protection` (2 occurrences each). Which line is A and which is B is UNVERIFIED."),
+     "Booklet p.6: the two curved covers around the hip-2 motor of one leg, which are the two Fusion "
+     "components on `hip_roll_motor` (material `hip2_protection`, 2 occurrences each). Which line is "
+     "A and which is B is UNVERIFIED."),
     (("P26", "P27"), ("3DP_legP07_knee_cover_a", "3DP_legP08_knee_cover_b"),
-     "The team BOM's Knee protection A and B (2 pieces each) are the two Fusion components with "
-     "the material `knee protection` (2 occurrences each). Which line is A and which is B is UNVERIFIED."),
+     "Booklet p.6: the two curved covers around the knee motor of one leg, which are the two Fusion "
+     "components on `knee_motor` (2 occurrences each). Which line is A and which is B is UNVERIFIED."),
     (("P28",), ("3DP_legP09_shank_cover_a", "3DP_legP10_shank_cover_b"),
-     "One team BOM line of 4 pieces over the two Fusion components with the material `shank "
-     "protection`, which have 1 occurrence each. The count is UNVERIFIED."),
+     "Booklet p.6 labels P28 twice on one leg: the two long flat straps, one on each side of the "
+     "shank, which is this line's 4 pieces over two legs. The Fusion tree carries the pair on the "
+     "right leg only (1 occurrence each), so the CAD is short of the booklet, not the team BOM."),
     (("P29", "P30"), ("3DP_legP11_ankle_cover_a", "3DP_legP12_ankle_cover_b"),
-     "The team BOM's Foot Protection Top and Bot (2 pieces each) are matched to the two Fusion "
-     "components with the material `ANKLE_1_PROTECTION` (2 occurrences each), the only leg covers "
-     "left once the sole and the front cap are matched. UNVERIFIED."),
+     "Booklet p.6: the two curved covers around the ankle-roll motor of one leg, which are the two "
+     "Fusion components on `ankle_roll_motor` (material `ANKLE_1_PROTECTION`, 2 occurrences each). "
+     "The team BOM calls them Foot Protection Top and Bot; they sit on the ankle, not on the foot. "
+     "Which line is Top and which is Bot is UNVERIFIED."),
     (("P31",), ("3DP_leg20_foot_front",),
-     ""),  # Foot Protection - Front, TPU x2 = Fusion `foot_front`, 2 occurrences
+     "Booklet p.6: the small teardrop cap at the front of the foot, one per leg."),
+    # Foot Protection - Front, TPU x2 = Fusion `foot_front`, 2 occurrences
     (("P32",), ("3DP_leg19_sole",),
-     ""),  # Foot Protection - Sole, TPU x2 = Fusion `symmetric_sole`, 2 occurrences
+     "Booklet p.6: the wedge sole under the foot plate, one per leg."),
+    # Foot Protection - Sole, TPU x2 = Fusion `symmetric_sole`, 2 occurrences
     (("P33", "P34"), ("3DP_armP07_shoulder_cover_e", "3DP_armP08_shoulder_cover_f"),
-     "The team BOM's Shoulder 2 protection A and B (2 pieces each) are matched to the two Fusion "
-     "components with the material `measured_shoulder_protection` (2 occurrences each). The four "
-     "`shoulder_protection` covers are the other candidate and have no team BOM line at all. UNVERIFIED."),
+     "Booklet p.10: the two curved covers around the shoulder-pitch motor of one arm, which are the "
+     "two Fusion components on `shoulder_pitch_protection` (2 occurrences each) once the four smooth "
+     "shaft covers of the same page are settled as `P39`. Which line is A and which is B is UNVERIFIED."),
     (("P35", "P36"), ("3DP_armP09_shoulder_yaw_cover_a", "3DP_armP10_shoulder_yaw_cover_b"),
-     "The team BOM's Arm Roll protection Front and Back (4 pieces each) are the two Fusion "
-     "components with the material `shoulder_yaw_protection` and 4 occurrences each. Which line "
-     "is front and which is back is UNVERIFIED."),
+     "Booklet p.10 labels P35 twice and P36 twice on one arm: four curved covers, which is 4 pieces "
+     "per line over two arms and the 4 occurrences of each Fusion half of the two-piece cover "
+     "`shoulder_yaw_protection`, placed twice per arm. Which Fusion half is Front and which is Back "
+     "is UNVERIFIED; the booklet draws both P35 at the shoulder end and both P36 at the forearm end, "
+     "so the lines may split by joint rather than by half."),
     (("P37", "P38"), ("3DP_armP01_elbow_cover_a", "3DP_armP02_elbow_cover_b"),
-     "The team BOM's Elbow protection A and B (2 pieces each) are the two Fusion components with "
-     "the material `elbow_protection` (2 occurrences each). Which line is A and which is B is UNVERIFIED."),
-    # P39 "Arm Roll Shaft Protection, TPU" x8 has no CAD match; it is emitted below
-    # as its own row. Candidates, neither confirmed: the four `shoulder_protection`
-    # covers (3DP_armP03-P06, 8 occurrences) or 3DP_armP11 (4 occurrences).
+     "Booklet p.10: the two curved covers around the elbow motor of one arm, which are the two Fusion "
+     "components on `elbow_motor_protection` (2 occurrences each). Which line is A and which is B is "
+     "UNVERIFIED."),
+    (("P39",), ("3DP_armP03_shoulder_cover_a", "3DP_armP04_shoulder_cover_b",
+                "3DP_armP05_shoulder_cover_c", "3DP_armP06_shoulder_cover_d"),
+     "Booklet p.10 labels P39 four times on one arm: the smooth flat covers over the roll shafts, "
+     "eight for two arms, which is this line's count. They are the four Fusion components on "
+     "`shoulder_roll_shaft` and `elbow_shaft` (2 occurrences each, 11 mm thick), and this is the only "
+     "team BOM line whose name (Arm Roll Shaft Protection) and count fit them."),
 ]
 
-# Sheet rows with no CAD match: part_id = team_ref.
-PRINTED_NO_CAD = {
-    "P39": ("arm", "Arm-roll shaft protection (team BOM name)",
-            "No CAD match yet. The Fusion components left without a team BOM line are the four "
-            "`shoulder_protection` covers `3DP_armP03`-`3DP_armP06` (8 occurrences, which is this "
-            "line's 8 pieces) and `3DP_armP11` (4 occurrences); neither is confirmed."),
+# Sheet rows with no CAD match: part_id = team_ref. Empty since the booklet
+# settled `P39`.
+PRINTED_NO_CAD: dict[str, tuple[str, str, str]] = {}
+
+# Team BOM lines whose piece count the booklet settles against the sheet, so
+# the row says which count holds instead of leaving the difference open.
+QTY_SETTLED = {"P15"}
+
+# Notes for printed CAD components that no team BOM line covers.
+PRINTED_EXTRA_NOTE: dict[str, str] = {
+    "3DP_armP11_shoulder_yaw_cover_c": (
+        "The booklet labels twelve covers per arm on p.10 and this is the one printed component left "
+        "over: it is the own body of the Fusion `shoulder_yaw_protection` group, 2.6 g once its two "
+        "cover halves (`P35`, `P36`) are subtracted. Whether it is a part at all is UNVERIFIED."),
 }
 
 # The three filament / powder rows. The team BOM has no line for them, but it
@@ -581,7 +815,9 @@ def build_printed(sheet: Sheet, tree: dict[str, list[dict]]) -> tuple[list[dict]
                 notes.append(map_note)
             sheet_qty = sum((r["qty"] or 0) for r in src)
             if len(mapped_ids(pid)) == 1 and sheet_qty != qty:
-                notes.append(f"The team BOM says {_plain(sheet_qty)} pieces, the Fusion model {qty}. UNVERIFIED.")
+                settled = set(refs) <= QTY_SETTLED
+                notes.append(f"The team BOM says {_plain(sheet_qty)} pieces, the Fusion model {qty}"
+                             + (f"; the booklet shows {qty}." if settled else ". UNVERIFIED."))
             material, process = sheet_material(src[0]["item"])
             if cad_material and material and material.lower() not in cad_material.lower():
                 notes.append(f"MATERIAL CONFLICT: the team BOM says {material}, Fusion says "
@@ -601,6 +837,8 @@ def build_printed(sheet: Sheet, tree: dict[str, list[dict]]) -> tuple[list[dict]
                 notes += [n for n in price_note(r, (first["mass_g"], first["children"])) if n != NO_PRICE]
         else:
             notes.append(NOT_IN_BOM)
+            if pid in PRINTED_EXTRA_NOTE:
+                notes.append(PRINTED_EXTRA_NOTE[pid])
         notes.append(cad_note)
         if int(first["children"]):
             notes.append(f"The Fusion component carries {first['children']} child component(s): "
@@ -656,6 +894,76 @@ def write(name: str, rows: list[dict]) -> Decimal:
     return total
 
 
+TEAM_MAP = "team-map.csv"
+TEAM_MAP_COLS = ["team_ref", "item", "category", "part_id", "qty_team", "qty_cad",
+                 "booklet_page", "evidence", "status"]
+
+
+def cnc_cad_counts(tree: dict[str, list[dict]]) -> dict[str, int]:
+    """Fusion occurrence count per `CNC_<module><nn>` stem, over every alias of it."""
+    out: dict[str, int] = {}
+    for name, rows in tree.items():
+        if not name.startswith("CNC_"):
+            continue
+        stem = "_".join(name.split("_")[:2])
+        out[stem] = out.get(stem, 0) + sum(int(r["qty"]) for r in rows)
+    return out
+
+
+def write_team_map(sheet: Sheet, cnc: list[dict], printed: list[dict],
+                   tree: dict[str, list[dict]]) -> None:
+    """One row per team BOM line: which CAD part it is and what settles that.
+
+    ``part_id`` and ``qty_cad`` are the whole group's where several lines share
+    one group of parts (the cover lines), and the evidence says so.
+    """
+    counts = cnc_cad_counts(tree)
+    groups: dict[str, tuple[tuple[str, ...], list[str]]] = {}
+    for refs, pids, _ in PRINTED_MAP:
+        for ref in refs:
+            groups[ref] = (refs, list(pids))
+
+    printed_qty = {r["part_id"]: int(r["qty_per_robot"] or 0) for r in printed}
+    purchased = {ref: pid for ref, _, pid, *_ in PURCHASED}
+    machined = {ref: pid for ref, pid, _ in CNC_MAP}
+
+    rows = []
+    for ref in sheet.order:
+        src = sheet[ref]
+        page, seen = BOOKLET.get(ref, ("—", "not labelled in the booklet"))
+        evidence = [f"Booklet {page}: {seen}." if page != "—" else f"{seen.capitalize()}."]
+        pids: list[str] = []
+        cad = ""
+        if ref in purchased:
+            pids = [purchased[ref]]
+        elif ref in machined:
+            pids = [machined[ref]]
+            cad = str(counts.get("_".join(machined[ref].split("_")[:2]), ""))
+        elif ref in groups:
+            refs, pids = groups[ref]
+            cad = str(sum(printed_qty.get(p, 0) for p in pids))
+            if len(refs) > 1:
+                evidence.append(f"One of {len(refs)} team BOM lines over {len(pids)} CAD parts; "
+                                f"`part_id` and `qty_cad` are that group's.")
+            elif len(pids) > 1:
+                evidence.append(f"This line covers {len(pids)} CAD parts; `qty_cad` is their total.")
+        if ref in OPEN:
+            evidence.append("OPEN: " + OPEN[ref])
+        rows.append(dict(team_ref=ref, item=src["item"], category=src["category"],
+                         part_id=" ".join(pids), qty_team=_plain(src["qty"]), qty_cad=cad,
+                         booklet_page=page, evidence=joined(evidence),
+                         status="open" if ref in OPEN else "settled"))
+
+    with open(DATA / TEAM_MAP, "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=TEAM_MAP_COLS, lineterminator="\n")
+        w.writeheader()
+        w.writerows(rows)
+    open_rows = [r["team_ref"] for r in rows if r["status"] == "open"]
+    print(f"{TEAM_MAP:24s} rows={len(rows):3d}  open={len(open_rows):3d}  "
+          f"settled={len(rows) - len(open_rows)}")
+    print(f"{'':26s}open: {', '.join(open_rows)}")
+
+
 def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
@@ -675,6 +983,7 @@ def main() -> int:
                        (CAB_FILE, bought[CAB_FILE]), (FAS_FILE, bought[FAS_FILE]),
                        ("cnc-parts.csv", cnc), ("printed-parts.csv", printed)):
         grand += write(name, rows)
+    write_team_map(sheet, cnc, printed, tree)
 
     # Which spreadsheet rows ended up where, and what the arithmetic says.
     used = {r["team_ref"] for rows in (list(bought.values()) + [cnc, printed]) for r in rows} - {""}

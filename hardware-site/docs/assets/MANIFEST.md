@@ -1,11 +1,11 @@
 # Image manifest
 
 Every image this site needs and does not have, with the exact path it must be
-saved to and one line on what it must show. **89 images are missing.**
+saved to and one line on what it must show. **83 images are missing.**
 
-This is the list to hand to whoever renders the exploded views. It is not a
-wish list: each path below is already named on a page, so dropping a file at
-that path is all that is needed — no page has to be rewritten to accept it.
+This is the list to hand to whoever renders the remaining figures. It is not
+a wish list: each path below is already named on a page, so dropping a file
+at that path is all that is needed — no page has to be rewritten to accept it.
 
 !!! warning "Why no page shows a broken image"
     `mkdocs build --strict` fails on a link to an image that does not exist, so
@@ -24,11 +24,13 @@ that path is all that is needed — no page has to be rewritten to accept it.
 
 | Priority | What | Why it is first |
 | --- | --- | --- |
-| 1 | `assets/images/exploded-overview.png` | **The team already has this render.** One file, four pages: the home page, What you get, Bill of materials and Assembly all want the whole-robot exploded view, and it is the single image that makes the machine legible |
-| 2 | The 5 subassembly exploded views (leg, arm, torso, head, gripper) | Each one makes its assembly page usable as a whole rather than step by step |
-| 3 | The 0 step renders | Written steps without a figure are the site's largest readability gap |
-| 4 | The 6 routing photographs | A routing decision does not survive being written down. These must be taken during a build, not reconstructed after one |
-| 5 | Everything else | — |
+| 1 | Step renders, `assets/assembly/<page>-step-NN.png` | Not one exists, and not one is named on a page yet. A step with no figure is the site's largest readability gap |
+| 2 | The 6 routing photographs | A routing decision does not survive being written down. These must be taken during a build, not reconstructed after one |
+| 3 | Everything else | — |
+
+The whole-robot and subassembly exploded views are no longer on this list:
+the team's exploded-view booklet delivers 12 of them, labelled with the
+team BOM ids and placed on the Assembly pages.
 
 ## Format and size
 
@@ -43,20 +45,14 @@ Filenames are lowercase with hyphens, except the per-part families below, whose
 filenames must match a `part_id` character for character so the page can find
 them without a lookup table.
 
-## Missing — referenced by a page (8)
+## Missing — referenced by a page (2)
 
 Each of these already has a placeholder blockquote on the page named.
 
 | Path | Page | What it must show |
 | --- | --- | --- |
-| `assets/assembly/arm-exploded.png` | `assembly/arm.md` | The arm exploded, every part labelled |
-| `assets/assembly/gripper-exploded.png` | `assembly/gripper.md` | One gripper exploded and labelled, slide direction and jaw travel drawn |
 | `assets/assembly/head-axes-diagram.png` | `assembly/head-and-camera-gimbal.md` | Frame P with both yaw axes, the pitch axis and the optical centre, dimensioned |
-| `assets/assembly/head-exploded.png` | `assembly/head-and-camera-gimbal.md` | One column exploded, labelled, axes drawn |
-| `assets/assembly/leg-exploded.png` | `assembly/leg.md` | The leg exploded, every part labelled |
 | `assets/assembly/subassembly-map.png` | `assembly/index.md` | The build order as a diagram |
-| `assets/assembly/torso-exploded.png` | `assembly/torso-and-waist.md` | The torso exploded, every item labelled in its mounting position |
-| `assets/images/exploded-overview.png` | `assembly/index.md` | The whole robot exploded into its subassemblies, each labelled with its page |
 
 ## Missing — named on a page but not yet placed (26)
 
@@ -167,11 +163,12 @@ can be produced in a batch and dropped in without touching a page.
     - `ACT_RS05`
     - `ACT_RS06`
 
-## Already here (7)
+## Already here (19)
 
-Real photographs of the reference robot, copied from the project repository's
-`media/` directory. They show a working machine; none of them is an assembly
-figure, and none of them substitutes for a render.
+Photographs and clips of the reference robot from the project repository's
+`media/` directory, plus the pages of the team's exploded-view booklet
+(`files/drawings/duke_humanoid_v2_exploded_views_rev01.pdf`), one image per
+page, labelled with the team BOM ids. None of these replaces a step render.
 
 | Path | Used on | What it shows |
 | --- | --- | --- |
@@ -182,16 +179,28 @@ figure, and none of them substitutes for a render.
 | `assets/images/hardware_close_front_back.mp4` | `assembly/head-and-camera-gimbal.md` | The two finished camera modules aiming independently. |
 | `assets/images/two_target_handoff_left_right.mp4` | `bringup/acceptance-tests.md` | What passing acceptance test A10 looks like. |
 | `assets/images/workspace.webp` | `reference/faq.md` | Visible-reachable workspace across six humanoid platforms. |
+| `assets/exploded/team/01-torso-frame.webp` | `assembly/torso-and-waist.md` | Torso frame: plates C0–C3, spine P0, actuators E3, bearings H0. |
+| `assets/exploded/team/02-electronics-tray.webp` | `assembly/torso-and-waist.md` | Torso electronics: E0, E7, E13, E16, E17, E18, E19, E20. |
+| `assets/exploded/team/03-torso-printed-plates.webp` | `assembly/torso-and-waist.md` | Printed torso plates P1–P3. |
+| `assets/exploded/team/04-leg-upper.webp` | `assembly/leg.md` | Hip pitch and roll: C4–C8, actuators E3, bearings H0. |
+| `assets/exploded/team/05-leg-lower.webp` | `assembly/leg.md` | Hip yaw to foot plate: C4, C5, C9–C21, actuators E3, E4, E6, bearings H0–H3. |
+| `assets/exploded/team/06-leg-covers.webp` | `assembly/leg.md` | Printed leg covers P20–P32. |
+| `assets/exploded/team/09-arm.webp` | `assembly/arm.md` | Right arm: C5, C22–C29, P4–P8, actuators E1, E2, E5, E6, bearings H2, H4. |
+| `assets/exploded/team/10-arm-covers.webp` | `assembly/arm.md` | Printed arm covers P33–P39. |
+| `assets/exploded/team/11-torso-p9.webp` | `assembly/arm.md` | Left arm, with the left wrist housing P9 in place of the right housing P7. |
+| `assets/exploded/team/13-gripper.webp` | `assembly/gripper.md` | One gripper: P10–P15, servo E15, driver board E10, converter E12. |
+| `assets/exploded/team/14-camera-gimbal.webp` | `assembly/head-and-camera-gimbal.md` | One camera column: P16–P19, actuators E5, camera E14, bearing H5. |
+| `assets/exploded/team/15-whole-robot.webp` | `index.md, assembly/index.md` | The robot with both camera columns and both grippers lifted off. |
 
 ## Counting
 
 | | |
 | --- | ---: |
-| Referenced by a page, missing | 8 |
+| Referenced by a page, missing | 2 |
 | Named on a page, not yet placed | 26 |
 | Per-part families | 55 |
-| **Missing, total** | **89** |
-| Present | 7 |
+| **Missing, total** | **83** |
+| Present | 19 |
 
 ## Regenerating this page
 

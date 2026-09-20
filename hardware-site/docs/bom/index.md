@@ -9,6 +9,9 @@ writes the six CSVs from it: it keeps the sheet's own item text, quantity and
 price, maps each line to the part ID the CAD export and the 3D viewer use, and
 records the sheet line each row came from in a `team_ref` column
 (`E3`, `C21`, `P20`, `H1`), which every table below shows.
+[team-map.csv](../data/team-map.csv) is the same mapping the other way round:
+one row per team BOM line, the CAD part it is, the team and CAD quantities, and
+the page of the team's exploded-view booklet that settles it.
 
 | Tier | Category | Covers | Subtotal |
 | --- | --- | --- | --- |
@@ -40,4 +43,5 @@ records the sheet line each row came from in a `team_ref` column
 [cnc-parts.csv](../data/cnc-parts.csv) ·
 [cables-connectors.csv](../data/cables-connectors.csv) ·
 [fasteners.csv](../data/fasteners.csv) ·
-[printed-parts.csv](../data/printed-parts.csv)
+[printed-parts.csv](../data/printed-parts.csv) ·
+[team-map.csv](../data/team-map.csv)

@@ -51,6 +51,8 @@ Regenerate after edits: `python tools/gen_punchlist.py`, `tools/gen_image_manife
   exports; download links appear automatically once files are named `<part_id>_rev<NN>.<ext>`.
 - `hardware/` — team power and data wiring diagrams (source of truth for electrical pages).
 - `reference/bom/` — the team's BOM spreadsheets the `docs/data/*.csv` are generated from.
+- `reference/team/` — the team's exploded-view booklet (`duke_humanoid_v2_hardware.pdf`); its pages are the
+  site's assembly figures, rendered to `hardware-site/docs/assets/exploded/team/`.
 - `_archive/hardware-site-docs-before-slim/` — the verbose pre-slim site, for recovering facts.
 - `V2_RELEASE_PLAYBOOK.md`, `CAD_RELEASE_COMPARISON.md` — analyses (Chinese), for the team.
 - `HANDOFF.md` — current status and next steps. Read it first.

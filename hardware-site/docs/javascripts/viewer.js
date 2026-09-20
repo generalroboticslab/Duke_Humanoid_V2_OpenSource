@@ -11,8 +11,10 @@
  *   parts:   { part_id:   [ {node, path, center:[x,y,z] m, radius m}, ... ] }
  *   vendor:  { file_name: [ {node, path, center, radius}, ... ] }
  *            (an object with a `meshes` list plus name/appearance/material/mass_g/bbox is accepted too)
- *   info:    { part_id: {desc, kind, qty, material, mass_g, bbox:[x,y,z]},
- *              "vendor:<file_name>": {name, appearance, material, mass_g, bbox} }
+ *   info:    { part_id: {desc, kind, qty, material, mass_g, bbox:[x,y,z], team_ref},
+ *              "vendor:<file_name>": {name, appearance, material, mass_g, bbox, team_ref} }
+ *            team_ref is the team BOM line ("C5", "E3", "P20", "H1"): the name the team
+ *            uses for the part, so it leads the info box title. "" when the BOM has none.
  *   axes:    { x:[x,y,z], y:[...], z:[...] }   arrow tips, metres, glTF (model-viewer) frame
  *   modules: { file_name: {name, path, depth, qty, mass_g, children} }  or a list with `file`
  * A mesh belongs to a module when its `path` equals the module path or starts with it + "+".
@@ -236,6 +238,17 @@
       targets.set(key, t);
       return t;
     }
+    // A Fusion name too long for a Windows path is published under a shortened stem
+    // (tools/stage_cad_export.py); downloads.json keys the full name to that path, so a
+    // file row whose link carries the short stem still finds the component's meshes.
+    const vendorByStem = new Map();
+    Object.keys(data.downloads).forEach((k) => {
+      if (!k.startsWith("vendor:")) return;
+      (data.downloads[k] || []).forEach((d) => {
+        const r = fileRef(d && d.href);
+        if (r && r.id !== k.slice(7) && data.vendor.has(k.slice(7))) vendorByStem.set(r.id, k.slice(7));
+      });
+    });
     // A file row's target from its download link: the id is tried as a part, a purchased
     // part and a module (the folder decides the order); whole-robot files preview the robot.
     function targetForRef(ref) {
@@ -243,7 +256,7 @@
       const order = ref.kind === "modules" ? ["module", "part", "vendor"]
                   : ref.kind === "vendor" ? ["vendor", "part", "module"] : ["part", "vendor", "module"];
       for (const k of order) {
-        const t = target(k, ref.id);
+        const t = target(k, k === "vendor" ? vendorByStem.get(ref.id) || ref.id : ref.id);
         if (t) return t;
       }
       return ref.kind === "assembly" || ref.kind === "drawings" ? target("robot") : null;
@@ -273,14 +286,16 @@
         a.title = "Download " + a.textContent.trim();
         if (!a.querySelector("svg")) a.insertAdjacentHTML("afterbegin", ICON_DOWNLOAD);
       });
-      // Preview: an explicit button in the first cell, in front of the row's content.
+      // Preview: an explicit button in front of the file links, so it stays paired with
+      // Download whatever the table's first column is (the file tables lead with the
+      // team BOM ref, the parts lists with the part id).
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "dh-preview";
       btn.title = "Show on the robot";
       btn.innerHTML = ICON_PREVIEW + "<span>Preview</span>";
       btn.addEventListener("click", (ev) => { ev.stopPropagation(); select(t, true); });
-      const cell = tr.querySelector("td");
+      const cell = (links[0] && links[0].closest("td")) || tr.querySelector("td");
       if (cell) cell.insertBefore(btn, cell.firstChild);
 
       tr.addEventListener("mouseenter", () => hover(t, true));
@@ -499,6 +514,13 @@
       });
       return out.slice(0, 3);
     }
+    // Title of an info box: the team BOM line first, bold, then the CAD id. The team
+    // calls the part by that number, so it is the primary label; without one the CAD id
+    // carries the emphasis on its own.
+    function titleHtml(ref, idHtml) {
+      const r = String(ref || "").trim();
+      return r ? `<strong>${esc(r)}</strong> · ${idHtml}` : `<strong>${idHtml}</strong>`;
+    }
     function facts(info) {
       const bbox = bboxOf(info);
       return [info.appearance, info.material && info.material !== info.appearance ? info.material : "",
@@ -510,7 +532,7 @@
       if (t.kind === "part") {
         const info = data.info[t.id] || {};
         // BOM quantity; the count on the model is added only when it differs (both values shown).
-        lines.push([`<strong><code>${esc(t.id)}</code></strong>`, info.qty ? `Qty ${esc(info.qty)}` : "",
+        lines.push([titleHtml(info.team_ref, `<code>${esc(t.id)}</code>`), info.qty ? `Qty ${esc(info.qty)}` : "",
                     String(t.meshes.length) === String(info.qty) ? "" : `${t.meshes.length} on the model`].filter(Boolean).join(" · "));
         if (info.desc) lines.push(esc(info.desc));
         // Mass and size are CAD values from the Fusion model (part-properties.csv), not measured.
@@ -522,7 +544,7 @@
       } else if (t.kind === "vendor") {
         const vi = data.vendorInfo(t.id), vm = data.vendorMap[t.id];
         const name = vi.name || vi.fusion_name || t.id;
-        lines.push([`<strong>${esc(name)}</strong>`, "Purchased part",
+        lines.push([titleHtml(vi.team_ref, esc(name)), "Purchased part",
                     t.meshes.length > 1 ? `${t.meshes.length} on the model` : ""].filter(Boolean).join(" · "));
         const f = facts(vi);
         if (f.length) lines.push(esc(f.join(" · ")));

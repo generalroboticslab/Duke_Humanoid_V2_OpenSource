@@ -7,9 +7,9 @@ harness tables below call out XT30 and GH1.25 connectors by part number. Build i
 [Harness fabrication](../electrical/harness-fabrication.md); route it with
 [Routing](../electrical/routing.md).
 
-| Part ID | Description | Team ref | Qty | Unit cost | Line total | Vendor |
+| Team ref | Part ID | Description | Qty | Unit cost | Line total | Vendor |
 | --- | --- | --- | ---: | ---: | ---: | --- |
-{% for r in pd_read_csv("data/cables-connectors.csv", dtype="str", keep_default_na=False).to_dict("records") %}| `{{ r.part_id }}` | {{ r.description }} | {{ team_ref_cell(r) }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
+{% for r in pd_read_csv("data/cables-connectors.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
 {% endfor %}| | | | | **Total** | **{{ bom_subtotal("cables-connectors.csv") }}** | |
 
 **Team ref** is the line in the team BOM spreadsheet

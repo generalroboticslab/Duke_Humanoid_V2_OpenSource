@@ -18,7 +18,9 @@ holes, not with invented numbers.
 from __future__ import annotations
 
 import csv
+import json
 import os
+import re
 from decimal import Decimal, ROUND_HALF_UP
 from typing import Any, Callable, Iterable
 
@@ -330,6 +332,67 @@ def define_env(env):
     def _cad_rows() -> list[dict[str, str]]:
         return _read(os.path.join(_data_dir(env), "cad-files.csv"))
 
+    def _team_refs() -> tuple[dict[str, str], set[str]]:
+        """(CAD id -> team BOM line, the CAD ids the team BOM has a row for).
+
+        The team numbers every BOM line (``C6``, ``E3``, ``P20``, ``H1``) and calls the
+        part by that number, so it leads every file table. ``gen_bom.py`` writes it into
+        the ``team_ref`` column of the parts CSVs, keyed by ``part_id``; a purchased-part
+        file is named after its Fusion component, which ``vendor-parts.csv`` maps to a
+        ``part_id``. The second value separates "the BOM lists this part but gives it no
+        number" (a gap: red TODO) from "this file is not a BOM part at all" — an
+        assembly, a module or a drawing — which gets an empty cell, not a gap marker.
+        """
+        directory = _data_dir(env)
+        refs: dict[str, str] = {}
+        known: set[str] = set()
+        for name in _robot_csv_names(directory):
+            for row in _read(os.path.join(directory, name)):
+                pid = (row.get(COL_ID) or "").strip()
+                if not pid:
+                    continue
+                known.add(pid)
+                ref = (row.get("team_ref") or "").strip()
+                if ref:
+                    refs.setdefault(pid, ref)
+        for row in _read(os.path.join(directory, "vendor-parts.csv")):
+            file_name = (row.get("file_name") or "").strip()
+            pid = (row.get(COL_ID) or "").strip()
+            if not file_name or pid not in known:
+                continue
+            known.add(file_name)
+            if refs.get(pid):
+                refs.setdefault(file_name, refs[pid])
+        # A Fusion name too long for a Windows path is published under a shortened
+        # stem (``tools/stage_cad_export.py``), which is the id ``cad-files.csv`` carries.
+        # ``downloads.json`` keys the full name to that published path, so the file
+        # table reaches the same BOM line through it.
+        dl_path = os.path.join(env.conf["docs_dir"], "assets", "viewer", "downloads.json")
+        if os.path.isfile(dl_path):
+            with open(dl_path, encoding="utf-8") as fh:
+                downloads = json.load(fh)
+            for key, entries in downloads.items():
+                full = key[len("vendor:"):] if key.startswith("vendor:") else ""
+                if full not in known:
+                    continue
+                for entry in entries or []:
+                    stem = (entry.get("href") or "").rsplit("/", 1)[-1]
+                    if stem.lower().endswith(".zip"):
+                        stem = stem[:-4]
+                    stem = re.sub(r"_rev\d+$", "", stem.rsplit(".", 1)[0])
+                    if not stem or stem == full:
+                        continue
+                    known.add(stem)
+                    if refs.get(full):
+                        refs.setdefault(stem, refs[full])
+        return refs, known
+
+    def _team_ref_file_cell(part_id: str, refs: dict[str, str], known: set[str]) -> str:
+        ref = refs.get(part_id, "")
+        if ref:
+            return f"`{ref}`"
+        return TODO if part_id in known else ""
+
     def _from_page(path: str) -> str:
         """Make a docs-root path relative to the Markdown file being rendered."""
         src = env.page.file.src_path.replace("\\", "/") if env.page else ""
@@ -360,14 +423,19 @@ def define_env(env):
         plain Markdown here. ``id_label`` names the id column (``Part`` for
         part files, ``Component`` for the purchased-part files, whose id is
         the Fusion component name).
+
+        The first column is the team's own BOM line (``_team_refs``), because
+        that number is what the team calls the part; the CAD file name follows.
         """
         rows = [r for r in _cad_rows() if kind is None or r["kind"] == kind]
         if not rows:
             return PENDING
-        out = [f"| File | {id_label} | Format | Size |", "| --- | --- | --- | ---: |"]
+        refs, known = _team_refs()
+        out = [f"| Team ref | File | {id_label} | Format | Size |", "| --- | --- | --- | --- | ---: |"]
         for r in rows:
             name = r["path"].rsplit("/", 1)[-1]
-            out.append(f"| {_link(r, name)} | `{r['part_id']}` | {r['format']} | {int(r['bytes']) / 2**20:.1f} MB |")
+            out.append(f"| {_team_ref_file_cell(r['part_id'], refs, known)} | {_link(r, name)} "
+                       f"| `{r['part_id']}` | {r['format']} | {int(r['bytes']) / 2**20:.1f} MB |")
         return "\n".join(out)
 
     @env.macro

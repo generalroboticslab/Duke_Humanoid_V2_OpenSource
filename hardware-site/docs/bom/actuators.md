@@ -4,9 +4,9 @@ Every joint is a RobStride quasi-direct-drive actuator:
 {{ bom_qty("actuators.csv") }} units, {{ bom_count("actuators.csv") }} models,
 {{ bom_subtotal("actuators.csv") }}.
 
-| Model | Part ID | Team ref | Qty | Unit cost | Line total | Vendor |
+| Team ref | Model | Part ID | Qty | Unit cost | Line total | Vendor |
 | --- | --- | --- | ---: | ---: | ---: | --- |
-{% for r in pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ r.mpn }} | `{{ r.part_id }}` | {{ team_ref_cell(r) }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
+{% for r in pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | {{ r.mpn }} | `{{ r.part_id }}` | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
 {% endfor %}| | **Total** | | **{{ bom_qty("actuators.csv") }}** | | **{{ bom_subtotal("actuators.csv") }}** | |
 
 **Team ref** is the line in the team BOM spreadsheet

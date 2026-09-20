@@ -11,6 +11,15 @@
 How to build an identical Duke Humanoid V2. The code is open; see
 [Software](software.md).
 
+<figure markdown>
+  ![The robot with both camera columns and both grippers lifted off](assets/exploded/team/15-whole-robot.webp){ loading=lazy }
+  <figcaption markdown="span">
+    What you build: torso, two legs, two arms, two camera columns, two
+    grippers. Exploded views of each are on the
+    [Assembly](assembly/index.md) pages.
+  </figcaption>
+</figure>
+
 ## Build path
 
 !!! danger "Before step 1: read Safety"
@@ -36,7 +45,7 @@ are open gaps, listed on [Open items](reference/todo.md).
 !!! missing "Not yet: a second robot cannot be built"
     | Blocker | Tracked on |
     | --- | --- |
-    | No drawings, print plates or native Fusion archive (part and whole-robot STEP are published) | [CAD downloads](fabrication/cad-downloads.md) |
+    | No per-part drawings, print plates or native Fusion archive (part and whole-robot STEP are published) | [CAD downloads](fabrication/cad-downloads.md) |
     | No fastener schedule | [Fasteners](bom/fasteners-and-hardware.md) |
     | No torque values (threadlocker: Loctite 222) | [Assembly](assembly/index.md) |
     | No hardware or documentation licence | [Citation and licence](reference/citation-and-license.md) |

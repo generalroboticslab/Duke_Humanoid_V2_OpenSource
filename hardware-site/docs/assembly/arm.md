@@ -7,9 +7,6 @@ Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final in
     - **Parts:** RobStride 02 ×3; 00, 03, 05, 06 ×1 each ([Actuators](../bom/actuators.md)); `CNC_arm01`–`CNC_arm13` ([machined parts](../bom/cnc-parts.md)).
     - **Before this:** [Leg](leg.md).
 
-> **Figure** <span class="pending-figure">not produced yet</span> —
-> `assets/assembly/arm-exploded.png`: the arm exploded, every part labelled.
-
 !!! missing "MISSING — arm parts list, fasteners, torques and fits"
     - No bearing, spacer, printed-part or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order,
@@ -45,6 +42,11 @@ Set each ID on the bench, one at a time. Label joint, ID **and bus**:
     *Owner: hardware lead.*
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
+
+<figure markdown>
+  ![Right arm exploded, parts labelled with team BOM ids](../assets/exploded/team/09-arm.webp){ loading=lazy }
+  <figcaption>Steps 2–8, body outward to the wrist: machined parts C5 and C22–C29, printed parts P4–P8, actuators E1, E2, E5 and E6, bearings H2 and H4. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
 
 {{ step(2, "Build the shoulder-pitch joint") }}
 
@@ -166,6 +168,11 @@ The `wrist_3` output carries the gripper's own flange.
 
 ✅ **Check:** The three wrist axes move together without contact.
 
+<figure markdown>
+  ![Printed arm covers exploded, parts labelled with team BOM ids](../assets/exploded/team/10-arm-covers.webp){ loading=lazy }
+  <figcaption>Printed arm covers P33–P39, shoulder to wrist. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
+
 {{ step(9, "Route the harness and close the arm") }}
 
 <div class="parts-needed" markdown>
@@ -191,6 +198,15 @@ Three cable groups:
 ✅ **Check:** All seven joints move through their travel with no cable stretched or pinched; measured travel recorded per joint.
 
 ## Build the second arm
+
+<figure markdown>
+  ![Left arm exploded with the left wrist housing labelled](../assets/exploded/team/11-torso-p9.webp){ loading=lazy }
+  <figcaption>The second arm uses the same chain with the left wrist housing P9 in place of the right housing P7. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
+
+Repeat steps 2–9, swapping each A cover with its B cover (P33/P34, P37/P38):
+the other arm takes the same printed covers in the mirrored positions.
+*Source: team exploded-view booklet, pages 11 and 12.*
 
 !!! missing "MISSING — which arm parts are handed and which are common"
     The model's arms differ in `shoulder_2` limits and orientation.

@@ -92,8 +92,11 @@ Buy these parts; the files are for fit checks only.
 
 #### Drawings (PDF)
 
-One drawing exists: the whole-robot overall dimensions. There are no per-part drawings, so
-machined parts are ordered from the STEP files with the shop's default tolerances.
+Two documents: the whole-robot overall dimensions, and the exploded-view booklet
+(`duke_humanoid_v2_exploded_views_rev01.pdf`, 15 pages) whose part labels are the team BOM ids
+used in the [parts lists](../bom/index.md) and reproduced on the [Assembly](../assembly/index.md) pages.
+There are no per-part drawings, so machined parts are ordered from the STEP files with the shop's
+default tolerances.
 
 {{ cad_table("drawings") }}
 

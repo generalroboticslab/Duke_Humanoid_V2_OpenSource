@@ -44,13 +44,15 @@ The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
 
-> **Figure** <span class="pending-figure">not produced yet</span> —
-> `assets/assembly/leg-exploded.png`: the leg exploded, every part labelled.
-
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../../assets/exploded/hip-assembly-poster.webp" aria-label="Exploded view of the pelvis block with the waist and four hip actuators"><source src="../../assets/exploded/hip-assembly.mp4" type="video/mp4"><a href="../../assets/exploded/hip-assembly.mp4">MP4</a></video>
   <figcaption>Pelvis: waist actuator with flange, ring and coupler; two hip actuators per side.</figcaption>
+</figure>
+
+<figure markdown>
+  ![Hip pitch and roll exploded, parts labelled with team BOM ids](../assets/exploded/team/04-leg-upper.webp){ loading=lazy }
+  <figcaption>Steps 2–3, body outward: brackets, retainers and shafts C4–C8, actuators E3, bearings H0. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
 </figure>
 
 {{ step(2, "Build the hip-pitch joint") }}
@@ -97,6 +99,11 @@ Make both bearing retainers concentric before tightening.
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../../assets/exploded/leg-poster.webp" aria-label="Exploded view of one leg hanging from the pelvis block"><source src="../../assets/exploded/leg.mp4" type="video/mp4"><a href="../../assets/exploded/leg.mp4">MP4</a></video>
   <figcaption>Leg below the pelvis: hip yaw, knee, two shank links, ankle pitch, ankle roll, foot plate.</figcaption>
+</figure>
+
+<figure markdown>
+  ![Hip yaw to foot plate exploded, parts labelled with team BOM ids](../assets/exploded/team/05-leg-lower.webp){ loading=lazy }
+  <figcaption>Steps 4–9, hip yaw down to the foot plate: machined parts C4, C5 and C9–C21, actuators E3, E4 and E6, bearings H0–H3. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
 </figure>
 
 {{ step(4, "Build the hip-yaw joint") }}
@@ -199,6 +206,11 @@ Make both shaft ends concentric before tightening.
 
 ✅ **Check:** At ankle zero the foot sits flat.
 
+<figure markdown>
+  ![Printed leg covers exploded, parts labelled with team BOM ids](../assets/exploded/team/06-leg-covers.webp){ loading=lazy }
+  <figcaption>Printed leg covers P20–P32, hip to sole. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
+
 {{ step(10, "Route the harness and close the leg") }}
 
 <div class="parts-needed" markdown>
@@ -218,6 +230,11 @@ It leaves at the hip; join it in [Final integration](final-integration.md).
 ✅ **Check:** All six joints move through their travel with no cable stretched or pinched. Nothing rattles.
 
 ## Build the second leg
+
+Repeat steps 2–10, swapping each A cover with its B cover (P20/P21, P22/P23,
+P24/P25, P26/P27): the other leg takes the same printed parts in the mirrored
+positions.
+*Source: team exploded-view booklet, page 8.*
 
 !!! missing "MISSING — which leg parts are handed and which are common"
     The model's legs differ in `hip_2` limits and orientation.

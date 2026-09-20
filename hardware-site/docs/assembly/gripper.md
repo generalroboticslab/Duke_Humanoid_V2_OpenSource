@@ -7,10 +7,6 @@ Build one rack-and-pinion parallel gripper (one serial-bus servo drives both jaw
     - **Parts:** per gripper, one servo and driver board ([Electronics](../bom/electronics.md)); `base` (servo, slides, two tag-holder plates, USB-C protector); `left_rack` and `right_rack` (the jaws); `cnc_flange` (machined disc, the wrist interface).
     - **Before this:** [Head and camera gimbal](head-and-camera-gimbal.md).
 
-> **Figure** <span class="pending-figure">not produced yet</span> —
-> `assets/assembly/gripper-exploded.png`: one gripper exploded and labelled,
-> slide direction and jaw travel drawn.
-
 !!! missing "MISSING — gripper parts list, fasteners, torques and fits"
     - Material, process and cost of `base`, both racks and `cnc_flange`.
     - Pinion, slide parts, fasteners.
@@ -35,6 +31,11 @@ record each board's USB serial against its hand.
     *Owner: controls + hardware lead.*
 
 ✅ **Check:** Each servo answers at its ID; hands and board serials recorded.
+
+<figure markdown>
+  ![One gripper exploded, parts labelled with team BOM ids](../assets/exploded/team/13-gripper.webp){ loading=lazy }
+  <figcaption>Steps 2–5, one of two identical grippers: housing P10, racks P11, pinion P12, fingers P13, AprilTag holders P14, tags P15, servo E15, driver board E10, converter E12. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+</figure>
 
 {{ step(2, "Build the gripper base") }}
 

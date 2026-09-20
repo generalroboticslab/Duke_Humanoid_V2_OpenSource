@@ -132,6 +132,37 @@ FAMILIES = [
 fam_total = sum(f[1] for f in FAMILIES)
 total = len(placed) + len(EXTRA) + fam_total
 
+# Pages of the team's exploded-view booklet
+# (docs/files/drawings/duke_humanoid_v2_exploded_views_rev01.pdf), rendered one
+# image per page. These are the exploded views the manifest used to list as
+# missing: they are delivered, labelled with the team BOM ids, and placed.
+# Pages 7, 8 and 12 are not published as figures — 8 and 12 carry only the
+# "switch A <-> B" mirror note, which the leg and arm pages state in words.
+TEAM_EXPLODED = [
+ ("01-torso-frame.webp", "assembly/torso-and-waist.md",
+  "Torso frame: plates C0–C3, spine P0, actuators E3, bearings H0."),
+ ("02-electronics-tray.webp", "assembly/torso-and-waist.md",
+  "Torso electronics: E0, E7, E13, E16, E17, E18, E19, E20."),
+ ("03-torso-printed-plates.webp", "assembly/torso-and-waist.md",
+  "Printed torso plates P1–P3."),
+ ("04-leg-upper.webp", "assembly/leg.md",
+  "Hip pitch and roll: C4–C8, actuators E3, bearings H0."),
+ ("05-leg-lower.webp", "assembly/leg.md",
+  "Hip yaw to foot plate: C4, C5, C9–C21, actuators E3, E4, E6, bearings H0–H3."),
+ ("06-leg-covers.webp", "assembly/leg.md", "Printed leg covers P20–P32."),
+ ("09-arm.webp", "assembly/arm.md",
+  "Right arm: C5, C22–C29, P4–P8, actuators E1, E2, E5, E6, bearings H2, H4."),
+ ("10-arm-covers.webp", "assembly/arm.md", "Printed arm covers P33–P39."),
+ ("11-torso-p9.webp", "assembly/arm.md",
+  "Left arm, with the left wrist housing P9 in place of the right housing P7."),
+ ("13-gripper.webp", "assembly/gripper.md",
+  "One gripper: P10–P15, servo E15, driver board E10, converter E12."),
+ ("14-camera-gimbal.webp", "assembly/head-and-camera-gimbal.md",
+  "One camera column: P16–P19, actuators E5, camera E14, bearing H5."),
+ ("15-whole-robot.webp", "index.md, assembly/index.md",
+  "The robot with both camera columns and both grippers lifted off."),
+]
+
 HAVE = [
  ("assets/images/teaser.webp", "index.md", "The robot in simulation and on hardware, side by side."),
  ("assets/images/hardware.webp", "index.md", "Hardware overview with all joints numbered and the three modules labelled."),
@@ -140,6 +171,8 @@ HAVE = [
  ("assets/images/hardware_close_front_back.mp4", "assembly/head-and-camera-gimbal.md", "The two finished camera modules aiming independently."),
  ("assets/images/two_target_handoff_left_right.mp4", "bringup/acceptance-tests.md", "What passing acceptance test A10 looks like."),
  ("assets/images/workspace.webp", "reference/faq.md", "Visible-reachable workspace across six humanoid platforms."),
+] + [
+ (f"assets/exploded/team/{p}", page, desc) for p, page, desc in TEAM_EXPLODED
 ]
 
 L=[]; w=L.append
@@ -148,9 +181,9 @@ w("")
 w("Every image this site needs and does not have, with the exact path it must be")
 w(f"saved to and one line on what it must show. **{total} images are missing.**")
 w("")
-w("This is the list to hand to whoever renders the exploded views. It is not a")
-w("wish list: each path below is already named on a page, so dropping a file at")
-w("that path is all that is needed — no page has to be rewritten to accept it.")
+w("This is the list to hand to whoever renders the remaining figures. It is not")
+w("a wish list: each path below is already named on a page, so dropping a file")
+w("at that path is all that is needed — no page has to be rewritten to accept it.")
 w("")
 w('!!! warning "Why no page shows a broken image"')
 w("    `mkdocs build --strict` fails on a link to an image that does not exist, so")
@@ -167,13 +200,27 @@ w("    row from this manifest. Both happen in the same commit or neither does.")
 w("")
 w("## What to produce first")
 w("")
+steps = sum(1 for k in placed if re.search(r"-step-", k))
+prio = []
+if steps:
+    prio.append((f"The {steps} step renders",
+                 "Written steps without a figure are the site's largest readability gap"))
+else:
+    prio.append(("Step renders, `assets/assembly/<page>-step-NN.png`",
+                 "Not one exists, and not one is named on a page yet. A step with no figure is the "
+                 "site's largest readability gap"))
+prio.append(("The 6 routing photographs",
+             "A routing decision does not survive being written down. These must be taken during a "
+             "build, not reconstructed after one"))
+prio.append(("Everything else", "—"))
 w("| Priority | What | Why it is first |")
 w("| --- | --- | --- |")
-w("| 1 | `assets/images/exploded-overview.png` | **The team already has this render.** One file, four pages: the home page, What you get, Bill of materials and Assembly all want the whole-robot exploded view, and it is the single image that makes the machine legible |")
-w("| 2 | The 5 subassembly exploded views (leg, arm, torso, head, gripper) | Each one makes its assembly page usable as a whole rather than step by step |")
-w(f"| 3 | The {sum(1 for k in placed if re.search(r'-step-', k))} step renders | Written steps without a figure are the site's largest readability gap |")
-w("| 4 | The 6 routing photographs | A routing decision does not survive being written down. These must be taken during a build, not reconstructed after one |")
-w("| 5 | Everything else | — |")
+for i, (what, why) in enumerate(prio, 1):
+    w(f"| {i} | {what} | {why} |")
+w("")
+w("The whole-robot and subassembly exploded views are no longer on this list:")
+w(f"the team's exploded-view booklet delivers {len(TEAM_EXPLODED)} of them, labelled with the")
+w("team BOM ids and placed on the Assembly pages.")
 w("")
 w("## Format and size")
 w("")
@@ -228,9 +275,10 @@ for pat, n, page, d, lst in FAMILIES:
     w("")
 w(f"## Already here ({len(HAVE)})")
 w("")
-w("Real photographs of the reference robot, copied from the project repository's")
-w("`media/` directory. They show a working machine; none of them is an assembly")
-w("figure, and none of them substitutes for a render.")
+w("Photographs and clips of the reference robot from the project repository's")
+w("`media/` directory, plus the pages of the team's exploded-view booklet")
+w("(`files/drawings/duke_humanoid_v2_exploded_views_rev01.pdf`), one image per")
+w("page, labelled with the team BOM ids. None of these replaces a step render.")
 w("")
 w("| Path | Used on | What it shows |")
 w("| --- | --- | --- |")

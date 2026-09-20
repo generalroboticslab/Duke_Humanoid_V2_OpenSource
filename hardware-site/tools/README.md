@@ -7,23 +7,36 @@ reproduced from its source and the published lists cannot drift away from the pa
 Run them from the site root with the site's virtualenv:
 
 ```console
-$ python tools/gen_bom.py           # every parts list -> docs/data/*.csv (from the team BOM spreadsheet)
-$ python tools/gen_printed.py       # prints the printed-part mapping; writes nothing
-$ python tools/gen_part_properties.py ../cad/<export>   # mass properties -> part-properties.csv, joints -> joints.csv
-$ python tools/gen_punchlist.py     # TODO blocks    -> docs/reference/todo.md
-$ python tools/gen_image_manifest.py# figure gaps    -> docs/assets/MANIFEST.md
+$ python tools/gen_bom.py                                # every parts list + team-map.csv -> docs/data/ (team BOM)
+$ python tools/gen_printed.py                            # prints the printed-part mapping; writes nothing
+$ python tools/gen_part_properties.py ../cad/<export>    # mass properties, joints
+$ python tools/gen_modules.py ../cad/<export>            # module list
+$ python tools/gen_vendor_map.py ../cad/<export>         # vendor components -> BOM
+$ python tools/stage_cad_export.py ../cad/<export> --apply   # -> docs/files/, viewer/downloads.json
+$ python tools/gen_cad_manifest.py                       # -> cad-files.csv, SHA256SUMS.txt
+$ python tools/build_viewer.py ../cad/<export>           # -> docs/assets/viewer/
+$ python tools/gen_punchlist.py                          # TODO blocks  -> docs/reference/todo.md
+$ python tools/gen_image_manifest.py                     # figure gaps  -> docs/assets/MANIFEST.md
+$ python -m mkdocs build --strict
 ```
+
+That is also the order to run them in: the BOM defines the part IDs, the CAD
+generators attach geometry to those IDs, staging publishes the files, and the
+two list generators read the finished pages.
 
 | Script | Reads | Writes |
 | --- | --- | --- |
-| `gen_bom.py` | `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` (the team BOM, the source for every parts list) and the newest `cad/*/tree.csv` | `actuators.csv`, `electronics.csv`, `cables-connectors.csv`, `fasteners.csv`, `cnc-parts.csv`, `printed-parts.csv` — all six under the column contract of `docs/data/README.md` plus `team_ref` |
-| `gen_punchlist.py` | every `!!! missing` and `!!! unverified` block in `docs/` | `docs/reference/todo.md` |
-| `gen_image_manifest.py` | figure placeholders in `docs/`, plus `part_id` columns | `docs/assets/MANIFEST.md` |
+| `gen_bom.py` | `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` (the team BOM, the source for every parts list) and the newest `cad/*/tree.csv` | `actuators.csv`, `electronics.csv`, `cables-connectors.csv`, `fasteners.csv`, `cnc-parts.csv`, `printed-parts.csv` — all six under the column contract of `docs/data/README.md` plus `team_ref`; and `team-map.csv`, one row per team BOM line (the booklet page that labels it, the CAD count, a `status`) |
 | `gen_printed.py` | the newest `cad/*/tree.csv` | nothing. It is the `PRINTED` mapping table (Fusion component -> site `part_id`: torso plates, wrist parts, covers, gripper parts, camera-column parts, end-effector attachment) that `gen_bom.py`, `stage_cad_export.py`, `build_viewer.py` and `gen_part_properties.py` import; run on its own it prints the mapping against an export and warns about a component the tree has lost |
 | `gen_part_properties.py` | `cad/<export>/tree.csv` (+ `print/*.stl` for volume, `joints.csv` from `fusion_export_modules`) | `part-properties.csv`: Fusion mass, bounding box, centre of mass and inertia per site part (inertia about the centre of mass, shifted from Fusion's origin-referenced tensor, and the raw `*_origin` values); `joints.csv`: every joint with limits in degrees |
-| `stage_cad_export.py` | a `cad/<export>/` folder from `fusion_export` | copies STEP/STL/overall drawing into `docs/files/` as `<part_id>_rev<NN>.<ext>`; zips a whole-robot STEP over 95 MB; skips the `.f3z` (release asset) |
+| `gen_modules.py` | `cad/<export>/modules.csv` (from `fusion_export_modules`) | `docs/data/modules.csv`: one row per module STEP — `module_id` (the slug the staged file is named after), Fusion name, English name, `class` (`module` / `vendor` / `internal` / `sketch`; `stage_cad_export.py` stages the first two), depth, qty, children, mass, path, export file, note |
+| `gen_vendor_map.py` | `cad/<export>/tree.csv` | `docs/data/vendor-parts.csv` and `docs/assets/viewer/vendor-map.json`: every component with bodies that is not one of the site's own parts, matched to a BOM line by explicit rules on its own name and on each ancestor in its occurrence path. Nothing is guessed from a name no rule covers; `note` records what the model and the BOM disagree on |
+| `stage_cad_export.py` | a `cad/<export>/` folder from `fusion_export` + `fusion_export_modules`, plus `docs/data/modules.csv` and `vendor-parts.csv` | copies part STEP/STL (as `<part_id>_rev<NN>.<ext>`), module STEPs (`<module_id>_rev<NN>.step`, classes `module` and `vendor`) and vendor STEPs (`vendor/<file_name>.step`; fasteners and parts under 3 g excluded) into `docs/files/`; zips a STEP over 95 MB; skips a `.f3z` over 95 MB (release asset) and the `.f3z.f3d`; keeps `docs/files/` under its 700 MB budget by dropping vendor parts under 20 g; writes `docs/assets/viewer/downloads.json`. Does not touch `docs/files/drawings/` |
 | `gen_cad_manifest.py` | files under `docs/files/` | `docs/data/cad-files.csv`, `docs/files/SHA256SUMS.txt`; fails on files over GitHub's limits |
-| `build_viewer.py` | `cad/<export>/print/*.stl` placed with `transforms.csv`, or a `fusion_export_viewer` folder | `docs/assets/viewer/robot.glb`, `parts.json` for the part viewer on the CAD downloads page |
+| `build_viewer.py` | `cad/<export>/print/*.stl` placed with `transforms.csv`, or a `fusion_export_viewer` folder | `docs/assets/viewer/robot.glb` (Draco, via `glb_tools.py`) and `parts.json` for the part viewer on the CAD downloads page (`downloads.json` comes from `stage_cad_export.py`, `vendor-map.json` from `gen_vendor_map.py`) |
+| `glb_tools.py` | — | library, not a command: the Draco-compressing GLB writer `build_viewer.py` uses (pure numpy + DracoPy; normals travel outside the Draco stream as quantised int8, and a one-byte rank attribute keeps vertices split along sharp edges apart) |
+| `gen_punchlist.py` | every `!!! missing` and `!!! unverified` block in `docs/` | `docs/reference/todo.md` |
+| `gen_image_manifest.py` | figure placeholders in `docs/`, plus `part_id` columns | `docs/assets/MANIFEST.md` |
 
 ## Fusion 360 scripts (run inside Fusion: Utilities > Add-Ins > Scripts and Add-Ins)
 
@@ -31,8 +44,11 @@ With `humanoid_2.1_latest` open, in this order, all into one dated folder `cad/h
 
 | Script | Writes | Notes |
 | --- | --- | --- |
-| `fusion_export/` | `tree.csv` (every component: `fusion_name`, `file_name`, kind, qty, bodies, children, material, mass, bounding box, linked / out-of-date, path, `color_rgb` and appearance name, centre of mass, moments and products of inertia); `assembly/<design>.step` and `.f3z`; `step/<file_name>.step` and `print/<file_name>.stl` for **every** component with bodies, vendor parts included; `joints.csv` (root only, empty: the joints live in the linked designs); `export.log` when done | `file_name` is unique per component: a second component with the same name is `name~2`. Mass to 0.1 g. **The inertia columns are about the component-frame origin, not the centre of mass** (verified against the STLs); `gen_part_properties.py` shifts them. |
+| `fusion_export/` | `tree.csv` (every component: `fusion_name`, `file_name`, kind, qty, bodies, children, material, mass, bounding box, linked / out-of-date, path, `color_rgb` and appearance name, centre of mass, moments and products of inertia); `assembly/<design>.step` and the Fusion archive, which lands as `<design>.f3z.f3d` (1.2 MB in both exports; the 319 MB `.f3z` release asset sits only in `…_1423/assembly/`, dated 17 minutes after that run's STEP); `step/<file_name>.step` and `print/<file_name>.stl` for **every** component with bodies, vendor parts included; `joints.csv` (root only, empty: the joints live in the linked designs); `export.log` when done | `file_name` is unique per component: a second component with the same name is `name~2`. Mass to 0.1 g. **The inertia columns are about the component-frame origin, not the centre of mass** (verified against the STLs); `gen_part_properties.py` shifts them. |
 | `fusion_export_modules/` | `modules/<file_name>.step` (one STEP per sub-assembly down to two levels below the root: lower body, torso, arms, gripper; legs, camera columns, wrists, hip / knee / shoulder / elbow modules, electronics tray, and the vendor assemblies at those levels); `modules.csv`; `joints.csv` (every joint of every component: type, the two occurrences, origin and axis **in that component's frame**, limits and value in rad or cm, suppressed flag); `transforms.csv` (every occurrence with bodies: path, name, the `file_name` of `tree.csv`, visible, 4×4 transform to the root in cm, row-major); `export_modules.log` | Pick the same dated folder. Overwrites the root-only `joints.csv`. |
+| `fusion_export_missing/` | the `print/<file_name>.stl` and `step/<file_name>.step` that `fusion_export` failed to write; `export_missing.log` | Run after `fusion_export`. It reads `export.log`, finds every `STL …: EXCEPTION/FAILED` line and re-exports those components body by body through a short temporary path (the failures are Windows' 260-character path limit on the long vendor names). |
+| `fusion_export_cameras/` | `print/<file_name>.stl` for every component whose name contains `IntelRealsense`, high resolution; `export_cameras.log` | Run after `fusion_export`, whose body-by-body STL of the two D435 components failed (`export.log`: `STL IntelRealsense_D435_Multibody: EXCEPTION FileNotFoundError` on the temporary path). Exports each as one occurrence — children and any mesh bodies included, component coordinates — which is what `build_viewer.py` places with `transforms.csv`; the field-of-view wedges come along and are dropped there by the 450 mm rule. The 16:07 log records 3 BRep bodies and 0 mesh bodies per camera, so the script's docstring ("the housing is a mesh body") is not what that export saw. |
+| `fusion_export_joints/` | `joints.csv` and `transforms.csv` only (30 s, no STEP export) | For an export folder written by an older `fusion_export_modules` that had no joint writer. Same columns as `fusion_export_modules`. |
 | `fusion_export_transforms/` | `transforms.csv` (old naming) and bodies-only STL/STEP of the `CNC_`/`3DP_` components that carry children | Superseded by `fusion_export` + `fusion_export_modules`; kept for the 14:23 export. |
 | `fusion_export_viewer/` | `viewer/context.stl` (whole robot, world coordinates, low resolution), `viewer/parts/NNNN.stl` per occurrence of a releasable part, `occurrences.csv` | Optional: `build_viewer.py` can place `print/*.stl` with `transforms.csv` instead. |
 
