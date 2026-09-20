@@ -41,7 +41,7 @@ cd hardware-site
 python -m venv .venv                     # Windows: py -m venv .venv
 .venv/bin/pip install -r requirements.txt    # Windows: .venv\Scripts\pip …
 .venv/bin/mkdocs serve -a 127.0.0.1:8321     # Windows: .venv\Scripts\mkdocs …
-# open http://localhost:8321/duke_humanoid_v2/   (the /duke_humanoid_v2/ prefix is intentional)
+# open http://localhost:8321/Duke_Humanoid_V2_OpenSource/   (the /duke_humanoid_v2/ prefix is intentional)
 ```
 Regenerate after edits: `python tools/gen_punchlist.py`, `tools/gen_image_manifest.py`,
 `tools/gen_cad_manifest.py` (indexes `docs/files/` and enforces GitHub size limits).

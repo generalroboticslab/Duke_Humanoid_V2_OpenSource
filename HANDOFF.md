@@ -17,7 +17,7 @@ Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` 
 | BOM source | **The team's spreadsheet `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` (2026-09-19, WIP) is the parts list** — the team's sheet wins over every other source. `tools/gen_bom.py` writes all six parts CSVs and `team-map.csv` from it, maps each line to the CAD part IDs the viewer and `docs/files/` key on, and records the sheet line in a `team_ref` column shown first on every BOM table. Rows the sheet does not price carry a **blank** cost and render a red TODO, never `$0.00`. The two-sheet CSV source and `gen_sheet1.py` / `gen_cnc.py` / `gen_recon.py` / `audit_sheet2.py` / `bom-reconciliation.csv` / `test-fixtures.csv` are superseded and deleted |
 | Parts data (generated, `docs/data/`) | `cnc-parts.csv` 35, `printed-parts.csv` 48, `electronics.csv` 14, `actuators.csv` 6, `fasteners.csv` 9, `cables-connectors.csv` 1; `part-properties.csv` 76 (volume filled on 71), `joints.csv` 1205, `modules.csv` 128, `vendor-parts.csv` 287, `cad-files.csv` 329; `team-map.csv` 100 (from `gen_bom.py`: one row per team BOM line with the booklet page that labels it, the CAD count and a `status`: 77 settled, 23 open) |
 | 3D viewer (`docs/assets/viewer/`) | `robot.glb` (2.3 MB, Draco), `parts.json`, `downloads.json`, `vendor-map.json`. Fusion appearance colours (own parts black-grey, purchased parts in their Fusion colours), joint axes, preview and download per part, hide/show the selection (Fusion-style eye) and an x-ray ghost where it is occluded |
-| Local preview | `http://localhost:8321/duke_humanoid_v2/` — the `/duke_humanoid_v2/` prefix is intentional (`site_url`) |
+| Local preview | `http://localhost:8321/Duke_Humanoid_V2_OpenSource/` — the `/Duke_Humanoid_V2_OpenSource/` prefix is intentional (`site_url`) |
 
 ## CAD export pipeline — three download levels
 
@@ -155,14 +155,14 @@ generator in `tools/` writes LF and POSIX paths on both systems (before 2026-09-
 and `gen_image_manifest.py` produced wrong counts on Windows because they compared backslash paths).
 Set `PYTHONIOENCODING=utf-8` when a generator prints `×` or `·` to a cp1252 console.
 
-## Publishing (later)
+## Publishing
 
-The 319 MB `.f3z` is a release asset (`cad-v2.1-rc1`) on this private repo; the link on the CAD downloads page
-only works for collaborators until the release is re-created on the public repo.
+Repository stays under `rivery927` (GitHub Pro, private). `.github/workflows/docs.yml` (repo root) builds with
+`--strict` on every push to `main` and deploys GitHub Pages; `site_url` is
+`https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/`. One-time setup by the owner:
+**Settings → Pages → Build and deployment → Source: GitHub Actions**. Collaborators only need write access.
 
-`hardware-site/.github/workflows/docs.yml` builds with `--strict` and deploys GitHub Pages from `main`. It is written
-for a repository whose root holds `hardware-site/` (`working-directory: hardware-site`, `paths: hardware-site/**`),
-and GitHub Actions only reads `<repo root>/.github/workflows/`, so it does not run from where it sits now — move it
-when publishing. `site_url` is still
-`https://generalroboticslab.github.io/duke_humanoid_v2/` — change it (and the Pages source) when the final
-home of the site is decided. This private repo cannot serve Pages on a free plan; publish from the public one.
+**A Pages site built from a private repository is still public** (visitor access control is an Enterprise
+feature): everything under `docs/files/` (674 MB of CAD) becomes downloadable by anyone the moment the first
+deploy succeeds. Do not enable Pages before the hardware licence is decided. The 319 MB `.f3z` release asset
+stays collaborator-only until the repository is public.
