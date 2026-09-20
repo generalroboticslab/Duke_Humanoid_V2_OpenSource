@@ -77,8 +77,7 @@ mechanical stops.
 
 ## Mass properties (Fusion model)
 
-CAD masses from the Fusion model `humanoid_2.1_latest` (export of 2026-09-19 16:46, `tree.csv`: each
-component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
+CAD masses from the Fusion model (each component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
 [Mass properties](part-index.md#mass-properties).
 
 | | |

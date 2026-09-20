@@ -12,9 +12,8 @@
 | Printed parts | {{ bom_subtotal("printed-parts.csv") }} |
 | **Parts, as far as priced** | **{{ bom_total() }}** |
 
-Every figure is the team's BOM spreadsheet
-(`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19, work in progress),
-totalled from the [data files](../bom/index.md). Those files hold
+Every figure is the team's own bill of materials, totalled from the [parts lists](../bom/index.md).
+Those lists hold
 {{ bom_row_count() }} rows, and {{ bom_unpriced_count() }} of them have no
 usable price (the team BOM prices them at zero, leaves them blank or has no
 line for them); those rows read **TODO**{ .dh-missing } on their pages and are

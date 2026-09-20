@@ -3,10 +3,8 @@
 Fused-deposition (FDM) and laser-sintered (SLS) parts of our own design, one row per Fusion component: the
 torso plates, the wrist and shoulder parts, the end-effector attachment, the covers, the gripper's parts and the
 camera-column parts, with three filament and powder rows at the end. Material, process, quantity and
-price are the team BOM's where it has a line for the part. **Team ref** is that line in the team BOM
-spreadsheet (`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19) and the row's `notes` quote it in
-full. Which CAD part each team ref is, and what settles it, is one row per team BOM line in
-[team-map.csv](../data/team-map.csv). Print settings: [Printing guide](../fabrication/printing-guide.md).
+price are the team BOM's where it has a line for the part; **Team ref** is that line.
+Print settings: [Printing guide](../fabrication/printing-guide.md).
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
 Volume, centre of mass and inertia for every part: [Mass properties](../reference/part-index.md#mass-properties).
@@ -37,7 +35,7 @@ What is left open is which half of a two-piece cover each *A*/*B* line is, and t
     - `P20`/`P21` *Hip 1 Protection A/B* and `P24`/`P25` *Hip 3 Protection A/B* → the four
       Fusion covers `3DP_legP01`–`P04`. Booklet p.6 draws four covers on one leg, over the
       hip-1 and the hip-3 motor: 4 lines × 2 = 8 pieces = the CAD's 8 occurrences. In the
-      2026-09-19 export those four are one two-piece design (identical mass and box) placed
+      CAD export those four are one two-piece design (identical mass and box) placed
       at four motors and all named after the hip-pitch motor, while the booklet's four covers
       do not all look alike. Whether *Hip 1* has a cover of its own, which line is which
       cover, and which pair is *Hip 1*, is open.
@@ -62,9 +60,9 @@ The gripper's rack teeth are cut along the slide arm `3DP_grip03_rail` (`P11`, b
 Fusion component `double_helix_rack_30teeth_6mm v2` is a placeholder with no body, no STEP and no STL.
 
 !!! missing "MISSING — STEP and STL of the shank covers `3DP_legP09_shank_cover_a` / `3DP_legP10_shank_cover_b`: the files published under those names are byte-identical to the shoulder covers `3DP_armP05` / `3DP_armP06` (both pairs are named `Component42` / `Component43` in Fusion, and the earlier export wrote one file per component name)"
-    The export of 2026-09-19 16:46 writes one file per component (`Component42` / `Component43` for the shank
+    The latest CAD export writes one file per component (`Component42` / `Component43` for the shank
     covers, `Component42~2`, `~3` / `Component43~2`, `~3` for the shoulder covers of the left and right arm);
-    re-staging it with `tools/stage_cad_export.py` closes this.
+    re-staging those files closes this.
     *Owner: whoever stages the export.*
 
 !!! unverified "UNVERIFIED — quantities are Fusion occurrence counts, and the left and right arm designs reuse one component name per cover, so one STL may serve both sides or one side may need a mirrored print"

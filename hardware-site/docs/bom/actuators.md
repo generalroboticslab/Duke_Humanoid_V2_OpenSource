@@ -9,9 +9,7 @@ Every joint is a RobStride quasi-direct-drive actuator:
 {% for r in pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | {{ r.mpn }} | `{{ r.part_id }}` | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
 {% endfor %}| | **Total** | | **{{ bom_qty("actuators.csv") }}** | | **{{ bom_subtotal("actuators.csv") }}** | |
 
-**Team ref** is the line in the team BOM spreadsheet
-(`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19), which is where
-every quantity and price on this page comes from.
+**Team ref** is the team BOM line every quantity and price on this page comes from.
 No model has a published alternate ([Sourcing](sourcing.md#supply-risk-parts)).
 Check each on arrival: [Incoming inspection](../fabrication/incoming-inspection.md#check-actuators).
 
@@ -30,7 +28,7 @@ Check each on arrival: [Incoming inspection](../fabrication/incoming-inspection.
 and buses: [CAN bus](../electrical/can-bus.md). Connectors:
 [Cables and connectors](cables-and-connectors.md#actuator-side-connectors).
 
-The team BOM also lists 6 RS05 (`Duke_Humanoid_V2_BOM_WIP.xlsx`, line `E5`).
+The team BOM also lists 6 RS05 (line `E5`).
 The CAD-derived head-camera note names RS05 as the yaw and pitch motors
 (`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITION_top_plate__head_cameras.md`),
 and the Cartesian-hand model's base group includes `CNC_arm13_x2_RS05_shaft_coupler`

@@ -1,12 +1,8 @@
 # CNC parts
 
 {{ bom_count("cnc-parts.csv") }} machined part rows, {{ bom_subtotal("cnc-parts.csv") }}.
-**Qty** and **Unit cost** are the team BOM's. **Team ref** is the line they come
-from in the team BOM spreadsheet (`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`,
-2026-09-19); the row's `notes` in [cnc-parts.csv](../data/cnc-parts.csv) quote
-that line in full, while [team-map.csv](../data/team-map.csv) gives one row per team BOM
-line: which CAD part it is, and what settles that. {{ bom_unpriced_count("cnc-parts.csv") }} rows have no team
-BOM line and so no price and no quantity, and read
+**Qty** and **Unit cost** are the team BOM's; **Team ref** is its line.
+{{ bom_unpriced_count("cnc-parts.csv") }} rows have no team BOM line, so no price and no quantity, and read
 **TODO**{ .dh-missing } rather than zero: {{ bom_unpriced("cnc-parts.csv") }}.
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
