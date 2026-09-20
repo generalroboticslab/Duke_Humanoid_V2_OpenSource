@@ -155,14 +155,10 @@ generator in `tools/` writes LF and POSIX paths on both systems (before 2026-09-
 and `gen_image_manifest.py` produced wrong counts on Windows because they compared backslash paths).
 Set `PYTHONIOENCODING=utf-8` when a generator prints `×` or `·` to a cp1252 console.
 
-## Publishing — NOT YET
+## Publishing
 
-The site is **not public** and must stay that way until the team decides (licence first). Collaborators
-need only **write** access to edit and push; every push to `main` runs the strict build in Actions.
-
-Deployment is gated: `.github/workflows/docs.yml` uploads and deploys Pages only when the repository
-variable `DEPLOY_PAGES` equals `true` (Settings → Secrets and variables → Actions → Variables). It is unset.
-Repository Settings → Pages → Source should be **None** until then. When the team decides to publish:
-set `DEPLOY_PAGES=true`, set Pages Source to **GitHub Actions**, push. `site_url` is
-`https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/`. Note: a Pages site built from a private
-repository is public — everything under `docs/files/` (674 MB of CAD) becomes downloadable by anyone.
+Decided 2026-09-20 (Boxi Xia): **Pages public, repository private.** Every push to `main` runs the strict build
+and deploys to `https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/` (Settings → Pages → Source:
+GitHub Actions). Collaborators need only write access. Everything under `docs/files/` (674 MB of CAD) is
+publicly downloadable from the site; the 319 MB `.f3z` release asset stays collaborator-only while the
+repository is private.

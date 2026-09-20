@@ -2,8 +2,7 @@ name: Hardware docs
 
 # Builds the hardware documentation site with --strict on every push, so that a
 # broken internal link or a missing nav target fails CI rather than shipping.
-# Deploys to GitHub Pages ONLY when the repository variable DEPLOY_PAGES is 'true'
-# (Settings -> Secrets and variables -> Actions -> Variables). The site is not public yet.
+# Deploys to GitHub Pages from the default branch only. The site is public; the repository stays private.
 
 on:
   push:
@@ -57,13 +56,13 @@ jobs:
         run: mkdocs build --strict
 
       - name: Upload Pages artifact
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: hardware-site/site
 
   deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
