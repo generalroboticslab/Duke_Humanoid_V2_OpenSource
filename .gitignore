@@ -4,6 +4,7 @@
 reference/*
 !reference/bom/
 !reference/_meta/
+!reference/team/
 reference/_meta/*
 !reference/_meta/cad-trees/
 # Notion export of the V2 design log (1.7 GB, contains vendor PDFs we must not redistribute)
