@@ -155,14 +155,14 @@ generator in `tools/` writes LF and POSIX paths on both systems (before 2026-09-
 and `gen_image_manifest.py` produced wrong counts on Windows because they compared backslash paths).
 Set `PYTHONIOENCODING=utf-8` when a generator prints `×` or `·` to a cp1252 console.
 
-## Publishing
+## Publishing — NOT YET
 
-Repository stays under `rivery927` (GitHub Pro, private). `.github/workflows/docs.yml` (repo root) builds with
-`--strict` on every push to `main` and deploys GitHub Pages; `site_url` is
-`https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/`. One-time setup by the owner:
-**Settings → Pages → Build and deployment → Source: GitHub Actions**. Collaborators only need write access.
+The site is **not public** and must stay that way until the team decides (licence first). Collaborators
+need only **write** access to edit and push; every push to `main` runs the strict build in Actions.
 
-**A Pages site built from a private repository is still public** (visitor access control is an Enterprise
-feature): everything under `docs/files/` (674 MB of CAD) becomes downloadable by anyone the moment the first
-deploy succeeds. Do not enable Pages before the hardware licence is decided. The 319 MB `.f3z` release asset
-stays collaborator-only until the repository is public.
+Deployment is gated: `.github/workflows/docs.yml` uploads and deploys Pages only when the repository
+variable `DEPLOY_PAGES` equals `true` (Settings → Secrets and variables → Actions → Variables). It is unset.
+Repository Settings → Pages → Source should be **None** until then. When the team decides to publish:
+set `DEPLOY_PAGES=true`, set Pages Source to **GitHub Actions**, push. `site_url` is
+`https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/`. Note: a Pages site built from a private
+repository is public — everything under `docs/files/` (674 MB of CAD) becomes downloadable by anyone.
