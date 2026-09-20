@@ -44,8 +44,8 @@ more than 184.
 | Perception lead | 8 | 1 |
 | PI | 7 | 5 |
 | Safety sign-off | 6 | 6 |
-| Whoever does the first build / re-sourcing | 5 | 0 |
 | BOM owner | 5 | 1 |
+| Whoever does the first build / re-sourcing | 5 | 0 |
 | Local EHS office | 3 | 3 |
 | Assembly lead | 2 | 1 |
 | Unassigned | 1 | 0 |

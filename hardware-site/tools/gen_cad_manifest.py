@@ -62,7 +62,7 @@ def main() -> int:
     rows, errors, total = [], [], 0
     for kind, exts in KINDS.items():
         folder = FILES / kind
-        for path in sorted(folder.glob("*")) if folder.is_dir() else []:
+        for path in sorted(folder.glob("*"), key=lambda p: p.name.lower()) if folder.is_dir() else []:
             if path.name.startswith(".") or not path.is_file():
                 continue
             if path.suffix.lower() not in exts:
