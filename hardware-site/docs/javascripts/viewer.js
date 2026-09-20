@@ -80,7 +80,6 @@
 
   // Same values as the legend swatches .dh-sw-* in stylesheets/extra.css.
   const RED = "#d91f14";         // selected
-  const GHOST_OPACITY = 0.35;   // x-ray ghost of the selected part where it is occluded
   const EYE_OFF = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M2 5.3 3.3 4l16.7 16.7-1.3 1.3-3-3A11 11 0 0 1 12 20C7 20 2.7 16.9 1 12.5c.8-1.9 2-3.6 3.5-4.9L2 5.3m9.9 2.3.6 0A4.5 4.5 0 0 1 16.4 12c0 .2 0 .4-.1.6l-4.4-4.4c.1-.2 0-.6 0-.6M12 5c5 0 9.3 3.1 11 7.5a12 12 0 0 1-3.5 4.7l-1.4-1.4A9.9 9.9 0 0 0 20.8 12.5 9.8 9.8 0 0 0 12 7c-.9 0-1.8.1-2.6.4L7.8 5.8C9.1 5.3 10.5 5 12 5Z"/></svg>';
   const EYE_ON = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M12 9a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3m0-4.5c5 0 9.3 3.1 11 7.5-1.7 4.4-6 7.5-11 7.5S2.7 16.4 1 12c1.7-4.4 6-7.5 11-7.5M3.2 12a9.8 9.8 0 0 0 17.6 0 9.8 9.8 0 0 0-17.6 0Z"/></svg>';
   const AMBER = "#f2a61a";       // hovered or focused row (the row hover colour)
@@ -388,13 +387,13 @@
         const mat = m.material.clone();
         mat.color.set(RED);          // three.js Color.set takes the CSS hex string
         mat.transparent = true;
-        mat.opacity = GHOST_OPACITY;
+        mat.opacity = GHOST_ALPHA;
         mat.depthWrite = false;
         mat.depthTest = true;
-        mat.depthFunc = 6;          // THREE.GreaterDepth: only the occluded fragments pass
+        mat.depthFunc = GREATER_DEPTH;   // only the occluded fragments pass
         mat.metalness = 0; mat.roughness = 1;
         g.material = mat;
-        g.renderOrder = 1000;
+        g.renderOrder = GHOST_ORDER;
         g.raycast = () => {};       // never picked
         g.name = "ghost:" + n;
         m.parent.add(g);
