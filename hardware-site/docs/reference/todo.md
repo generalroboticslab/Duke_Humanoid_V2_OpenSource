@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **180 open items** across **42 pages**, of which **55 block the public release**.
+Every unresolved item on this site, in one table: **184 open items** across **42 pages**, of which **56 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -22,30 +22,30 @@ that is not here.
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
 | Before you start | 22 | 15 |
-| Bill of materials | 25 | 5 |
+| Bill of materials | 29 | 6 |
 | Fabrication | 18 | 6 |
 | Assembly | 46 | 5 |
 | Electrical | 26 | 12 |
 | Bring-up | 25 | 7 |
 | Reference | 16 | 5 |
 | Top level | 2 | 0 |
-| **Total** | **180** | **55** |
+| **Total** | **184** | **56** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 180.
+more than 184.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Hardware lead | 112 | 30 |
+| Hardware lead | 115 | 31 |
 | Electrical lead | 46 | 23 |
 | Controls lead | 31 | 7 |
 | Perception lead | 8 | 1 |
 | PI | 7 | 5 |
 | Safety sign-off | 6 | 6 |
 | Whoever does the first build / re-sourcing | 5 | 0 |
-| BOM owner | 3 | 1 |
+| BOM owner | 4 | 1 |
 | Local EHS office | 3 | 3 |
 | Assembly lead | 2 | 1 |
 | Unassigned | 1 | 0 |
@@ -58,7 +58,7 @@ in this list makes a build harder; these make it impossible.
 | Blocker | Where it is tracked |
 | --- | --- |
 | No drawings, print plates or native Fusion archive — per-part and whole-robot STEP are published | [CAD downloads](../fabrication/cad-downloads.md) |
-| No fastener schedule — every screw, nut, washer and bearing is one placeholder row | [Fasteners and hardware](../bom/fasteners-and-hardware.md) |
+| No fastener schedule — the team BOM's bearing and screw lines carry no price, no vendor and no screw quantity | [Fasteners and hardware](../bom/fasteners-and-hardware.md) |
 | No torque values and no threadlocker grade, anywhere | [Assembly](../assembly/index.md), [Tools](../assembly/tools.md) |
 | No hardware licence and no documentation licence | [Citation and licence](citation-and-license.md) |
 | No human-safety procedure: no e-stop doctrine, no power-down order, no bystander distance | [Safety](../before-you-start/safety.md) |
@@ -96,30 +96,34 @@ in this list makes a build harder; these make it impossible.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [actuators → Which model goes in which joint](../bom/actuators.md#which-model-goes-in-which-joint) | RS05 on wrist_3 and the four camera joints is not checked on the robot | hardware lead + controls lead | no |
+| [actuators → Which model goes in which joint](../bom/actuators.md#which-model-goes-in-which-joint) | 2 RS06: this table needs 4 (ankle_2 and shoulder_2 on both sides), the team BOM line `E6` buys 2 | hardware lead | no |
 | [actuators → Motor data](../bom/actuators.md#motor-data) | RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot | hardware lead + controls lead | no |
 | [cables-and-connectors](../bom/cables-and-connectors.md) | Pinout of every custom cable, cut length per run, strain relief and service loops at moving joints | electrical lead | no |
 | [cables-and-connectors → Actuator-side connectors](../bom/cables-and-connectors.md#actuator-side-connectors) | Trunk connector (harness pages: XT30(2+2) on every actuator; manuals: XT30 + GH1.25 on RS03/RS04) and CAN wire colours (RS04 manual: blue = CAN_H, brown = CAN_L; team harness, blue/yellow: yellow = CAN_H, blue = CAN_L) | electrical lead | no |
 | [cables-and-connectors → Wire gauge](../bom/cables-and-connectors.md#wire-gauge) | Wire gauge of the 48 V riser, the ground returns, the motor branches and the CAN wire | electrical lead | **yes** |
-| [cables-and-connectors → Not in this list](../bom/cables-and-connectors.md#not-in-this-list) | Parts-list rows for EC5 connectors, Ethernet cable, heat-shrink, bulk wire (gauge, rating, colour, length), CAN termination resistors and GH1.25 cable housings | electrical lead | no |
+| [cables-and-connectors → Not in this list](../bom/cables-and-connectors.md#not-in-this-list) | Parts-list rows for every connector the harness uses (XT30, XT30(2+2), GH1.25 housings and contacts, EC5), for wire loom or sleeving, Ethernet cable, heat-shrink, bulk wire (gauge, rating, colour, length) and … | electrical lead | no |
 | [cables-and-connectors → Not in this list](../bom/cables-and-connectors.md#not-in-this-list) | Two design-log parts with no role: Amazon B0774VBJ3J and connector-housing kit B0BHZTQ1WV | electrical lead | no |
-| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | `CNC_arm12_wrist_pitch` is in the machining quote but not in the Fusion model; `CNC_arm06_RS02_shaft_coupler` is in Fusion only as the printed `3DP_arm06` (see Printed parts); `CNC_leg18_foot_plate` is in … | hardware lead | no |
-| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | The team's 32-part CNC list names `arm05`–`arm10` shifted by one ID from the Fusion names used here; the *not in team list* rows (`01_…`–`22_…`, `B1`–`B5`) are in neither the team list nor the Fusion model and … | hardware lead | no |
+| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | Whether the five rows with no team BOM line are machined parts at all: `CNC_arm05`, `CNC_arm06` and `CNC_arm11` are SLS nylon in Fusion and are listed again under Printed parts, `CNC_arm12_wrist_pitch` is in … | hardware lead | no |
+| [cnc-parts → Summary](../bom/cnc-parts.md#summary) | The team BOM names its machined lines by function (`Hip 1 Motor Bracket`, `Foot`), not by part ID, so every row above is paired with its line by name, quantity and price together, and two pairings are not … | hardware lead | no |
 | [electronics → Where each part goes](../bom/electronics.md#where-each-part-goes) | Computer RAM, storage, OS release and rated input power; camera firmware version; physical IMU mounting position and orientation; bring-up peripherals beyond the operator laptop and the GPU machine | electrical lead | no |
 | [electronics → Where each part goes](../bom/electronics.md#where-each-part-goes) | IMU mounting screw: M3 (team log) vs Ø2.10 flange holes on 30 × 31 mm centres (vendor drawing) | hardware lead | no |
 | [electronics → Power path](../bom/electronics.md#power-path) | 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | **yes** |
-| [electronics → Not in this list](../bom/electronics.md#not-in-this-list) | Parts-list rows (MPN, qty, link) for the surge protector, 10 A fuse and holder, the four power distribution terminal bars and the charger | electrical lead | no |
+| [electronics → Not in this list](../bom/electronics.md#not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
 | [fasteners-and-hardware](../bom/fasteners-and-hardware.md) | Fastener schedule from CAD: every screw (thread, length, head, drive, qty), bearings and fits per location, dowel pins, retaining rings, shims, threadlocker locations, torque per size and joint, purchase links | hardware lead, from the CAD | **yes** |
+| [fasteners-and-hardware → Screwing into an actuator](../bom/fasteners-and-hardware.md#screwing-into-an-actuator) | The 35 × 44 × 5 mm bearing count: team BOM line `H2` buys 18, the Fusion model places 26 `bearing_35x44x5_6707_1.6kN_15g` (at least one of them inside the RobStride 06 actuator model, so not every occurrence … | hardware lead | **yes** |
 | [fasteners-and-hardware → Screwing into an actuator](../bom/fasteners-and-hardware.md#screwing-into-an-actuator) | Retaining compound and grease type per bearing and sliding surface | hardware lead | **yes** |
+| [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
 | [index](../bom/index.md) | Allowance for tax, scrap and re-machining in the robot cost | hardware lead | no |
-| [printed-parts](../bom/printed-parts.md) | For every printed part: filament or powder grade (the covers only carry a Fusion material name such as `hip3_protection`), structural or cosmetic, print orientation and infill, cost and vendor | hardware lead | **yes** |
-| [printed-parts](../bom/printed-parts.md) | The gripper parts `3DP_grip01`–`06`, the camera-column parts `3DP_cam01`–`04` and the shoulder-yaw cover C `3DP_armP11` are listed as printed on the strength of their Fusion appearance (a plastic) and custom … | hardware lead | no |
+| [printed-parts](../bom/printed-parts.md) | For every printed part: filament or powder grade (the covers only carry a Fusion material name such as `hip3_protection`), structural or cosmetic, print orientation and infill; and a unit cost and vendor for every row the team BOM does not price | hardware lead | **yes** |
+| [printed-parts](../bom/printed-parts.md) | Materials: the four torso plates `3DP_body06`–`09` are PLA in the team BOM and `ABS Plastic 60%infill` in Fusion, and the team BOM's PLA is what this table shows; the material of the gripper parts … | hardware lead | no |
+| [printed-parts](../bom/printed-parts.md) | Ten open questions on how the team BOM's printed lines map onto the CAD parts: the cover lines are matched to the Fusion covers as groups, by material and piece count, not one by one, and the priced lines are … | hardware lead, from the CAD | no |
 | [printed-parts](../bom/printed-parts.md) | Geometry of the gripper's rack: Fusion `double_helix_rack_30teeth_6mm v2` holds only the empty component `Component115` (no body), so no STEP or STL of the rack exists; whether the teeth are cut into the … | hardware lead, from the CAD | no |
 | [printed-parts](../bom/printed-parts.md) | STEP and STL of the shank covers `3DP_legP09_shank_cover_a` / `3DP_legP10_shank_cover_b`: the files published under those names are byte-identical to the shoulder covers `3DP_armP05` / `3DP_armP06` (both pairs … | whoever stages the export | no |
 | [printed-parts](../bom/printed-parts.md) | Quantities are Fusion occurrence counts, and the left and right arm designs reuse one component name per cover, so one STL may serve both sides or one side may need a mirrored print | hardware lead, from the CAD | no |
 | [sourcing](../bom/sourcing.md) | Quoted lead times, with the quote date, for machining, the D436 and the RobStride actuators | hardware lead | no |
 | [sourcing → Supply-risk parts](../bom/sourcing.md#supply-risk-parts) | An alternate for the D436 and for each RobStride model, or what a substitution requires | hardware lead + perception lead | no |
 | [sourcing → Vendors](../bom/sourcing.md#vendors) | Manufacturer part numbers for the marketplace lines | hardware lead | no |
-| [sourcing → Price dates](../bom/sourcing.md#price-dates) | A checked date (`priced_as_of`) on every price; no price is dated | whoever re-sources the parts | no |
+| [sourcing → Price dates](../bom/sourcing.md#price-dates) | A re-check of each price against its vendor, with the date it was checked | whoever re-sources the parts | no |
 
 ## Fabrication
 
@@ -278,7 +282,7 @@ and check below is written against a voltage nobody has confirmed.
 | [faq](faq.md) | Camera module interface for another robot: mounting | hardware lead | no |
 | [faq](faq.md) | Issue template, contribution guide, support policy; what to do with an out-of-tolerance part; kits; build-log review | PI + hardware lead | no |
 | [full-specifications → Mass properties (Fusion model)](full-specifications.md#mass-properties-fusion-model) | Unspecified: mechanical stops, as-built mass breakdown, measured CoM and inertia, physical foot geometry, current draw and runtime, payload, measured walking speed, measured gimbal range and slew rate, IP rating, robot temperature range, noise | hardware lead + controls lead | no |
-| [part-index](part-index.md) | Part index (part ID → description, qty, subassembly, assembly steps), blocked until one of the three machined-part naming schemes is chosen — Schemes in use: `CNC_leg01`, `01_m03_shaft`, `B1_body_base_plate`.; See CNC parts. | hardware lead for the numbering, then whoever writes the generator | no |
+| [part-index](part-index.md) | Part index (part ID → description, qty, subassembly, assembly steps) — The parts lists carry the IDs (`CNC_leg01_hip_center_back`, `3DP_legP01_hip3_cover_a`);; the team BOM names its lines by function instead, … | hardware lead for the numbering, then whoever writes the generator | no |
 | [part-index](part-index.md) | CNC IDs arm05–arm10 and four quantities differ between the team's 32-part list and this site's list — / ID / Team list / This site / / --- / --- / --- / / arm05 / RS02_back_cover ×4 / RS02_shaft_bearing ×4 / / … | hardware lead | no |
 | [part-index → Mass properties](part-index.md#mass-properties) | Inertia about the centre of mass for every part whose `notes` give a ± bound: the export rounds the mass to 0.1 g and these parts sit far from their component origin — The `*_origin` columns are Fusion's exact … | hardware lead, from the CAD (`tools/fusion_export/`) | no |
 | [part-index → Mass properties](part-index.md#mass-properties) | Own-part mass, centre of mass and inertia for the parts whose Fusion component carries child components (inserts, magnets, mounted electronics), and the volume of every part until the export's STLs are written … | hardware lead, from the CAD: make those components leaf parts or export their bodies; whoever runs `tools/gen_part_properties.py` once `print/ | no |

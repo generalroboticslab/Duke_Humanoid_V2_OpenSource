@@ -8,21 +8,22 @@ Bill of materials (BOM) CSV rules, for content authors; not in the site nav.
 
 - Every site cost is computed from these CSVs by the macros in `main.py`, never
   typed into prose. A missing value renders as *not yet published*.
-- The scripts in `tools/` generate the CSVs from the source spreadsheets: change
-  the source and re-run the generator; never edit a CSV by hand.
+- The scripts in `tools/` generate the CSVs from the source: change the source
+  and re-run the generator; never edit a CSV by hand.
+- The six parts lists all come from one source, the team's own BOM
+  (`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`), through `tools/gen_bom.py`.
+  Where that spreadsheet and any older sheet disagree, the spreadsheet wins.
 
 ## Files
 
 | File | Rows | Contents |
 | --- | --- | --- |
-| `actuators.csv` | 6 | RobStride models |
-| `electronics.csv` | 11 | Computer, battery, power conversion, CAN adapters, IMU, cameras, servos |
-| `cnc-parts.csv` | 61 | Machined parts, `subassembly` = `leg` / `arm` / `body` |
-| `cables-connectors.csv` | 8 | Connectors, sleeving, USB cables |
-| `fasteners.csv` | 1 | Placeholder; no schedule yet |
-| `printed-parts.csv` | 48 | 45 printed parts from the Fusion tree, then 3 print-material rows (`MAT_*`) |
-| `test-fixtures.csv` | 1 | Not a robot part; excluded from every total |
-| `bom-reconciliation.csv` | 7 | Audit of the source spreadsheet totals; no part rows |
+| `actuators.csv` | 6 | RobStride models (team BOM `E1`-`E6`) |
+| `electronics.csv` | 14 | Computer, battery, power conversion, CAN adapters, IMU, cameras, servos, surge protector, distribution blocks, voltage checkers |
+| `cnc-parts.csv` | 35 | Machined parts, `subassembly` = `leg` / `arm` / `body`: the team BOM's 30 machined lines mapped to part IDs, plus 5 published part IDs the team BOM has no line for |
+| `cables-connectors.csv` | 1 | The one cable line of the team BOM |
+| `fasteners.csv` | 9 | Six bearing sizes and three screw sizes; none priced |
+| `printed-parts.csv` | 49 | 45 printed parts from the Fusion tree, 1 team BOM line with no CAD match, then 3 print-material rows (`MAT_*`) |
 | `part-properties.csv` | one per part in the Fusion model | Mass, bounding box, volume, centre of mass, inertia; no cost column, so never in a total |
 | `vendor-parts.csv` | one per vendor/other component with bodies in the Fusion model | Which BOM row each vendor component of the CAD belongs to; no cost column, so never in a total |
 | `modules.csv` | one per sub-assembly STEP the Fusion modules export wrote | The module (sub-assembly) download level: id, English name, class; no cost column |
@@ -34,8 +35,8 @@ macro on a missing file returns *not yet published*; the build stays green.
 
 - `bom_total()` is called with **no arguments** everywhere. It sums every parts
   CSV here except `NON_ROBOT_FILES` in `main.py` (`test-fixtures.csv`,
-  `tools.csv`, `optional.csv`, `spares.csv`); add any new non-robot file to it
-  in the same commit.
+  `tools.csv`, `optional.csv`, `spares.csv` — none of which exists today); add
+  any new non-robot file to it in the same commit.
 - `read_csv(...)` re-parses numbers: always pass `dtype="str",
   keep_default_na=False, disable_numparse=True` (the quoted string `"str"`).
 - In a `{% for %}` table, put any `{% set %}` above the header row, never
@@ -43,6 +44,9 @@ macro on a missing file returns *not yet published*; the build stays green.
 - `allow_missing_files: false` makes `read_csv` on a missing file fail the
   build. Gate it with `{% if data_file_exists("x.csv") %}`.
 - Leave an unknown price blank, never `0.00`: blank is skipped, zero is summed.
+  A team BOM line priced `0` is an unknown price, not a free part, so it lands
+  here blank with the note "Team BOM: no price yet" and the page prints a red
+  TODO. `bom_unpriced(csv)` lists exactly those rows.
 - No duplicate `part_id`.
 
 ## Columns — parts CSVs
@@ -51,7 +55,7 @@ Every column must be in the header row.
 
 | Column | Required | Meaning |
 | --- | --- | --- |
-| `subassembly` | yes | `leg` / `arm` / `body` / `actuators` / `electronics` / `harness` / `fasteners` / `printed` / `test_fixture`; reserved `head_camera` / `gripper` |
+| `subassembly` | yes | `leg` / `arm` / `body` / `actuators` / `electronics` / `harness` / `fasteners` / `printed` / `head_camera` / `gripper` |
 | `class` | yes | `off_the_shelf` / `machined` / `printed` / `consumable` |
 | `part_id` | yes | Matches the CAD filename and the assembly steps. No quantity in the ID (no `_x4`) |
 | `description` | yes | Human-readable name |
@@ -67,7 +71,13 @@ Every column must be in the header row.
 | `tolerance_finish` | machined | e.g. `±0.05 mm, anodised clear` |
 | `lead_time_days` | optional | Quoted lead time |
 | `priced_as_of` | if priced | ISO date the price was checked |
-| `notes` | optional | Free text |
+| `notes` | optional | Free text. Every generated row starts with the team BOM line it came from, verbatim, then anything the mapping leaves open |
+| `team_ref` | yes, when the team BOM has the row | The `#` value of the team BOM line the row came from (`E3`, `C21`, `P20`, `H1`). Several refs, comma-separated, mean the row's part is covered by several lines, or that a group of lines was matched to a group of parts without resolving which is which (the `notes` say so). Blank means the team BOM has no line for this part |
+
+**Quantities.** A purchased, machined or fastener row carries the team BOM's
+quantity. A printed row carries the Fusion occurrence count, because the team
+BOM's printed lines are grouped by cover half rather than by component; where
+the two differ, the row says both.
 
 **`print_profiles.csv` columns:** `part_id` (a `class=printed` row), `material`, `layer_height_mm`, `walls`,
 `infill_pct`, `orientation`, `supports` (`none` / `tree` / `normal`, plus
@@ -77,8 +87,10 @@ where), `printer_tested`.
 
 In `main.py`: `bom_subtotal(csv, subassembly=, part_class=, exclude_ids=)`,
 `bom_total(csv_names=, exclude_ids=)`, `bom_count(csv, ...)`, `bom_qty(csv, ...)`,
-`bom_unpriced(csv)`, `bom_priced_as_of(csv)`, `data_file_exists(csv)`, `money(x)`,
-`cad_links(part_id)`, `part_props(part_id)`.
+`bom_unpriced(csv)`, `bom_unpriced_count(csv=)`, `bom_row_count(csv=)`, `bom_priced_as_of(csv)`,
+`data_file_exists(csv)`, `money(x)`, `cad_links(part_id)`, `part_props(part_id)`, and for table cells
+`money_cell(value)`, `line_total_cell(row)`, `team_ref_cell(row)` — the only way a cost or a team
+ref reaches a cell, so a blank renders a red TODO and never `$0.00`.
 
 ## Downloadable CAD files
 

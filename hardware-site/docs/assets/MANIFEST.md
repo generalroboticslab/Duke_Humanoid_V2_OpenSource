@@ -1,7 +1,7 @@
 # Image manifest
 
 Every image this site needs and does not have, with the exact path it must be
-saved to and one line on what it must show. **112 images are missing.**
+saved to and one line on what it must show. **89 images are missing.**
 
 This is the list to hand to whoever renders the exploded views. It is not a
 wish list: each path below is already named on a page, so dropping a file at
@@ -92,41 +92,19 @@ in the page body yet; add the placeholder in the commit that adds the file.
 | `assets/fabrication/printed-parts-orientation.png` | `fabrication/printing-guide.md` | Each structural printed part shown in its validated print orientation, with the load direction the layer lines must not align with drawn on it. |
 | `assets/fabrication/heat-set-insert-seated.jpg` | `fabrication/printing-guide.md` | A heat-set insert correctly seated, next to one pressed in too far and one left proud. |
 
-## Missing — per-part families (78)
+## Missing — per-part families (55)
 
 One image per row of a BOM CSV. The filename **is** the `part_id`, so these
 can be produced in a batch and dropped in without touching a page.
 
 | Path pattern | Count | Page | What each must show |
 | --- | ---: | --- | --- |
-| `assets/bom/cnc/<part_id>.png` | 61 | `bom/cnc-parts.md` | One render per machined part, filename exactly the `part_id` in `cnc-parts.csv`. A machined part a builder cannot see is a part they will order wrong. |
-| `assets/bom/electronics/<part_id>.jpg` | 11 | `bom/electronics.md` | One photograph per bought electronic part, filename exactly the `part_id` in `electronics.csv`, so a builder can confirm the thing in the box is the thing on the list. |
+| `assets/bom/cnc/<part_id>.png` | 35 | `bom/cnc-parts.md` | One render per machined part, filename exactly the `part_id` in `cnc-parts.csv`. A machined part a builder cannot see is a part they will order wrong. |
+| `assets/bom/electronics/<part_id>.jpg` | 14 | `bom/electronics.md` | One photograph per bought electronic part, filename exactly the `part_id` in `electronics.csv`, so a builder can confirm the thing in the box is the thing on the list. |
 | `assets/bom/actuators/<part_id>.jpg` | 6 | `bom/actuators.md` | One photograph per Robstride model, filename exactly the `part_id` in `actuators.csv`. The models look alike and are not interchangeable. |
 
-??? note "The 61 filenames for `assets/bom/cnc/<part_id>.png`"
+??? note "The 35 filenames for `assets/bom/cnc/<part_id>.png`"
 
-    - `01_m03_shaft`
-    - `02_hip_0_m04_back_bracket`
-    - `03_hip_1_m04_front_retainer`
-    - `04_hip_1_m04_shaft`
-    - `05_hip_1_front_bracket`
-    - `06_hip_1_back_bracket`
-    - `07_hip_1_front_shaft`
-    - `08_hip_1_back_shaft`
-    - `09_hip_2_back_cover`
-    - `10_m03_front_retainer`
-    - `11_knee_m04_front_retainer`
-    - `12_knee_m04_back_cover`
-    - `13_knee_front_shaft`
-    - `14_knee_back_shaft`
-    - `15_ankle_cap`
-    - `16_ankle_0_front_retainer`
-    - `17_ankle_0_back_cover`
-    - `18_ankle_1_back_retainer`
-    - `19_ankle_1_m02_back_cover`
-    - `20_ankle_1_front_retainer`
-    - `21_ankle_1_front_shaft`
-    - `22_foot_plate`
     - `CNC_leg01_hip_center_back`
     - `CNC_leg02_RS03_shaft_coupler`
     - `CNC_leg03_RS03_shaft_bearing_retainer`
@@ -158,28 +136,27 @@ can be produced in a batch and dropped in without touching a page.
     - `CNC_arm11_wrist_roll`
     - `CNC_arm12_wrist_pitch`
     - `CNC_arm13_RS05_shaft_coupler`
-    - `B1_body_base_plate`
-    - `B2_body_top_plate`
-    - `B3_body_side_plate`
-    - `B5_body_shelf`
     - `CNC_body01_bottom_plate`
     - `CNC_body02_side_plate`
     - `CNC_body03_top_plate`
     - `CNC_body04_front_plate`
 
-??? note "The 11 filenames for `assets/bom/electronics/<part_id>.jpg`"
+??? note "The 14 filenames for `assets/bom/electronics/<part_id>.jpg`"
 
     - `EL_COMPUTE_MINIPC`
     - `EL_BATTERY_6S`
-    - `EL_CAM_D436`
-    - `EL_IMU_TM171`
-    - `EL_CAN_ADAPTER`
-    - `EL_BUCK_12V_ENC`
-    - `EL_BUCK_48V_12V`
     - `EL_TVS_DIODE`
     - `EL_SERVO_DRIVER`
+    - `EL_BUCK_12V_ENC`
+    - `EL_BUCK_48V_12V`
+    - `EL_CAN_ADAPTER`
+    - `EL_CAM_D436`
     - `EL_SERVO_FEETECH`
     - `EL_USB_HUB`
+    - `EL_IMU_TM171`
+    - `EL_SURGE_PROTECTOR`
+    - `EL_DIST_BLOCK`
+    - `EL_VOLTAGE_CHECKER`
 
 ??? note "The 6 filenames for `assets/bom/actuators/<part_id>.jpg`"
 
@@ -212,8 +189,8 @@ figure, and none of them substitutes for a render.
 | --- | ---: |
 | Referenced by a page, missing | 8 |
 | Named on a page, not yet placed | 26 |
-| Per-part families | 78 |
-| **Missing, total** | **112** |
+| Per-part families | 55 |
+| **Missing, total** | **89** |
 | Present | 7 |
 
 ## Regenerating this page

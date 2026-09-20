@@ -2,12 +2,16 @@
 
 Computer, battery, power conversion, Controller Area Network (CAN) and sensing:
 {{ bom_subtotal("electronics.csv") }} across {{ bom_count("electronics.csv") }}
-lines (MPN: manufacturer part number).
+lines (MPN: manufacturer part number). Every line is priced in the team BOM.
 
-| Part ID | Description | MPN | Qty | Unit cost | Line total | Vendor |
-| --- | --- | --- | ---: | ---: | ---: | --- |
-{% for r in pd_read_csv("data/electronics.csv", dtype="str", keep_default_na=False).to_dict("records") %}| `{{ r.part_id }}` | {{ r.description }} | {{ r.mpn or "**TODO**{ .dh-missing }" }} | {{ r.qty_per_robot }} | {{ money(r.unit_cost_usd|float) }} | {{ money((r.unit_cost_usd|float) * (r.qty_per_robot|int)) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
-{% endfor %}| | | | | **Total** | **{{ bom_subtotal("electronics.csv") }}** | |
+| Part ID | Description | MPN | Team ref | Qty | Unit cost | Line total | Vendor |
+| --- | --- | --- | --- | ---: | ---: | ---: | --- |
+{% for r in pd_read_csv("data/electronics.csv", dtype="str", keep_default_na=False).to_dict("records") %}| `{{ r.part_id }}` | {{ r.description }} | {{ r.mpn or "**TODO**{ .dh-missing }" }} | {{ team_ref_cell(r) }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
+{% endfor %}| | | | | | **Total** | **{{ bom_subtotal("electronics.csv") }}** | |
+
+**Team ref** is the line in the team BOM spreadsheet
+(`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19), which is where
+every quantity and price on this page comes from.
 
 ## Where each part goes
 
@@ -21,6 +25,10 @@ lines (MPN: manufacturer part number).
 | `EL_SERVO_FEETECH`, `EL_SERVO_DRIVER` | One servo per gripper, each on its own Waveshare driver board ([Gripper](../assembly/gripper.md)) |
 | `EL_TVS_DIODE` | Transient-voltage-suppression (TVS) diode across power and ground at each distribution-block pair |
 | `EL_BUCK_48V_12V`, `EL_BUCK_12V_ENC` | 48 V→12 V conversion; conflict under [Power path](#power-path) |
+| `EL_SURGE_PROTECTOR` | Pack lead, before the 48 V bus. That this is the surge protector drawn on the power diagram is **UNVERIFIED**{ .dh-unverified }: the team BOM gives a vendor storefront, not one product |
+| `EL_DIST_BLOCK` | The four distribution-block terminals, two power + ground pairs. That the drawn blocks are this part is **UNVERIFIED**{ .dh-unverified } |
+| `EL_USB_HUB` | 3 off. Which devices hang off which hub is **UNVERIFIED**{ .dh-unverified } |
+| `EL_VOLTAGE_CHECKER` | Pack voltage check, 1–8S. Where the two sit on the robot is not recorded **TODO**{ .dh-missing } |
 
 What the deploy stack configures or assumes for the computer and the IMU:
 
@@ -51,12 +59,10 @@ waist) and upper-body pair (arms, both shoulder_1, gimbals, computer branch).
 
 | Item | Evidence | Status |
 | --- | --- | --- |
-| Surge protector | Power diagram, pack lead before the 48 V bus | Part not identified **TODO**{ .dh-missing } |
 | 10 A fuse and holder | Power diagram, computer branch only | Part not identified **TODO**{ .dh-missing } |
-| Distribution blocks, 4 (two power + ground pairs) | Power diagram; design log links AliExpress 3256806176225478, "Double row 8" | Count and variant **UNVERIFIED**{ .dh-unverified } |
-| Battery charger | Design log links Amazon B09WKN863V (listing says ISDT) | Model **UNVERIFIED**{ .dh-unverified } |
+| Battery charger | Design log links Amazon B09WKN863V (listing says ISDT) | Not in the team BOM; model **UNVERIFIED**{ .dh-unverified } |
 | EC5 battery connectors | [Cables and connectors](cables-and-connectors.md#not-in-this-list) | — |
 | E-stop, main disconnect, pre-charge | Not drawn; the run scripts assume a physical e-stop | [Power system](../electrical/power-system.md) **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — parts-list rows (MPN, qty, link) for the surge protector, 10 A fuse and holder, the four power distribution terminal bars and the charger"
+!!! missing "MISSING — a parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage checker, which the team BOM identifies by a vendor link alone"
     *Owner: electrical lead.*

@@ -58,8 +58,10 @@ Scene rules:
 
 parts.json: {"parts": {part_id: [{node, path, center, radius}]},
              "vendor": {file_name: [{node, path, center, radius}]},
-             "info": {part_id | "vendor:"+file_name: {desc, kind, qty, material, mass_g,
-                      bbox, fusion_name, appearance, module_path}},
+             "info": {part_id | "vendor:"+file_name: {desc, kind, qty, material, team_ref,
+                      mass_g, bbox, fusion_name, appearance, module_path}},
+                      (team_ref: the line of the team BOM the part comes from, "" for a
+                       part the team BOM does not list)
              "hardware": {"hardware:k": {n, desc}},
              "axes": {"x": [..], "y": [..], "z": [..]},
              "modules": {module_file_name: {name, path, path_prefix, mass_g, depth, qty,
@@ -836,7 +838,8 @@ def main() -> int:
     for f in ("cnc-parts.csv", "printed-parts.csv"):
         for r in read_csv(SITE / "docs" / "data" / f):
             info[r["part_id"]] = {"desc": r["description"], "kind": r["process"] or r["class"],
-                                  "qty": r["qty_per_robot"], "material": r["material"]}
+                                  "qty": r["qty_per_robot"], "material": r["material"],
+                                  "team_ref": r.get("team_ref", "")}
     rows_by_pid: dict[str, dict] = {}
     for o in occ:
         if o["pid"] and o["pid"] not in rows_by_pid:

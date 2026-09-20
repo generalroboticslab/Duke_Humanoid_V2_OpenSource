@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import csv
 import os
+from decimal import Decimal, ROUND_HALF_UP
 from typing import Any, Callable, Iterable
 
 # Rendered in place of a number whenever the underlying CSV is missing or has no
@@ -46,7 +47,7 @@ COL_ID = "part_id"
 # that end up in the machine", so the default total is everything in the data
 # directory that carries the parts schema, minus this set.
 NON_ROBOT_FILES = {
-    "test-fixtures.csv",   # development fixtures — see docs/bom/cnc-parts.md
+    "test-fixtures.csv",   # development fixtures, should one land again
     "tools.csv",           # tools tier, priced separately
     "optional.csv",        # third camera module, spares, upgrades
     "spares.csv",          # reserved
@@ -82,11 +83,11 @@ def _header(path: str) -> list[str]:
 def _is_parts_file(path: str) -> bool:
     """True if this CSV follows the parts schema in ``docs/data/README.md``.
 
-    Guards the default of ``bom_total()``: ``bom-reconciliation.csv`` (an audit
-    table) already lives in the same directory and ``print_profiles.csv`` (print
-    settings) will when it lands; neither carries a ``part_id`` or a cost
-    column, so they are excluded by shape rather than by being listed one by
-    one.
+    Guards the default of ``bom_total()``: ``part-properties.csv``,
+    ``vendor-parts.csv``, ``modules.csv``, ``joints.csv`` and ``cad-files.csv``
+    live in the same directory, and ``print_profiles.csv`` (print settings)
+    will when it lands; none carries both a ``part_id`` and a cost column, so
+    they are excluded by shape rather than by being listed one by one.
     """
     cols = set(_header(path))
     return COL_ID in cols and bool(cols & {COL_UNIT, COL_TOTAL})
@@ -159,10 +160,17 @@ def define_env(env):
 
     @env.macro
     def money(amount: float | None) -> str:
-        """Format a USD figure the one way this site formats USD figures."""
+        """Format a USD figure the one way this site formats USD figures.
+
+        Rounds half up on the decimal value, as a spreadsheet displays it: the
+        machined subtotal is 4198.575 in the team BOM and must print $4,198.58,
+        which ``f"{x:,.2f}"`` alone does not give (the binary float sits just
+        below .575).
+        """
         if amount is None:
             return PENDING
-        return f"${amount:,.2f}"
+        cents = Decimal(f"{amount:.6f}").quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+        return f"${cents:,.2f}"
 
     @env.macro
     def bom_subtotal(
@@ -242,6 +250,66 @@ def define_env(env):
         if not rows:
             return PENDING
         return ", ".join(missing) if missing else "none"
+
+    @env.macro
+    def bom_unpriced_count(csv_name: str | None = None) -> str:
+        """How many rows carry no usable cost, as a string.
+
+        With no argument this counts every parts CSV a whole-robot total covers,
+        so a page can state the size of the hole without a hand-typed number
+        that goes stale the day the team prices a line. Today 53 rows have no
+        usable cost: the team BOM prices its 30 unpriced printed lines at ``0``,
+        leaves its 9 hardware lines blank, and has no line at all for the rest
+        (``gen_bom.py`` writes a blank cost for all of them). Each such row
+        prints a red TODO in its cost cell rather than ``$0.00``, which is what
+        a blank would become if it were parsed as a number.
+        """
+        directory = _data_dir(env)
+        names = [csv_name] if csv_name else _robot_csv_names(directory)
+        if not names:
+            return PENDING
+        rows = [r for n in names for r in _read(os.path.join(directory, n))]
+        if not rows:
+            return PENDING
+        return str(sum(1 for r in rows if _row_total(r) is None))
+
+    @env.macro
+    def bom_row_count(csv_name: str | None = None) -> str:
+        """Total number of part rows, over one CSV or the whole robot."""
+        directory = _data_dir(env)
+        names = [csv_name] if csv_name else _robot_csv_names(directory)
+        rows = [r for n in names for r in _read(os.path.join(directory, n))]
+        return str(len(rows)) if rows else PENDING
+
+    @env.macro
+    def money_cell(value: Any) -> str:
+        """A cost cell for a table row: the figure, or a red TODO if blank.
+
+        Never call ``money(row.unit_cost_usd|float)`` in a page: Jinja's
+        ``float`` filter turns an empty cell into ``0.0`` and the page then
+        states a confident ``$0.00`` for a part nobody has priced. This macro
+        is the only way a cost reaches a table cell.
+        """
+        amount = _num(value)
+        return TODO if amount is None else money(amount)
+
+    @env.macro
+    def line_total_cell(row: dict[str, str]) -> str:
+        """Line total (qty × unit cost) for one CSV row, or a red TODO."""
+        total = _row_total(row)
+        return TODO if total is None else money(total)
+
+    @env.macro
+    def team_ref_cell(row: dict[str, str]) -> str:
+        """The team BOM line this row came from, or a red TODO if it has none.
+
+        ``team_ref`` is the ``#`` value of the line in the team's spreadsheet
+        (``E3``, ``C21``, ``P20``, ``H1``). Blank means the team BOM has no line
+        for this part at all, which is a gap in the list, not a formatting
+        detail, so it reads as a TODO rather than a dash.
+        """
+        ref = (row.get("team_ref") or "").strip()
+        return f"`{ref}`" if ref else TODO
 
     @env.macro
     def bom_priced_as_of(csv_name: str) -> str:

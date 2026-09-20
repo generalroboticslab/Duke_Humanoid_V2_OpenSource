@@ -111,6 +111,13 @@
   "qty_in_model": 2,
   "via": "robstride00"
  },
+ "half-bearing_30x37x4_6706_0.9kN_8g": {
+  "part_id": "FAS_BEARING_30X37X4",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 30 x 37 x 4 mm",
+  "qty_in_model": 4,
+  "via": ""
+ },
  "0001755652_1_1_30_GR-2202_ASM_1_ASM_1_1_30_GR-2202_ASM_FL46BLW10-48V-5N.m-DE_2__FL46BLW10-48V-5N.m-DE": {
   "part_id": "ACT_RS05",
   "bom_file": "actuators.csv",
@@ -335,6 +342,13 @@
   "qty_in_model": 1,
   "via": "Robstride 06-No Back Cover"
  },
+ "half-bearing_35x44x5_6707_1.6kN_15g~2": {
+  "part_id": "FAS_BEARING_35X44X5",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 35 x 44 x 5 mm",
+  "qty_in_model": 14,
+  "via": ""
+ },
  "1_1_04_EB672-503_1.stp": {
   "part_id": "ACT_RS02",
   "bom_file": "actuators.csv",
@@ -510,13 +524,6 @@
   "qty_in_model": 6,
   "via": ""
  },
- "USB-C_Cable": {
-  "part_id": "CBL_USBA_USBC",
-  "bom_file": "cables-connectors.csv",
-  "description": "USB-A to USB-C 3.1 Gen 2 cable",
-  "qty_in_model": 12,
-  "via": ""
- },
  "Component1": {
   "part_id": "EL_IMU_TM171",
   "bom_file": "electronics.csv",
@@ -559,11 +566,32 @@
   "qty_in_model": 13,
   "via": "Vention USB Hub"
  },
+ "battery_tester": {
+  "part_id": "EL_VOLTAGE_CHECKER",
+  "bom_file": "electronics.csv",
+  "description": "LiPo voltage checker, 1-8S, with case",
+  "qty_in_model": 2,
+  "via": ""
+ },
  "battery_zeee_10000mah": {
   "part_id": "EL_BATTERY_6S",
   "bom_file": "electronics.csv",
   "description": "Zeee 6S LiPo battery, 10000 mAh, 22.2 V, 2-pack",
   "qty_in_model": 2,
+  "via": ""
+ },
+ "block": {
+  "part_id": "EL_DIST_BLOCK",
+  "bom_file": "electronics.csv",
+  "description": "Power distribution block terminals",
+  "qty_in_model": 4,
+  "via": ""
+ },
+ "half-bearing-45x58x7_6809_5.4kN_40g": {
+  "part_id": "FAS_BEARING_45X58X7",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 45 x 58 x 7 mm",
+  "qty_in_model": 26,
   "via": ""
  },
  "IntelRealsense_D435_Multibody_v9_1": {
@@ -1694,11 +1722,11 @@
   "via": "Robstride 06-No Back Cover"
  },
  "half-bearing_35x44x5_6707_1.6kN_15g": {
-  "part_id": "ACT_RS06",
-  "bom_file": "actuators.csv",
-  "description": "RobStride 06 quasi-direct-drive actuator",
+  "part_id": "FAS_BEARING_35X44X5",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 35 x 44 x 5 mm",
   "qty_in_model": 38,
-  "via": "Robstride 06-No Back Cover"
+  "via": ""
  },
  "weight": {
   "part_id": "ACT_RS06",
@@ -1706,6 +1734,20 @@
   "description": "RobStride 06 quasi-direct-drive actuator",
   "qty_in_model": 3,
   "via": "Robstride 06-No Back Cover"
+ },
+ "half-bearing_35x47x7_6807_4.0kN_29g": {
+  "part_id": "FAS_BEARING_35X47X7",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 35 x 47 x 7 mm",
+  "qty_in_model": 8,
+  "via": ""
+ },
+ "half-bearing_50x65x7_6810_6.1kN_52g": {
+  "part_id": "FAS_BEARING_50X65X7",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 50 x 65 x 7 mm",
+  "qty_in_model": 4,
+  "via": ""
  },
  "1_1_02_EB1201-501_1_1_1": {
   "part_id": "ACT_RS04",

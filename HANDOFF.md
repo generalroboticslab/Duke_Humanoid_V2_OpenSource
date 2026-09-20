@@ -7,13 +7,14 @@ Last worked on: 2026-09-19 (Windows). Continue from this repo. Read `CLAUDE.md` 
 | Item | State |
 |---|---|
 | Site (`hardware-site/`, MkDocs Material) | 50 pages, English, `mkdocs build --strict` clean |
-| Punch list (`docs/reference/todo.md`, generated) | **181 open items, 55 block release** — every gap is a red MISSING/UNVERIFIED box |
-| Images still needed (`docs/assets/MANIFEST.md`, generated) | 112, incl. the whole-robot exploded view (`assets/images/exploded-overview.png`, not yet made) |
+| Punch list (`docs/reference/todo.md`, generated) | **184 open items, 56 block release** — every gap is a red MISSING/UNVERIFIED box |
+| Images still needed (`docs/assets/MANIFEST.md`, generated) | 89, incl. the whole-robot exploded view (`assets/images/exploded-overview.png`, not yet made) |
 | Exploded-view animations | 9 web MP4s in `docs/assets/exploded/`, embedded on the assembly pages |
 | Wiring diagrams | `hardware/*.jpg` → `docs/assets/wiring/`, on the electrical pages |
 | CAD downloads (`docs/files/`) | 86 files live (120 MB) **from the 14:23 export**: 32 CNC STEP, 27 printed parts (STEP + STL), whole-robot STEP (zip), overall-dimensions PDF; `.f3z` (319 MB) as release asset `cad-v2.1-rc1`. Must be re-staged from the 16:46 export (unique file names, 45 printed parts now). No per-part drawings exist |
 | Authoritative CAD export | `cad/humanoid_2.1_latest_2026-09-19_1646/` — `fusion_export` re-run started 16:46 (the 16:07 run never wrote `assembly/`, `step/` or `print/`): `tree.csv` complete (629 components with Fusion mass, centre of mass, inertia, appearance colour, unique `file_name`; same values as the 16:07 tree except the pose-dependent bounding boxes of 16 subassemblies and 2 mixed components), whole-robot STEP + `.f3z` written 16:51, `step/` + `print/` being written at 16:55, no `export.log` yet. `<1607>/modules/` holds the 128 module STEPs + `modules.csv` from a 16:42 run of `fusion_export_modules`, but that run wrote no `joints.csv` / `transforms.csv` (its log has no `wrote joints.csv` line, so Fusion ran a copy of the script from before those writers were added): re-run it on `<1646>/` |
-| Parts data (generated) | `docs/data/printed-parts.csv` 45 printed rows + 3 material rows; `docs/data/part-properties.csv` 76 rows from the 16:46 tree (Fusion mass / COM / inertia; volumes fill in as `print/*.stl` appear — re-run after `export.log`); `docs/data/joints.csv` not written yet (needs the modules export with the joints writer) |
+| BOM source | **The team's BOM spreadsheet `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` (2026-09-19, WIP) is the parts list** ("以团队的为准"). `tools/gen_bom.py` writes all six parts CSVs from it (114 rows, $12,345.9485 = the sheet's own SUM cell), maps each line to the CAD part IDs the viewer and `docs/files/` key on, and records the sheet line in a `team_ref` column shown on every BOM table. 53 rows have no usable cost (the sheet's 30 zero-priced printed lines and 9 blank hardware lines, plus 13 rows the sheet has no line for): they carry a **blank** cost in the CSV and render a red TODO, never `$0.00`. The two-sheet CSV source and `gen_sheet1.py` / `gen_cnc.py` / `gen_recon.py` / `audit_sheet2.py` / `bom-reconciliation.csv` / `test-fixtures.csv` are superseded and deleted |
+| Parts data (generated) | `docs/data/printed-parts.csv` 49 rows: 45 printed parts from the Fusion tree, `P39` (a team BOM line with no CAD match yet) and 3 material rows; `docs/data/part-properties.csv` 76 rows from the 16:46 tree (Fusion mass / COM / inertia; volumes fill in as `print/*.stl` appear — re-run after `export.log`); `docs/data/joints.csv` not written yet (needs the modules export with the joints writer) |
 | Local preview | `http://localhost:8321/duke_humanoid_v2/` — the `/duke_humanoid_v2/` prefix is intentional (`site_url`) |
 
 ## CAD export pipeline — three download levels
@@ -124,7 +125,7 @@ Site-side, in order: `gen_printed.py` → `gen_part_properties.py <export>` → 
 ## Repo layout
 
 - `hardware-site/` — site. `tools/` regenerates everything derived (see `tools/README.md`): BOM generators
-  (`gen_sheet1.py`, `gen_cnc.py`, `gen_recon.py`, read `reference/bom/`), `gen_printed.py`,
+  (`gen_bom.py`, reads `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`), `gen_printed.py`,
   `gen_part_properties.py`, `stage_cad_export.py`, `gen_cad_manifest.py` (also enforces GitHub limits: 95
   MB/file, 900 MB total), `build_viewer.py`, `gen_punchlist.py`, `gen_image_manifest.py`, and the four Fusion
   scripts.

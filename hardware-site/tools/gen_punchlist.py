@@ -363,7 +363,7 @@ def render(items: list[dict]) -> str:
     w("| Blocker | Where it is tracked |")
     w("| --- | --- |")
     w("| No drawings, print plates or native Fusion archive — per-part and whole-robot STEP are published | [CAD downloads](../fabrication/cad-downloads.md) |")
-    w("| No fastener schedule — every screw, nut, washer and bearing is one placeholder row | [Fasteners and hardware](../bom/fasteners-and-hardware.md) |")
+    w("| No fastener schedule — the team BOM's bearing and screw lines carry no price, no vendor and no screw quantity | [Fasteners and hardware](../bom/fasteners-and-hardware.md) |")
     w("| No torque values and no threadlocker grade, anywhere | [Assembly](../assembly/index.md), [Tools](../assembly/tools.md) |")
     w("| No hardware licence and no documentation licence | [Citation and licence](citation-and-license.md) |")
     w("| No human-safety procedure: no e-stop doctrine, no power-down order, no bystander distance | [Safety](../before-you-start/safety.md) |")

@@ -42,5 +42,8 @@ Machining vendor: [CNC guide](../fabrication/cnc-guide.md#order-the-parts).
 
 ## Price dates
 
-!!! missing "MISSING — a checked date (`priced_as_of`) on every price; no price is dated"
+Every price on this site is the team BOM's, dated
+{{ bom_priced_as_of("actuators.csv") }}.
+
+!!! missing "MISSING — a re-check of each price against its vendor, with the date it was checked"
     *Owner: whoever re-sources the parts.*

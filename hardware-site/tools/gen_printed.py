@@ -1,17 +1,20 @@
-"""Add the printed parts to docs/data/printed-parts.csv from the Fusion tree.
+"""The printed parts of our own design: Fusion component -> site `part_id`.
 
-    python tools/gen_printed.py [path/to/tree.csv]
+    python tools/gen_printed.py [path/to/tree.csv]       # prints the mapping
 
-`gen_sheet1.py` writes the three filament/powder rows the team sheet has; this
-script appends one row per printed component of our own design found in the
-Fusion export (`cad/<export>/tree.csv`, written by tools/fusion_export/).
+This module no longer writes a CSV: `tools/gen_bom.py` writes
+`docs/data/printed-parts.csv` from the team BOM spreadsheet and this table.
+What lives here is the mapping itself, which `gen_bom.py`,
+`stage_cad_export.py`, `build_viewer.py` and `gen_part_properties.py` all
+import so that one part has one ID everywhere (`docs/files/<kind>/<part_id>_
+rev<NN>.*`, the viewer, `part-properties.csv`).
 
 Which components are listed is the `PRINTED` table below: the `3DP_` components,
 the unnamed `ComponentNN` covers (known only by their `*_protection` material),
 the gripper's own parts, the camera-column parts and the end-effector
-attachment. Material and process come from the Fusion material name when it is
-a print material (`MATERIALS`); a custom material name (`rail`, `Base`,
-`hip3_protection`, ...) gives a blank material and a note, never a guess.
+attachment. `material_of` maps a Fusion material name to a site material and
+process only when it is a print material (`MATERIALS`); a custom material name
+(`rail`, `Base`, `hip3_protection`, ...) returns blanks, never a guess.
 Quantities are the occurrence counts in the tree, summed over the left and
 right copies of a component (the arms and legs are separate linked designs, so
 one part is two Fusion components with distinct `file_name`s).
@@ -23,8 +26,9 @@ and a shoulder cover in the arms; `Component34`..`Component37` are also
 RealSense parts in the torso. An unscoped `ComponentNN` key means the arms.
 `name` also matches Fusion's `name (1)` copies (the second camera column).
 
-Run after gen_sheet1.py. `stage_cad_export.py`, `build_viewer.py` and
-`gen_part_properties.py` import PRINTED / pick to name the files.
+Run it on its own to check a fresh Fusion export: it prints one line per part
+(quantity, CAD mass, material) and warns about any entry the tree has no
+component for.
 """
 
 from __future__ import annotations
@@ -37,10 +41,6 @@ import sys
 from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
-OUT = SITE / "docs" / "data" / "printed-parts.csv"
-COLS = ["subassembly", "class", "part_id", "description", "mpn", "vendor", "vendor_url", "alt_mpn", "alt_url",
-        "qty_per_robot", "unit_cost_usd", "total_cost_usd", "material", "process", "tolerance_finish",
-        "lead_time_days", "priced_as_of", "notes"]
 
 # (fusion component name[|scope], part_id, subassembly, description). Roles of the
 # unnamed `ComponentNN` covers come from their Fusion material name and position only.
@@ -154,40 +154,27 @@ def material_of(fusion_material: str) -> tuple[str, str]:
 
 
 def main() -> int:
-    tree = load_tree(find_tree(sys.argv[1] if len(sys.argv) > 1 else None))
-    with open(OUT, encoding="utf-8-sig", newline="") as fh:
-        keep = [r for r in csv.DictReader(fh) if r["part_id"].startswith("MAT_")]
-    rows = []
+    """Print the mapping against a Fusion export; writes nothing."""
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    path = find_tree(sys.argv[1] if len(sys.argv) > 1 else None)
+    tree = load_tree(path)
+    print(f"{path}")
+    missing = 0
     for key, pid, sub, desc in PRINTED:
         occ = pick(tree, key)
         if not occ:
-            print(f"WARNING {pid}: {key} not in tree", file=sys.stderr)
+            print(f"WARNING {pid}: `{key}` is not in the tree", file=sys.stderr)
+            missing += 1
             continue
         first = occ[0]
-        mat = first["material"]
-        material, proc = material_of(mat)
         qty = sum(int(r["qty"]) for r in occ)
-        files = sorted({r["file_name"] for r in occ})
-        fusion_name = re.sub(r" \(\d+\)$", "", first["fusion_name"])
-        notes = (f"From the Fusion tree: component `{fusion_name}`, export file(s) "
-                 f"{', '.join(f'`{f}`' for f in files)}, {qty} occurrence(s), {first['mass_g']} g each in CAD.")
-        if int(first["children"]):
-            notes += (f" The Fusion component carries {first['children']} child component(s) "
-                      f"(inserts, magnets, mounted parts): its CAD mass includes them.")
-        if not material:
-            notes += (f" Fusion material name `{mat}` (appearance `{first['appearance'] or '?'}`): "
-                      f"filament and print settings not recorded in CAD.")
-            if "protection" not in mat.lower():
-                notes += " Listed as printed on the strength of that appearance only; the process is not confirmed."
-        rows.append({c: "" for c in COLS} | dict(
-            subassembly=sub, **{"class": "printed"}, part_id=pid, description=desc, qty_per_robot=qty,
-            material=material, process=proc, notes=notes))
-    with open(OUT, "w", newline="", encoding="utf-8") as fh:
-        w = csv.DictWriter(fh, fieldnames=COLS, lineterminator="\n")
-        w.writeheader()
-        w.writerows(rows + keep)
-    print(f"{OUT.relative_to(SITE).as_posix()}: {len(rows)} printed parts + {len(keep)} material rows")
-    return 0
+        material, process = material_of(first["material"])
+        print(f"{pid:42s} {sub:12s} x{qty:<3d} {first['mass_g'] or '?':>7s} g  "
+              f"{material or '(no print material)':34s} {process:4s} `{first['material']}`")
+    print(f"{len(PRINTED)} printed parts, {missing} not found in this export. "
+          f"tools/gen_bom.py writes docs/data/printed-parts.csv from this table.")
+    return 1 if missing else 0
 
 
 if __name__ == "__main__":
