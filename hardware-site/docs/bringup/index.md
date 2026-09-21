@@ -24,11 +24,6 @@ Do the stages in order; each assumes the previous one passed.
     The joints are quasi-direct-drive: cutting power drops the robot. A bent-leg
     hang tilts the torso and corrupts the body-frame geometry.
 
-## Keep one owner per CAN bus
-
-Stop `humanoid_real_env.py` before any tool that talks to the motors: two
-clients on one CAN (Controller Area Network) bus look like a harness fault.
-
 {% include "bringup/robot-computer-setup.md" %}
 
 {{ step_ns("first-power-on") }}
