@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **18 open items** across **11 pages**, of which **5 block the public release**.
+Every unresolved item on this site, in one table: **16 open items** across **10 pages**, of which **3 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,27 +21,25 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Before you start | 3 | 3 |
+| Before you start | 2 | 2 |
 | Bill of materials | 4 | 0 |
 | Assembly | 2 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| Reference | 1 | 1 |
-| **Total** | **18** | **5** |
+| **Total** | **16** | **3** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 18.
+more than 16.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Electrical lead | 12 | 3 |
+| Electrical lead | 11 | 2 |
 | Hardware lead | 5 | 1 |
 | Controls lead | 3 | 0 |
 | BOM owner | 2 | 0 |
 | Safety sign-off | 2 | 1 |
-| PI | 1 | 1 |
 
 ## What the release still owes
 
@@ -51,18 +49,15 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-| No hardware or documentation licence — nobody may legally reuse the design | [Citation and licence](citation-and-license.md) |
-| No e-stop is specified, though the run scripts assume one | [Safety](../before-you-start/safety.md#rules) |
-| No fuse in the battery path | [Power system](../electrical/power-system.md#protection-disconnect-and-e-stop) |
+| No fuse in the battery path — a pack short is the worst-case fault | [Power system](../electrical/power-system.md#protection-and-disconnect) |
 | No lifting points or sling route on the robot | [Safety](../before-you-start/safety.md#rules) |
-| No physical power-on and power-off order | [Safety](../before-you-start/safety.md#rules) |
+| No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](../before-you-start/safety.md#rules) |
 
 ## Before you start
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [safety → Rules](../before-you-start/safety.md#rules) | Lifting points on the robot, sling route and clearance zone — The gantry itself is specified above;; where to attach to the robot is not. | hardware lead | **yes** |
-| [safety → Rules](../before-you-start/safety.md#rules) | E-stop: none in the bill of materials or power diagram, yet the run scripts assume one; mounting, what it cuts, remote or dead-man switch, restart checks — Scripts: `humanoid_nav_step_test.py`, `humanoid_joint_monkey_hw.py`. | electrical lead | **yes** |
 | [safety → Rules](../before-you-start/safety.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
 
 ## Bill of materials
@@ -94,7 +89,7 @@ across every step of every limb, and each carries the flag in its own right.
 | [power-system → Wire the 48 V bus](../electrical/power-system.md#wire-the-48-v-bus) | TVS diodes fitted at each location (BOM: 10) | electrical lead | no |
 | [power-system → Wire the 48 V bus](../electrical/power-system.md#wire-the-48-v-bus) | Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors, charger: diagram or team log only, not the BOM; no confirmed part numbers | BOM owner + electrical lead | no |
 | [power-system → Feed the 12 V rail](../electrical/power-system.md#feed-the-12-v-rail) | Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget | electrical lead | no |
-| [power-system → Protection, disconnect and e-stop](../electrical/power-system.md#protection-disconnect-and-e-stop) | Pack-path fuse (none drawn); surge protector part number and rating | electrical lead + safety officer | **yes** |
+| [power-system → Protection and disconnect](../electrical/power-system.md#protection-and-disconnect) | Pack-path fuse (none drawn); surge protector part number and rating | electrical lead + safety officer | **yes** |
 
 ## Bring-up
 
@@ -106,12 +101,6 @@ and check below is written against a voltage nobody has confirmed.
 | --- | --- | --- | :-: |
 | [first-power-on → Power the computer only (step 1)](../bringup/first-power-on.md#step-1) | How to power the computer alone: the power diagram feeds it from the arm motors' distribution block, no disconnect drawn — Do not improvise. | electrical lead | no |
 | [motor-id-and-config → Set an ID](../bringup/motor-id-and-config.md#set-an-id) | Whether an ID can only be set with the motor alone on the bus, and what firmware baseline the team ran — The procedure above is the vendor tool's. | controls lead | no |
-
-## Reference
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [citation-and-license → Licence](citation-and-license.md#licence) | Hardware licence (e.g. CERN-OHL-S or -W) and documentation licence (e.g. CC-BY-4.0), with the licence file beside the CAD and on the download page; note V1 was MIT | PI + the university's licensing office | **yes** |
 
 ## Items that are not TODO blocks
 

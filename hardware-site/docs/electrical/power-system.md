@@ -63,10 +63,11 @@ drawn).
 !!! missing "MISSING — Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget"
     *Owner: electrical lead.*
 
-## Protection, disconnect and e-stop
+## Protection and disconnect
 
-!!! note "The missing e-stop is tracked on [Safety](../before-you-start/safety.md#rules)"
-    *Owner: electrical lead + safety officer. Blocks pre-power checks and first power-on.*
+The deployed robot's first stop is software, not hardware: see the three
+layers on [Safety](../before-you-start/safety.md#rules). Hardware still needs
+two things — a pack-path fuse and a confirmed surge protector.
 
 !!! missing "MISSING — SAFETY — Pack-path fuse (none drawn); surge protector part number and rating"
     *Owner: electrical lead + safety officer. Blocks release.*

@@ -45,6 +45,10 @@ KINDS = {
     "modules": {".step", ".stp", ".zip"},                     # .zip: a module STEP over 95 MB, zipped
     "vendor": {".step", ".stp", ".zip"},                      # .zip: a vendor STEP over 95 MB, zipped
 }
+
+# Files at the top of docs/files/ that ship with the design but are not
+# categorised CAD: LICENCE, NOTICE, release notes.
+TOP_LEVEL = {"LICENSE", "NOTICE", "RELEASE_NOTES"}
 MAX_FILE = 95 * 1024 * 1024
 MAX_TOTAL = 900 * 1024 * 1024
 NAME = re.compile(r"^(?P<part>.+?)(?:_rev(?P<rev>\d+))?$")
@@ -85,6 +89,20 @@ def main() -> int:
                 "bytes": size,
                 "sha256": sha256(path),
             })
+
+    for path in sorted(FILES.glob("*"), key=lambda p: p.name.lower()):
+        if not path.is_file() or path.name.startswith(".") or path.name not in TOP_LEVEL:
+            continue
+        rows.append({
+            "part_id": path.stem,
+            "rev": "",
+            "kind": "release",
+            "format": "TEXT",
+            "path": f"files/{path.name}",
+            "bytes": path.stat().st_size,
+            "sha256": sha256(path),
+        })
+
     if total > MAX_TOTAL:
         errors.append(f"total {total / 2**20:.0f} MB is over the 900 MB budget for a GitHub Pages site")
 
@@ -96,8 +114,10 @@ def main() -> int:
         w.writerows(rows)
     SUMS.write_text("".join(f"{r['sha256']}  {r['path'][len('files/'):]}\n" for r in rows),
                     encoding="utf-8", newline="\n")
+    n_release = sum(1 for r in rows if r["kind"] == "release")
 
-    print(f"{OUT.relative_to(SITE).as_posix()}: {len(rows)} files, {total / 2**20:.1f} MB")
+    print(f"{OUT.relative_to(SITE).as_posix()}: {len(rows)} files, {total / 2**20:.1f} MB"
+          + (f", {n_release} release artefact(s)" if n_release else ""))
     for e in errors:
         print(f"ERROR: {e}", file=sys.stderr)
     return 1 if errors else 0

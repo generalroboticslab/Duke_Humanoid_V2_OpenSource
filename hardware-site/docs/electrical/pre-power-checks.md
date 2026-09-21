@@ -89,15 +89,17 @@ after F1–F4 pass.
 !!! note "Yours to determine — pack acceptance thresholds for F1, F2 and F4"
     *Owner: electrical lead + safety officer.*
 
-## G. Check safety systems
+## G. Confirm software stops
 
-Cutting power drops the robot: the e-stop is a last resort, not a routine stop.
+The reference build's first stop is software, not hardware: see the three
+layers on [Safety](../before-you-start/safety.md#rules). Verify each layer
+fires when you trigger it.
 
 | | | |
 | --- | --- | --- |
-| G1 | E-stop position | Reachable from outside the robot's reach |
-| G2 | E-stop contacts | Open pressed, closed reset |
-| G3 | What the e-stop interrupts | **TODO**{ .dh-missing } ([Power system](power-system.md#protection-disconnect-and-e-stop)) |
-| G4 | Who holds the e-stop | Known to all, aloud |
+| G1 | Operator-side stream silence | Stop `humanoid_auto_operator.py` (or `humanoid_real_env.py`): the robot's nav 1 s / arm 0.5 s / gaze 2 s failsafes fire and the base stops, arms ramp to default, gimbals park |
+| G2 | CAN watchdog | Pause `humanoid_setup_can.py`: the watchdog latches a frozen arm into damped hold until restart |
+| G3 | Physical disconnect | Pull the pack connector: every drive releases the bus and the rig drops to gantry support |
+| G4 | Who triggers each | Known to all, aloud |
 
-✅ **Check:** all seven groups pass and are signed.
+✅ **Check:** all six groups pass and are signed.

@@ -42,18 +42,17 @@ How to build an identical Duke Humanoid V2. The code is open; see
 Red bold **MISSING**{ .dh-missing } and **UNVERIFIED**{ .dh-unverified } marks
 are open gaps, listed on [Open items](reference/todo.md).
 
-!!! missing "Five gaps still open"
+!!! missing "Three gaps still open"
     Everything needed to make the parts is published: a STEP per part, a whole-robot
-    STEP, an STL per printed part and the bill of materials. These five are not,
+    STEP, an STL per printed part, the bill of materials and an
+    [Apache-2.0 licence file](../files/LICENSE){ download="" } beside the CAD. These three are not,
     and each is somebody's to close before this counts as a finished release.
 
     | Blocker | Tracked on |
     | --- | --- |
-    | No hardware or documentation licence — nobody may legally reuse the design | [Citation and licence](reference/citation-and-license.md) |
-    | No e-stop is specified, though the run scripts assume one | [Safety](before-you-start/safety.md#rules) |
-    | No fuse in the battery path | [Power system](electrical/power-system.md#protection-disconnect-and-e-stop) |
+    | No fuse in the battery path — a pack short is the worst-case fault | [Power system](electrical/power-system.md#protection-and-disconnect) |
     | No lifting points or sling route on the robot | [Safety](before-you-start/safety.md#rules) |
-    | No physical power-on and power-off order | [Safety](before-you-start/safety.md#rules) |
+    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](before-you-start/safety.md#rules) |
 
     Everything else still open makes a build harder, not impossible:
     [Open items](reference/todo.md).

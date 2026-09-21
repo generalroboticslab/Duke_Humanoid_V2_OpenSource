@@ -34,13 +34,36 @@ close every red box with them first.
     !!! note "Yours to determine — rest of the PPE list: safety shoes, and whether gloves are required or forbidden"
         *Owner: hardware lead + local EHS office.*
 
-5. **Have an emergency stop (e-stop)** within reach of a person outside the
-   envelope. Pressing it is often right, but the robot falls: it never makes
-   approaching safe.
+5. **Have a way to stop.** Three independent layers:
 
-    !!! missing "MISSING — SAFETY — E-stop: none in the bill of materials or power diagram, yet the run scripts assume one; mounting, what it cuts, remote or dead-man switch, restart checks"
-        Scripts: `humanoid_nav_step_test.py`, `humanoid_joint_monkey_hw.py`.
-        *Owner: electrical lead. Blocks [First power-on](../bringup/first-power-on.md). Blocks release.*
+    1. **Software e-stop** — the deployed mission loop always publishes, and
+       every silence triggers a fail-closed response from the robot:
+
+       | Stream | Timeout (no packet = action) | Action |
+       | --- | ---: | --- |
+       | nav (base) | 1 s | robot stops the base |
+       | arm | 0.5 s | robot ramps both arms to the default pose |
+       | gaze (cameras) | 2 s | robot parks both gimbals |
+
+       Halting the operator process, losing the network, or terminating
+       `humanoid_real_env.py` *is* the e-stop: nothing else reaches the motors.
+       *Source: `deploy/control/humanoid_real_env.py`, lines 355–360;
+       `deploy/control/docs/auto_operator_safety_contract.md` SAFE-SHUTDOWN-001
+       and the silence-failsafe constants `nav 1 s / arm 0.5 s / gaze 2 s`.*
+
+    2. **CAN watchdog** — a joint whose feedback freezes for
+       `_WATCHDOG_STALE_TICKS` latches the arm into a damped hold
+       (position pinned, integrator cleared, feed-forward zeroed) until
+       restart. Guarded by `--arm-watchdog` (default on). *Source:
+       `deploy/control/humanoid_real_env.py`, lines 355–365.*
+
+    3. **Physical disconnect** — the runbook assumes one, with the same
+       effect as a watchdog latch: every motor releases the bus and the robot
+       drops. Plan the lift, not the stance.
+
+    Pressing any layer is often right, but the robot falls: removing power
+    on this quasi-direct-drive rig drops the 36 kg body and anything the
+    arms hold.
 
 6. **Follow the power sequence.** After power-on, start the software in the
    order of deploy's runbook (`deploy/control/docs/OPERATIONS.md`, section 2)

@@ -3,9 +3,9 @@
 Energise the robot and prove all 31 actuators answer, **without enabling any**.
 
 !!! abstract "At a glance"
-    - **Tools:** bench supply, e-stop (emergency stop), two people.
+    - **Tools:** bench supply, two people.
     - **Operator:** connects power, runs commands, reads output aloud; never touches the robot.
-    - **Safety:** holds the e-stop, watches, calls the abort; never touches the keyboard.
+    - **Safety:** holds the operator kill switch (stops the mission process is the e-stop — see [Safety](../before-you-start/safety.md#rules)), watches, calls the abort; never touches the keyboard.
     - **Before this:** [Pre-power checks](../electrical/pre-power-checks.md) passed and signed. Robot hung from a rated hoist, legs straight, clear space below.
 
 ## Prepare the host
@@ -79,8 +79,9 @@ Fault came and went? Run the
 [dropout probe](../electrical/can-bus.md#bus-health-and-fault-diagnosis) before
 any power cycle.
 
-!!! missing "No e-stop is specified; every step assumes one"
-    Tracked on [Power system](../electrical/power-system.md#protection-disconnect-and-e-stop).
+!!! note "Every layer of stopping is software here — confirm each one is armed before you press Enter"
+    The three layers on [Safety](../before-you-start/safety.md#rules) fire from the
+    moment the mission loop starts: silence in, action out, no pack needed.
     *Owner: electrical lead.*
 
 ## Power up
@@ -181,7 +182,7 @@ nominal, 50.4 V full.
 !!! note "Not measured on the reference robot — bench-supply voltage and current limit per stage; what to do without one"
     *Owner: electrical lead.*
 
-1. Safety holds the e-stop.
+1. Safety stands by the operator kill switch — killing the mission is the stop.
 2. Current limit set, raise the supply to bus voltage.
 3. Watch the current, not the robot.
 4. Current limit hit: short, **cut power**, back to

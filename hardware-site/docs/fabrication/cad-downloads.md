@@ -121,8 +121,12 @@ The native Fusion 360 archive is too large for this repository and is published 
 | --- | ---: | --- |
 | [humanoid_2.1_latest.f3z](https://github.com/rivery927/Duke_Humanoid_V2_OpenSource/releases/download/cad-v2.1-rc1/humanoid_2.1_latest.f3z) (101 linked designs included, release `cad-v2.1-rc1`) | 319 MB | `f440621df68f0775f521c87d02f8a644ae0a65f64ef76b385fdd2bc22a04d420` |
 
-Known CAD errors are listed in the [CNC guide](cnc-guide.md#known-cad-errors). No hardware or
-documentation licence is declared yet ([Citation and licence](../reference/citation-and-license.md)).
+Known CAD errors are listed in the [CNC guide](cnc-guide.md#known-cad-errors). The
+hardware design files, this documentation and the figures all ship under
+[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0); see
+[Citation and licence](../reference/citation-and-license.md) and the
+[`LICENSE`](../files/LICENSE){ download="" } file at the top of the downloads
+folder.
 
 ## Not manufacturing files
 
