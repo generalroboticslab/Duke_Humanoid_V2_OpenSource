@@ -62,5 +62,4 @@ joint-to-type map and the team's own booklet both show four. *Source:
 - Current-limit defaults, resistance and back-EMF: [Power system](../electrical/index.md#power-system).
 - Deploy sets the `0x700B` torque limit of every motor to one ratio of its max torque. The ratio comes from `--torque-limit` (default 0.1; the `OPERATIONS.md` robot launch uses 0.8), and the operator steps it by 0.1 between 0.1 and 0.8. The four camera motors follow the same ratio (`deploy/control/humanoid_real_env.py`: `torque_limit`, `[TORQUE_UP]`/`[TORQUE_DOWN]`, `_apply_group_torque_limits`).
 
-!!! missing "MISSING — RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot"
-    *Owner: hardware lead + controls lead.*
+Manual data for RS00, RS05, RS06 (voltage range, reduction, encoder, current-limit register): [`RobStride/Product_Information`](https://github.com/RobStride/Product_Information).
