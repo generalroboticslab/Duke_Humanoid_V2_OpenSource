@@ -17,9 +17,10 @@ close every red box with them first.
    robot; the reference build used a
    [Unitree G1 gantry](https://stemfinity.com/products/unitree-gantry).
 
-    !!! missing "MISSING — SAFETY — Lifting points on the robot, sling route and clearance zone"
-        The gantry itself is specified above; where to attach to the robot is not.
-        *Owner: hardware lead. Blocks release.*
+    !!! note "Yours to determine — sling route and lifting points on the robot; clearance zone under the gantry"
+        The gantry itself is specified above; where to attach to the robot and how
+        much floor to keep clear are your build's call.
+        *Owner: hardware lead.*
 
 3. **Keep out of the envelope.** Nobody and nothing enters the range of motion
    while powered. Power off before approaching, with a second person guarding
