@@ -573,8 +573,10 @@
         lines.push(dl.length ? dl.join(" ") : "No file on this page.");
         lines.push(...chainsHtml(t.meshes));
       } else if (t.kind === "vendor") {
-        const vi = data.vendorInfo(t.id), vm = data.vendorMap[t.id];
-        const name = vi.name || vi.fusion_name || t.id;
+        // A BOM row target ("bom:<part_id>") stands for every Fusion component of that purchased part.
+        const files = t.key.startsWith("bom:") ? (vendorFilesByPart.get(t.id) || []) : [t.id];
+        const vi = data.vendorInfo(files[0] || t.id), vm = data.vendorMap[files[0] || t.id];
+        const name = t.key.startsWith("bom:") ? ((vm && vm.description) || t.id) : (vi.name || vi.fusion_name || t.id);
         lines.push([titleHtml(vi.team_ref, esc(name)), "Purchased part",
                     t.meshes.length > 1 ? `${t.meshes.length} on the model` : ""].filter(Boolean).join(" · "));
         const f = facts(vi);
