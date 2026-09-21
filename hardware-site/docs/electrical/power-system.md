@@ -52,13 +52,16 @@ Team log (not in the BOM):
 
 ## Feed the 12 V rail
 
-Run upper-body power block → 10 A fuse → 48V-to-12V buck → MINISFORUM X1-470;
-12 V run **16 AWG**. The computer has no power unless the upper-body block
-is energised. The two gripper servos are the other 12 V loads (supply not
-drawn).
+Two converters serve two loads:
 
-!!! note "The 12 V conversion conflict is tracked on [Electronics](../bom/index.md#electronics)"
-    *Owner: electrical lead.*
+- `EL_BUCK_12V_ENC` (E11, 20–60 V → 12 V encased) feeds the **MINISFORUM X1-470**
+  onboard computer: upper-body power block → 10 A fuse → E11 → computer. 12 V
+  run **16 AWG**. The computer has no power unless the upper-body block is
+  energised.
+- `EL_BUCK_60V_12V` (E12, 60 V → 12 V) feeds the **two gripper servos** through
+  the per-gripper `EL_SERVO_DRIVER` (E10) bus driver boards. E12 fits two in
+  the BOM because the board needs one input per servo bus; the 12 V wiring to
+  each gripper is **18 AWG**.
 
 !!! missing "MISSING — Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget"
     *Owner: electrical lead.*
