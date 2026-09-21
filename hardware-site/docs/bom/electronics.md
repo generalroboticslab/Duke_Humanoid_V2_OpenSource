@@ -25,7 +25,7 @@ every quantity and price on this page comes from.
 | `EL_SERVO_FEETECH`, `EL_SERVO_DRIVER` | One servo per gripper, each on its own Waveshare driver board ([Gripper](../assembly/index.md#gripper)) |
 | `EL_TVS_DIODE` | Transient-voltage-suppression (TVS) diode across power and ground at each distribution-block pair |
 | `EL_BUCK_60V_12V`, `EL_BUCK_12V_ENC` | 60 V→12 V conversion (E12) and 20–60 V→12 V encased (E11); conflict under [Power path](#power-path) |
-| `EL_SURGE_PROTECTOR` | Pack lead, before the 48 V bus. An E9 150 A circuit breaker with manual reset, supplied 2026-09-21. That this matches the surge-protector symbol drawn on the power diagram is **TODO**{ .dh-missing }: the diagram shows a generic surge-protector symbol, not a breaker |
+| `EL_SURGE_PROTECTOR` | Pack lead, before the 48 V bus. T Tocas E9 150 A circuit breaker with manual reset, 12–48 VDC ([B01F76VJ3I](https://www.amazon.com/dp/B01F76VJ3I/)) |
 | `EL_DIST_BLOCK` | The four grounding bars, two power + ground pairs. That the drawn blocks are this part is **UNVERIFIED**{ .dh-unverified } |
 | `EL_USB_HUB` | 3 off. Which devices hang off which hub is **UNVERIFIED**{ .dh-unverified } |
 | `EL_VOLTAGE_CHECKER` | Pack voltage check, 1–8S. Where the two sit on the robot is not recorded **TODO**{ .dh-missing } |
