@@ -15,6 +15,15 @@ not reference material.
   wire, bring up, verify, safety, specs. No dev diary, dates, options
   considered-and-dropped, selection process, comparisons with other projects,
   or meta-commentary. Design rationale belongs in the paper, not the site.
+- **One page per section.** `nav` holds eight entries and no sub-entries. Each
+  `<section>/index.md` ends with `{% include "<section>/<page>.md" %}` lines, in
+  build order, and `exclude_docs` keeps those files from also building as pages
+  of their own; the site's section links are that page's headings
+  (`toc.integrate`). Add a page = add the file, add its `{% include %}`, nothing
+  in `nav`. Cross-page links are `../<section>/index.md#<heading-slug>`, in-page
+  ones are bare `#<heading-slug>`. Repeated heading text on one page needs an
+  explicit `{ #id }`; `{{ step() }}` anchors are namespaced by the
+  `{{ step_ns("<file stem>") }}` that precedes each include.
 - **Clear and scannable:** imperative headings, numbered steps (one action
   each), tables, figures above the steps they explain, `✅ **Check:**` lines,
   an `!!! abstract "At a glance"` box on build pages, no paragraph over ~3

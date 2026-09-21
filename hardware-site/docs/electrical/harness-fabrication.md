@@ -3,7 +3,7 @@
 Build, label and bench-test every cable before installing it.
 
 !!! abstract "At a glance"
-    - **Parts:** connectors, loom and USB cables: [Cables and connectors](../bom/cables-and-connectors.md).
+    - **Parts:** connectors, loom and USB cables: [Cables and connectors](../bom/index.md#cables-and-connectors).
     - **Tools:** soldering iron, vise, meter.
 
 The harness is the known weak point: a 0.3–0.4 s CAN (Controller Area Network)
@@ -38,7 +38,7 @@ One row per cable, plus one per motor drop once the daisy-chain order exists
 *Gauges: power wiring diagram.*
 
 !!! note "Read off the model — one row per motor run: length, route, service loop"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: electrical lead, measured on a real build. Blocks routing and assembly.*
 
 **Never** run solid or coarse-stranded wire across a joint: it breaks inside the
@@ -57,7 +57,7 @@ Red = positive, black = ground. **Never mate or unmate an XT30 under power.**
 *Source: RobStride manuals.* An RS03 board has two XT30 and two CAN sockets (in,
 out). XT30(2+2): 15 A with 18 AWG.
 
-!!! note "The actuator connector conflict is tracked on [Cables and connectors](../bom/cables-and-connectors.md)"
+!!! note "The actuator connector conflict is tracked on [Cables and connectors](../bom/index.md#cables-and-connectors)"
     *Owner: electrical lead.*
 
 !!! missing "MISSING — Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation"
@@ -122,5 +122,5 @@ continuity and the flex test before installation.
 ## Thread cables before closing limbs
 
 !!! note "Read off the model — which cables must be threaded before a limb closes"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: electrical lead + assembly lead. Blocks leg, arm, torso and head assembly.*

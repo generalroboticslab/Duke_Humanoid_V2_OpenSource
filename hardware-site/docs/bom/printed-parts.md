@@ -6,10 +6,10 @@ camera-column parts, with three filament and powder rows at the end. Material, p
 price are the team BOM's where it has a line for the part. **Team ref** is that line in the team BOM
 spreadsheet (`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19) and the row's `notes` quote it in
 full. Which CAD part each team ref is, and what settles it, is one row per team BOM line in
-[team-map.csv](../data/team-map.csv). Print settings: [Printing guide](../fabrication/printing-guide.md).
+[team-map.csv](../data/team-map.csv). Print settings: [Printing guide](../fabrication/index.md#printing-guide).
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
-Volume, centre of mass and inertia for every part: [Mass properties](../reference/part-index.md#mass-properties).
+Volume, centre of mass and inertia for every part: [Mass properties](../reference/index.md#mass-properties).
 **Qty** is the Fusion occurrence count per robot; the left and right arm and leg designs are separate, so
 their copies of one part are summed. Where the team BOM counts differently, the row's `notes` say both.
 The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-parts.csv") }} of
@@ -23,7 +23,7 @@ The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-pa
 
 
 !!! note "Read off the model — Fusion material name per printed part"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 !!! note "Build to the model — torso plates `3DP_body06`–`09`: PLA in the team sheet, ABS in Fusion"
@@ -75,12 +75,12 @@ bounding box and differ in file content.
     The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead, from the CAD.*
 
-## Not in this list
+## Not in this list { #printed-parts-not-in-this-list }
 
 Seen in team build photos but absent from the Fusion tree **UNVERIFIED**{ .dh-unverified }: battery holders
 with heat-set inserts; the X-shaped IMU (inertial measurement unit) bracket; the T-brackets
 holding the computer. In Fusion the batteries, IMU, computer and relay sit directly under
-`3DP_body_05_x1_interior_plate` with no bracket components ([Torso and waist](../assembly/torso-and-waist.md)).
+`3DP_body_05_x1_interior_plate` with no bracket components ([Torso and waist](../assembly/index.md#torso-and-waist)).
 
 In the Fusion tree but not listed, because the material does not say the part is printed
 **UNVERIFIED**{ .dh-unverified }: `Hub` inside the `Vention USB Hub` assembly (Bambu `PAHT-CF` filament material,

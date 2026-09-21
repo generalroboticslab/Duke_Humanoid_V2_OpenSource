@@ -25,7 +25,7 @@ How to build an identical Duke Humanoid V2. The code is open; see
 !!! danger "Before step 1: read Safety"
     36 kg, no self-locking joints: removing power, including an emergency stop
     (e-stop), drops the robot and whatever it holds. Two 6S lithium-polymer packs
-    in series reach 50.4 V. Read [Safety](before-you-start/safety.md) before
+    in series reach 50.4 V. Read [Safety](before-you-start/index.md#safety) before
     ordering parts and before first power-on.
 
 <div class="grid cards" markdown>
@@ -35,12 +35,12 @@ How to build an identical Duke Humanoid V2. The code is open; see
 -   :material-wrench: **3 · Assemble** — subassembly by subassembly. [Assembly →](assembly/index.md)
 -   :material-flash: **4 · Wire** — power, harnesses, six CAN (Controller Area Network) buses. [Electrical →](electrical/index.md)
 -   :material-power: **5 · Bring up** — motor IDs, zeroing, calibration. [Bring-up →](bringup/index.md)
--   :material-check-decagram: **6 · Verify** — before leaving the gantry. [Acceptance tests →](bringup/acceptance-tests.md)
+-   :material-check-decagram: **6 · Verify** — before leaving the gantry. [Acceptance tests →](bringup/index.md#acceptance-tests)
 
 </div>
 
 Red bold **MISSING**{ .dh-missing } and **UNVERIFIED**{ .dh-unverified } marks
-are open gaps, listed on [Open items](reference/todo.md).
+are open gaps, listed on [Open items](reference/index.md#open-items-the-punch-list).
 
 !!! missing "Three gaps still open"
     Everything needed to make the parts is published: a STEP per part, a whole-robot
@@ -50,12 +50,12 @@ are open gaps, listed on [Open items](reference/todo.md).
 
     | Blocker | Tracked on |
     | --- | --- |
-    | No fuse in the battery path — a pack short is the worst-case fault | [Power system](electrical/power-system.md#protection-and-disconnect) |
-    | No lifting points or sling route on the robot | [Safety](before-you-start/safety.md#rules) |
-    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](before-you-start/safety.md#rules) |
+    | No fuse in the battery path — a pack short is the worst-case fault | [Power system](electrical/index.md#protection-and-disconnect) |
+    | No lifting points or sling route on the robot | [Safety](before-you-start/index.md#rules) |
+    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](before-you-start/index.md#rules) |
 
     Everything else still open makes a build harder, not impossible:
-    [Open items](reference/todo.md).
+    [Open items](reference/index.md#open-items-the-punch-list).
 
 ## Specifications
 
@@ -74,7 +74,7 @@ are open gaps, listed on [Open items](reference/todo.md).
 | People | At least two |
 
 *Source: project README (first seven rows).* See also
-[Full specifications](reference/full-specifications.md).
+[Full specifications](reference/index.md#full-specifications).
 
 <figure markdown>
   ![Duke Humanoid V2 hardware overview with joints numbered](assets/images/hardware.webp){ loading=lazy }
@@ -95,7 +95,7 @@ are open gaps, listed on [Open items](reference/todo.md).
   </video>
   <figcaption markdown="span">
     Each module tracks its own target. The
-    [camera gimbal](assembly/head-and-camera-gimbal.md) is why this robot exists.
+    [camera gimbal](assembly/index.md#head-and-camera-gimbal) is why this robot exists.
   </figcaption>
 </figure>
 

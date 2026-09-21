@@ -6,7 +6,7 @@ Count, measure and record every part before assembly.
     - **You will:** inspect and log every part.
     - **Parts:** the whole [bill of materials (BOM)](../bom/index.md).
     - **Tools:** caliper, micrometer, bore or pin gauges, surface plate.
-    - **Before this:** [Printing guide](printing-guide.md).
+    - **Before this:** [Printing guide](#printing-guide).
 
 ## Count and sort
 
@@ -31,7 +31,7 @@ Count, measure and record every part before assembly.
     | Tapped holes | Real screw runs full depth by hand | The screw | ≥ 4 mm usable thread, 6 mm preferred |
 
 !!! note "Read off the model — nominal size of every fit-critical feature"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](#cad-downloads).
     *Owner: hardware lead, once the CNC drawings exist.*
 
 ### What the reference build found
@@ -60,7 +60,7 @@ Count, measure and record every part before assembly.
 
 </div>
 
-Measure these first ([CNC guide](cnc-guide.md#fit-critical-parts) interfaces).
+Measure these first ([CNC guide](#fit-critical-parts) interfaces).
 No nominal was recorded, so no reading is an acceptance value.
 
 | Part | Rework | Caliper reading |
@@ -96,7 +96,7 @@ bearing is pressed. A press fit is not reversible without damage.
     - Do not change the torque limit, protection temperature or over-temperature time.
     - Send a stop command before switching control mode.
 
-1. **Model** matches the joint ([Actuators](../bom/actuators.md#which-model-goes-in-which-joint)).
+1. **Model** matches the joint ([Actuators](../bom/index.md#which-model-goes-in-which-joint)).
 2. **Free rotation** by hand, unpowered, through a full turn: no notch or grinding.
 3. **No damage** to connectors, output flange or housing.
 4. **Controller Area Network (CAN) ID as shipped:** read it on the bench, not on
@@ -108,7 +108,7 @@ bearing is pressed. A press fit is not reversible without damage.
 ✅ **Check:** a unit passes all six before it goes into a limb.
 
 **Vendor PC tool** ([robstride.com/download](https://www.robstride.com/download);
-see [Motor ID and config](../bringup/motor-id-and-config.md)):
+see [Motor ID and config](../bringup/index.md#motor-id-and-config)):
 
 - Reads parameters, sets CAN ID and zero, calibrates the encoder, updates firmware.
 - Needs the vendor's serial USB-CAN module (CH340, AT mode), not a CANable **UNVERIFIED**{ .dh-unverified }.
@@ -120,9 +120,9 @@ see [Motor ID and config](../bringup/motor-id-and-config.md)):
 ## Check electronics
 
 !!! danger "Lithium-polymer packs"
-    A damaged pack is a fire. Read [Safety](../before-you-start/safety.md) first;
-    power nothing before [Pre-power checks](../electrical/pre-power-checks.md).
-    Charging: [Power system](../electrical/power-system.md).
+    A damaged pack is a fire. Read [Safety](../before-you-start/index.md#safety) first;
+    power nothing before [Pre-power checks](../electrical/index.md#pre-power-checks).
+    Charging: [Power system](../electrical/index.md#power-system).
 
 1. Confirm variants; look for bent pins, cracked connectors, loose heatsinks.
 2. Count the small parts.

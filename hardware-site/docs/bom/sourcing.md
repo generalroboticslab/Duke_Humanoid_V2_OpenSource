@@ -35,7 +35,7 @@ design assumes.
 {% for vendor, items in bought | selectattr("vendor") | groupby("vendor") %}| {{ vendor }} | {{ items | length }} | {{ items | map(attribute="part_id") | join(", ") }} |
 {% endfor %}
 
-Machining vendor: [CNC guide](../fabrication/cnc-guide.md#order-the-parts).
+Machining vendor: [CNC guide](../fabrication/index.md#order-the-parts).
 
 !!! note "Yours to source — marketplace lines carry a link, not a manufacturer part number"
     *Owner: hardware lead.*

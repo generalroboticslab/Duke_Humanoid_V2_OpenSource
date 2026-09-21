@@ -5,7 +5,7 @@ Connect all 31 actuators to six CAN (Controller Area Network) buses at
 
 !!! abstract "At a glance"
     - **You will:** wire, name and bring up each bus.
-    - **Parts:** six CANable PRO V2.0 USB-CAN adapters (candleLight / `gs_usb`), [Electronics](../bom/electronics.md).
+    - **Parts:** six CANable PRO V2.0 USB-CAN adapters (candleLight / `gs_usb`), [Electronics](../bom/index.md#electronics).
 
 <figure markdown>
   ![Data wiring diagram, Duke Humanoid V2](../assets/wiring/data-wiring-v2.webp){ loading=lazy }
@@ -58,7 +58,7 @@ Whether the first D436, `can9` and `can25` plug into the hub or the computer is
     list the same order, left camera first). Ignore the stale `#27`–`#30`
     comments on the camera lines there.*
 
-- Program IDs per [Motor ID and config](../bringup/motor-id-and-config.md).
+- Program IDs per [Motor ID and config](../bringup/index.md#motor-id-and-config).
   IDs are unique robot-wide; keep them so.
 - `can22` spans both blocks: waist on lower-body power, both `shoulder_1` on
   upper-body power.
@@ -67,7 +67,7 @@ Whether the first D436, `can9` and `can25` plug into the hub or the computer is
 ## Wire and terminate each bus
 
 1. Daisy-chain each bus: no ring, no stubs
-   ([connectors and pinouts](harness-fabrication.md#identify-the-connector-pinouts)).
+   ([connectors and pinouts](#identify-the-connector-pinouts)).
 2. Fit 120 Ω at each physical end. No terminator is in the parts list.
 
 !!! note "Not measured on the reference robot — per-bus terminator location and measured resistance"
@@ -109,7 +109,7 @@ Whether the first D436, `can9` and `can25` plug into the hub or the computer is
 
 ## Bring the buses up
 
-After **every** power cycle ([host setup](../bringup/first-power-on.md)):
+After **every** power cycle ([host setup](../bringup/index.md#first-power-on)):
 
 1. Run `humanoid_setup_can.py`; it USB-resets failures and lists what to replug.
 

@@ -11,10 +11,10 @@
 | FDM (fused deposition modelling) printing | PLA and TPU parts |
 | SLS (selective laser sintering) printing, or a service bureau | Nylon parts |
 | Bearing and press fits | Bearings sit directly in machined housings |
-| Digital caliper (0.01 mm); ideally a bore gauge and surface plate | [Incoming inspection](../fabrication/incoming-inspection.md) |
+| Digital caliper (0.01 mm); ideally a bore gauge and surface plate | [Incoming inspection](../fabrication/index.md#incoming-inspection) |
 
 !!! note "Yours to determine — whether your machines cover the part set, from the published model"
-    *Owner: hardware lead, from the CAD. Blocks [CNC guide](../fabrication/cnc-guide.md).*
+    *Owner: hardware lead, from the CAD. Blocks [CNC guide](../fabrication/index.md#cnc-guide).*
 
 ## Electrical and assembly
 
@@ -40,7 +40,7 @@ Planned grasps need a separate CUDA machine; see [Software](../software.md).
 ## People and space
 
 Two people, a bench, a gantry, a charging station away from flammables, and
-clear floor. See [Safety](safety.md).
+clear floor. See [Safety](#safety).
 
 !!! note "Not recorded — the bench and floor space the reference build used"
     *Owner: hardware lead.*

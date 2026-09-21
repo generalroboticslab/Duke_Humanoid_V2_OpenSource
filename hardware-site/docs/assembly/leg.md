@@ -4,8 +4,8 @@ Build one leg, hip to foot plate; build two.
 
 !!! abstract "At a glance"
     - **You will:** set six IDs, then build from hip to foot.
-    - **Parts:** RobStride 03 ×4, 04 ×1, 06 ×1 ([Actuators](../bom/actuators.md)); `CNC_leg01`–`CNC_leg18` ([machined parts](../bom/cnc-parts.md)).
-    - **Before this:** [Tools](tools.md).
+    - **Parts:** RobStride 03 ×4, 04 ×1, 06 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_leg01`–`CNC_leg18` ([machined parts](../bom/index.md#cnc-parts)).
+    - **Before this:** [Tools](#tools).
 
 RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these depths:
 
@@ -13,7 +13,7 @@ RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these
 - **Output:** 6 × M4, 6 mm deep; 3 × Ø4 mm pin holes, 7 mm deep; Ø70 mm pilot, 2.5 mm proud.
 
 !!! note "Read off the model — leg parts list, fasteners and fits"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - No printed-part, bearing, spacer or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order.
     - Retainer alignment and preload (steps 3, 8).
@@ -25,7 +25,7 @@ RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these
 {{ step(1, "Configure and label the six actuators") }}
 
 The six joints share one Controller Area Network (CAN) bus: `can24` left, `can23` right.
-New units share a default ID: set each on the bench alone ([Motor ID and config](../bringup/motor-id-and-config.md)).
+New units share a default ID: set each on the bench alone ([Motor ID and config](../bringup/index.md#motor-id-and-config)).
 
 | Joint | Model axis | Actuator | ID L / R | Model limit L | Model limit R |
 | --- | --- | --- | --- | --- | --- |
@@ -42,7 +42,7 @@ The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 
 !!! note "Not measured on the reference robot — hard-stop angles, where a leg joint has one"
     The travel each joint is commanded to is published in
-    [Motor ID and configuration](../bringup/motor-id-and-config.md).
+    [Motor ID and configuration](../bringup/index.md#motor-id-and-config).
     *Owner: hardware lead.*
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
@@ -140,7 +140,7 @@ Make both bearing retainers concentric before tightening.
 
 </div>
 
-!!! note "The M5/M4 CAD error is tracked on [CNC guide](../fabrication/cnc-guide.md)"
+!!! note "The M5/M4 CAD error is tracked on [CNC guide](../fabrication/index.md#cnc-guide)"
     Found at the first-article fit check; whether the released CAD is fixed is
     unknown. Check your parts before choosing screws. *Owner: hardware lead.*
 
@@ -207,7 +207,7 @@ Make both shaft ends concentric before tightening.
 </div>
 
 !!! note "Read off the model — whether a foot sole or pad is fitted"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** At ankle zero the foot sits flat.
@@ -228,10 +228,10 @@ Make both shaft ends concentric before tightening.
 
 </div>
 
-It leaves at the hip; join it in [Final integration](final-integration.md).
+It leaves at the hip; join it in [Final integration](#final-integration).
 
 !!! note "Read off the model — leg harness lengths, routes and service loops"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** All six joints move through their travel with no cable stretched or pinched. Nothing rattles.

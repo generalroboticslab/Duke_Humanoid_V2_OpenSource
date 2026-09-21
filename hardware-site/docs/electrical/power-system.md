@@ -4,7 +4,7 @@ Wire the 48 V and 12 V rails.
 
 !!! abstract "At a glance"
     - **You will:** join the packs in series, then feed every block.
-    - **Parts:** [Electronics](../bom/electronics.md) BOM (bill of materials), plus team-log parts below.
+    - **Parts:** [Electronics](../bom/index.md#electronics) BOM (bill of materials), plus team-log parts below.
 
 <figure markdown>
   ![Power wiring diagram, Duke Humanoid V2](../assets/wiring/power-supply-v2.webp){ loading=lazy }
@@ -48,7 +48,7 @@ Team log (not in the BOM):
 !!! unverified "UNVERIFIED — Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors, charger: diagram or team log only, not the BOM; no confirmed part numbers"
     *Owner: BOM owner + electrical lead.*
 
-✅ **Check:** the series link passes C3 ([Pre-power checks](pre-power-checks.md)).
+✅ **Check:** the series link passes C3 ([Pre-power checks](#pre-power-checks)).
 
 ## Feed the 12 V rail
 
@@ -57,7 +57,7 @@ Run upper-body power block → 10 A fuse → 48V-to-12V buck → MINISFORUM X1-4
 is energised. The two gripper servos are the other 12 V loads (supply not
 drawn).
 
-!!! note "The 12 V conversion conflict is tracked on [Electronics](../bom/electronics.md)"
+!!! note "The 12 V conversion conflict is tracked on [Electronics](../bom/index.md#electronics)"
     *Owner: electrical lead.*
 
 !!! missing "MISSING — Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget"
@@ -66,7 +66,7 @@ drawn).
 ## Protection and disconnect
 
 The deployed robot's first stop is software, not hardware: see the three
-layers on [Safety](../before-you-start/safety.md#rules). Hardware still needs
+layers on [Safety](../before-you-start/index.md#rules). Hardware still needs
 two things — a pack-path fuse and a confirmed surge protector.
 
 !!! missing "MISSING — SAFETY — Pack-path fuse (none drawn); surge protector part number and rating"
@@ -90,7 +90,7 @@ two things — a pack-path fuse and a confirmed surge protector.
 every motor (default scale 0.6). Per-motor phase limits: never sum them to size
 wire or fuses.
 
-!!! note "RS00/RS05/RS06 manual data is tracked on [Actuators](../bom/actuators.md)"
+!!! note "RS00/RS05/RS06 manual data is tracked on [Actuators](../bom/index.md#actuators)"
     *Owner: controls lead + hardware lead.*
 
 !!! note "Not measured on the reference robot — bus current (quiescent, standing, walking) and peak inrush at pack connection"

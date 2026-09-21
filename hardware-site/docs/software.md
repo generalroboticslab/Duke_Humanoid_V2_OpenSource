@@ -20,7 +20,7 @@ machine, not in the bill of materials. The robot computer needs no CUDA.
    tool: press the adapter button for flash mode and connect it directly to the
    computer. Firmware version **UNVERIFIED**{ .dh-unverified }.
 2. Prepare the host and name the adapters. Bus map:
-   [CAN (Controller Area Network) bus](electrical/can-bus.md).
+   [CAN (Controller Area Network) bus](electrical/index.md#can-bus).
 
     ```bash
     # Ubuntu 22.04; log out and back in after adduser
@@ -69,7 +69,7 @@ machine, not in the bill of materials. The robot computer needs no CUDA.
 5. Build `deploy/control` with CMake, vcpkg and Ninja presets (nanobind
    bindings).
 
-Before the robot moves, read [Safety](before-you-start/safety.md), then deploy's
+Before the robot moves, read [Safety](before-you-start/index.md#safety), then deploy's
 [`OPERATIONS.md`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/docs/OPERATIONS.md),
 [`auto_operator_incidents.md`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/docs/auto_operator_incidents.md)
 and `auto_operator_safety_contract.md`.
@@ -104,11 +104,11 @@ The asset READMEs cite these paths, which are not in the export:
     *Owner: controls lead.*
 
 The model sets joint order, directions and link masses. Never machine from its
-meshes; see [CAD downloads](fabrication/cad-downloads.md).
+meshes; see [CAD downloads](fabrication/index.md#cad-downloads).
 
 | Contract item | Where deploy sets it |
 | --- | --- |
-| Joint vector (index, name) | `motor_setup_dict` order in `deploy/control/humanoid_config.py`; table on [CAN bus](electrical/can-bus.md) |
+| Joint vector (index, name) | `motor_setup_dict` order in `deploy/control/humanoid_config.py`; table on [CAN bus](electrical/index.md#can-bus) |
 | Encoder vs training frame | The calibrated `robot.xml` differs from the training model at three joints: `left_wrist_1` (−π/2 reference), `right_wrist_1` (+π/2 reference), `left_wrist_2` (axis flipped); `humanoid_real_env.py --obs-frame-fix` or `--lw2-mirror` (both off by default, mutually exclusive) rewrites the wrist observations the policy sees |
 | Checkpoint | `humanoid_site.DEPLOY_TASK` (`…BankFlatDecoupledCosine`, `policy_deployed.pt`) runs on the calibrated `robot.xml` of `DEPLOY_MODEL_TASK` (`…v159bMixedArmsCam`); both ship in `deploy/control/legged_env_bundle/` |
 | Fresh install | Deploy `control/docs/SETUP.md`: Python 3.12, `requirements.txt` pins, CMake ≥ 3.26, CAN, servo ports, hand-eye calibration, network, RealSense; the robot runs `torch` 2.9.1+rocm6.3 |
@@ -120,4 +120,4 @@ meshes; see [CAD downloads](fabrication/cad-downloads.md).
 
     *Owner: controls lead.*
 
-Code is Apache-2.0; see [Citation and licence](reference/citation-and-license.md).
+Code is Apache-2.0; see [Citation and licence](reference/index.md#citation-and-licence).

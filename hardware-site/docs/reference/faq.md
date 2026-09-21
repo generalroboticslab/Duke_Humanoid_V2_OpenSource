@@ -3,7 +3,7 @@
 **Can I build it today?** No; see the [home page](../index.md) blockers.
 
 **What does it cost?** At least {{ bom_total() }} in parts; see
-[Cost and time](../before-you-start/cost-and-time.md).
+[Cost and time](../before-you-start/index.md#cost-and-time).
 
 **How long does it take?** **TODO**{ .dh-missing }: not measured.
 
@@ -24,10 +24,10 @@ and 8 for the left (`deploy/control/humanoid_config.py`).
 </figure>
 
 **Can I substitute the D436 or the RobStride actuators?** **TODO**{ .dh-missing }:
-no alternate is recorded. See [Sourcing](../bom/sourcing.md).
+no alternate is recorded. See [Sourcing](../bom/index.md#sourcing).
 
 **Do I need a 5-axis mill?** **TODO**{ .dh-missing }: unknown. See
-[Skills and shop access](../before-you-start/skills-and-shop.md).
+[Skills and shop access](../before-you-start/index.md#skills-and-shop-access).
 
 **Do I need a GPU?** Not on the robot; the planner needs a separate CUDA machine.
 

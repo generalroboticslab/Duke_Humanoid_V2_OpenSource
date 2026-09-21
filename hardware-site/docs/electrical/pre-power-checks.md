@@ -11,11 +11,11 @@ find a wiring fault.
 
 | # | Check | Pass |
 | --- | --- | --- |
-| A1 | Rated hoist carries full weight | Hoist rated well above 36 kg; safety factor **TODO**{ .dh-missing } ([Safety](../before-you-start/safety.md)) |
+| A1 | Rated hoist carries full weight | Hoist rated well above 36 kg; safety factor **TODO**{ .dh-missing } ([Safety](../before-you-start/index.md#safety)) |
 | A2 | Legs | Hang straight, no torso tilt (tilt corrupts perception geometry) |
 | A3 | Floor | Clear within the robot's reach and fall path |
 | A4 | Final-integration fastener check | Signed |
-| A5 | Both checks on [Routing](routing.md#verifying-a-routing-job) | Pass; wiggle-test power state **UNVERIFIED**{ .dh-unverified } |
+| A5 | Both checks on [Routing](#verifying-a-routing-job) | Pass; wiggle-test power state **UNVERIFIED**{ .dh-unverified } |
 | A6 | Two people; the e-stop (emergency stop) holder does not connect the battery | Confirmed aloud |
 
 ## B. Test continuity and isolation
@@ -50,7 +50,7 @@ A wrongly loaded XT30 shell mates with reversed polarity.
 ## D. Bench-test converters
 
 Bench supply, low current limit, before any converter sees a pack. Which are
-fitted: **UNVERIFIED**{ .dh-unverified } ([Power system](power-system.md#feed-the-12-v-rail)).
+fitted: **UNVERIFIED**{ .dh-unverified } ([Power system](#feed-the-12-v-rail)).
 
 | | | |
 | --- | --- | --- |
@@ -72,7 +72,7 @@ fitted: **UNVERIFIED**{ .dh-unverified } ([Power system](power-system.md#feed-th
 | E1b | H–L, and each line to ground | No short |
 | E2 | Adapter labels vs `99-candlelight.rules` | Agree |
 | E3 | Adapter USB plugs, firm pull | Stay in |
-| E4 | Every drop vs the [actuator map](can-bus.md#the-actuator-map) | Exact match |
+| E4 | Every drop vs the [actuator map](#the-actuator-map) | Exact match |
 
 ## F. Check packs
 
@@ -92,7 +92,7 @@ after F1–F4 pass.
 ## G. Confirm software stops
 
 The reference build's first stop is software, not hardware: see the three
-layers on [Safety](../before-you-start/safety.md#rules). Verify each layer
+layers on [Safety](../before-you-start/index.md#rules). Verify each layer
 fires when you trigger it.
 
 | | | |

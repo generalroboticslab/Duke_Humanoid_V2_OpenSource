@@ -20,7 +20,7 @@ all.
 | Item | Specification |
 | --- | --- |
 | Screws | Torx button-head. Team BOM: M3x10, M4x8, M4x10. Team design log: M4x12 (McMaster-Carr 90991A123) and M3x12 (90991A115) **UNVERIFIED**{ .dh-unverified } |
-| Exception | M5 on the Motor04 shaft and the knee. The published CAD has M4 clearance there; enlarge to Ø5.3 mm at the machinist — see [CNC guide](../fabrication/cnc-guide.md#known-cad-errors) |
+| Exception | M5 on the Motor04 shaft and the knee. The published CAD has M4 clearance there; enlarge to Ø5.3 mm at the machinist — see [CNC guide](../fabrication/index.md#known-cad-errors) |
 | Thread engagement | At least 4 mm of usable thread, 6 mm preferred |
 | Main bearing | 50 × 65 × 7 mm, 2 off (team BOM line `H1`; the Fusion model has two `bearing_50x65x7_6810_6.1kN_52g`). No part number in the team BOM **TODO**{ .dh-missing }; the team design log models McMaster-Carr 6656K229 |
 | Ankle thrust bearing | Not specified **UNVERIFIED**{ .dh-unverified } |
@@ -29,7 +29,7 @@ all.
 *Source: team design log, "Hardware Choice" and CNC checklist.*
 
 !!! note "Read off the model — every screw, bearing and fit per location"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead, from the CAD. Blocks every page under [Assembly](../assembly/index.md).*
 
 ## Screwing into an actuator

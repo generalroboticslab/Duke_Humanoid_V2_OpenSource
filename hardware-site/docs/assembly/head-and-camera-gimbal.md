@@ -4,8 +4,8 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
 
 !!! abstract "At a glance"
     - **You will:** build and bench-test each (the right is the left rotated 180°), then mount both.
-    - **Parts:** RobStride 05 ×4 ([Actuators](../bom/actuators.md)); Intel RealSense D436 ×2 ([Electronics](../bom/electronics.md)); per column `gimbal_mount`, `gimbal_neck`, `gimbal_arm`, `U-joint_type_C_adapter`.
-    - **Before this:** [Torso and waist](torso-and-waist.md).
+    - **Parts:** RobStride 05 ×4 ([Actuators](../bom/index.md#actuators)); Intel RealSense D436 ×2 ([Electronics](../bom/index.md#electronics)); per column `gimbal_mount`, `gimbal_neck`, `gimbal_arm`, `U-joint_type_C_adapter`.
+    - **Before this:** [Torso and waist](#torso-and-waist).
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="800" poster="../../assets/images/hardware_close_front_back-poster.webp" aria-label="The two camera modules on the reference robot, each aiming at a different target">
@@ -16,7 +16,7 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
 </figure>
 
 !!! note "Read off the model — gimbal column fasteners and bearings"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - Per step: screws, torque, Loctite 222 use, order.
     - Any yaw bearing; neck keying.
     - How to set and hold the yaw and pitch zeros; hard stops.
@@ -84,7 +84,7 @@ plate top face (`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITI
 lines 64 and 77).
 
 !!! note "Read off the model — gimbal part geometry, bearings and fasteners"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead + BOM owner.*
 
 ✅ **Check:** Turns freely, no axial play; mount bottom face flat and clean.
@@ -116,7 +116,7 @@ lines 64 and 77).
 Make the pitch axis perpendicular to, and intersecting, the yaw axis.
 
 !!! note "Read off the model — whether `gimbal_arm` is one part or two, and what the type-C adapter is"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** No binding; the arm clears neck and mount.
@@ -134,7 +134,7 @@ Make the pitch axis perpendicular to, and intersecting, the yaw axis.
 
 Hold the camera by its body; keep the lens film on until done. Factory
 extrinsics differ per unit: read your own at
-[Camera calibration](../bringup/camera-calibration.md).
+[Camera calibration](../bringup/index.md#camera-calibration).
 
 The bracket is modelled from a D435 body (the STEP names it
 `IntelRealsense_D435_Multibody`) and the D436 shares that envelope: the model
@@ -231,14 +231,14 @@ contour, 64.8 × 59.0 mm (`simulation/asset/duke_v2/head_cam/PositionDeter/RELAT
 line 66).
 
 !!! note "Read off the model — top plate central hole shape"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** Yaw axes 130.00 mm apart, pitch axes collinear, no shims, columns never touch.
 
 {{ step(10, "Record the as-built geometry") }}
 
-Record, for [Camera calibration](../bringup/camera-calibration.md):
+Record, for [Camera calibration](../bringup/index.md#camera-calibration):
 
 - camera serial per side;
 - IDs per column;

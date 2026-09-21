@@ -4,7 +4,7 @@ Gather these before the first assembly step.
 
 !!! abstract "At a glance"
     - **You will:** count every fastener into a divided tray by size; a leftover means a missed step.
-    - **Before this:** [Incoming inspection](../fabrication/incoming-inspection.md).
+    - **Before this:** [Incoming inspection](../fabrication/index.md#incoming-inspection).
 
 Tools are not priced here: what a tool costs you depends on what your shop
 already owns. Specify from the table, then quote what you are short of.
@@ -20,8 +20,8 @@ already owns. Specify from the table, then quote what you are short of.
 | Torque driver | Every torqued screw | Covering 1–5 N·m, the band M3 and M4 fall in |
 | Soldering iron and solder | XT30 solder cups; heat-set inserts in printed parts | About 480 °C for XT30 cups |
 | Heat gun, heat-shrink | Over soldered joints | Sized over XT30 joints |
-| Wire strippers, flush cutters | Harness | Gauges per [Harness fabrication](../electrical/harness-fabrication.md) |
-| Crimp tool | Signal connectors | Dies to match the connectors you fit; see [Harness fabrication](../electrical/harness-fabrication.md) |
+| Wire strippers, flush cutters | Harness | Gauges per [Harness fabrication](../electrical/index.md#harness-fabrication) |
+| Crimp tool | Signal connectors | Dies to match the connectors you fit; see [Harness fabrication](../electrical/index.md#harness-fabrication) |
 | Multimeter | Continuity, polarity, voltage | Any |
 | Hoist or gantry, sling | Lifting the robot; hanging it legs straight | 50 kg or more, 1.4 m or more of clear height ([reference](https://stemfinity.com/products/unitree-gantry)) |
 | Limb stand or jig | Holding a limb | Anything that holds a 5 kg limb at bench height without loading a joint |

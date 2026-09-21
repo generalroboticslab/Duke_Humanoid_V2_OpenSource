@@ -4,8 +4,8 @@ Have the machined parts made and check a first article.
 
 !!! abstract "At a glance"
     - **You will:** order the parts and measure a first article.
-    - **Parts:** [CNC parts](../bom/cnc-parts.md).
-    - **Before this:** [CAD downloads](cad-downloads.md).
+    - **Parts:** [CNC parts](../bom/index.md#cnc-parts).
+    - **Before this:** [CAD downloads](#cad-downloads).
 
 ## Material and design rules
 
@@ -21,7 +21,7 @@ Have the machined parts made and check a first article.
 *Source: team design log, "Material Choice" and CNC checklist.*
 
 !!! note "Read off the model — nominal geometry per part; alloy, tolerance and finish are the machinist's call"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](#cad-downloads).
     *Owner: hardware lead, from the CAD and the machining quotations.*
 
 ## Known CAD errors
@@ -50,7 +50,7 @@ means re-finishing the part.
 
 **The RS03 shaft bearing retainer above the knee (`CNC_leg03`) was enlarged by
 hand on the reference build.** Its bore is undersize as drawn. Expect to open
-it on fitting; see [Incoming inspection](incoming-inspection.md#measure-machined-parts)
+it on fitting; see [Incoming inspection](#measure-machined-parts)
 for the measured values.
 
 !!! note "Not recorded — which hole pattern on the Motor04 shaft the first article opened"
@@ -76,7 +76,7 @@ interfaces first:
 ## Order the parts
 
 1. **Freeze the revision:** make every part from one release tag.
-2. **Send one archive:** STEP per part ([CAD downloads](cad-downloads.md)), a parts table (ID,
+2. **Send one archive:** STEP per part ([CAD downloads](#cad-downloads)), a parts table (ID,
    quantity, material, finish) and a cover sheet (general tolerance, default
    finish, deadline, contact). There are no per-part drawings in the CAD.
 
@@ -90,7 +90,7 @@ interfaces first:
 3. **Ask for a first article:** one piece of each fit-critical part before the
    batch runs. Measure it yourself.
 4. **Get the measurement report:** measured values on toleranced features, for
-   [incoming inspection](incoming-inspection.md).
+   [incoming inspection](#incoming-inspection).
 5. **Order spares on the same setup.**
 
     !!! note "Yours to determine — which machined parts need spares, and how many"

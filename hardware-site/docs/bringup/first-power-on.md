@@ -5,8 +5,8 @@ Energise the robot and prove all 31 actuators answer, **without enabling any**.
 !!! abstract "At a glance"
     - **Tools:** bench supply, two people.
     - **Operator:** connects power, runs commands, reads output aloud; never touches the robot.
-    - **Safety:** holds the operator kill switch (stops the mission process is the e-stop — see [Safety](../before-you-start/safety.md#rules)), watches, calls the abort; never touches the keyboard.
-    - **Before this:** [Pre-power checks](../electrical/pre-power-checks.md) passed and signed. Robot hung from a rated hoist, legs straight, clear space below.
+    - **Safety:** holds the operator kill switch (stops the mission process is the e-stop — see [Safety](../before-you-start/index.md#rules)), watches, calls the abort; never touches the keyboard.
+    - **Before this:** [Pre-power checks](../electrical/index.md#pre-power-checks) passed and signed. Robot hung from a rated hoist, legs straight, clear space below.
 
 ## Prepare the host
 
@@ -76,11 +76,11 @@ Cut power, and do not restart to retry, on:
 - anyone calling abort.
 
 Fault came and went? Run the
-[dropout probe](../electrical/can-bus.md#bus-health-and-fault-diagnosis) before
+[dropout probe](../electrical/index.md#bus-health-and-fault-diagnosis) before
 any power cycle.
 
 !!! note "Every layer of stopping is software here — confirm each one is armed before you press Enter"
-    The three layers on [Safety](../before-you-start/safety.md#rules) fire from the
+    The three layers on [Safety](../before-you-start/index.md#rules) fire from the
     moment the mission loop starts: silence in, action out, no pack needed.
     *Owner: electrical lead.*
 
@@ -112,7 +112,7 @@ any power cycle.
     ```
 
 2. USB speed: `480M` is USB 2; replug until `5000M`, else fix the hub or
-   [routing](../electrical/routing.md).
+   [routing](../electrical/index.md#routing).
 
     ```bash
     lsusb -t  # each RealSense must show 5000M, not 480M
@@ -186,7 +186,7 @@ nominal, 50.4 V full.
 2. Current limit set, raise the supply to bus voltage.
 3. Watch the current, not the robot.
 4. Current limit hit: short, **cut power**, back to
-   [Pre-power checks](../electrical/pre-power-checks.md) group B.
+   [Pre-power checks](../electrical/index.md#pre-power-checks) group B.
 
 ✅ **Check:** current steady and low (value **TODO**{ .dh-missing }).
 
@@ -202,7 +202,7 @@ python humanoid_motor_temps.py  # read-only; humanoid_real_env.py stopped
 | Check | Pass |
 | --- | --- |
 | Rows | 31, none *no feedback yet* |
-| ID and bus | Match the [actuator map](../electrical/can-bus.md#the-actuator-map); fix in hardware |
+| ID and bus | Match the [actuator map](../electrical/index.md#the-actuator-map); fix in hardware |
 | Bus voltage | Supply voltage on every motor. Low means a bad conductor |
 | Temperature | Near ambient. Tool flags > 60 °C |
 
@@ -214,7 +214,7 @@ python humanoid_motor_temps.py  # read-only; humanoid_real_env.py stopped
 python humanoid_profile_motor_latency.py  # latency per motor and bus
 ```
 
-✅ **Check:** pass values in [A2](acceptance-tests.md#a2-measure-can-latency).
+✅ **Check:** pass values in [A2](#a2-measure-can-latency).
 
 {{ step(7, "Power down") }}
 
@@ -229,5 +229,5 @@ python humanoid_profile_motor_latency.py  # latency per motor and bus
 4. Remove motor bus power.
 5. Disconnect the supply or packs.
 
-!!! note "Power-on and power-off order is tracked on [Safety](../before-you-start/safety.md#rules)"
+!!! note "Power-on and power-off order is tracked on [Safety](../before-you-start/index.md#rules)"
     *Owner: electrical lead + controls lead.*

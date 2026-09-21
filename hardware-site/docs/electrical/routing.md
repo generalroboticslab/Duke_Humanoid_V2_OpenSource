@@ -12,7 +12,7 @@ Route every limb cable, then verify.
     - **Wrists:** `humanoid_joint_monkey_hw.py` limits sweep and speed against
       cable wrap and the wrist encoders' ±π wrap, assuming the reference routing.
 2. Each D436 USB-C cable crosses two gimbal axes and must hold USB 3: use the
-   40 Gbit/s extension and right-angle cable ([Cables and connectors](../bom/cables-and-connectors.md)).
+   40 Gbit/s extension and right-angle cable ([Cables and connectors](../bom/index.md#cables-and-connectors)).
 
 !!! note "Not recorded — routing photos, bend radii and clamp positions from the reference build"
     *Owner: electrical lead, from a photographed build.*

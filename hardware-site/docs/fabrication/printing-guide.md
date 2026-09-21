@@ -5,9 +5,9 @@ sintering (SLS).
 
 !!! abstract "At a glance"
     - **You will:** print a test part, then the set.
-    - **Parts:** [Printed parts](../bom/printed-parts.md).
-    - **Files:** a 3MF per part in the Files column of [Printed parts](../bom/printed-parts.md), all on [CAD downloads](cad-downloads.md).
-    - **Before this:** [CNC guide](cnc-guide.md).
+    - **Parts:** [Printed parts](../bom/index.md#printed-parts).
+    - **Files:** a 3MF per part in the Files column of [Printed parts](../bom/index.md#printed-parts), all on [CAD downloads](#cad-downloads).
+    - **Before this:** [CNC guide](#cnc-guide).
 
 ## Print profiles
 
@@ -24,7 +24,7 @@ sintering (SLS).
 ## Which process each part takes
 
 The `Process` and `Material` columns on
-[Printed parts](../bom/printed-parts.md) carry the assignment for every part:
+[Printed parts](../bom/index.md#printed-parts) carry the assignment for every part:
 **40 parts are FDM** (PLA and TPU) and **seven are SLS** in nylon 12.
 
 The seven SLS parts are the drivetrain parts — every one of them transmits
@@ -64,4 +64,4 @@ and FDM is what the reference robot used for all of them.
 !!! note "Yours to determine — post-processing: support removal, reaming, heat-set insert fitting"
     *Owner: hardware lead.*
 
-Next: [Incoming inspection](incoming-inspection.md#check-printed-parts).
+Next: [Incoming inspection](#check-printed-parts).

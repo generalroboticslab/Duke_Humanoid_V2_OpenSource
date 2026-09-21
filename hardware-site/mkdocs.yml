@@ -11,20 +11,19 @@ edit_uri: edit/main/hardware-site/docs/
 
 copyright: >-
   Copyright &copy; General Robotics Lab, Duke University —
-  hardware and documentation licence not yet declared, see
-  <a href="https://generalroboticslab.github.io/duke_humanoid_v2/reference/citation-and-license/">Citation &amp; licence</a>.
+  hardware, documentation and code under Apache-2.0, see
+  <a href="https://generalroboticslab.github.io/duke_humanoid_v2/reference/#citation-and-licence">Citation &amp; licence</a>.
 
 theme:
   name: material
   language: en
   features:
     - navigation.tabs
-    - navigation.sections
-    - navigation.indexes
     - navigation.top
     - navigation.footer
     - navigation.tracking
     - toc.follow
+    - toc.integrate
     - search.suggest
     - search.highlight
     - content.code.copy
@@ -79,6 +78,10 @@ plugins:
   - macros:
       module_name: main
       on_error_fail: true
+      # Section pages are flat: <section>/index.md pulls its subsections in with
+      # {% include "<section>/<page>.md" %}. Jinja renders what it includes, so
+      # the macros inside those files still run.
+      include_dir: docs
   - table-reader:
       data_path: docs
       allow_missing_files: false
@@ -117,67 +120,25 @@ markdown_extensions:
       permalink: true
       toc_depth: 3
 
+# One page per section. Everything under a section is included into that
+# section's index.md, so MkDocs must not build it as a page of its own as well.
+exclude_docs: |
+  /before-you-start/*.md
+  /bom/*.md
+  /fabrication/*.md
+  /assembly/*.md
+  /electrical/*.md
+  /bringup/*.md
+  /reference/*.md
+  !index.md
+
 nav:
   - Home: index.md
-
-  - Before you start:
-      - before-you-start/index.md
-      - Safety: before-you-start/safety.md
-      - What you get: before-you-start/what-you-get.md
-      - Skills and shop access: before-you-start/skills-and-shop.md
-      - Cost and time: before-you-start/cost-and-time.md
-
-  - Bill of materials:
-      - bom/index.md
-      - Actuators: bom/actuators.md
-      - Electronics: bom/electronics.md
-      - CNC parts: bom/cnc-parts.md
-      - Printed parts: bom/printed-parts.md
-      - Fasteners and hardware: bom/fasteners-and-hardware.md
-      - Cables and connectors: bom/cables-and-connectors.md
-      - Sourcing: bom/sourcing.md
-
-  - Fabrication:
-      - fabrication/index.md
-      - CAD downloads: fabrication/cad-downloads.md
-      - CNC guide: fabrication/cnc-guide.md
-      - Printing guide: fabrication/printing-guide.md
-      - Incoming inspection: fabrication/incoming-inspection.md
-
-  - Assembly:
-      - assembly/index.md
-      - Tools: assembly/tools.md
-      - Leg: assembly/leg.md
-      - Arm: assembly/arm.md
-      - Torso and waist: assembly/torso-and-waist.md
-      - Head and camera gimbal: assembly/head-and-camera-gimbal.md
-      - Gripper: assembly/gripper.md
-      - Final integration: assembly/final-integration.md
-
-  - Electrical:
-      - electrical/index.md
-      - Power system: electrical/power-system.md
-      - CAN bus: electrical/can-bus.md
-      - Harness fabrication: electrical/harness-fabrication.md
-      - Routing: electrical/routing.md
-      - Pre-power checks: electrical/pre-power-checks.md
-
-  - Bring-up:
-      - bringup/index.md
-      - First power-on: bringup/first-power-on.md
-      - Motor ID and config: bringup/motor-id-and-config.md
-      - Joint zeroing: bringup/joint-zeroing.md
-      - Camera calibration: bringup/camera-calibration.md
-      - Acceptance tests: bringup/acceptance-tests.md
-
+  - Before you start: before-you-start/index.md
+  - Bill of materials: bom/index.md
+  - Fabrication: fabrication/index.md
+  - Assembly: assembly/index.md
+  - Electrical: electrical/index.md
+  - Bring-up: bringup/index.md
   - Software: software.md
-
-  - Reference:
-      - reference/index.md
-      - Open items (punch list): reference/todo.md
-      - Full specifications: reference/full-specifications.md
-      - Part index: reference/part-index.md
-      - Revisions: reference/revisions.md
-      - Troubleshooting: reference/troubleshooting.md
-      - FAQ: reference/faq.md
-      - Citation and licence: reference/citation-and-license.md
+  - Reference: reference/index.md

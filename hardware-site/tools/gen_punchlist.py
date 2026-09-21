@@ -56,6 +56,16 @@ BLOCK_RE = re.compile(r'^([ \t]*)(!!!|\?\?\?\+?)\s+(missing|unverified)\s+"((?:M
 STEP_RE = re.compile(r'\{\{\s*step\(\s*([0-9]+)\s*,\s*"([^"]*)"')
 H_RE = re.compile(r'^(#{1,4})\s+(.*)$')
 JINJA_RE = re.compile(r'^\s*\{%-?\s*(if|elif|else|endif)\b')
+# `## Not in this list { #electronics-not-in-this-list }` — attr_list id, used
+# where the same heading text appears more than once on a flat section page.
+ATTR_ID = re.compile(r"\{\s*#([A-Za-z0-9_-]+)[^}]*\}\s*$")
+
+# Every top-level section builds as one flat page: <section>/index.md includes
+# the files under it, so a row links to that page and to the heading the block
+# sits under, never to the file the block was read from. Step anchors are
+# namespaced per included file (see step_ns() in main.py).
+FLAT = {"before-you-start", "bom", "fabrication", "assembly", "electrical",
+        "bringup", "reference"}
 
 SECTIONS = [
     ("before-you-start/", "Before you start"),
@@ -197,6 +207,9 @@ def extract() -> list[dict]:
 # --------------------------------------------------------------------------- #
 
 def slug(text: str) -> str:
+    m = ATTR_ID.search(text)
+    if m:
+        return m.group(1)          # the heading sets its own id with attr_list
     text = re.sub(r"`([^`]*)`", r"\1", text)
     text = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", text)
     text = re.sub(r"[*_]", "", text)
@@ -205,7 +218,16 @@ def slug(text: str) -> str:
     return re.sub(r"[-\s]+", "-", text)
 
 
+def renders_on(file: str) -> tuple[str, str]:
+    """(page this file's blocks render on, prefix its step anchors carry)."""
+    section, _, name = file.partition("/")
+    if section in FLAT and name and name != "index.md":
+        return f"{section}/index.md", f"{name[:-3]}-"
+    return file, ""
+
+
 def clean(t: str) -> str:
+    t = ATTR_ID.sub("", t)
     t = re.sub(r"\*Owner:.*", "", t, flags=re.S)
     t = re.sub(r"\[([^\]]*)\]\([^)]*\)", r"\1", t)
     t = re.sub(r"\{\s*\.dh-[a-z]+\s*\}", "", t)   # inline red-marker attribute lists
@@ -420,11 +442,13 @@ def render(items: list[dict]) -> str:
         w("| Page | What is missing | Who can supply it | Blocks release |")
         w("| --- | --- | --- | :-: |")
         for it in sorted(its, key=lambda x: (x["file"], x["line"])):
-            rel = posixpath.relpath(it["file"], "reference")
+            built, step_ns = renders_on(it["file"])
+            rel = posixpath.relpath(built, "reference")
             ctx = it["context"]
             m = re.match(r"Step (\d+) — (.*)", ctx)
             if m:
-                anchor, label = f"#step-{m.group(1)}", f"{m.group(2)} (step {m.group(1)})"
+                anchor = f"#step-{step_ns}{m.group(1)}"
+                label = f"{m.group(2)} (step {m.group(1)})"
             elif ctx:
                 anchor, label = "#" + slug(ctx), clean(ctx)
             else:

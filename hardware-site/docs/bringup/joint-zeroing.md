@@ -3,7 +3,7 @@
 Record each joint's encoder reading at the model's zero pose.
 
 !!! abstract "At a glance"
-    - **Before this:** [Motor ID and config](motor-id-and-config.md). Robot hung, legs straight, emergency stop held, motors **not** enabled.
+    - **Before this:** [Motor ID and config](#motor-id-and-config). Robot hung, legs straight, emergency stop held, motors **not** enabled.
 
 ## Set zeros
 
@@ -11,7 +11,7 @@ The zero pose is the deploy model at all-zero joint angles: deploy assumes
 encoder 0 equals model `qpos` 0. The model is `robot.xml` in the
 `HumanoidRmaVelEstArmFlashSacv159bMixedArmsCam` run directory
 (`humanoid_site.DEPLOY_MODEL_TASK`). Joint order and IDs:
-[actuator map](../electrical/can-bus.md#the-actuator-map).
+[actuator map](../electrical/index.md#the-actuator-map).
 
 | Joint | Zero as the software defines it |
 |---|---|
@@ -26,7 +26,7 @@ The wrist encoders wrap at ±π. Keep the wrists' zero well away from the wrap
 
 !!! danger "It zeroes all 31 motors, every time"
     Re-zeroing to fix an arm also wipes the gimbal zeros. After any run, redo
-    [Camera calibration](camera-calibration.md).
+    [Camera calibration](#camera-calibration).
 
 1. Go to `control/`:
 
@@ -74,7 +74,7 @@ It writes each motor's current position as its zero, sets `zero_sta = 1`
 
 ✅ **Check:** every joint matches the model at the zero pose, the gimbal check
 agrees with the cameras, and the offsets are saved and backed up. Pass values:
-[A5](acceptance-tests.md#a5-check-zero-and-model-fidelity).
+[A5](#a5-check-zero-and-model-fidelity).
 
 ## Back up zeros
 

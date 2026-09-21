@@ -12,8 +12,8 @@ Every joint is a RobStride quasi-direct-drive actuator:
 **Team ref** is the line in the team BOM spreadsheet
 (`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19), which is where
 every quantity and price on this page comes from.
-No model has a published alternate ([Sourcing](sourcing.md#supply-risk-parts)).
-Check each on arrival: [Incoming inspection](../fabrication/incoming-inspection.md#check-actuators).
+No model has a published alternate ([Sourcing](#supply-risk-parts)).
+Check each on arrival: [Incoming inspection](../fabrication/index.md#check-actuators).
 
 ## Which model goes in which joint
 
@@ -27,8 +27,8 @@ Check each on arrival: [Incoming inspection](../fabrication/incoming-inspection.
 | RS06 | 4 | ankle_2, shoulder_2 |
 
 *Source: `deploy/control/humanoid_config.py`.* Controller Area Network (CAN) IDs
-and buses: [CAN bus](../electrical/can-bus.md). Connectors:
-[Cables and connectors](cables-and-connectors.md#actuator-side-connectors).
+and buses: [CAN bus](../electrical/index.md#can-bus). Connectors:
+[Cables and connectors](#actuator-side-connectors).
 
 The team BOM also lists 6 RS05 (`Duke_Humanoid_V2_BOM_WIP.xlsx`, line `E5`).
 The CAD-derived head-camera note names RS05 as the yaw and pitch motors
@@ -59,7 +59,7 @@ joint-to-type map and the team's own booklet both show four. *Source:
 
 - Max torque and torque constant equal `MAX_TORQUE` and `MOTOR_TORQUE_CONSTANTS` in `py_motor.py`; the control code clamps to max torque.
 - RS02, RS03, RS04 (manuals): 48 VDC rated, 24–60 VDC operating; CAN at 1 Mbps; 14-bit single-turn absolute encoder; reduction 7.75:1 (RS02) and 9:1 (RS03, RS04).
-- Current-limit defaults, resistance and back-EMF: [Power system](../electrical/power-system.md).
+- Current-limit defaults, resistance and back-EMF: [Power system](../electrical/index.md#power-system).
 - Deploy sets the `0x700B` torque limit of every motor to one ratio of its max torque. The ratio comes from `--torque-limit` (default 0.1; the `OPERATIONS.md` robot launch uses 0.8), and the operator steps it by 0.1 between 0.1 and 0.8. The four camera motors follow the same ratio (`deploy/control/humanoid_real_env.py`: `torque_limit`, `[TORQUE_UP]`/`[TORQUE_DOWN]`, `_apply_group_torque_limits`).
 
 !!! missing "MISSING — RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot"

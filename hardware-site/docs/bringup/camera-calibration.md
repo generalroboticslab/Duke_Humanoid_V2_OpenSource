@@ -4,7 +4,7 @@ Calibrate the two RealSense D436 cameras, sections 1–4 in order.
 
 !!! abstract "At a glance"
     - **Parts:** both cameras on USB Hub #1, each on its own two-axis gimbal; [tag cubes](#make-the-fixtures).
-    - **Before this:** [Joint zeroing](joint-zeroing.md). No calibration data ships.
+    - **Before this:** [Joint zeroing](#joint-zeroing). No calibration data ships.
 
 | Port | Module | Model site | Gimbal joints |
 | --- | --- | --- | --- |
@@ -201,7 +201,7 @@ quiet zone on each face.
 `perception/tagged_bodies/grasp_cube/`, `perception/asset/tag_cube_creation/`.*
 
 !!! note "Yours to print — tag cubes: any rigid 40 mm cube with the tag family below"
-    *Owner: perception lead. Blocks [CAD downloads](../fabrication/cad-downloads.md).*
+    *Owner: perception lead. Blocks [CAD downloads](../fabrication/index.md#cad-downloads).*
 
 Tag size limits range: 30 mm tags stop decoding beyond about 2 m **UNVERIFIED**{ .dh-unverified }. Keep the cubes within 2 m of the cameras. *Source: deploy repo, `OPERATIONS.md`.*
 

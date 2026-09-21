@@ -89,7 +89,7 @@ close every red box with them first.
     !!! missing "MISSING — SAFETY — Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step"
         The software ladder above is published; the order the hardware itself is
         switched is not.
-        *Owner: electrical lead. Blocks [Pre-power checks](../electrical/pre-power-checks.md). Blocks release.*
+        *Owner: electrical lead. Blocks [Pre-power checks](../electrical/index.md#pre-power-checks). Blocks release.*
 
 7. **Isolate before touching.** Disconnect the packs and move them away before
    any work; lock-out/tag-out on a shared robot.
@@ -116,7 +116,7 @@ Every joint is quasi-direct-drive, with no self-locking gearbox. Removing
 power, including an e-stop, drops the 36 kg body and whatever the arms hold.
 
 !!! note "Not measured on the reference robot — collapse behaviour and standoff distance on power loss; safe pose before planned power-down"
-    *Owner: hardware lead, from a drop test with the robot suspended. Blocks [First power-on](../bringup/first-power-on.md).*
+    *Owner: hardware lead, from a drop test with the robot suspended. Blocks [First power-on](../bringup/index.md#first-power-on).*
 
 ### Lithium-polymer (LiPo) packs
 
@@ -139,7 +139,7 @@ protector: 44.4 V nominal, 50.4 V full, about 222 Wh per pack (computed).
 
 !!! note "Yours to determine — battery procedure: charger and charge rate, voltage floor, storage, fire response, disposal, pack-path protection"
     The team linked an "ISDT ... DC600Wx2" charger; the model is **UNVERIFIED**{ .dh-unverified }.
-    *Owner: hardware lead with the local EHS office. Blocks [Power system](../electrical/power-system.md).*
+    *Owner: hardware lead with the local EHS office. Blocks [Power system](../electrical/index.md#power-system).*
 
 ### Crush
 
@@ -180,7 +180,7 @@ settings, not measured joint torques.
 A biped can fall on its own: 36 kg at floor level, possibly on a foot.
 
 !!! note "Yours to determine — conditions for letting the robot stand free"
-    *Owner: hardware lead + controls lead. See [Acceptance tests](../bringup/acceptance-tests.md).*
+    *Owner: hardware lead + controls lead. See [Acceptance tests](../bringup/index.md#acceptance-tests).*
 
 ## Inspect and log before each session
 

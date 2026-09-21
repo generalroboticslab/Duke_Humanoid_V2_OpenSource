@@ -15,7 +15,7 @@ Headline figures: [home page](../index.md#specifications).
 | **Total** | | **{{ bom_qty("actuators.csv") }}** | | |
 
 *Source: `deploy/control/humanoid_config.py`, `py_motor.py`.* CAN (Controller Area
-Network) IDs and buses: [CAN bus](../electrical/can-bus.md).
+Network) IDs and buses: [CAN bus](../electrical/index.md#can-bus).
 
 Deploy writes each motor's torque limit as its peak torque above × a ratio: 0.1 by
 default (`humanoid_real_env.py --torque_limit`), stepped by 0.1 within 0.1–0.8 with
@@ -79,7 +79,7 @@ mechanical stops.
 
 CAD masses from the Fusion model `humanoid_2.1_latest` (export of 2026-09-19 16:46, `tree.csv`: each
 component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
-[Mass properties](part-index.md#mass-properties).
+[Mass properties](#mass-properties).
 
 | | |
 | --- | --- |

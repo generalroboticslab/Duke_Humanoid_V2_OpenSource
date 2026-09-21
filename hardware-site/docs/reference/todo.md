@@ -49,24 +49,24 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-| No fuse in the battery path — a pack short is the worst-case fault | [Power system](../electrical/power-system.md#protection-and-disconnect) |
-| No lifting points or sling route on the robot | [Safety](../before-you-start/safety.md#rules) |
-| No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](../before-you-start/safety.md#rules) |
+| No fuse in the battery path — a pack short is the worst-case fault | [Power system](../electrical/index.md#protection-and-disconnect) |
+| No lifting points or sling route on the robot | [Safety](../before-you-start/index.md#rules) |
+| No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](../before-you-start/index.md#rules) |
 
 ## Before you start
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [safety → Rules](../before-you-start/safety.md#rules) | Lifting points on the robot, sling route and clearance zone — The gantry itself is specified above;; where to attach to the robot is not. | hardware lead | **yes** |
-| [safety → Rules](../before-you-start/safety.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
+| [safety → Rules](../before-you-start/index.md#rules) | Lifting points on the robot, sling route and clearance zone — The gantry itself is specified above;; where to attach to the robot is not. | hardware lead | **yes** |
+| [safety → Rules](../before-you-start/index.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
 
 ## Bill of materials
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [actuators → Motor data](../bom/actuators.md#motor-data) | RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot | hardware lead + controls lead | no |
-| [electronics → Power path](../bom/electronics.md#power-path) | 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
-| [electronics → Not in this list](../bom/electronics.md#not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
+| [actuators → Motor data](../bom/index.md#motor-data) | RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot | hardware lead + controls lead | no |
+| [electronics → Power path](../bom/index.md#power-path) | 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
+| [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
 | [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
 
 ## Assembly
@@ -77,19 +77,19 @@ across every step of every limb, and each carries the flag in its own right.
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [gripper → Set the open and closed positions (step 7)](../assembly/gripper.md#step-7) | The uncalibrated service map reports 90 mm; measure the real gap in step 7 | hardware lead + controls | no |
-| [head-and-camera-gimbal → Route the camera cable (step 6)](../assembly/head-and-camera-gimbal.md#step-6) | Camera cable across the yaw and pitch axes — Real yaw travel; how the USB-C cable crosses yaw (slip ring, helix or stop).; Cable type, length, bend radius, service loop, retention. … | hardware lead + electrical | no |
+| [gripper → Set the open and closed positions (step 7)](../assembly/index.md#step-gripper-7) | The uncalibrated service map reports 90 mm; measure the real gap in step 7 | hardware lead + controls | no |
+| [head-and-camera-gimbal → Route the camera cable (step 6)](../assembly/index.md#step-head-and-camera-gimbal-6) | Camera cable across the yaw and pitch axes — Real yaw travel; how the USB-C cable crosses yaw (slip ring, helix or stop).; Cable type, length, bend radius, service loop, retention. … | hardware lead + electrical | no |
 
 ## Electrical
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [harness-fabrication → Identify the connector pinouts](../electrical/harness-fabrication.md#identify-the-connector-pinouts) | Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation | electrical lead | no |
-| [power-system → Wire the 48 V bus](../electrical/power-system.md#wire-the-48-v-bus) | Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charger model, charge rate, balance-charging procedure and charging location | hardware lead (retention) + electrical lead + safety officer | no |
-| [power-system → Wire the 48 V bus](../electrical/power-system.md#wire-the-48-v-bus) | TVS diodes fitted at each location (BOM: 10) | electrical lead | no |
-| [power-system → Wire the 48 V bus](../electrical/power-system.md#wire-the-48-v-bus) | Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors, charger: diagram or team log only, not the BOM; no confirmed part numbers | BOM owner + electrical lead | no |
-| [power-system → Feed the 12 V rail](../electrical/power-system.md#feed-the-12-v-rail) | Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget | electrical lead | no |
-| [power-system → Protection and disconnect](../electrical/power-system.md#protection-and-disconnect) | Pack-path fuse (none drawn); surge protector part number and rating | electrical lead + safety officer | **yes** |
+| [harness-fabrication → Identify the connector pinouts](../electrical/index.md#identify-the-connector-pinouts) | Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation | electrical lead | no |
+| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charger model, charge rate, balance-charging procedure and charging location | hardware lead (retention) + electrical lead + safety officer | no |
+| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | TVS diodes fitted at each location (BOM: 10) | electrical lead | no |
+| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors, charger: diagram or team log only, not the BOM; no confirmed part numbers | BOM owner + electrical lead | no |
+| [power-system → Feed the 12 V rail](../electrical/index.md#feed-the-12-v-rail) | Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget | electrical lead | no |
+| [power-system → Protection and disconnect](../electrical/index.md#protection-and-disconnect) | Pack-path fuse (none drawn); surge protector part number and rating | electrical lead + safety officer | **yes** |
 
 ## Bring-up
 
@@ -99,8 +99,8 @@ and check below is written against a voltage nobody has confirmed.
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [first-power-on → Power the computer only (step 1)](../bringup/first-power-on.md#step-1) | How to power the computer alone: the power diagram feeds it from the arm motors' distribution block, no disconnect drawn — Do not improvise. | electrical lead | no |
-| [motor-id-and-config → Set an ID](../bringup/motor-id-and-config.md#set-an-id) | Whether an ID can only be set with the motor alone on the bus, and what firmware baseline the team ran — The procedure above is the vendor tool's. | controls lead | no |
+| [first-power-on → Power the computer only (step 1)](../bringup/index.md#step-first-power-on-1) | How to power the computer alone: the power diagram feeds it from the arm motors' distribution block, no disconnect drawn — Do not improvise. | electrical lead | no |
+| [motor-id-and-config → Set an ID](../bringup/index.md#set-an-id) | Whether an ID can only be set with the motor alone on the bus, and what firmware baseline the team ran — The procedure above is the vendor tool's. | controls lead | no |
 
 ## Items that are not TODO blocks
 

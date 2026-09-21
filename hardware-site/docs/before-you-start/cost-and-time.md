@@ -40,4 +40,4 @@ Order long-lead items first. The Intel RealSense D436 and the
 ({{ bom_count("actuators.csv") }} models) are single-source.
 
 !!! note "Yours to determine — quoted lead times (cameras, each actuator model, machining), tested alternates for both single-source items, ordering sequence"
-    *Owner: hardware lead. See [Sourcing](../bom/sourcing.md).*
+    *Owner: hardware lead. See [Sourcing](../bom/index.md#sourcing).*

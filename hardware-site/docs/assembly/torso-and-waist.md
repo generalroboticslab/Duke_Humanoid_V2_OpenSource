@@ -4,11 +4,11 @@ Build the torso that limbs and camera columns bolt to.
 
 !!! abstract "At a glance"
     - **You will:** build frame and waist; mount electronics, packs and covers.
-    - **Parts:** RobStride 03 ×1 ([Actuators](../bom/actuators.md)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/cnc-parts.md)); electronics in steps 5–8 ([Electronics](../bom/electronics.md)).
-    - **Before this:** [Arm](arm.md).
+    - **Parts:** RobStride 03 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/index.md#cnc-parts)); electronics in steps 5–8 ([Electronics](../bom/index.md#electronics)).
+    - **Before this:** [Arm](#arm).
 
 !!! note "Read off the model — torso fasteners, mounts and retention"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - Per step: screws, torque, Loctite 222 use, plate join order and location,
       squareness tolerance.
     - No electronics item has a mount in any parts list.
@@ -69,7 +69,7 @@ the pelvis through a flange, a ring and a coupler.
 </figure>
 
 !!! note "Read off the model — waist flange, ring and coupler"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** Turns freely, no axial play; square to the pelvis at zero.
@@ -85,7 +85,7 @@ the pelvis through a flange, a ring and a coupler.
 </div>
 
 It is the datum for both camera columns: yaw axes at y = ±65 mm, z = 0.52 m in
-the base frame ([Head and camera gimbal](head-and-camera-gimbal.md)).
+the base frame ([Head and camera gimbal](#head-and-camera-gimbal)).
 
 ✅ **Check:** Flat and square to the frame.
 
@@ -136,14 +136,14 @@ Retain it against walking shock, with intake, exhaust and ports clear.
 </div>
 
 !!! danger "Keep both packs disconnected"
-    Until [Pre-power checks](../electrical/pre-power-checks.md) pass. See
-    [Safety](../before-you-start/safety.md).
+    Until [Pre-power checks](../electrical/index.md#pre-power-checks) pass. See
+    [Safety](../before-you-start/index.md#safety).
 
 Stand the packs upright, side by side, in the rear bay. They run **in series**
 (one pack's + to the other's −) through a surge protector to the 48 V bus:
 44.4 V nominal, 50.4 V full (computed). *Source: team power wiring diagram.*
 
-!!! note "Pack retention is tracked on [Power system](../electrical/power-system.md)"
+!!! note "Pack retention is tracked on [Power system](../electrical/index.md#power-system)"
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** Packs cannot shift, no lead is taut or on an edge, each pack comes out.
@@ -165,8 +165,8 @@ Stand the packs upright, side by side, in the rear bay. They run **in series**
 </div>
 
 Label each CAN adapter with its bus first: a udev rule binds bus name to USB
-serial. Wire per [Power system](../electrical/power-system.md) and
-[CAN bus](../electrical/can-bus.md). The power diagram draws one buck converter
+serial. Wire per [Power system](../electrical/index.md#power-system) and
+[CAN bus](../electrical/index.md#can-bus). The power diagram draws one buck converter
 (computer only), the bill of materials (BOM) three.
 
 ✅ **Check:** Every adapter bus-labelled; no board hangs on its cable; no converter's heat path blocked.
@@ -188,7 +188,7 @@ Mount it rigidly: the control stack treats its orientation as a constant.
   <figcaption>IMU on a printed X-bracket on a machined plate. Same mount on the finished robot: <strong class="dh-unverified">UNVERIFIED</strong>.</figcaption>
 </figure>
 
-!!! note "The IMU screw conflict is tracked on [Electronics](../bom/electronics.md)"
+!!! note "The IMU screw conflict is tracked on [Electronics](../bom/index.md#electronics)"
     *Owner: hardware lead.*
 
 Deploy assumes the IMU axes match the robot base frame. It opens the IMU with
@@ -210,7 +210,7 @@ enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
 
 {{ step(9, "Fit the disconnect and emergency stop") }}
 
-!!! note "The missing e-stop is tracked on [Safety](../before-you-start/safety.md#rules)"
+!!! note "The missing e-stop is tracked on [Safety](../before-you-start/index.md#rules)"
     The run scripts assume a physical e-stop. Specify device, what it cuts,
     rating and location.
     *Owner: hardware lead + electrical + Safety sign-off.*
@@ -229,7 +229,7 @@ enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
 {{ step(10, "Fit the front and back covers") }}
 
 !!! note "Read off the model — torso cover geometry and fixings"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** Nothing inside moves when the torso is tilted; the waist still turns.

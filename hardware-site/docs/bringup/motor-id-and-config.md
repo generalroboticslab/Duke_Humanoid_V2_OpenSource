@@ -5,16 +5,16 @@ any joint is commanded.
 
 !!! abstract "At a glance"
     - **Tools:** RobStride software ([robstride.com/download](https://www.robstride.com/download), "Lingzu v0.0.4") and USB-CAN module (CH340, AT mode), not the robot's `gs_usb` adapters **UNVERIFIED**{ .dh-unverified }.
-    - **Before this:** [First power-on](first-power-on.md). Robot hung, legs straight, e-stop (emergency stop) held, `humanoid_real_env.py` stopped.
+    - **Before this:** [First power-on](#first-power-on). Robot hung, legs straight, e-stop (emergency stop) held, `humanoid_real_env.py` stopped.
 
 | Property | Set by | Verified by |
 | --- | --- | --- |
-| CAN ID and bus | Vendor tool | `humanoid_motor_temps.py` against the [actuator map](../electrical/can-bus.md#the-actuator-map) |
+| CAN ID and bus | Vendor tool | `humanoid_motor_temps.py` against the [actuator map](../electrical/index.md#the-actuator-map) |
 | Actuator model | Assembly | Actuator map |
 | Firmware version | Vendor tool | **TODO**{ .dh-missing } |
 | Current limit | `humanoid_set_current_limit.py` | Self-check after a power cycle |
 | Torque limit | Runtime flag | Self-check |
-| Zero, `−π..+π` flag | [`humanoid_set_zero.py`](joint-zeroing.md) | Model comparison |
+| Zero, `−π..+π` flag | [`humanoid_set_zero.py`](#joint-zeroing) | Model comparison |
 | Direction | Actuator orientation at assembly | Smoke test, [Positive direction](#positive-direction) |
 
 ## Set an ID
@@ -53,10 +53,10 @@ RS03 and RS04 ship at CAN ID **127** (other models
     ```
 
 It writes `min(default × scale, 40 A)` per motor and **saves to the drives**.
-Values: [Power system](../electrical/power-system.md#configured-current-limits).
+Values: [Power system](../electrical/index.md#configured-current-limits).
 Register `0x7018` range: RS02 0–23 A, RS03 0–43 A, RS04 0–90 A (RobStride manuals).
 
-!!! note "The `0x7018` range is tracked on [Actuators](../bom/actuators.md)"
+!!! note "The `0x7018` range is tracked on [Actuators](../bom/index.md#actuators)"
     *Owner: controls lead.*
 
 ## Set runtime torque limits

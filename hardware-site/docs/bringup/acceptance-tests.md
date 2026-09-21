@@ -4,7 +4,7 @@ Run A0 to A11 in order; each adds energy.
 
 !!! abstract "At a glance"
     - **On a failure:** fix the cause, then re-run that test and every later one.
-    - **Before this:** [Camera calibration](camera-calibration.md). Keep the robot hung, legs straight, until A11.
+    - **Before this:** [Camera calibration](#camera-calibration). Keep the robot hung, legs straight, until A11.
 
 ## Run offline tests
 
@@ -48,7 +48,7 @@ Unpowered. *Source: [project README](https://github.com/generalroboticslab/duke_
 
 | Pass | Abort |
 | --- | --- |
-| Every check of [First power-on](first-power-on.md) steps 3 and 5, from a cold power-up, three times in a row | Any ERROR-WARNING, error frame or fewer than 31 answers |
+| Every check of [First power-on](#first-power-on) steps 3 and 5, from a cold power-up, three times in a row | Any ERROR-WARNING, error frame or fewer than 31 answers |
 
 ## A2. Measure CAN latency
 
@@ -74,7 +74,7 @@ python humanoid_profile_motor_latency.py  # 1 % torque, no position command
     ```
 
 2. Wiggle every connector, clamp and limb entry while stirring the limb
-   ([Routing](../electrical/routing.md#verifying-a-routing-job)).
+   ([Routing](../electrical/index.md#verifying-a-routing-job)).
 
 | Pass | Abort |
 | --- | --- |
@@ -88,7 +88,7 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 
 | Check | Pass |
 | --- | --- |
-| Commanded joints | All move ([joint set](motor-id-and-config.md#step-3) **UNVERIFIED**{ .dh-unverified }) |
+| Commanded joints | All move ([joint set](#step-motor-id-and-config-3) **UNVERIFIED**{ .dh-unverified }) |
 | Other joints | Still |
 | Direction | Per the convention **TODO**{ .dh-missing } |
 | Tracking error, current | **TODO**{ .dh-missing } |
@@ -114,7 +114,7 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 
 | Check | Pass |
 | --- | --- |
-| Zero pose reached | Matches the [zero pose](joint-zeroing.md#set-zeros) **TODO**{ .dh-missing } |
+| Zero pose reached | Matches the [zero pose](#set-zeros) **TODO**{ .dh-missing } |
 | Arm static | `arm is static — measurement valid`: each arm joint's mean velocity ≤ 0.02 rad/s, the script's default `--vel-tol` |
 | Residual, `shoulder_2`, `shoulder_3`, `elbow`, `wrist_1` | `MATCH`: each ≤ 0.35 N·m, the script's default `--tol` |
 | Residual pattern | Not growing from wrist to shoulder |
@@ -124,7 +124,7 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 
 ## A6. Check perception
 
-Procedure: [Camera calibration](camera-calibration.md).
+Procedure: [Camera calibration](#camera-calibration).
 
 | Check | Pass |
 | --- | --- |

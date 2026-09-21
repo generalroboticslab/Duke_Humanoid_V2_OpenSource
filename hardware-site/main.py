@@ -536,6 +536,22 @@ def define_env(env):
     # assembly page furniture
     # ----------------------------------------------------------------- #
 
+    # Set by step_ns() before each {% include %} on a section page, so that the
+    # step headings of the subassemblies sharing that page do not all claim
+    # id="step-1". Jinja renders a page top to bottom, so the value in force is
+    # always the one set for the file currently being included.
+    step_prefix = [""]
+
+    @env.macro
+    def step_ns(name: str) -> str:
+        """Namespace the step anchors of the next included file.
+
+        ``{{ step_ns("leg") }}{% include "assembly/leg.md" %}`` makes that file's
+        steps ``#step-leg-1`` … instead of colliding with the arm's ``#step-1``.
+        """
+        step_prefix[0] = f"{name}-" if name else ""
+        return ""
+
     @env.macro
     def step(number: int | str, title: str) -> str:
         """Numbered assembly-step heading with a badge.
@@ -543,7 +559,7 @@ def define_env(env):
         ``{{ step(3, "Press the hip-roll bearing") }}`` renders an ``<h3>`` that
         the table of contents picks up, with a circled step number in front.
         """
-        anchor = f"step-{number}"
+        anchor = f"step-{step_prefix[0]}{number}"
         return (
             f'<h3 class="step" id="{anchor}">'
             f'<span class="step-badge">{number}</span>{title}'

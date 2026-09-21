@@ -1,14 +1,14 @@
 # Arm
 
-Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final integration](final-integration.md).
+Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final integration](#final-integration).
 
 !!! abstract "At a glance"
     - **You will:** set seven IDs, then build from shoulder to wrist.
-    - **Parts:** RobStride 02 ×3; 00, 03, 05, 06 ×1 each ([Actuators](../bom/actuators.md)); `CNC_arm01`–`CNC_arm13` ([machined parts](../bom/cnc-parts.md)).
-    - **Before this:** [Leg](leg.md).
+    - **Parts:** RobStride 02 ×3; 00, 03, 05, 06 ×1 each ([Actuators](../bom/index.md#actuators)); `CNC_arm01`–`CNC_arm13` ([machined parts](../bom/index.md#cnc-parts)).
+    - **Before this:** [Leg](#leg).
 
 !!! note "Read off the model — arm parts list, fasteners and fits"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - No bearing, spacer, printed-part or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order,
       alignment and preload (steps 3, 5).
@@ -166,7 +166,7 @@ Check the RobStride 00 screw sizes; they may differ.
 The `wrist_3` output carries the gripper's own flange.
 
 !!! note "Read off the model — wrist-to-gripper interface: bolt circle, pilot, keying, cable pass-through"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** The three wrist axes move together without contact.
@@ -195,8 +195,8 @@ Three cable groups:
 - the gripper servo cable, from its driver board in the torso.
 
 !!! note "Read off the model — arm harness lengths, routes and service loops"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
-    See [Harness fabrication](../electrical/harness-fabrication.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
+    See [Harness fabrication](../electrical/index.md#harness-fabrication).
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** All seven joints move through their travel with no cable stretched or pinched; measured travel recorded per joint.

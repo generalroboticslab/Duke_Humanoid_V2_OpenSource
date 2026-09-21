@@ -5,17 +5,17 @@ Join the subassemblies into one robot, **battery disconnected throughout**.
 !!! abstract "At a glance"
     - **You will:** mount, wire, inspect, weigh and hang the robot.
     - **Parts:** two legs and two arms, each past its final check; torso complete; two camera columns bench-tested; two grippers with open and closed positions recorded.
-    - **Before this:** [Gripper](gripper.md); every actuator labelled with joint, ID and bus; camera and gripper-board serials recorded against their sides.
+    - **Before this:** [Gripper](#gripper); every actuator labelled with joint, ID and bus; camera and gripper-board serials recorded against their sides.
 
 {{ step(1, "Support the torso") }}
 
 !!! danger "Two people or a hoist from here on"
     The robot is 36 kg and 1.2 m tall, and less stable with each limb. Read
-    [Safety](../before-you-start/safety.md).
+    [Safety](../before-you-start/index.md#safety).
 
 Support it level, waist free, hips and shoulders reachable.
 
-!!! note "Lifting points and sling route are tracked on [Safety](../before-you-start/safety.md#rules)"
+!!! note "Lifting points and sling route are tracked on [Safety](../before-you-start/index.md#rules)"
     - None defined; needed before the first lift.
     - Sling attachment.
     - What holds the torso (upright or lying down) while limbs go on.
@@ -32,7 +32,7 @@ Bolt the leg to the pelvis, supporting its weight. Joint location
 **UNVERIFIED**{ .dh-unverified } ([Assembly](index.md)).
 
 !!! note "Read off the model — hip, shoulder and wrist interfaces: screws and locating features"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** All six joints still move; the harness branch reaches the torso, unconnected.
@@ -57,7 +57,7 @@ Bolt each arm to its `shoulder_1` output through the square adapter.
 
 {{ step(5, "Install the camera columns") }}
 
-Follow [Head and camera gimbal](head-and-camera-gimbal.md), step 9.
+Follow [Head and camera gimbal](#head-and-camera-gimbal), step 9.
 
 ✅ **Check:** Yaw axes 130.00 mm apart; no column touches an arm in any pose.
 
@@ -81,8 +81,8 @@ links, two camera cables, power.
 | `can25` | Camera gimbals, IDs 5–8 |
 
 !!! note "Read off the model — torso harness lengths, routes and service loops"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
-    See [Harness fabrication](../electrical/harness-fabrication.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
+    See [Harness fabrication](../electrical/index.md#harness-fabrication).
     *Owner: electrical lead.*
 
 ✅ **Check:** Every branch is labelled; waist, hips and shoulders move with nothing pulled or pinched.
@@ -112,5 +112,5 @@ it with the **legs straight**.
 ✅ **Check:** It hangs level, legs straight, mass recorded.
 
 Next: [Electrical](../electrical/index.md),
-[Pre-power checks](../electrical/pre-power-checks.md), then
+[Pre-power checks](../electrical/index.md#pre-power-checks), then
 [Bring-up](../bringup/index.md).

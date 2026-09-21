@@ -10,7 +10,7 @@ BOM line and so no price and no quantity, and read
 **TODO**{ .dh-missing } rather than zero: {{ bom_unpriced("cnc-parts.csv") }}.
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
-Volume, centre of mass and inertia for every part: [Mass properties](../reference/part-index.md#mass-properties).
+Volume, centre of mass and inertia for every part: [Mass properties](../reference/index.md#mass-properties).
 
 ## Leg
 
@@ -46,8 +46,8 @@ Volume, centre of mass and inertia for every part: [Mass properties](../referenc
 
 **Machined total: {{ bom_subtotal("cnc-parts.csv") }}.** Raw data, every column:
 [cnc-parts.csv](../data/cnc-parts.csv). Make them with the
-[CNC guide](../fabrication/cnc-guide.md); check them with
-[Incoming inspection](../fabrication/incoming-inspection.md).
+[CNC guide](../fabrication/index.md#cnc-guide); check them with
+[Incoming inspection](../fabrication/index.md#incoming-inspection).
 
 The part IDs are the Fusion component names without their `_x<qty>` token, so every row with a
 download link is checked against the CAD. Fusion occurrence counts per robot: `leg02` 7, `leg03` 5,

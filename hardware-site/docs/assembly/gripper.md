@@ -4,11 +4,11 @@ Build one rack-and-pinion parallel gripper (one serial-bus servo drives both jaw
 
 !!! abstract "At a glance"
     - **You will:** configure the servos, build, then set the jaw positions.
-    - **Parts:** per gripper, one servo and driver board ([Electronics](../bom/electronics.md)); `base` (servo, slides, two tag-holder plates, USB-C protector); `left_rack` and `right_rack` (the jaws); `cnc_flange` (machined disc, the wrist interface).
-    - **Before this:** [Head and camera gimbal](head-and-camera-gimbal.md).
+    - **Parts:** per gripper, one servo and driver board ([Electronics](../bom/index.md#electronics)); `base` (servo, slides, two tag-holder plates, USB-C protector); `left_rack` and `right_rack` (the jaws); `cnc_flange` (machined disc, the wrist interface).
+    - **Before this:** [Head and camera gimbal](#head-and-camera-gimbal).
 
 !!! note "Read off the model — gripper parts list, fasteners and fits"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - Material, process and cost of `base`, both racks and `cnc_flange`.
     - Pinion, slide parts, fasteners.
     - Per step: screws, torque, Loctite 222 use, order.
@@ -69,7 +69,7 @@ centreline.
 {{ step(4, "Fit the jaw pads") }}
 
 !!! note "Read off the model — whether jaw pads are fitted, and how"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** The pads meet flat when the jaws close.
@@ -108,8 +108,8 @@ every model rebuild (`deploy/control/rebuild_deploy_model.py`, lines 58 and 352)
 a left-right build fails that check.
 
 !!! note "Read off the model — flange bolt circle, pilot and keying"
-    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
-    Document with the arm side ([Arm](arm.md), step 8). *Owner: hardware lead.*
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
+    Document with the arm side ([Arm](#arm), step 8). *Owner: hardware lead.*
 
 ✅ **Check:** The flange is square to the body and matches the wrist bolt ring.
 

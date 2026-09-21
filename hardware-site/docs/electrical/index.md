@@ -1,16 +1,16 @@
 # Electrical
 
 !!! danger "No battery connected in this section"
-    Connect a pack only after [Pre-power checks](pre-power-checks.md) pass, under
-    [First power-on](../bringup/first-power-on.md), robot suspended.
+    Connect a pack only after [Pre-power checks](#pre-power-checks) pass, under
+    [First power-on](../bringup/index.md#first-power-on), robot suspended.
 
 ## Work in this order
 
-1. [Power system](power-system.md) ([diagram](../assets/wiring/power-supply-v2.png))
-2. [CAN bus](can-bus.md) ([diagram](../assets/wiring/data-wiring-v2.png))
-3. [Harness fabrication](harness-fabrication.md)
-4. [Routing](routing.md), in step with [Assembly](../assembly/index.md)
-5. [Pre-power checks](pre-power-checks.md)
+1. [Power system](#power-system) ([diagram](../assets/wiring/power-supply-v2.png))
+2. [CAN bus](#can-bus) ([diagram](../assets/wiring/data-wiring-v2.png))
+3. [Harness fabrication](#harness-fabrication)
+4. [Routing](#routing), in step with [Assembly](../assembly/index.md)
+5. [Pre-power checks](#pre-power-checks)
 
 ## What the system carries
 
@@ -25,3 +25,13 @@
 
 *Source: [deploy repository](https://github.com/generalroboticslab/duke_humanoid_v2_deploy)
 `control/humanoid_config.py`, `docs/SETUP.md`; bill of materials.*
+
+{% include "electrical/power-system.md" %}
+
+{% include "electrical/can-bus.md" %}
+
+{% include "electrical/harness-fabrication.md" %}
+
+{% include "electrical/routing.md" %}
+
+{% include "electrical/pre-power-checks.md" %}

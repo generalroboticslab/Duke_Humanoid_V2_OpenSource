@@ -8,17 +8,17 @@
 | Camera gimbal and gripper models | published | `head_cam/`, `parallel_gripper/` beside it |
 | Code licence (Apache-2.0), `CITATION.cff` | published | each repository |
 | Operator runbook, software safety contract | published | `deploy/control/docs/` |
-| Power and data wiring diagrams | published | [Power system](../electrical/power-system.md), [CAN bus](../electrical/can-bus.md) |
+| Power and data wiring diagrams | published | [Power system](../electrical/index.md#power-system), [CAN bus](../electrical/index.md#can-bus) |
 | 9 exploded-view CAD animations (unlabelled) | published | Assembly pages |
 | [Bill of materials](../bom/index.md) | **TODO**{ .dh-missing } partial | Fasteners and printed parts are placeholders |
-| STEP files for machined parts | **TODO**{ .dh-missing } | [CAD downloads](../fabrication/cad-downloads.md) |
+| STEP files for machined parts | **TODO**{ .dh-missing } | [CAD downloads](../fabrication/index.md#cad-downloads) |
 | Drawings, tolerances, finishes | **TODO**{ .dh-missing } | None for any machined part |
-| STL/3MF and print profiles | **TODO**{ .dh-missing } | [Printing guide](../fabrication/printing-guide.md) |
+| STL/3MF and print profiles | **TODO**{ .dh-missing } | [Printing guide](../fabrication/index.md#printing-guide) |
 | Fastener schedule, torque values | **TODO**{ .dh-missing } | Threadlocker only: Loctite 222 |
 | Assembly instructions | **TODO**{ .dh-missing } partial | [Assembly](../assembly/index.md) |
 | Harness drawings, connector pinouts | **TODO**{ .dh-missing } | Wiring diagrams are not harness drawings |
-| Hardware and documentation licences | **TODO**{ .dh-missing } | [Citation and licence](../reference/citation-and-license.md) |
-| Tagged release pinning all of the above | **TODO**{ .dh-missing } | [Revisions](../reference/revisions.md) |
+| Hardware and documentation licences | **TODO**{ .dh-missing } | [Citation and licence](../reference/index.md#citation-and-licence) |
+| Tagged release pinning all of the above | **TODO**{ .dh-missing } | [Revisions](../reference/index.md#revisions) |
 
 !!! note "Yours to determine — scope: in or out for teleoperation setup, training workstation, mocap rig, test fixtures, perception cube targets and tripods, charging bench and gantry"
     *Owner: hardware lead.*
