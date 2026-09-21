@@ -259,3 +259,14 @@
 /* eye (hide / show the selected part) and "Show hidden (N)" buttons in the viewer bar */
 .md-typeset .dh-viewer-bar .dh-eye, .md-typeset .dh-viewer-bar .dh-unhide { display: inline-flex; align-items: center; gap: .35em; }
 .md-typeset .dh-viewer-bar .dh-eye:disabled { opacity: .45; cursor: default; }
+
+/* Clip pause/play (javascripts/clips.js) */
+.md-typeset .dh-clip-wrap { position: relative; display: block; max-width: 100%; margin: 0 auto; }
+.md-typeset .dh-clip-wrap video.dh-clip { cursor: pointer; display: block; margin: 0 auto; }
+.md-typeset .dh-clip-wrap:focus-within video.dh-clip { outline: 2px solid var(--md-accent-fg-color); outline-offset: 2px; }
+.md-typeset .dh-clip-badge {
+  position: absolute; top: 0.5rem; left: 50%; transform: translateX(-50%);
+  padding: 0.15rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600;
+  background: rgba(0, 0, 0, 0.65); color: #fff; pointer-events: none; opacity: 0; transition: opacity 0.15s;
+}
+.md-typeset .dh-clip-wrap.is-paused .dh-clip-badge { opacity: 1; }
