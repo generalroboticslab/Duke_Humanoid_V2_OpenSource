@@ -18,7 +18,7 @@ Build the torso that limbs and camera columns bolt to.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/body-frame-poster.webp" aria-label="Exploded view of the torso plate frame"><source src="../../assets/exploded/body-frame.mp4" type="video/mp4"><a href="../../assets/exploded/body-frame.mp4">MP4</a></video>
+    poster="../assets/exploded/body-frame-poster.webp" aria-label="Exploded view of the torso plate frame"><source src="../assets/exploded/body-frame.mp4" type="video/mp4"><a href="../assets/exploded/body-frame.mp4">MP4</a></video>
   <figcaption>Frame: plates, four ribbed rails, internal spine, both shoulder-pitch actuators, waist actuator.</figcaption>
 </figure>
 
@@ -91,7 +91,7 @@ the base frame ([Head and camera gimbal](#head-and-camera-gimbal)).
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/body-front-poster.webp" aria-label="Exploded view of the torso front electronics bay"><source src="../../assets/exploded/body-front.mp4" type="video/mp4"><a href="../../assets/exploded/body-front.mp4">MP4</a></video>
+    poster="../assets/exploded/body-front-poster.webp" aria-label="Exploded view of the torso front electronics bay"><source src="../assets/exploded/body-front.mp4" type="video/mp4"><a href="../assets/exploded/body-front.mp4">MP4</a></video>
   <figcaption>Front bay, identifications <strong class="dh-unverified">UNVERIFIED</strong>: six CAN adapters, mini PC on the spine, two distribution bars, inertial measurement unit (IMU) on the top plate.</figcaption>
 </figure>
 
@@ -121,7 +121,7 @@ Retain it against walking shock, with intake, exhaust and ports clear.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/body-back-poster.webp" aria-label="Exploded view of the torso rear bay with two upright packs"><source src="../../assets/exploded/body-back.mp4" type="video/mp4"><a href="../../assets/exploded/body-back.mp4">MP4</a></video>
+    poster="../assets/exploded/body-back-poster.webp" aria-label="Exploded view of the torso rear bay with two upright packs"><source src="../assets/exploded/body-back.mp4" type="video/mp4"><a href="../assets/exploded/body-back.mp4">MP4</a></video>
   <figcaption>Rear bay: two packs upright behind the spine, terminal strip below. No pack retention is drawn.</figcaption>
 </figure>
 
@@ -217,7 +217,7 @@ enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1248" height="702"
-    poster="../../assets/exploded/body-cover-poster.webp" aria-label="Exploded view of the torso front and back covers"><source src="../../assets/exploded/body-cover.mp4" type="video/mp4"><a href="../../assets/exploded/body-cover.mp4">MP4</a></video>
+    poster="../assets/exploded/body-cover-poster.webp" aria-label="Exploded view of the torso front and back covers"><source src="../assets/exploded/body-cover.mp4" type="video/mp4"><a href="../assets/exploded/body-cover.mp4">MP4</a></video>
   <figcaption>Front and back covers: each a perforated frame plus a perforated panel.</figcaption>
 </figure>
 

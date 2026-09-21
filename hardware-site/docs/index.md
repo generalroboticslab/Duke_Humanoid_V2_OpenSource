@@ -45,7 +45,7 @@ are open gaps, listed on [Open items](reference/index.md#open-items-the-punch-li
 !!! missing "Three gaps still open"
     Everything needed to make the parts is published: a STEP per part, a whole-robot
     STEP, an STL per printed part, the bill of materials and an
-    [Apache-2.0 licence file](../files/LICENSE){ download="" } beside the CAD. These three are not,
+    [Apache-2.0 licence file](files/LICENSE){ download="" } beside the CAD. These three are not,
     and each is somebody's to close before this counts as a finished release.
 
     | Blocker | Tracked on |

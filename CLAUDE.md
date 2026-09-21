@@ -69,6 +69,10 @@ Regenerate after edits: `python tools/gen_punchlist.py`, `tools/gen_image_manife
 `tools/gen_cad_manifest.py` (indexes `docs/files/`; its 95 MB-per-file and 900 MB-total
 ceilings are GitHub's limits, so relax them if the site moves to another host).
 
+After `mkdocs build`, run `python tools/check_links.py`. `--strict` only validates
+Markdown links; raw HTML (`<video>`, `<model-viewer>`, `poster=`) it never looks at,
+so a path left at the wrong URL depth 404s silently. Must report 0 broken links.
+
 ## Layout
 - `hardware-site/` — the site; its generator scripts live in `hardware-site/tools/`.
   `docs/files/{step,print,drawings,plates,assembly,modules,vendor}/` receive CAD exports;

@@ -350,9 +350,9 @@ def home_blockers() -> list[tuple[str, str]]:
 # sentence on a page to hang a TODO block on, so it can only be found by looking.
 DATA_GAPS = [
     ("print_profiles.csv",
-     "The per-part profile table on [Printing guide](../fabrication/printing-guide.md) "
+     "The per-part profile table on [Printing guide](../fabrication/index.md#printing-guide) "
      "is gated on the file and does not render. Material and process per part are "
-     "published without it, on [Printed parts](../bom/printed-parts.md)",
+     "published without it, on [Printed parts](../bom/index.md#printed-parts)",
      "hardware lead", False),
 ]
 

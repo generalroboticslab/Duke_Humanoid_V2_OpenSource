@@ -15,7 +15,7 @@ or purchased).
 ## Find a part on the robot
 
 <div class="dh-viewer-block">
-<model-viewer id="dh-viewer" data-base="../../" src="../../assets/viewer/robot.glb" camera-controls
+<model-viewer id="dh-viewer" data-base="../" src="../assets/viewer/robot.glb" camera-controls
   camera-orbit="35deg 75deg auto" min-camera-orbit="auto auto 0.3m" max-camera-orbit="auto auto 6m"
   interaction-prompt="none" shadow-intensity="0.6" exposure="1.1" loading="eager"
   alt="Duke Humanoid V2, every component in its Fusion 360 appearance">

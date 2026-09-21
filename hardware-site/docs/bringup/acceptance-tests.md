@@ -230,9 +230,9 @@ Biggest hop about 89 s, out-and-back about 4.5 min **UNVERIFIED**{ .dh-unverifie
 ## A10. Reach and grasp
 
 <figure markdown>
-  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="450" poster="../../assets/images/two_target_handoff_left_right-poster.webp" aria-label="The reference robot grasping one target from a bench while a person holds the second">
-    <source src="../../assets/images/two_target_handoff_left_right.mp4" type="video/mp4">
-    <a href="../../assets/images/two_target_handoff_left_right.mp4">A10 video</a>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="450" poster="../assets/images/two_target_handoff_left_right-poster.webp" aria-label="The reference robot grasping one target from a bench while a person holds the second">
+    <source src="../assets/images/two_target_handoff_left_right.mp4" type="video/mp4">
+    <a href="../assets/images/two_target_handoff_left_right.mp4">A10 video</a>
   </video>
   <figcaption>A10 passing on the reference robot.</figcaption>
 </figure>

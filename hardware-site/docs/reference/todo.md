@@ -110,7 +110,7 @@ on a page to generate a row from. Their presence here is checked against
 
 | Gap | What it means | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| `print_profiles.csv` does not exist | The per-part profile table on [Printing guide](../fabrication/printing-guide.md) is gated on the file and does not render. Material and process per part are published without it, on [Printed parts](../bom/printed-parts.md) | hardware lead | no |
+| `print_profiles.csv` does not exist | The per-part profile table on [Printing guide](../fabrication/index.md#printing-guide) is gated on the file and does not render. Material and process per part are published without it, on [Printed parts](../bom/index.md#printed-parts) | hardware lead | no |
 
 ## Images
 

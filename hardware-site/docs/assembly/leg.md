@@ -49,7 +49,7 @@ The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/hip-assembly-poster.webp" aria-label="Exploded view of the pelvis block with the waist and four hip actuators"><source src="../../assets/exploded/hip-assembly.mp4" type="video/mp4"><a href="../../assets/exploded/hip-assembly.mp4">MP4</a></video>
+    poster="../assets/exploded/hip-assembly-poster.webp" aria-label="Exploded view of the pelvis block with the waist and four hip actuators"><source src="../assets/exploded/hip-assembly.mp4" type="video/mp4"><a href="../assets/exploded/hip-assembly.mp4">MP4</a></video>
   <figcaption>Pelvis: waist actuator with flange, ring and coupler; two hip actuators per side.</figcaption>
 </figure>
 
@@ -101,7 +101,7 @@ Make both bearing retainers concentric before tightening.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/leg-poster.webp" aria-label="Exploded view of one leg hanging from the pelvis block"><source src="../../assets/exploded/leg.mp4" type="video/mp4"><a href="../../assets/exploded/leg.mp4">MP4</a></video>
+    poster="../assets/exploded/leg-poster.webp" aria-label="Exploded view of one leg hanging from the pelvis block"><source src="../assets/exploded/leg.mp4" type="video/mp4"><a href="../assets/exploded/leg.mp4">MP4</a></video>
   <figcaption>Leg below the pelvis: hip yaw, knee, two shank links, ankle pitch, ankle roll, foot plate.</figcaption>
 </figure>
 

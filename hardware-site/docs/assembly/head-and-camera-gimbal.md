@@ -8,9 +8,9 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
     - **Before this:** [Torso and waist](#torso-and-waist).
 
 <figure markdown>
-  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="800" poster="../../assets/images/hardware_close_front_back-poster.webp" aria-label="The two camera modules on the reference robot, each aiming at a different target">
-    <source src="../../assets/images/hardware_close_front_back.mp4" type="video/mp4">
-    <a href="../../assets/images/hardware_close_front_back.mp4">MP4</a>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="800" poster="../assets/images/hardware_close_front_back-poster.webp" aria-label="The two camera modules on the reference robot, each aiming at a different target">
+    <source src="../assets/images/hardware_close_front_back.mp4" type="video/mp4">
+    <a href="../assets/images/hardware_close_front_back.mp4">MP4</a>
   </video>
   <figcaption>The finished columns on the robot, aiming independently.</figcaption>
 </figure>
@@ -26,7 +26,7 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/twincities-poster.webp" aria-label="Exploded view of one camera gimbal column"><source src="../../assets/exploded/twincities.mp4" type="video/mp4"><a href="../../assets/exploded/twincities.mp4">MP4</a></video>
+    poster="../assets/exploded/twincities-poster.webp" aria-label="Exploded view of one camera gimbal column"><source src="../assets/exploded/twincities.mp4" type="video/mp4"><a href="../assets/exploded/twincities.mp4">MP4</a></video>
   <figcaption>One column: pedestal, yaw actuator, neck, pitch actuator, two L-shaped arms (pitch output and idler bearing), camera.</figcaption>
 </figure>
 

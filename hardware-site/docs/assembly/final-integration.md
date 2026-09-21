@@ -51,7 +51,7 @@ Bolt each arm to its `shoulder_1` output through the square adapter.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1154" height="650"
-    poster="../../assets/exploded/camera-mount-poster.webp" aria-label="Whole robot with camera columns and grippers lifting off"><source src="../../assets/exploded/camera-mount.mp4" type="video/mp4"><a href="../../assets/exploded/camera-mount.mp4">MP4</a></video>
+    poster="../assets/exploded/camera-mount-poster.webp" aria-label="Whole robot with camera columns and grippers lifting off"><source src="../assets/exploded/camera-mount.mp4" type="video/mp4"><a href="../assets/exploded/camera-mount.mp4">MP4</a></video>
   <figcaption>Camera columns lift off the top plate; grippers come off the wrists (steps 5 and 6).</figcaption>
 </figure>
 

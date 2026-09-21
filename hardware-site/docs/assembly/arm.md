@@ -18,7 +18,7 @@ Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final in
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/arm-poster.webp" aria-label="Exploded view of one arm, shoulder-pitch actuator to wrist"><source src="../../assets/exploded/arm.mp4" type="video/mp4"><a href="../../assets/exploded/arm.mp4">MP4</a></video>
+    poster="../assets/exploded/arm-poster.webp" aria-label="Exploded view of one arm, shoulder-pitch actuator to wrist"><source src="../assets/exploded/arm.mp4" type="video/mp4"><a href="../assets/exploded/arm.mp4">MP4</a></video>
   <figcaption>Shoulder pitch to wrist. Shoulder roll and elbow each sit in a two-plate yoke, one bearing per plate.</figcaption>
 </figure>
 
