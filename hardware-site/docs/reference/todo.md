@@ -48,9 +48,6 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-| No fuse in the battery path — a pack short is the worst-case fault | [Power system](../electrical/index.md#protection-and-disconnect) |
-| No lifting points or sling route on the robot | [Safety](../fabrication/index.md#rules) |
-| No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](../fabrication/index.md#rules) |
 
 ## Bill of materials
 

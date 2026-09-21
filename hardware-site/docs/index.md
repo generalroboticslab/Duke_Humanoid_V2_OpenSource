@@ -42,21 +42,6 @@ How to build an identical Duke Humanoid V2. The code is open; see
 Red bold **MISSING**{ .dh-missing } and **UNVERIFIED**{ .dh-unverified } marks
 are open gaps, listed on [Open items](reference/index.md#open-items-the-punch-list).
 
-!!! missing "Three gaps still open"
-    Everything needed to make the parts is published: a STEP per part, a whole-robot
-    STEP, an STL per printed part, the bill of materials and an
-    [Apache-2.0 licence file](files/LICENSE){ download="" } beside the CAD. These three are not,
-    and each is somebody's to close before this counts as a finished release.
-
-    | Blocker | Tracked on |
-    | --- | --- |
-    | No fuse in the battery path — a pack short is the worst-case fault | [Power system](electrical/index.md#protection-and-disconnect) |
-    | No lifting points or sling route on the robot | [Safety](fabrication/index.md#rules) |
-    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](fabrication/index.md#rules) |
-
-    Everything else still open makes a build harder, not impossible:
-    [Open items](reference/index.md#open-items-the-punch-list).
-
 ## Specifications
 
 | | |
