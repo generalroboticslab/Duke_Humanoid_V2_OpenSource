@@ -11,11 +11,11 @@ Join the subassemblies into one robot, **battery disconnected throughout**.
 
 !!! danger "Two people or a hoist from here on"
     The robot is 36 kg and 1.2 m tall, and less stable with each limb. Read
-    [Safety](../before-you-start/index.md#safety).
+    [Safety](../fabrication/index.md#safety).
 
 Support it level, waist free, hips and shoulders reachable.
 
-!!! note "Lifting points and sling route are tracked on [Safety](../before-you-start/index.md#rules)"
+!!! note "Lifting points and sling route are tracked on [Safety](../fabrication/index.md#rules)"
     - None defined; needed before the first lift.
     - Sling attachment.
     - What holds the torso (upright or lying down) while limbs go on.

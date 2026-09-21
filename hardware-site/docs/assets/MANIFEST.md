@@ -62,9 +62,9 @@ in the page body yet; add the placeholder in the commit that adds the file.
 | Path | Page that will use it | What it must show |
 | --- | --- | --- |
 | `assets/images/camera-module.png` | `index.md, reference/faq.md` | One camera gimbal module alone, off the robot, dimensioned — so it can be judged as a component by someone who wants only the module. |
-| `assets/images/safety-pinch-points.png` | `before-you-start/safety.md` | The robot with every pinch point marked on the real link geometry: between limb and torso, inside each joint, and the jaw closing line. |
-| `assets/images/safety-lifting-points.png` | `before-you-start/safety.md, assembly/final-integration.md` | The sanctioned lifting points marked on the machine, with the sling route drawn, and the places that look like handles but are not. |
-| `assets/images/safety-hanging-legs-straight.png` | `before-you-start/safety.md` | The robot correctly suspended with the legs hanging straight, next to the same robot hung wrong with the legs bent. Three bring-up sessions were lost to this exact mistake; the pair of images is the whole lesson. |
+| `assets/images/safety-pinch-points.png` | `fabrication/safety.md` | The robot with every pinch point marked on the real link geometry: between limb and torso, inside each joint, and the jaw closing line. |
+| `assets/images/safety-lifting-points.png` | `fabrication/safety.md, assembly/final-integration.md` | The sanctioned lifting points marked on the machine, with the sling route drawn, and the places that look like handles but are not. |
+| `assets/images/safety-hanging-legs-straight.png` | `fabrication/safety.md` | The robot correctly suspended with the legs hanging straight, next to the same robot hung wrong with the legs bent. Three bring-up sessions were lost to this exact mistake; the pair of images is the whole lesson. |
 | `assets/bom/fasteners/fastener-size-chart.png` | `bom/fasteners-and-hardware.md` | One-page visual size chart for every fastener in the build, printed 1:1 so a screw can be laid on the page and identified. Blocked on the fastener schedule existing at all. |
 | `assets/electrical/system-wiring-diagram.svg` | `electrical/index.md` | Every load, rail, bus and connector on one sheet. The single most valuable missing artefact in the Electrical section. |
 | `assets/electrical/power-tree.svg` | `electrical/power-system.md` | Packs, their series/parallel configuration, each converter, each rail and what it feeds, with the fusing and the disconnect drawn where they belong. |

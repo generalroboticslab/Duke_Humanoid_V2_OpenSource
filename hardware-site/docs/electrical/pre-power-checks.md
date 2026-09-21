@@ -11,7 +11,7 @@ find a wiring fault.
 
 | # | Check | Pass |
 | --- | --- | --- |
-| A1 | Rated hoist carries full weight | Hoist rated well above 36 kg; safety factor **TODO**{ .dh-missing } ([Safety](../before-you-start/index.md#safety)) |
+| A1 | Rated hoist carries full weight | Hoist rated well above 36 kg; safety factor **TODO**{ .dh-missing } ([Safety](../fabrication/index.md#safety)) |
 | A2 | Legs | Hang straight, no torso tilt (tilt corrupts perception geometry) |
 | A3 | Floor | Clear within the robot's reach and fall path |
 | A4 | Final-integration fastener check | Signed |
@@ -92,7 +92,7 @@ after F1–F4 pass.
 ## G. Confirm software stops
 
 The reference build's first stop is software, not hardware: see the three
-layers on [Safety](../before-you-start/index.md#rules). Verify each layer
+layers on [Safety](../fabrication/index.md#rules). Verify each layer
 fires when you trigger it.
 
 | | | |

@@ -21,8 +21,8 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Before you start | 2 | 2 |
 | Bill of materials | 4 | 0 |
+| Fabrication | 2 | 2 |
 | Assembly | 2 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
@@ -50,15 +50,8 @@ ones somebody has to close before this counts as a finished release.
 | Blocker | Where it is tracked |
 | --- | --- |
 | No fuse in the battery path — a pack short is the worst-case fault | [Power system](../electrical/index.md#protection-and-disconnect) |
-| No lifting points or sling route on the robot | [Safety](../before-you-start/index.md#rules) |
-| No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](../before-you-start/index.md#rules) |
-
-## Before you start
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [safety → Rules](../before-you-start/index.md#rules) | Lifting points on the robot, sling route and clearance zone — The gantry itself is specified above;; where to attach to the robot is not. | hardware lead | **yes** |
-| [safety → Rules](../before-you-start/index.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
+| No lifting points or sling route on the robot | [Safety](../fabrication/index.md#rules) |
+| No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](../fabrication/index.md#rules) |
 
 ## Bill of materials
 
@@ -68,6 +61,13 @@ ones somebody has to close before this counts as a finished release.
 | [electronics → Power path](../bom/index.md#power-path) | 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
 | [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
 | [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
+
+## Fabrication
+
+| Page | What is missing | Who can supply it | Blocks release |
+| --- | --- | --- | :-: |
+| [safety → Rules](../fabrication/index.md#rules) | Lifting points on the robot, sling route and clearance zone — The gantry itself is specified above;; where to attach to the robot is not. | hardware lead | **yes** |
+| [safety → Rules](../fabrication/index.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
 
 ## Assembly
 

@@ -120,7 +120,7 @@ see [Motor ID and config](../bringup/index.md#motor-id-and-config)):
 ## Check electronics
 
 !!! danger "Lithium-polymer packs"
-    A damaged pack is a fire. Read [Safety](../before-you-start/index.md#safety) first;
+    A damaged pack is a fire. Read [Safety](#safety) first;
     power nothing before [Pre-power checks](../electrical/index.md#pre-power-checks).
     Charging: [Power system](../electrical/index.md#power-system).
 

@@ -25,7 +25,7 @@ How to build an identical Duke Humanoid V2. The code is open; see
 !!! danger "Before step 1: read Safety"
     36 kg, no self-locking joints: removing power — pulling the pack disconnect
     included — drops the robot and whatever it holds. Two 6S lithium-polymer packs
-    in series reach 50.4 V. Read [Safety](before-you-start/index.md#safety) before
+    in series reach 50.4 V. Read [Safety](fabrication/index.md#safety) before
     ordering parts and before first power-on.
 
 <div class="grid cards" markdown>
@@ -51,8 +51,8 @@ are open gaps, listed on [Open items](reference/index.md#open-items-the-punch-li
     | Blocker | Tracked on |
     | --- | --- |
     | No fuse in the battery path — a pack short is the worst-case fault | [Power system](electrical/index.md#protection-and-disconnect) |
-    | No lifting points or sling route on the robot | [Safety](before-you-start/index.md#rules) |
-    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](before-you-start/index.md#rules) |
+    | No lifting points or sling route on the robot | [Safety](fabrication/index.md#rules) |
+    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](fabrication/index.md#rules) |
 
     Everything else still open makes a build harder, not impossible:
     [Open items](reference/index.md#open-items-the-punch-list).

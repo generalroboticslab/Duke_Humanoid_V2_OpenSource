@@ -69,7 +69,7 @@ machine, not in the bill of materials. The robot computer needs no CUDA.
 5. Build `deploy/control` with CMake, vcpkg and Ninja presets (nanobind
    bindings).
 
-Before the robot moves, read [Safety](before-you-start/index.md#safety), then deploy's
+Before the robot moves, read [Safety](fabrication/index.md#safety), then deploy's
 [`OPERATIONS.md`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/docs/OPERATIONS.md),
 [`auto_operator_incidents.md`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/docs/auto_operator_incidents.md)
 and `auto_operator_safety_contract.md`.

@@ -26,7 +26,7 @@ the page of the team's exploded-view booklet that settles it.
 | **Optional** | A third camera module, spares and upgrades; quote them from the same vendors as the parts they duplicate | | — |
 
 - {{ bom_unpriced_count() }} of the {{ bom_row_count() }} rows carry no usable unit cost: the team BOM prices the line at `0`, leaves it blank, or has no line for the part. They read **TODO**{ .dh-missing } wherever a price would go, never `$0.00`, and no subtotal above includes them.
-- The robot subtotal therefore excludes every bearing and screw, most printed parts, bulk wire, tools, shipping, duty and labour ([Cost and time](../before-you-start/index.md#cost-and-time)).
+- The robot subtotal therefore excludes every bearing and screw, most printed parts, bulk wire, tools, shipping, duty and labour ([Cost and time](../fabrication/index.md#cost-and-time)).
 - Prices are the team BOM's as of {{ bom_priced_as_of("actuators.csv") }}; order sequence, vendors and alternates: [Sourcing](#sourcing).
 
 !!! missing "MISSING — a unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for"

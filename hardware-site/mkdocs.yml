@@ -123,7 +123,6 @@ markdown_extensions:
 # One page per section. Everything under a section is included into that
 # section's index.md, so MkDocs must not build it as a page of its own as well.
 exclude_docs: |
-  /before-you-start/*.md
   /bom/*.md
   /fabrication/*.md
   /assembly/*.md
@@ -134,7 +133,6 @@ exclude_docs: |
 
 nav:
   - Home: index.md
-  - Before you start: before-you-start/index.md
   - Bill of materials: bom/index.md
   - Fabrication: fabrication/index.md
   - Assembly: assembly/index.md

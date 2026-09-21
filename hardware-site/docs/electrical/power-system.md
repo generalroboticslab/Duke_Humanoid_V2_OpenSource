@@ -66,7 +66,7 @@ drawn).
 ## Protection and disconnect
 
 The deployed robot's first stop is software, not hardware: see the three
-layers on [Safety](../before-you-start/index.md#rules). Hardware still needs
+layers on [Safety](../fabrication/index.md#rules). Hardware still needs
 two things — a pack-path fuse and a confirmed surge protector.
 
 !!! missing "MISSING — SAFETY — Pack-path fuse (none drawn); surge protector part number and rating"

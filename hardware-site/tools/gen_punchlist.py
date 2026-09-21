@@ -64,11 +64,9 @@ ATTR_ID = re.compile(r"\{\s*#([A-Za-z0-9_-]+)[^}]*\}\s*$")
 # the files under it, so a row links to that page and to the heading the block
 # sits under, never to the file the block was read from. Step anchors are
 # namespaced per included file (see step_ns() in main.py).
-FLAT = {"before-you-start", "bom", "fabrication", "assembly", "electrical",
-        "bringup", "reference"}
+FLAT = {"bom", "fabrication", "assembly", "electrical", "bringup", "reference"}
 
 SECTIONS = [
-    ("before-you-start/", "Before you start"),
     ("bom/", "Bill of materials"),
     ("fabrication/", "Fabrication"),
     ("assembly/", "Assembly"),
