@@ -39,9 +39,6 @@ How to build an identical Duke Humanoid V2. The code is open; see
 
 </div>
 
-Red bold **MISSING**{ .dh-missing } and **UNVERIFIED**{ .dh-unverified } marks
-are open gaps, listed on [Open items](reference/index.md#open-items-the-punch-list).
-
 ## Specifications
 
 | | |
