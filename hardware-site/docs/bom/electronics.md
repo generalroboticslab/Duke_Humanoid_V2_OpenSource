@@ -13,23 +13,6 @@ lines (MPN: manufacturer part number). Every line is priced in the team BOM.
 (`reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx`, 2026-09-19), which is where
 every quantity and price on this page comes from.
 
-## Where each part goes
-
-| Part ID | Use |
-| --- | --- |
-| `EL_COMPUTE_MINIPC` | Onboard computer, fed from the upper-body distribution block via a 10 A fuse and a `EL_BUCK_60V_12V` (60 V→12 V) buck converter |
-| `EL_BATTERY_6S` | 2-pack = both packs, in series (one pack's + to the other's −): 44.4 V nominal, 50.4 V full |
-| `EL_CAN_ADAPTER` | One per CAN bus, 1 Mbit/s: can9 left arm, can21 right arm, can22 waist and both shoulder_1, can23 right leg, can24 left leg, can25 camera gimbals |
-| `EL_CAM_D436` | One per camera gimbal. Needs librealsense 2.58.1 or later ([Camera calibration](../bringup/index.md#camera-calibration)) |
-| `EL_IMU_TM171` | Body inertial measurement unit (IMU), 40 × 34 × 12.6 mm, read over USB. Configuration: [Software](../software.md) |
-| `EL_SERVO_FEETECH`, `EL_SERVO_DRIVER` | One servo per gripper, each on its own Waveshare driver board ([Gripper](../assembly/index.md#gripper)) |
-| `EL_TVS_DIODE` | Transient-voltage-suppression (TVS) diode across power and ground at each distribution-block pair |
-| `EL_BUCK_60V_12V`, `EL_BUCK_12V_ENC` | 60 V→12 V conversion (E12) and 20–60 V→12 V encased (E11); conflict under [Power path](#power-path) |
-| `EL_SURGE_PROTECTOR` | Pack lead, before the 48 V bus. T Tocas E9 150 A circuit breaker with manual reset, 12–48 VDC ([B01F76VJ3I](https://www.amazon.com/dp/B01F76VJ3I/)) |
-| `EL_DIST_BLOCK` | The four copper grounding bars, 6×8-7 holes; the two power + ground pairs on the power diagram |
-| `EL_USB_HUB` | 3 off. Which devices hang off which hub is **UNVERIFIED**{ .dh-unverified } |
-| `EL_VOLTAGE_CHECKER` | Pack voltage check, 1–8S. Two off; mounting location on the robot is **TODO**{ .dh-missing } |
-
 What the deploy stack configures or assumes for the computer and the IMU:
 
 | Item | Deploy configures or assumes | Source (deploy repo) |
