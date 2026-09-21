@@ -28,7 +28,7 @@ every quantity and price on this page comes from.
 | `EL_SURGE_PROTECTOR` | Pack lead, before the 48 V bus. T Tocas E9 150 A circuit breaker with manual reset, 12–48 VDC ([B01F76VJ3I](https://www.amazon.com/dp/B01F76VJ3I/)) |
 | `EL_DIST_BLOCK` | The four grounding bars, two power + ground pairs. That the drawn blocks are this part is **UNVERIFIED**{ .dh-unverified } |
 | `EL_USB_HUB` | 3 off. Which devices hang off which hub is **UNVERIFIED**{ .dh-unverified } |
-| `EL_VOLTAGE_CHECKER` | Pack voltage check, 1–8S. Where the two sit on the robot is not recorded **TODO**{ .dh-missing } |
+| `EL_VOLTAGE_CHECKER` | Pack voltage check, 1–8S. Two off; mounting location on the robot is **TODO**{ .dh-missing } |
 
 What the deploy stack configures or assumes for the computer and the IMU:
 
