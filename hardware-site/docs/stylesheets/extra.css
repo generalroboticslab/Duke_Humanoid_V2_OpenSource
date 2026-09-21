@@ -269,4 +269,6 @@
   padding: 0.15rem 0.6rem; border-radius: 1rem; font-size: 0.7rem; font-weight: 600;
   background: rgba(0, 0, 0, 0.65); color: #fff; pointer-events: none; opacity: 0; transition: opacity 0.15s;
 }
+.md-typeset .dh-clip-scrub { display: none; width: 100%; margin: 0.2rem 0 0; cursor: ew-resize; accent-color: var(--md-primary-fg-color); }
 .md-typeset .dh-clip-wrap.is-paused .dh-clip-badge { opacity: 1; }
+.md-typeset .dh-clip-wrap.is-paused .dh-clip-scrub { display: block; }
