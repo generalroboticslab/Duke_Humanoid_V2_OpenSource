@@ -3,7 +3,7 @@
 **Can I build it today?** No; see the [home page](../index.md) blockers.
 
 **What does it cost?** At least {{ bom_total() }} in parts; see
-[Cost and time](../fabrication/index.md#cost-and-time).
+[Cost and time](../bom/index.md).
 
 **How long does it take?** **TODO**{ .dh-missing }: not measured.
 

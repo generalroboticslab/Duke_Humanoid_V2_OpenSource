@@ -16,8 +16,6 @@ Turn the CAD into parts: order the machined parts, print the rest, check every p
 | Tools | Digital caliper (0.01 mm); soldering iron for XT30 cups and heat-set inserts; crimp tool for signal connectors |
 | Space | Two people, a bench, a gantry rated 50 kg with 1.4 m clear height, a charging spot away from flammables |
 
-{% include "fabrication/cost-and-time.md" %}
-
 {% include "fabrication/cad-downloads.md" %}
 
 {% include "fabrication/cnc-guide.md" %}
