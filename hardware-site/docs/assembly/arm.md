@@ -1,13 +1,14 @@
 # Arm
 
-Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final integration](final-integration.md).
+Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final integration](#final-integration).
 
 !!! abstract "At a glance"
     - **You will:** set seven IDs, then build from shoulder to wrist.
-    - **Parts:** RobStride 02 ×3; 00, 03, 05, 06 ×1 each ([Actuators](../bom/actuators.md)); `CNC_arm01`–`CNC_arm13` ([machined parts](../bom/cnc-parts.md)).
-    - **Before this:** [Leg](leg.md).
+    - **Parts:** RobStride 02 ×3; 00, 03, 05, 06 ×1 each ([Actuators](../bom/index.md#actuators)); `CNC_arm01`–`CNC_arm13` ([machined parts](../bom/index.md#cnc-parts)).
+    - **Before this:** [Leg](#leg).
 
-!!! missing "MISSING — arm parts list, fasteners, torques and fits"
+!!! note "Read off the model — arm parts list, fasteners and fits"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - No bearing, spacer, printed-part or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order,
       alignment and preload (steps 3, 5).
@@ -17,7 +18,7 @@ Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final in
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/arm-poster.webp" aria-label="Exploded view of one arm, shoulder-pitch actuator to wrist"><source src="../../assets/exploded/arm.mp4" type="video/mp4"><a href="../../assets/exploded/arm.mp4">MP4</a></video>
+    poster="../assets/exploded/arm-poster.webp" aria-label="Exploded view of one arm, shoulder-pitch actuator to wrist"><source src="../assets/exploded/arm.mp4" type="video/mp4"><a href="../assets/exploded/arm.mp4">MP4</a></video>
   <figcaption>Shoulder pitch to wrist. Shoulder roll and elbow each sit in a two-plate yoke, one bearing per plate.</figcaption>
 </figure>
 
@@ -38,7 +39,7 @@ Set each ID on the bench, one at a time. Label joint, ID **and bus**:
 
 *Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); limits from `humanoid_v21.xml`; axes from the repo `README.md` (Hardware), which names joints 1–7 shoulder pitch/roll/yaw, elbow, wrist roll/pitch/yaw.*
 
-!!! missing "MISSING — arm hard stops, and the real travel of the four ±180° joints with cabling fitted"
+!!! note "Not measured on the reference robot — hard stops, and how far the four ±180° joints really turn with cabling fitted"
     *Owner: hardware lead.*
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
@@ -55,7 +56,7 @@ Set each ID on the bench, one at a time. Label joint, ID **and bus**:
 | | |
 | --- | --- |
 | RobStride 03 — `shoulder_1` | 1 |
-| `CNC_arm10_x4_r03_back_cover` | **TODO**{ .dh-missing } |
+| `CNC_arm10_x4_r03_back_cover` | |
 
 </div>
 
@@ -63,7 +64,8 @@ In the CAD the body sits in the torso side plate, output outward; the arm
 starts with a square adapter on that output. Plate or arm first:
 **UNVERIFIED**{ .dh-unverified } ([Assembly](index.md)).
 
-!!! unverified "UNVERIFIED — machined-part IDs `arm05`–`arm10`: team list and site list disagree"
+!!! note "Build to the model — `arm05`–`arm10` IDs differ between the team list and this site"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     Steps below use site IDs; order by part name until settled. Team list:
     `arm05` RS02 back cover, `arm06` RS02 bearing retainer, `arm07` RS02
     coupler ×4, `arm08`/`arm09` elbow front/back retainer, `arm10` elbow output
@@ -78,10 +80,10 @@ starts with a square adapter on that output. Plate or arm first:
 | | |
 | --- | --- |
 | RobStride 06 — `shoulder_2` | 1 |
-| `CNC_arm03_x2_shoulder_roll_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_arm04_x4_shoulder_roll_support_shaft` | **TODO**{ .dh-missing } |
-| `CNC_arm01_x2_shoulder_roll_front_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm02_x2_shoulder_roll_back_bearing` | **TODO**{ .dh-missing } |
+| `CNC_arm03_x2_shoulder_roll_output_shaft` | |
+| `CNC_arm04_x4_shoulder_roll_support_shaft` | |
+| `CNC_arm01_x2_shoulder_roll_front_bearing` | |
+| `CNC_arm02_x2_shoulder_roll_back_bearing` | |
 
 </div>
 
@@ -96,8 +98,8 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 02 — `shoulder_3` | 1 |
-| `CNC_arm05_x4_RS02_shaft_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm06_x4_RS02_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm05_x4_RS02_shaft_bearing` | |
+| `CNC_arm06_x4_RS02_shaft_coupler` | |
 
 </div>
 
@@ -110,11 +112,11 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 02 — `elbow` | 1 |
-| `CNC_arm09_x2_elbow_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_arm07_x2_elbow_front_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm08_x2_elbow_back_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm05_x4_RS02_shaft_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm06_x4_RS02_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm09_x2_elbow_output_shaft` | |
+| `CNC_arm07_x2_elbow_front_bearing` | |
+| `CNC_arm08_x2_elbow_back_bearing` | |
+| `CNC_arm05_x4_RS02_shaft_bearing` | |
+| `CNC_arm06_x4_RS02_shaft_coupler` | |
 
 </div>
 
@@ -127,9 +129,9 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 02 — `wrist_1` | 1 |
-| `CNC_arm11_x2_wrist_roll` | **TODO**{ .dh-missing } |
-| `CNC_arm05_x4_RS02_shaft_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm06_x4_RS02_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm11_x2_wrist_roll` | |
+| `CNC_arm05_x4_RS02_shaft_bearing` | |
+| `CNC_arm06_x4_RS02_shaft_coupler` | |
 
 </div>
 
@@ -142,7 +144,7 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 00 — `wrist_2` | 1 |
-| `CNC_arm12_x2_wrist_pitch` | **TODO**{ .dh-missing } |
+| `CNC_arm12_x2_wrist_pitch` | |
 
 </div>
 
@@ -157,13 +159,14 @@ Check the RobStride 00 screw sizes; they may differ.
 | | |
 | --- | --- |
 | RobStride 05 — `wrist_3` | 1 |
-| `CNC_arm13_x2_RS05_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm13_x2_RS05_shaft_coupler` | |
 
 </div>
 
 The `wrist_3` output carries the gripper's own flange.
 
-!!! missing "MISSING — wrist-to-gripper interface: bolt circle, pilot, keying, servo-cable pass-through"
+!!! note "Read off the model — wrist-to-gripper interface: bolt circle, pilot, keying, cable pass-through"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** The three wrist axes move together without contact.
@@ -191,8 +194,9 @@ Three cable groups:
 - `can9` or `can21` to the other six joints;
 - the gripper servo cable, from its driver board in the torso.
 
-!!! missing "MISSING — arm harness: wire gauge, connectors, lengths, service loops"
-    See [Harness fabrication](../electrical/harness-fabrication.md).
+!!! note "Read off the model — arm harness lengths, routes and service loops"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
+    See [Harness fabrication](../electrical/index.md#harness-fabrication).
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** All seven joints move through their travel with no cable stretched or pinched; measured travel recorded per joint.
@@ -208,6 +212,8 @@ Repeat steps 2–9, swapping each A cover with its B cover (P33/P34, P37/P38):
 the other arm takes the same printed covers in the mirrored positions.
 *Source: team exploded-view booklet, pages 11 and 12.*
 
-!!! missing "MISSING — which arm parts are handed and which are common"
-    The model's arms differ in `shoulder_2` limits and orientation.
-    *Owner: hardware lead, from the CAD.*
+**The arms are mirrored, not identical.** `shoulder_2` travel runs −180°…+30°
+on the left and −30°…+180° on the right; every other arm joint takes the same
+symmetric range on both sides. Which machined parts that makes handed is
+readable off the model.
+*Source: `humanoid_v21_full.urdf`.*

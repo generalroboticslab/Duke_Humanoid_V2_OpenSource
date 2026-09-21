@@ -15,7 +15,7 @@ Headline figures: [home page](../index.md#specifications).
 | **Total** | | **{{ bom_qty("actuators.csv") }}** | | |
 
 *Source: `deploy/control/humanoid_config.py`, `py_motor.py`.* CAN (Controller Area
-Network) IDs and buses: [CAN bus](../electrical/can-bus.md).
+Network) IDs and buses: [CAN bus](../electrical/index.md#can-bus).
 
 Deploy writes each motor's torque limit as its peak torque above × a ratio: 0.1 by
 default (`humanoid_real_env.py --torque_limit`), stepped by 0.1 within 0.1–0.8 with
@@ -77,8 +77,9 @@ mechanical stops.
 
 ## Mass properties (Fusion model)
 
-CAD masses from the Fusion model (each component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
-[Mass properties](part-index.md#mass-properties).
+CAD masses from the Fusion model `humanoid_2.1_latest` (export of 2026-09-19 16:46, `tree.csv`: each
+component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
+[Mass properties](#mass-properties).
 
 | | |
 | --- | --- |
@@ -89,5 +90,5 @@ CAD masses from the Fusion model (each component's mass with the material assign
 | Gripper (each, `dovetail_umi_gripper`) | 0.35 kg (351.1 g, with servo, servo board, buck converter and mounting flange); the code repo's `parallel_gripper/README.md` gives ≈ 346 g with flange (gripper 324 g + flange 22 g) for its `ParallelGripper0710` STEP; whether the Fusion `dovetail_umi_gripper` is that revision is not recorded **UNVERIFIED**{ .dh-unverified } |
 | Against the MJCF | The 34.5 kg model mass above counts body, waist, legs and arms only; the Fusion sum without grippers and camera columns is 33.4 kg **UNVERIFIED**{ .dh-unverified } |
 
-!!! missing "MISSING — Unspecified: mechanical stops, as-built mass breakdown, measured CoM and inertia, physical foot geometry, current draw and runtime, payload, measured walking speed, measured gimbal range and slew rate, IP rating, robot temperature range, noise"
+!!! note "Not measured on the reference robot — unspecified: mechanical stops, as-built mass breakdown, measured CoM and inertia, physical foot geometry, current draw and runtime, payload, measured walking speed, measured gimbal range and slew rate, IP rating, robot temperature range, noise"
     *Owner: hardware lead + controls lead.*

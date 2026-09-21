@@ -6,16 +6,16 @@ or purchased).
 !!! abstract "At a glance"
     - **You will:** download the files for what you are making or checking, and verify each one.
     - **Three levels:** [whole robot](#whole-robot) · [modules](#modules) (one sub-assembly each) · [parts](#parts) (one component each, machined, printed or purchased).
-    - **Parts lists:** [CNC parts](../bom/cnc-parts.md) · [Printed parts](../bom/printed-parts.md).
+    - **Parts lists:** [CNC parts](../bom/index.md#cnc-parts) · [Printed parts](../bom/index.md#printed-parts).
     - **Before this:** [Bill of materials](../bom/index.md).
 
-!!! unverified "UNVERIFIED — redistribution terms of the vendor CAD models (RobStride, Feetech, Intel RealSense, SYD Dynamics, MINISFORUM) included in the whole-robot and module files"
+!!! note "Yours to check — redistribution terms of the vendor CAD models you download"
     *Owner: PI + hardware lead.*
 
 ## Find a part on the robot
 
 <div class="dh-viewer-block">
-<model-viewer id="dh-viewer" data-base="../../" src="../../assets/viewer/robot.glb" camera-controls
+<model-viewer id="dh-viewer" data-base="../" src="../assets/viewer/robot.glb" camera-controls
   camera-orbit="35deg 75deg auto" min-camera-orbit="auto auto 0.3m" max-camera-orbit="auto auto 6m"
   interaction-prompt="none" shadow-intensity="0.6" exposure="1.1" loading="eager"
   alt="Duke Humanoid V2, every component in its Fusion 360 appearance">
@@ -58,7 +58,7 @@ used at those levels. Use these to rebuild one joint or to check fits. Depth 0 i
 {% if cad_count("modules") %}
 {{ cad_table_modules() }}
 {% else %}
-!!! missing "MISSING — module STEP files (one per sub-assembly) are not published yet"
+!!! note "Not published — per-sub-assembly module STEP files; the whole-robot and per-part STEPs cover the build"
     *Owner: hardware lead.*
 {% endif %}
 
@@ -86,7 +86,7 @@ Buy these parts; the files are for fit checks only.
 {% if cad_count("vendor") %}
 {{ cad_table("vendor", "Component") }}
 {% else %}
-!!! missing "MISSING — purchased-part STEP files (motors, servos, camera, IMU, computer) are not published yet"
+!!! note "The vendors' to distribute — purchased-part STEP files (motors, servos, camera, IMU, computer)"
     *Owner: hardware lead.*
 {% endif %}
 
@@ -109,7 +109,7 @@ Slicer projects with orientation, supports and settings already set.
 Checksums for every file: [SHA256SUMS.txt](../files/SHA256SUMS.txt){ download="" }.
 {% else %}
 !!! missing "MISSING — SAFETY — no manufacturing CAD published: per-part STEP, printable 3MF/STL, PDF drawings, whole-robot STEP and Fusion 360 archive"
-    *Owner: hardware lead.*
+    *Owner: hardware lead. Blocks release.*
 {% endif %}
 
 All STEP files are AP214 (`AUTOMOTIVE_DESIGN`), written by Fusion 360 build 2705.1.15 from the
@@ -121,8 +121,12 @@ The native Fusion 360 archive is too large for this repository and is published 
 | --- | ---: | --- |
 | [humanoid_2.1_latest.f3z](https://github.com/rivery927/Duke_Humanoid_V2_OpenSource/releases/download/cad-v2.1-rc1/humanoid_2.1_latest.f3z) (101 linked designs included, release `cad-v2.1-rc1`) | 319 MB | `f440621df68f0775f521c87d02f8a644ae0a65f64ef76b385fdd2bc22a04d420` |
 
-Known CAD errors are listed in the [CNC guide](cnc-guide.md#known-cad-errors). No hardware or
-documentation licence is declared yet ([Citation and licence](../reference/citation-and-license.md)).
+Known CAD errors are listed in the [CNC guide](#known-cad-errors). The
+hardware design files, this documentation and the figures all ship under
+[Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0); see
+[Citation and licence](../reference/index.md#citation-and-licence) and the
+[`LICENSE`](../files/LICENSE){ download="" } file at the top of the downloads
+folder.
 
 ## Not manufacturing files
 

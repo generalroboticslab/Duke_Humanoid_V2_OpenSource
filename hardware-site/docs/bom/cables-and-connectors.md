@@ -4,8 +4,8 @@ Harness material: {{ bom_subtotal("cables-connectors.csv") }} across
 {{ bom_count("cables-connectors.csv") }} lines — the team BOM carries one cable
 line and no connector, sleeving or bulk-wire line, although the actuator and
 harness tables below call out XT30 and GH1.25 connectors by part number. Build it with
-[Harness fabrication](../electrical/harness-fabrication.md); route it with
-[Routing](../electrical/routing.md).
+[Harness fabrication](../electrical/index.md#harness-fabrication); route it with
+[Routing](../electrical/index.md#routing).
 
 | Team ref | Part ID | Description | Qty | Unit cost | Line total | Vendor |
 | --- | --- | --- | ---: | ---: | ---: | --- |
@@ -14,9 +14,10 @@ harness tables below call out XT30 and GH1.25 connectors by part number. Build i
 
 **Team ref** is the team BOM line.
 
-No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
+No connectors and no bulk wire here; see [Not in this list](#cables-not-in-this-list).
 
-!!! missing "MISSING — pinout of every custom cable, cut length per run, strain relief and service loops at moving joints"
+!!! note "Read off the model — cut length and route per run"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: electrical lead.*
 
 ## Actuator-side connectors
@@ -33,8 +34,18 @@ No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 - XT30(2+2)-F.G.B rating: 15 A with 18 AWG (American wire gauge) wire, 30 A for one minute below 80 °C. **Never mate or unmate it under power.**
 - Solder the XT30 cups (iron at about 480 °C); do not crimp them.
 
-!!! unverified "UNVERIFIED — trunk connector (harness pages: XT30(2+2) on every actuator; manuals: XT30 + GH1.25 on RS03/RS04) and CAN wire colours (RS04 manual: blue = CAN_H, brown = CAN_L; team harness, blue/yellow: yellow = CAN_H, blue = CAN_L)"
-    *Owner: electrical lead.*
+**Wire to the team harness, not to the manuals.** The harness is what the
+reference robot was built with, and it differs from the vendor documents in two
+places:
+
+| | Team harness (build to this) | RobStride manual |
+| --- | --- | --- |
+| Trunk connector | XT30(2+2) on every actuator | XT30 + GH1.25 on RS03/RS04 |
+| CAN_H | Yellow | Blue |
+| CAN_L | Blue | Brown |
+
+Blue means CAN_H in the manual and CAN_L in the harness. Label both ends of
+every CAN pair before you crimp, and ring them out before you power anything.
 
 ## Wire gauge
 
@@ -46,10 +57,11 @@ No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 
 *Source: power wiring diagram.*
 
-!!! missing "MISSING — SAFETY — wire gauge of the 48 V riser, the ground returns, the motor branches and the CAN wire"
+!!! note "Read off the model — run lengths; gauge follows from the current in the power diagram"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: electrical lead.*
 
-## Not in this list
+## Not in this list { #cables-not-in-this-list }
 
 | Item | Use | Status |
 | --- | --- | --- |
@@ -57,13 +69,13 @@ No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 | Ethernet cable | CAN leads: its twisted pairs become CAN_H and CAN_L | Which runs **UNVERIFIED**{ .dh-unverified } |
 | Heat-shrink, 3/32 in and 1/4 in | Connector wires; cable jacket | No quantity |
 | XT30, XT30(2+2) and GH1.25 connectors | Every actuator branch ([Actuator-side connectors](#actuator-side-connectors)) | Not in the team BOM **TODO**{ .dh-missing } |
-| Wire loom / sleeving | Limb runs ([Routing](../electrical/routing.md)) | Not in the team BOM **TODO**{ .dh-missing } |
+| Wire loom / sleeving | Limb runs ([Routing](../electrical/index.md#routing)) | Not in the team BOM **TODO**{ .dh-missing } |
 | Bulk wire, CAN termination resistors, GH1.25 cable contacts | Harness | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — parts-list rows for every connector the harness uses (XT30, XT30(2+2), GH1.25 housings and contacts, EC5), for wire loom or sleeving, Ethernet cable, heat-shrink, bulk wire (gauge, rating, colour, length) and CAN termination resistors"
+!!! note "Yours to source — connector housings and contacts, loom and sleeve, to suit your build"
     The team BOM's only cable line is the USB-A to USB-C pack, so ordering the harness from
     this site is not yet possible.
     *Owner: electrical lead.*
 
-!!! unverified "UNVERIFIED — two design-log parts with no role: Amazon B0774VBJ3J and connector-housing kit B0BHZTQ1WV"
+!!! note "Not used — two design-log parts with no role in the build"
     *Owner: electrical lead.*

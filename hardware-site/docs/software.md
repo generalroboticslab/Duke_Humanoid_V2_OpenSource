@@ -15,64 +15,9 @@ machine, not in the bill of materials. The robot computer needs no CUDA.
 
 ## Robot computer setup
 
-1. Flash each CANable PRO V2.0 with **candleLight** (`gs_usb`) using the ElmueSoft
-   [CANable Firmware Update](https://netcult.ch/elmue/CANable%20Firmware%20Update/)
-   tool: press the adapter button for flash mode and connect it directly to the
-   computer. Firmware version **UNVERIFIED**{ .dh-unverified }.
-2. Prepare the host and name the adapters. Bus map:
-   [CAN (Controller Area Network) bus](electrical/can-bus.md).
-
-    ```bash
-    # Ubuntu 22.04; log out and back in after adduser
-    sudo apt remove brltty            # else /dev/ttyUSB0 never appears
-    sudo adduser $USER netdev         # CAN up without sudo
-    sudo adduser $USER dialout        # serial devices
-    sudo apt install can-utils libsocketcan-dev
-    modinfo gs_usb; lsmod | grep can  # candleLight driver present and loaded
-    sudo dmesg                        # each adapter's USB serial (or lsusb -v, usb-devices)
-    # write /etc/udev/rules.d/99-candlelight.rules (below); humanoid_setup_can.py reads it
-    sudo udevadm control --reload-rules && sudo systemctl restart systemd-udevd && sudo udevadm trigger
-    # then unplug and replug every adapter
-    ```
-
-    ```text
-    # One line per name: for a duplicated name the setup script keeps the last line.
-    # Optional on each line: ATTRS{idVendor}=="1d50", ATTRS{idProduct}=="606f"
-    SUBSYSTEM=="net", ACTION=="add", ATTRS{serial}=="<adapter-serial>", NAME="can9"
-    SUBSYSTEM=="net", ACTION=="add", ATTRS{serial}=="<adapter-serial>", NAME="can21"
-    SUBSYSTEM=="net", ACTION=="add", ATTRS{serial}=="<adapter-serial>", NAME="can22"
-    SUBSYSTEM=="net", ACTION=="add", ATTRS{serial}=="<adapter-serial>", NAME="can23"
-    SUBSYSTEM=="net", ACTION=="add", ATTRS{serial}=="<adapter-serial>", NAME="can24"
-    SUBSYSTEM=="net", ACTION=="add", ATTRS{serial}=="<adapter-serial>", NAME="can25"
-    SUBSYSTEM=="net", KERNEL=="can[0-9]*", GROUP="can", MODE="0660"
-    ```
-
-3. Configure the TransducerM TM171 inertial measurement unit in the vendor's
-   ImuAssistant (Windows):
-
-    ```text
-    Output data        Composite + Status only
-    Output data rate   800 Hz
-    Port               USB (UART off)
-    Sensors            gyro, accelerometer, magnetometer on
-    Boot mode          Auto
-    GyroErrFilter      on
-    Self-adapt filter  on
-    Accel / mag gain   2.08 / 1.00
-    # deploy imu.hpp opens USB at 4000000 baud and parses only the Combo packet
-    ```
-
-4. Install librealsense2 **2.58.1** (`librealsense2`, `-utils`, `-dev`, `-gl`,
-   `-udev-rules`, `-dbg`) from `librealsense.realsenseai.com`, old Intel
-   repository commented out; reload udev rules. Deploy pins
-   `pyrealsense2==2.58.1.10581`.
-5. Build `deploy/control` with CMake, vcpkg and Ninja presets (nanobind
-   bindings).
-
-Before the robot moves, read [Safety](before-you-start/safety.md), then deploy's
-[`OPERATIONS.md`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/docs/OPERATIONS.md),
-[`auto_operator_incidents.md`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/docs/auto_operator_incidents.md)
-and `auto_operator_safety_contract.md`.
+On-robot setup (flash CANables, name adapters, configure IMU, install
+librealsense2, build `deploy/control`) lives in
+[Bring-up · Robot computer setup](bringup/index.md#robot-computer-setup).
 
 Deploy has no lower-body gravity compensation; the reinforcement-learning (RL)
 policy stands the robot.
@@ -97,27 +42,27 @@ The asset READMEs cite these paths, which are not in the export:
 | `head_cam/README.md` | `source/HeadCameraV2.step`, `source/HeadCameraV2_dual.step`, `meshes/components_high_res/` |
 | `parallel_gripper/README.md` | `mini_gripper_old/ParallelGripper0710/` (`ParallelGripper0710.step`), `CNC.step` |
 
-!!! missing "MISSING — Asset READMEs cite paths absent from the export"
+!!! note "Yours to check — a few asset READMEs cite paths absent from the export"
     Whether the files above will be published, and where a builder gets the
     STEP originals, is not stated.
 
     *Owner: controls lead.*
 
 The model sets joint order, directions and link masses. Never machine from its
-meshes; see [CAD downloads](fabrication/cad-downloads.md).
+meshes; see [CAD downloads](fabrication/index.md#cad-downloads).
 
 | Contract item | Where deploy sets it |
 | --- | --- |
-| Joint vector (index, name) | `motor_setup_dict` order in `deploy/control/humanoid_config.py`; table on [CAN bus](electrical/can-bus.md) |
+| Joint vector (index, name) | `motor_setup_dict` order in `deploy/control/humanoid_config.py`; table on [CAN bus](electrical/index.md#can-bus) |
 | Encoder vs training frame | The calibrated `robot.xml` differs from the training model at three joints: `left_wrist_1` (−π/2 reference), `right_wrist_1` (+π/2 reference), `left_wrist_2` (axis flipped); `humanoid_real_env.py --obs-frame-fix` or `--lw2-mirror` (both off by default, mutually exclusive) rewrites the wrist observations the policy sees |
 | Checkpoint | `humanoid_site.DEPLOY_TASK` (`…BankFlatDecoupledCosine`, `policy_deployed.pt`) runs on the calibrated `robot.xml` of `DEPLOY_MODEL_TASK` (`…v159bMixedArmsCam`); both ship in `deploy/control/legged_env_bundle/` |
 | Fresh install | Deploy `control/docs/SETUP.md`: Python 3.12, `requirements.txt` pins, CMake ≥ 3.26, CAN, servo ports, hand-eye calibration, network, RealSense; the robot runs `torch` 2.9.1+rocm6.3 |
 
-!!! missing "MISSING — Hardware/software contract: per-joint sign check, checkpoint per hardware revision, tested OS, kernel and drivers"
+!!! note "Yours to determine — the OS, kernel and driver baseline you run"
     Still unknown: the positive rotation direction of each joint as a builder
     checks it on a freshly wired robot, which checkpoint matches which hardware
     revision, and the tested OS, kernel, driver and firmware versions.
 
     *Owner: controls lead.*
 
-Code is Apache-2.0; see [Citation and licence](reference/citation-and-license.md).
+Code is Apache-2.0; see [Citation and licence](reference/index.md#citation-and-licence).

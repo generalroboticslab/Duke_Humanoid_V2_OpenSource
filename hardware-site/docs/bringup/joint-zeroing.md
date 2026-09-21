@@ -3,7 +3,7 @@
 Record each joint's encoder reading at the model's zero pose.
 
 !!! abstract "At a glance"
-    - **Before this:** [Motor ID and config](motor-id-and-config.md). Robot hung, legs straight, emergency stop held, motors **not** enabled.
+    - **Before this:** [Motor ID and config](#motor-id-and-config). Robot hung, legs straight, a hand on the operator kill switch, motors **not** enabled.
 
 ## Set zeros
 
@@ -11,14 +11,14 @@ The zero pose is the deploy model at all-zero joint angles: deploy assumes
 encoder 0 equals model `qpos` 0. The model is `robot.xml` in the
 `HumanoidRmaVelEstArmFlashSacv159bMixedArmsCam` run directory
 (`humanoid_site.DEPLOY_MODEL_TASK`). Joint order and IDs:
-[actuator map](../electrical/can-bus.md#the-actuator-map).
+[actuator map](../electrical/index.md#the-actuator-map).
 
 | Joint | Zero as the software defines it |
 |---|---|
 | `cam_yaw_*`, `cam_pitch_*` | Camera looks straight ahead (gimbal FK assumption) |
 | `left_wrist_1`, `right_wrist_1` | The model sets `ref` −π/2 (left), +π/2 (right) to keep encoder 0 at `qpos` 0, 90° from the upstream model's wrist_1 zero ("working pose") |
 
-!!! missing "MISSING — Zero pose: figure, physical per-joint description for legs, waist and arms, holding method or fixture"
+!!! note "Not recorded — a zero-pose photograph and holding fixture from the reference build"
     *Owner: hardware lead + controls lead.*
 
 The wrist encoders wrap at ±π. Keep the wrists' zero well away from the wrap
@@ -26,7 +26,7 @@ The wrist encoders wrap at ±π. Keep the wrists' zero well away from the wrap
 
 !!! danger "It zeroes all 31 motors, every time"
     Re-zeroing to fix an arm also wipes the gimbal zeros. After any run, redo
-    [Camera calibration](camera-calibration.md).
+    [Camera calibration](#camera-calibration).
 
 1. Go to `control/`:
 
@@ -74,14 +74,14 @@ It writes each motor's current position as its zero, sets `zero_sta = 1`
 
 ✅ **Check:** every joint matches the model at the zero pose, the gimbal check
 agrees with the cameras, and the offsets are saved and backed up. Pass values:
-[A5](acceptance-tests.md#a5-check-zero-and-model-fidelity).
+[A5](#a5-check-zero-and-model-fidelity).
 
 ## Back up zeros
 
-!!! missing "MISSING — Reading out, backing up and restoring the 31 zero offsets; what to redo after a drive swap"
+!!! note "Yours to determine — how you back up and restore the zero offsets"
     *Owner: controls lead.*
 
 ## Check accuracy
 
-!!! missing "MISSING — Zeroing accuracy target per joint"
+!!! note "Not measured on the reference robot — zeroing accuracy target per joint"
     *Owner: controls lead + hardware lead.*

@@ -23,9 +23,9 @@ How to build an identical Duke Humanoid V2. The code is open; see
 ## Build path
 
 !!! danger "Before step 1: read Safety"
-    36 kg, no self-locking joints: removing power, including an emergency stop
-    (e-stop), drops the robot and whatever it holds. Two 6S lithium-polymer packs
-    in series reach 50.4 V. Read [Safety](before-you-start/safety.md) before
+    36 kg, no self-locking joints: removing power — pulling the pack disconnect
+    included — drops the robot and whatever it holds. Two 6S lithium-polymer packs
+    in series reach 50.4 V. Read [Safety](fabrication/index.md#safety) before
     ordering parts and before first power-on.
 
 <div class="grid cards" markdown>
@@ -35,23 +35,27 @@ How to build an identical Duke Humanoid V2. The code is open; see
 -   :material-wrench: **3 · Assemble** — subassembly by subassembly. [Assembly →](assembly/index.md)
 -   :material-flash: **4 · Wire** — power, harnesses, six CAN (Controller Area Network) buses. [Electrical →](electrical/index.md)
 -   :material-power: **5 · Bring up** — motor IDs, zeroing, calibration. [Bring-up →](bringup/index.md)
--   :material-check-decagram: **6 · Verify** — before leaving the gantry. [Acceptance tests →](bringup/acceptance-tests.md)
+-   :material-check-decagram: **6 · Verify** — before leaving the gantry. [Acceptance tests →](bringup/index.md#acceptance-tests)
 
 </div>
 
 Red bold **MISSING**{ .dh-missing } and **UNVERIFIED**{ .dh-unverified } marks
-are open gaps, listed on [Open items](reference/todo.md).
+are open gaps, listed on [Open items](reference/index.md#open-items-the-punch-list).
 
-!!! missing "Not yet: a second robot cannot be built"
+!!! missing "Three gaps still open"
+    Everything needed to make the parts is published: a STEP per part, a whole-robot
+    STEP, an STL per printed part, the bill of materials and an
+    [Apache-2.0 licence file](files/LICENSE){ download="" } beside the CAD. These three are not,
+    and each is somebody's to close before this counts as a finished release.
+
     | Blocker | Tracked on |
     | --- | --- |
-    | No per-part drawings, print plates or native Fusion archive (part and whole-robot STEP are published) | [CAD downloads](fabrication/cad-downloads.md) |
-    | No fastener schedule | [Fasteners](bom/fasteners-and-hardware.md) |
-    | No torque values (threadlocker: Loctite 222) | [Assembly](assembly/index.md) |
-    | No hardware or documentation licence | [Citation and licence](reference/citation-and-license.md) |
-    | No human-safety procedure | [Safety](before-you-start/safety.md) |
-    | No e-stop, pack fuse or main disconnect | [Power system](electrical/power-system.md) |
-    | No hardware/software contract | [Software](software.md) |
+    | No fuse in the battery path — a pack short is the worst-case fault | [Power system](electrical/index.md#protection-and-disconnect) |
+    | No lifting points or sling route on the robot | [Safety](fabrication/index.md#rules) |
+    | No physical power-on and power-off order (computer, USB-CAN, bus, gimbals) | [Safety](fabrication/index.md#rules) |
+
+    Everything else still open makes a build harder, not impossible:
+    [Open items](reference/index.md#open-items-the-punch-list).
 
 ## Specifications
 
@@ -66,11 +70,11 @@ are open gaps, listed on [Open items](reference/todo.md).
 | Control | 50 Hz learned whole-body policy onboard, 200 Hz CAN motor loop |
 | Parts cost | {{ bom_total() }}, a floor: fasteners, printed parts, tools, shipping and setup fees unpriced |
 | Build time | **TODO**{ .dh-missing } not measured |
-| Also needed | A CUDA machine for the planner; a gantry rated well over 36 kg |
+| Also needed | A CUDA machine for the planner; a gantry rated 50 kg or more, 1.4 m or more of clear height |
 | People | At least two |
 
 *Source: project README (first seven rows).* See also
-[Full specifications](reference/full-specifications.md).
+[Full specifications](reference/index.md#full-specifications).
 
 <figure markdown>
   ![Duke Humanoid V2 hardware overview with joints numbered](assets/images/hardware.webp){ loading=lazy }
@@ -91,7 +95,7 @@ are open gaps, listed on [Open items](reference/todo.md).
   </video>
   <figcaption markdown="span">
     Each module tracks its own target. The
-    [camera gimbal](assembly/head-and-camera-gimbal.md) is why this robot exists.
+    [camera gimbal](assembly/index.md#head-and-camera-gimbal) is why this robot exists.
   </figcaption>
 </figure>
 

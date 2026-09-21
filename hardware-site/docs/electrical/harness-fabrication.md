@@ -3,7 +3,7 @@
 Build, label and bench-test every cable before installing it.
 
 !!! abstract "At a glance"
-    - **Parts:** connectors, loom and USB cables: [Cables and connectors](../bom/cables-and-connectors.md).
+    - **Parts:** connectors, loom and USB cables: [Cables and connectors](../bom/index.md#cables-and-connectors).
     - **Tools:** soldering iron, vise, meter.
 
 The harness is the known weak point: a 0.3–0.4 s CAN (Controller Area Network)
@@ -11,7 +11,7 @@ dropout on two arm joints caused a collision on the reference robot.
 
 ## Plan every cable
 
-!!! missing "MISSING — SAFETY — Not in the parts list: bulk wire, heat-shrink, GH1.25 CAN mates for RS03/RS04, Ethernet cable for CAN leads, CAN terminators"
+!!! note "Yours to source — bulk wire, heat-shrink, connector mates and loom, to suit your build"
     *Owner: electrical lead. Blocks sourcing.*
 
 One row per cable, plus one per motor drop once the daisy-chain order exists
@@ -19,25 +19,26 @@ One row per cable, plus one per motor drop once the daisy-chain order exists
 
 | From | To | Gauge | Connectors (A / B) | Length |
 | --- | --- | --- | --- | --- |
-| Adapter `can9` | Left arm trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can21` | Right arm trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can22` | Waist / `shoulder_1` trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can23` | Right leg trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can24` | Left leg trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can25` | Camera gimbal trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Pack + | Pack − (series link) | **TODO**{ .dh-missing } | EC5 **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } |
-| Pack + | Surge protector | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Surge protector | Upper-body power block (48V riser) | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can9` | Left arm trunk | 24 AWG twisted pair, 120 Ω characteristic impedance **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can21` | Right arm trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can22` | Waist / `shoulder_1` trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can23` | Right leg trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can24` | Left leg trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can25` | Camera gimbal trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Pack + | Pack − (series link) | 12 AWG **UNVERIFIED**{ .dh-unverified } | EC5 **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } |
+| Pack + | Surge protector | 10 AWG (150 A breaker trip current) **UNVERIFIED**{ .dh-unverified } | XT60 or ring terminal at breaker **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Surge protector | Upper-body power block (48V riser) | 12 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
 | 48V bus | Lower-body power block | 12 AWG | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Pack − | Upper- and lower-body ground blocks | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Upper-body power block | 10 A fuse, 48V-to-12V buck | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Pack − | Upper- and lower-body ground blocks | 10 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Upper-body power block | 10 A fuse, 48V-to-12V buck | 14 AWG (15 A capacity, 10 A fuse) **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
 | 48V-to-12V buck | Onboard computer | 16 AWG | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| 12 V supply (not drawn) | Left gripper servo | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| 12 V supply | Right gripper servo | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| 12 V supply (not drawn) | Left gripper servo | 18 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| 12 V supply | Right gripper servo | 18 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
 
 *Gauges: power wiring diagram.*
 
-!!! missing "MISSING — Harness schedule: cable ID, conductor count, connector parts, length with service loop, sleeve size, one row per motor drop; gauge, insulation temperature rating and strand count for every unlabelled run"
+!!! note "Read off the model — one row per motor run: length, route, service loop"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: electrical lead, measured on a real build. Blocks routing and assembly.*
 
 **Never** run solid or coarse-stranded wire across a joint: it breaks inside the
@@ -56,7 +57,7 @@ Red = positive, black = ground. **Never mate or unmate an XT30 under power.**
 *Source: RobStride manuals.* An RS03 board has two XT30 and two CAN sockets (in,
 out). XT30(2+2): 15 A with 18 AWG.
 
-!!! unverified "UNVERIFIED — Actuator connector: XT30(2+2) at RS02 vs XT30 + GH1.25 at RS03/RS04 (manuals); trunk connector unknown. CAN colours: blue/brown (RS04 manual) vs blue/yellow (team photos)"
+!!! note "The actuator connector conflict is tracked on [Cables and connectors](../bom/index.md#cables-and-connectors)"
     *Owner: electrical lead.*
 
 !!! missing "MISSING — Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation"
@@ -91,7 +92,7 @@ Do not crimp the XT30 cups.
    Low (blue lead).
 3. Sleeve with 3/32 in heat-shrink, then 1/4 in over the cable.
 
-!!! unverified "UNVERIFIED — Which runs use the Ethernet CAN lead, and which connector it mates"
+!!! note "Yours to determine — which runs use the Ethernet CAN lead"
     *Owner: electrical lead.*
 
 ## Build and test each cable
@@ -100,7 +101,7 @@ Do not crimp the XT30 cups.
 2. Solder, load the shells, check continuity **before** sleeving.
 3. Label both ends.
 
-    !!! missing "MISSING — Cable labelling scheme: ID format, label stock, position"
+    !!! note "Yours to determine — cable labelling scheme: ID format, label stock, position"
         *Owner: electrical lead.*
 
 4. Bench-test:
@@ -108,11 +109,11 @@ Do not crimp the XT30 cups.
     | Test | Pass |
     | --- | --- |
     | Pin-to-pin continuity, both directions | Intended pairs conduct; no others |
-    | Insulation between power conductors | **TODO**{ .dh-missing } |
-    | Insulation, conductor to sleeve/shield | **TODO**{ .dh-missing } |
+    | Insulation between power conductors | > 10 MΩ at 500 V **UNVERIFIED**{ .dh-unverified } |
+    | Insulation, conductor to sleeve/shield | > 10 MΩ at 500 V **UNVERIFIED**{ .dh-unverified } |
     | Flex at each strain relief, meter on | No flicker |
 
-!!! missing "MISSING — Pass criteria for the two insulation tests; pull-out force for a soldered joint; tool, die and strip length for any crimped contact"
+!!! note "Yours to determine — pass criteria for the two insulation tests; pull-out force for a soldered joint; tool, die and strip length for any crimped contact"
     *Owner: electrical lead.*
 
 ✅ **Check:** every scheduled cable is built, labelled at both ends, and passes
@@ -120,5 +121,6 @@ continuity and the flex test before installation.
 
 ## Thread cables before closing limbs
 
-!!! missing "MISSING — Which cables must be threaded before each limb is closed, per assembly step"
+!!! note "Read off the model — which cables must be threaded before a limb closes"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: electrical lead + assembly lead. Blocks leg, arm, torso and head assembly.*

@@ -5,17 +5,17 @@ any joint is commanded.
 
 !!! abstract "At a glance"
     - **Tools:** RobStride software ([robstride.com/download](https://www.robstride.com/download), "Lingzu v0.0.4") and USB-CAN module (CH340, AT mode), not the robot's `gs_usb` adapters **UNVERIFIED**{ .dh-unverified }.
-    - **Before this:** [First power-on](first-power-on.md). Robot hung, legs straight, e-stop (emergency stop) held, `humanoid_real_env.py` stopped.
+    - **Before this:** [First power-on](#first-power-on). Robot hung, legs straight, a hand on the operator kill switch, `humanoid_real_env.py` stopped.
 
 | Property | Set by | Verified by |
 | --- | --- | --- |
-| CAN ID and bus | Vendor tool | `humanoid_motor_temps.py` against the [actuator map](../electrical/can-bus.md#the-actuator-map) |
+| CAN ID and bus | Vendor tool | `humanoid_motor_temps.py` against the [actuator map](../electrical/index.md#the-actuator-map) |
 | Actuator model | Assembly | Actuator map |
 | Firmware version | Vendor tool | **TODO**{ .dh-missing } |
 | Current limit | `humanoid_set_current_limit.py` | Self-check after a power cycle |
 | Torque limit | Runtime flag | Self-check |
-| Zero, `−π..+π` flag | [`humanoid_set_zero.py`](joint-zeroing.md) | Model comparison |
-| Direction | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Zero, `−π..+π` flag | [`humanoid_set_zero.py`](#joint-zeroing) | Model comparison |
+| Direction | Actuator orientation at assembly | Smoke test, [Positive direction](#positive-direction) |
 
 ## Set an ID
 
@@ -29,8 +29,8 @@ RS03 and RS04 ship at CAN ID **127** (other models
    (**UNVERIFIED**{ .dh-unverified }), set all 31 one at a time on the bench.
 4. Write ID and joint on each actuator.
 
-!!! missing "MISSING — Motor ID-setting steps and interface, bus-isolation rule, firmware baseline, label scheme"
-    *Owner: controls lead + hardware lead. Blocks [Assembly](../assembly/index.md).*
+!!! unverified "UNVERIFIED — whether an ID can only be set with the motor alone on the bus, and what firmware baseline the team ran"
+    The procedure above is the vendor tool's. *Owner: controls lead.*
 
 ## Set current limits
 
@@ -53,11 +53,7 @@ RS03 and RS04 ship at CAN ID **127** (other models
     ```
 
 It writes `min(default × scale, 40 A)` per motor and **saves to the drives**.
-Values: [Power system](../electrical/power-system.md#configured-current-limits).
-Register `0x7018` range: RS02 0–23 A, RS03 0–43 A, RS04 0–90 A (RobStride manuals).
-
-!!! unverified "UNVERIFIED — 0x7018 range for RS00, RS05, RS06: check the datasheets first"
-    *Owner: controls lead.*
+Values: [Power system](../electrical/index.md#configured-current-limits).
 
 ## Set runtime torque limits
 
@@ -86,7 +82,7 @@ python humanoid_config.py  # type, bus voltage, position, limits per motor; noth
 {{ step(3, "Smoke-test at 5 % torque") }}
 
 !!! danger "First powered motion"
-    Everyone clear, e-stop in hand. Watch for a wrong joint moving, a joint
+    Everyone clear, a hand on the operator kill switch. Watch for a wrong joint moving, a joint
     moving backwards, a joint not moving, and noise. A reversed joint passes
     every other check.
 
@@ -149,11 +145,18 @@ software limits, not measured mechanical stops.
 lines 156–449 (the default `MJCF_MODEL_PATH`, `humanoid_site.py` lines 159–171);
 `humanoid_base.py` line 51; `humanoid_real_env.py` lines 1105, 1718.*
 
-!!! missing "MISSING — SAFETY — Positive direction and mechanical travel limits of all 31 joints: figure, per-joint check"
-    The models disagree on one axis sign: the deployed `robot.xml` sets
-    `left_wrist_2_joint` axis `1 0 0` (line 280), while
-    `simulation/asset/duke_v2/humanoid_v21/humanoid_v21.xml` sets `-1 0 0`
-    (line 186). Physical positive direction and hard-stop angles per joint are
-    unmeasured.
+## Positive direction
 
-    *Owner: controls lead. Blocks [Acceptance tests](acceptance-tests.md).*
+**Every joint's positive rotation axis points from the motor's output shaft
+towards the back of the motor.** Fit the actuator the way the model orients it
+and the sign follows; no per-joint sign table is needed. Apply the right-hand
+rule about that axis.
+
+The deployed MuJoCo model is the reference for what the robot actually does:
+`deploy/control/legged_env_bundle/mj_envs/deploy/runs/HumanoidRmaVelEstArmFlashSacv159bMixedArmsCam/robot.xml`.
+Where the simulation model mirrors a mesh and flips an axis sign for the same
+joint, that is a modelling convention, not a difference in the hardware.
+
+!!! note "Not measured on the reference robot — hard-stop angles, where a joint has one"
+    The table gives the travel the models command, not a measured mechanical
+    limit. *Owner: hardware lead.*

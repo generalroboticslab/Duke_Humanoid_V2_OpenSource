@@ -12,9 +12,9 @@ Route every limb cable, then verify.
     - **Wrists:** `humanoid_joint_monkey_hw.py` limits sweep and speed against
       cable wrap and the wrist encoders' ±π wrap, assuming the reference routing.
 2. Each D436 USB-C cable crosses two gimbal axes and must hold USB 3: use the
-   40 Gbit/s extension and right-angle cable ([Cables and connectors](../bom/cables-and-connectors.md)).
+   40 Gbit/s extension and right-angle cable ([Cables and connectors](../bom/index.md#cables-and-connectors)).
 
-!!! missing "MISSING — Routing record for leg, arm, waist, torso, gimbal, gripper: photo, bend radius, service loop and the pose it is sized at, clamp points, pinch clearance"
+!!! note "Not recorded — routing photos, bend radii and clamp positions from the reference build"
     *Owner: electrical lead, from a photographed build.*
 
 ✅ **Check:** `lsusb -t` shows `5000M`; if not, replug or change port.
@@ -49,7 +49,7 @@ Robot suspended, motors unpowered.
     when a joint's position, velocity and effort stay bit-identical for five
     rows (about 100 ms) mid-motion.
 
-!!! unverified "UNVERIFIED — Supplies that must be on for the wiggle test: which rails feed CAN polling while the arm motors stay disabled"
+!!! note "Not recorded — which rails feed CAN polling with the arm motors disabled"
     *Owner: controls lead + electrical lead.*
 
 ✅ **Check:** every joint driven to both extremes by hand leaves every cable free,
@@ -57,5 +57,5 @@ and a full wiggle test raises no dropout alarm.
 
 ## Check for trapped cables
 
-!!! missing "MISSING — Trapped-cable check after final integration: where to look, without disassembly"
+!!! note "Yours to determine — trapped-cable check after final integration: where to look, without disassembly"
     *Owner: electrical lead + assembly lead.*

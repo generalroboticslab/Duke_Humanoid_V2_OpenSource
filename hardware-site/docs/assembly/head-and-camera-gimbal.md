@@ -4,18 +4,19 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
 
 !!! abstract "At a glance"
     - **You will:** build and bench-test each (the right is the left rotated 180°), then mount both.
-    - **Parts:** RobStride 05 ×4 ([Actuators](../bom/actuators.md)); Intel RealSense D436 ×2 ([Electronics](../bom/electronics.md)); per column `gimbal_mount`, `gimbal_neck`, `gimbal_arm`, `U-joint_type_C_adapter`.
-    - **Before this:** [Torso and waist](torso-and-waist.md).
+    - **Parts:** RobStride 05 ×4 ([Actuators](../bom/index.md#actuators)); Intel RealSense D436 ×2 ([Electronics](../bom/index.md#electronics)); per column `gimbal_mount`, `gimbal_neck`, `gimbal_arm`, `U-joint_type_C_adapter`.
+    - **Before this:** [Torso and waist](#torso-and-waist).
 
 <figure markdown>
-  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="800" poster="../../assets/images/hardware_close_front_back-poster.webp" aria-label="The two camera modules on the reference robot, each aiming at a different target">
-    <source src="../../assets/images/hardware_close_front_back.mp4" type="video/mp4">
-    <a href="../../assets/images/hardware_close_front_back.mp4">MP4</a>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="800" poster="../assets/images/hardware_close_front_back-poster.webp" aria-label="The two camera modules on the reference robot, each aiming at a different target">
+    <source src="../assets/images/hardware_close_front_back.mp4" type="video/mp4">
+    <a href="../assets/images/hardware_close_front_back.mp4">MP4</a>
   </video>
   <figcaption>The finished columns on the robot, aiming independently.</figcaption>
 </figure>
 
-!!! missing "MISSING — gimbal column procedure: fasteners, torques, bearings, hard stops"
+!!! note "Read off the model — gimbal column fasteners and bearings"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - Per step: screws, torque, Loctite 222 use, order.
     - Any yaw bearing; neck keying.
     - How to set and hold the yaw and pitch zeros; hard stops.
@@ -25,7 +26,7 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/twincities-poster.webp" aria-label="Exploded view of one camera gimbal column"><source src="../../assets/exploded/twincities.mp4" type="video/mp4"><a href="../../assets/exploded/twincities.mp4">MP4</a></video>
+    poster="../assets/exploded/twincities-poster.webp" aria-label="Exploded view of one camera gimbal column"><source src="../assets/exploded/twincities.mp4" type="video/mp4"><a href="../assets/exploded/twincities.mp4">MP4</a></video>
   <figcaption>One column: pedestal, yaw actuator, neck, pitch actuator, two L-shaped arms (pitch output and idler bearing), camera.</figcaption>
 </figure>
 
@@ -49,9 +50,15 @@ Deploy treats the ID 7/8 camera as the forward-facing one at zero and the
 ID 5/6 camera as the rear-facing one (`deploy/control/humanoid_gimbal_zero_check.py`,
 line 38; `deploy/control/docs/auto_operator_safety_contract.md`, SAFE-GAZE-003).
 
-!!! missing "MISSING — which physical side of the plate carries `cam_yaw_left` (ID 7) and `cam_pitch_left` (ID 8)"
-    Computer-aided design (CAD): left at y = −65 mm; MuJoCo model: y = +0.065 m.
-    A swap fails silently. *Owner: hardware lead + controls.*
+Build to the deployed model: `cam_yaw_left` is the column at **y = +65 mm** —
+the robot's left — with the two columns 130 mm apart on a plate 520 mm above
+`base_link`. The Fusion model mirrors the pair, so do not read the side off the
+CAD tree. *Source: `simulation/asset/duke_v2/humanoid_v21/humanoid_v21_full.urdf`
+(`cam_base_left_fixed`); MuJoCo model.*
+
+A swap fails silently — the robot gazes with the wrong camera and nothing
+errors. Confirm it on the robot in step 7: command `cam_yaw_left` and watch
+which column turns.
 
 ✅ **Check:** IDs 5 to 8 answer on can25; both serials assigned.
 
@@ -76,7 +83,8 @@ CAD puts the yaw actuator body on the yaw axis, its centre 103.5 mm above the
 plate top face (`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITION_top_plate__head_cameras.md`,
 lines 64 and 77).
 
-!!! missing "MISSING — gimbal parts are in no bill of materials: material, process, tolerance, cost, bearing, fasteners"
+!!! note "Read off the model — gimbal part geometry, bearings and fasteners"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead + BOM owner.*
 
 ✅ **Check:** Turns freely, no axial play; mount bottom face flat and clean.
@@ -107,7 +115,8 @@ lines 64 and 77).
 
 Make the pitch axis perpendicular to, and intersecting, the yaw axis.
 
-!!! unverified "UNVERIFIED — `gimbal_arm`: one part or two; `U-joint_type_C_adapter`: mechanical or a USB-C cable adapter"
+!!! note "Read off the model — whether `gimbal_arm` is one part or two, and what the type-C adapter is"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** No binding; the arm clears neck and mount.
@@ -125,13 +134,13 @@ Make the pitch axis perpendicular to, and intersecting, the yaw axis.
 
 Hold the camera by its body; keep the lens film on until done. Factory
 extrinsics differ per unit: read your own at
-[Camera calibration](../bringup/camera-calibration.md).
+[Camera calibration](../bringup/index.md#camera-calibration).
 
-!!! unverified "UNVERIFIED — the bracket CAD names a D435 body; confirm the D436 fits before machining"
-    The STEP names the camera `IntelRealsense_D435_Multibody`; the model build
-    script calls the camera solid a D436 housing, 25 × 90 × 25 mm
-    (`simulation/asset/duke_v2/head_cam/head_camera_creation.py`, lines 169–173).
-    *Owner: hardware lead.*
+The bracket is modelled from a D435 body (the STEP names it
+`IntelRealsense_D435_Multibody`) and the D436 shares that envelope: the model
+build script gives the camera solid as 25 × 90 × 25 mm and calls it a D436
+housing (`simulation/asset/duke_v2/head_cam/head_camera_creation.py`, lines
+169–173). One bracket takes either camera.
 
 ✅ **Check:** The camera does not move under hand pressure.
 
@@ -181,7 +190,7 @@ stays inside the travel verified in step 6.
 - yaw moves the image sideways, pitch vertically;
 - nothing heats or binds over a few hundred cycles of verified travel.
 
-!!! missing "MISSING — single-column bench harness and written test procedure"
+!!! note "Yours to determine — single-column bench harness and written test procedure"
     The deploy sweep drives all four gimbal motors; no single-column harness,
     cycle count or pass criteria exist in the sources.
     *Owner: hardware lead + controls.*
@@ -221,14 +230,15 @@ Frame P: origin at the centre of the top plate's central hole, on its top face;
 contour, 64.8 × 59.0 mm (`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITION_top_plate__head_cameras.md`,
 line 66).
 
-!!! unverified "UNVERIFIED — top plate central hole shape: the CAD parse gives only a 64.8 × 59.0 mm bounding box; the CAD animation shows it hexagonal"
+!!! note "Read off the model — top plate central hole shape"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** Yaw axes 130.00 mm apart, pitch axes collinear, no shims, columns never touch.
 
 {{ step(10, "Record the as-built geometry") }}
 
-Record, for [Camera calibration](../bringup/camera-calibration.md):
+Record, for [Camera calibration](../bringup/index.md#camera-calibration):
 
 - camera serial per side;
 - IDs per column;

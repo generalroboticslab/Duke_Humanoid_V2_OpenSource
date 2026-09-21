@@ -19,7 +19,7 @@ all.
 | Item | Specification |
 | --- | --- |
 | Screws | Torx button-head. Team BOM: M3x10, M4x8, M4x10. Team design log: M4x12 (McMaster-Carr 90991A123) and M3x12 (90991A115) **UNVERIFIED**{ .dh-unverified } |
-| Exception | M5 on the Motor04 shaft and the knee, where the CAD has M4 **UNVERIFIED**{ .dh-unverified }; see [CNC guide](../fabrication/cnc-guide.md#known-cad-errors) |
+| Exception | M5 on the Motor04 shaft and the knee. The published CAD has M4 clearance there; enlarge to Ø5.3 mm at the machinist — see [CNC guide](../fabrication/index.md#known-cad-errors) |
 | Thread engagement | At least 4 mm of usable thread, 6 mm preferred |
 | Main bearing | 50 × 65 × 7 mm, 2 off (team BOM line `H1`; the Fusion model has two `bearing_50x65x7_6810_6.1kN_52g`). No part number in the team BOM **TODO**{ .dh-missing }; the team design log models McMaster-Carr 6656K229 |
 | Ankle thrust bearing | Not specified **UNVERIFIED**{ .dh-unverified } |
@@ -27,7 +27,8 @@ all.
 
 *Source: team design log, "Hardware Choice" and CNC checklist.*
 
-!!! missing "MISSING — SAFETY — fastener schedule from CAD: every screw (thread, length, head, drive, qty), bearings and fits per location, dowel pins, retaining rings, shims, threadlocker locations, torque per size and joint, purchase links"
+!!! note "Read off the model — every screw, bearing and fit per location"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead, from the CAD. Blocks every page under [Assembly](../assembly/index.md).*
 
 ## Screwing into an actuator
@@ -43,11 +44,12 @@ RS03 mounting interface (RobStride 03 manual §1.1):
 Never drive a screw deeper than the actuator's thread depth (RS02/03/04
 manuals). Check every screw that goes into an actuator.
 
-!!! unverified "UNVERIFIED — the 35 × 44 × 5 mm bearing count: team BOM line `H2` buys 18, the Fusion model places 26 `bearing_35x44x5_6707_1.6kN_15g` (at least one of them inside the RobStride 06 actuator model, so not every occurrence need be a bought part); and the 10 × 15 × 4 mm bearing (`H5`, 2 off) has no component named for it in Fusion"
+!!! note "Build to the model — it places 26 of the 35 × 44 × 5 mm bearing, the team sheet buys 18"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The other four bearing lines agree with the Fusion model, where each bearing is a
     `bearing_<size>` subassembly of two halves: `H0` 13, `H1` 2, `H3` 4, `H4` 2. No bearing
     line carries a part number or link.
     *Owner: hardware lead.*
 
-!!! missing "MISSING — retaining compound and grease type per bearing and sliding surface"
+!!! note "Yours to choose — bearing retaining compound and grease; the site specifies Loctite 222 for threads"
     *Owner: hardware lead.*

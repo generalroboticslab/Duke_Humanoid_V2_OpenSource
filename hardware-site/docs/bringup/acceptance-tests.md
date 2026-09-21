@@ -4,7 +4,7 @@ Run A0 to A11 in order; each adds energy.
 
 !!! abstract "At a glance"
     - **On a failure:** fix the cause, then re-run that test and every later one.
-    - **Before this:** [Camera calibration](camera-calibration.md). Keep the robot hung, legs straight, until A11.
+    - **Before this:** [Camera calibration](#camera-calibration). Keep the robot hung, legs straight, until A11.
 
 ## Run offline tests
 
@@ -29,7 +29,7 @@ Unpowered. *Source: [project README](https://github.com/generalroboticslab/duke_
 | Degrees of freedom | 31 | Exact |
 | Actuators RS00 / RS02 / RS03 / RS04 / RS05 / RS06 | 2 / 6 / 11 / 2 / 6 / 4 | Exact |
 
-!!! missing "MISSING — A0 tolerances; mass breakdown by subassembly; source of the model's 967 g cable mass"
+!!! note "Not measured on the reference robot — A0 tolerances; mass breakdown by subassembly; source of the model's 967 g cable mass"
     *Owner: hardware lead.*
 
 ## A1. Prove bus integrity
@@ -48,7 +48,7 @@ Unpowered. *Source: [project README](https://github.com/generalroboticslab/duke_
 
 | Pass | Abort |
 | --- | --- |
-| Every check of [First power-on](first-power-on.md) steps 3 and 5, from a cold power-up, three times in a row | Any ERROR-WARNING, error frame or fewer than 31 answers |
+| Every check of [First power-on](#first-power-on) steps 3 and 5, from a cold power-up, three times in a row | Any ERROR-WARNING, error frame or fewer than 31 answers |
 
 ## A2. Measure CAN latency
 
@@ -62,7 +62,7 @@ python humanoid_profile_motor_latency.py  # 1 % torque, no position command
 | Spread across one bus | **TODO**{ .dh-missing } |
 | Headroom against the 200 Hz (5 ms) loop | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A2 reference latency per bus and the harness-fault threshold"
+!!! note "Not measured on the reference robot — A2 latency per bus and the harness-fault threshold"
     *Owner: controls lead.*
 
 ## A3. Wiggle the harness
@@ -74,7 +74,7 @@ python humanoid_profile_motor_latency.py  # 1 % torque, no position command
     ```
 
 2. Wiggle every connector, clamp and limb entry while stirring the limb
-   ([Routing](../electrical/routing.md#verifying-a-routing-job)).
+   ([Routing](../electrical/index.md#verifying-a-routing-job)).
 
 | Pass | Abort |
 | --- | --- |
@@ -88,13 +88,13 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 
 | Check | Pass |
 | --- | --- |
-| Commanded joints | All move ([joint set](motor-id-and-config.md#step-3) **UNVERIFIED**{ .dh-unverified }) |
+| Commanded joints | All move ([joint set](#step-motor-id-and-config-3) **UNVERIFIED**{ .dh-unverified }) |
 | Other joints | Still |
 | Direction | Per the convention **TODO**{ .dh-missing } |
 | Tracking error, current | **TODO**{ .dh-missing } |
 | Noise | No grinding, knocking or binding |
 
-!!! missing "MISSING — A4 motion test for legs, waist, gimbals; reference tracking and current; range-of-motion sweep"
+!!! note "Not measured on the reference robot — A4 motion test for legs, waist and gimbals; tracking, current, range-of-motion sweep"
     *Owner: controls lead.*
 
 ## A5. Check zero and model fidelity
@@ -114,17 +114,17 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 
 | Check | Pass |
 | --- | --- |
-| Zero pose reached | Matches the [zero pose](joint-zeroing.md#set-zeros) **TODO**{ .dh-missing } |
+| Zero pose reached | Matches the [zero pose](#set-zeros) **TODO**{ .dh-missing } |
 | Arm static | `arm is static — measurement valid`: each arm joint's mean velocity ≤ 0.02 rad/s, the script's default `--vel-tol` |
 | Residual, `shoulder_2`, `shoulder_3`, `elbow`, `wrist_1` | `MATCH`: each ≤ 0.35 N·m, the script's default `--tol` |
 | Residual pattern | Not growing from wrist to shoulder |
 
-!!! missing "MISSING — A5 reference residual per joint measured on the reference robot"
+!!! note "Not measured on the reference robot — A5 residual per joint"
     *Owner: controls lead.*
 
 ## A6. Check perception
 
-Procedure: [Camera calibration](camera-calibration.md).
+Procedure: [Camera calibration](#camera-calibration).
 
 | Check | Pass |
 | --- | --- |
@@ -135,7 +135,7 @@ Procedure: [Camera calibration](camera-calibration.md).
 | Hand-eye solve | `VALID`, within the residual table, YAML loaded |
 | Gimbal tracking | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A6 gimbal tracking test with error and lag figures"
+!!! note "Not measured on the reference robot — A6 gimbal tracking error and lag"
     *Owner: perception lead.*
 
 ## A7. Test grippers
@@ -164,7 +164,7 @@ fingers of the tested side.
 | Carry and park torque | About 1.5× that level |
 | Symmetry, cycle endurance | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A7 reference no-slip level per side, test-cube size and mass, asymmetry limit, endurance test"
+!!! note "Not measured on the reference robot — A7 no-slip level per side, test-cube size and mass, asymmetry limit, endurance"
     *Owner: controls lead.*
 
 ## A8. Hold whole-body posture
@@ -195,7 +195,7 @@ RobStride defaults: fault 80 °C, warning 75 °C (stored × 10). Do not change
 torque limit, protection temperature or over-temperature time. On a tilt
 refusal, straighten the hang; never widen the envelope.
 
-!!! missing "MISSING — A8 reference motor temperatures and standing current, with fail values"
+!!! note "Not measured on the reference robot — A8 motor temperatures and standing current, with fail values"
     *Owner: controls lead.*
 
 ## A9. Test arm transit
@@ -230,9 +230,9 @@ Biggest hop about 89 s, out-and-back about 4.5 min **UNVERIFIED**{ .dh-unverifie
 ## A10. Reach and grasp
 
 <figure markdown>
-  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="450" poster="../../assets/images/two_target_handoff_left_right-poster.webp" aria-label="The reference robot grasping one target from a bench while a person holds the second">
-    <source src="../../assets/images/two_target_handoff_left_right.mp4" type="video/mp4">
-    <a href="../../assets/images/two_target_handoff_left_right.mp4">A10 video</a>
+  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="450" poster="../assets/images/two_target_handoff_left_right-poster.webp" aria-label="The reference robot grasping one target from a bench while a person holds the second">
+    <source src="../assets/images/two_target_handoff_left_right.mp4" type="video/mp4">
+    <a href="../assets/images/two_target_handoff_left_right.mp4">A10 video</a>
   </video>
   <figcaption>A10 passing on the reference robot.</figcaption>
 </figure>
@@ -260,14 +260,14 @@ A `[verdict]` banner names each abort:
 - envelope or no-progress → tags, placement;
 - clearance-standoff → object too near the torso.
 
-!!! missing "MISSING — A10 reference grasp success rate over N attempts"
+!!! note "Not measured on the reference robot — A10 grasp success rate over N attempts"
     *Owner: controls lead.*
 
 ## A11. Walk
 
 !!! danger "First run on the floor"
-    Hoist attached and slack, path clear, e-stop (emergency stop) held. Confirm the safety layers,
-    in order, before the first command.
+    Hoist attached and slack, path clear, a hand on the operator kill switch. Confirm the
+    safety layers, in order, before the first command.
 
 ```bash
 python humanoid_nav_step_test.py  # one measured velocity step; not a gamepad
@@ -278,12 +278,12 @@ python humanoid_nav_step_test.py  # one measured velocity step; not a gamepad
 | Step | Robot walks, hoist slack, path clear |
 | Coast after zero command | **TODO**{ .dh-missing } |
 | Post-stop yaw rate | Recorded against 0.10 rad/s |
-| Safety layers, before the run | Ctrl+C zeroes; process death zeroes after 1.0 s; gamepad seizes control; e-stop **TODO**{ .dh-missing } |
+| Safety layers, before the run | Ctrl+C zeroes; process death zeroes after 1.0 s; gamepad seizes control; stream silence fires the nav 1 s / arm 0.5 s / gaze 2 s failsafes |
 
-!!! missing "MISSING — SAFETY — A11 coast distance and pass threshold; the coast constant was never measured"
+!!! note "Not measured on the reference robot — A11 coast distance and pass threshold"
     *Owner: controls lead.*
 
-!!! unverified "UNVERIFIED — A11 stillness threshold 0.10 rad/s is untested"
+!!! note "Not measured on the reference robot — A11 stillness threshold 0.10 rad/s is untested"
     *Owner: controls lead.*
 
 ✅ **Check:** every test passes against the published reference values.

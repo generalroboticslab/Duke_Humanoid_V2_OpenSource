@@ -1,11 +1,33 @@
 # Fabrication
 
-Turn the CAD into parts, then check every part before assembly, in this order:
+Read [Safety](#safety) first. Then read what this release publishes
+([What you get](#what-you-get)), that your shop covers the part set
+([Skills and shop access](#skills-and-shop-access)) and what a build costs
+([Cost and time](#cost-and-time)).
 
-1. [CAD downloads](cad-downloads.md) — get and verify one release tag's files.
-2. [CNC guide](cnc-guide.md) — order the machined parts first.
-3. [Printing guide](printing-guide.md) — print while the machined parts are made.
-4. [Incoming inspection](incoming-inspection.md) — count, measure and record every part.
+Then turn the CAD into parts, and check every part before assembly, in this
+order:
 
-**TODO**{ .dh-missing } Not yet published: robot STEP files, drawings, per-part
-material, tolerance and finish, print profiles.
+1. [CAD downloads](#cad-downloads) — download one release tag's files and verify each SHA-256.
+2. [CNC guide](#cnc-guide) — order the machined parts first.
+3. [Printing guide](#printing-guide) — print while the machined parts are made.
+4. [Incoming inspection](#incoming-inspection) — count, measure and record every part.
+
+Not published: per-part drawings, per-part material, tolerance and finish, and
+slicer profiles **TODO**{ .dh-missing }.
+
+{% include "fabrication/safety.md" %}
+
+{% include "fabrication/what-you-get.md" %}
+
+{% include "fabrication/skills-and-shop.md" %}
+
+{% include "fabrication/cost-and-time.md" %}
+
+{% include "fabrication/cad-downloads.md" %}
+
+{% include "fabrication/cnc-guide.md" %}
+
+{% include "fabrication/printing-guide.md" %}
+
+{% include "fabrication/incoming-inspection.md" %}

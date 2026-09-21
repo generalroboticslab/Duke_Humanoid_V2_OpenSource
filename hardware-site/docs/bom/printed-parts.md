@@ -3,11 +3,10 @@
 Fused-deposition (FDM) and laser-sintered (SLS) parts of our own design, one row per Fusion component: the
 torso plates, the wrist and shoulder parts, the end-effector attachment, the covers, the gripper's parts and the
 camera-column parts, with three filament and powder rows at the end. Material, process, quantity and
-price are the team BOM's where it has a line for the part; **Team ref** is that line.
-Print settings: [Printing guide](../fabrication/printing-guide.md).
+price are the team BOM's where it has a line for the part. **Team ref** is that line. Print settings: [Printing guide](../fabrication/index.md#printing-guide).
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
-Volume, centre of mass and inertia for every part: [Mass properties](../reference/part-index.md#mass-properties).
+Volume, centre of mass and inertia for every part: [Mass properties](../reference/index.md#mass-properties).
 **Qty** is the Fusion occurrence count per robot; the left and right arm and leg designs are separate, so
 their copies of one part are summed. Where the team BOM counts differently, the row's `notes` say both.
 The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-parts.csv") }} of
@@ -20,10 +19,12 @@ The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-pa
 {% endfor %}| | | **Printed total** | | | **{{ bom_qty("printed-parts.csv") }}** | | **{{ bom_subtotal("printed-parts.csv") }}** | | | |
 
 
-!!! missing "MISSING — SAFETY — for every printed part: filament or powder grade (the covers only carry a Fusion material name such as `hip3_protection`), structural or cosmetic, print orientation and infill; and a unit cost and vendor for every row the team BOM does not price"
+!!! note "Read off the model — Fusion material name per printed part"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
-!!! unverified "UNVERIFIED — materials: the four torso plates `3DP_body06`–`09` are PLA in the team BOM and `ABS Plastic 60%infill` in Fusion, and the team BOM's PLA is what this table shows; the material of the gripper parts `3DP_grip01`–`06` and the camera-column parts `3DP_cam01`–`04` is the team BOM's alone (their Fusion material names `rail`, `Base`, `Neck`, `Arm` are not print materials); `3DP_armP11` has no team BOM line at all and is listed as printed on its Fusion material name only"
+!!! note "Build to the model — torso plates `3DP_body06`–`09`: PLA in the team sheet, ABS in Fusion"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead.*
 
 Every printed line of the team BOM is matched to its CAD part by the team's exploded-view booklet, which
@@ -31,7 +32,8 @@ labels each assembly with the spreadsheet's own ids and is reproduced on the
 [assembly pages](../assembly/index.md).
 What is left open is which half of a two-piece cover each *A*/*B* line is, and two piece counts.
 
-!!! unverified "UNVERIFIED — which half of a cover each line is: the booklet draws both halves of a pair but does not say which is A and which is B, so the pairs below are matched as pairs only"
+!!! note "Build to the model — which half of a cover pair each line is"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     - `P20`/`P21` *Hip 1 Protection A/B* and `P24`/`P25` *Hip 3 Protection A/B* → the four
       Fusion covers `3DP_legP01`–`P04`. Booklet p.6 draws four covers on one leg, over the
       hip-1 and the hip-3 motor: 4 lines × 2 = 8 pieces = the CAD's 8 occurrences. In the
@@ -45,7 +47,8 @@ What is left open is which half of a two-piece cover each *A*/*B* line is, and t
       at the forearm end, so those two lines may split by joint rather than by half.
     *Owner: hardware lead.*
 
-!!! unverified "UNVERIFIED — two piece counts: `P15` *AprilTags* ×12 against 16 tiles (booklet p.13 draws eight on one gripper, Fusion has 16), and `P28` *Shank Protection* ×4 against the 2 occurrences Fusion carries (booklet p.6 draws two straps on one leg, and the CAD holds the pair on the right leg only)"
+!!! note "Build to the model — `P15` and `P28` piece counts differ from the booklet"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The table above shows the Fusion count, so `P15` reads 16 and `P28` reads 1 per cover.
     *Owner: hardware lead.*
 
@@ -59,21 +62,22 @@ and states no unit.
 The gripper's rack teeth are cut along the slide arm `3DP_grip03_rail` (`P11`, booklet p.13), so the empty
 Fusion component `double_helix_rack_30teeth_6mm v2` is a placeholder with no body, no STEP and no STL.
 
-!!! missing "MISSING — STEP and STL of the shank covers `3DP_legP09_shank_cover_a` / `3DP_legP10_shank_cover_b`: the files published under those names are byte-identical to the shoulder covers `3DP_armP05` / `3DP_armP06` (both pairs are named `Component42` / `Component43` in Fusion, and the earlier export wrote one file per component name)"
-    The latest CAD export writes one file per component (`Component42` / `Component43` for the shank
-    covers, `Component42~2`, `~3` / `Component43~2`, `~3` for the shoulder covers of the left and right arm);
-    re-staging those files closes this.
-    *Owner: whoever stages the export.*
+The shank covers and the shoulder covers are distinct files, despite sharing
+Fusion component names (`Component42` / `Component43`): the shank covers span
+261 × 66 × 25 mm, the shoulder covers 82 × 47 × 11 mm. Each pair's two halves
+are mirrors of each other, so they carry the same triangle count and the same
+bounding box and differ in file content.
 
-!!! unverified "UNVERIFIED — quantities are Fusion occurrence counts, and the left and right arm designs reuse one component name per cover, so one STL may serve both sides or one side may need a mirrored print"
+!!! note "Build to the model — quantities are Fusion occurrence counts"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead, from the CAD.*
 
-## Not in this list
+## Not in this list { #printed-parts-not-in-this-list }
 
 Seen in team build photos but absent from the Fusion tree **UNVERIFIED**{ .dh-unverified }: battery holders
 with heat-set inserts; the X-shaped IMU (inertial measurement unit) bracket; the T-brackets
 holding the computer. In Fusion the batteries, IMU, computer and relay sit directly under
-`3DP_body_05_x1_interior_plate` with no bracket components ([Torso and waist](../assembly/torso-and-waist.md)).
+`3DP_body_05_x1_interior_plate` with no bracket components ([Torso and waist](../assembly/index.md#torso-and-waist)).
 
 In the Fusion tree but not listed, because the material does not say the part is printed
 **UNVERIFIED**{ .dh-unverified }: `Hub` inside the `Vention USB Hub` assembly (Bambu `PAHT-CF` filament material,

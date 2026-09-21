@@ -1,16 +1,16 @@
 # Part index
 
-!!! missing "MISSING — Part index (part ID → description, qty, subassembly, assembly steps)"
+!!! note "Not written yet — a part index keyed to assembly steps; the parts lists on each page carry the same data"
     The parts lists carry the IDs (`CNC_leg01_hip_center_back`, `3DP_legP01_hip3_cover_a`); the team BOM
     names its lines by function instead, and the two are tied together row by row in the CSV `notes`.
-    See [CNC parts](../bom/cnc-parts.md).
+    See [CNC parts](../bom/index.md#cnc-parts).
     *Owner: hardware lead for the numbering, then whoever writes the generator.*
 
 Team labels read *kind_regionNN_xCount* (+ `L`/`R`); kind is `CNC`, `ELEC`,
 `MTR`, `HWR` (hardware) or `DIY` (printed). Example: `CNC_leg02_x7`,
 RS03_shaft_coupler.
 
-!!! unverified "UNVERIFIED — CNC IDs arm05–arm10 and four quantities differ between the team's 32-part list and this site's list"
+!!! note "The `arm05`–`arm10` ID conflict is tracked on [Arm](../assembly/index.md#arm)"
     | ID | Team list | This site |
     | --- | --- | --- |
     | arm05 | RS02_back_cover ×4 | RS02_shaft_bearing ×4 |
@@ -22,13 +22,13 @@ RS03_shaft_coupler.
 
     Site-only, and in no team list: arm05, arm06, arm11 wrist_roll, arm12 wrist_pitch,
     arm13 RS05_shaft_coupler — all five unpriced. Confirm each row against the CAD before ordering.
-    *Owner: hardware lead. See [CNC parts](../bom/cnc-parts.md).*
+    *Owner: hardware lead. See [CNC parts](../bom/index.md#cnc-parts).*
 
 ## Mass properties
 
 Every machined and printed part on this site that is in the Fusion model has one row in
 [part-properties.csv](../data/part-properties.csv){ download="" }: Fusion's own mass properties of every component. The
-**Mass / size** column on [CNC parts](../bom/cnc-parts.md) and [Printed parts](../bom/printed-parts.md) is read
+**Mass / size** column on [CNC parts](../bom/index.md#cnc-parts) and [Printed parts](../bom/index.md#printed-parts) is read
 from it. Every value is CAD-derived; nothing is measured on a built part.
 
 {% set pp = pd_read_csv("data/part-properties.csv", dtype="str", keep_default_na=False).to_dict("records") %}
@@ -57,16 +57,17 @@ multiplies that rounding by the square of the distance between the two, so `note
 (±0.05 g × distance²) wherever it exceeds 2 % of the largest moment, and the six centre-of-mass values are left
 blank where it exceeds the moments themselves. The `*_origin` columns are exact in every row.
 
-!!! unverified "UNVERIFIED — inertia about the centre of mass for every part whose `notes` give a ± bound: the export rounds the mass to 0.1 g and these parts sit far from their component origin"
+!!! note "Not measured on the reference robot — inertia about the centre of mass for every part whose `notes` give a ± bound: the export rounds the mass to 0.1 g and these parts sit far from their component origin"
     The `*_origin` columns are Fusion's exact values; the bound is stated per row. A re-export with the mass to
     0.001 g (or the matrix taken about the centre of mass inside Fusion) removes it.
     *Owner: hardware lead, from the CAD.*
 
-!!! missing "MISSING — own-part mass, centre of mass and inertia for the parts whose Fusion component carries child components (inserts, magnets, mounted electronics), and the volume of every part until the export's STLs are written and the generator re-run"
+!!! note "Not measured on the reference robot — own-part mass, centre of mass and inertia for the parts whose Fusion component carries child components (inserts, magnets, mounted electronics), and the volume of every part until the export's STLs are written and the generator re-run"
     Listed below with the reason from the `notes` column; these cells read **TODO**{ .dh-missing } in the parts tables.
     *Owner: hardware lead, from the CAD: make those components leaf parts or export their bodies; regenerate the mass properties once the part STLs exist.*
 
-!!! unverified "UNVERIFIED — parts that exist as two or three Fusion components (the left and right arm and leg designs are separate) whose copies differ in size or centre of mass, and parts whose STL bounding box differs from the Fusion component's"
+!!! note "Build to the model — some parts exist as two or three Fusion components whose copies differ"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The row carries the values of the copy named in `notes`; the size shown in the parts tables carries an
     **UNVERIFIED**{ .dh-unverified } mark where the STL disagrees.
     *Owner: hardware lead, from the CAD (check the copies for a hidden body, a mirrored placement or construction geometry).*
@@ -89,15 +90,15 @@ suppressed.
 **Frame.** Origin and axis are in the frame of the component that owns the joint (the linked design's own
 coordinates: an arm, a leg, the torso), not the robot frame, and the root component owns no joint. Min and max
 are the Fusion joint limits where they are enabled, in degrees, not mechanical stops; the limits the controller
-enforces are on [Full specifications](full-specifications.md#joint-limits).
+enforces are on [Full specifications](#joint-limits).
 
 | Joint | Component | Kind | Axis (x, y, z) | Origin (mm) | Min | Max | Value |
 | --- | --- | --- | --- | --- | ---: | ---: | ---: |
 {% for j in rev %}| `{{ j.joint }}` | `{{ j.component }}` | {{ j.kind }} | {{ j.axis_x }}, {{ j.axis_y }}, {{ j.axis_z }} | {{ j.origin_x_mm }}, {{ j.origin_y_mm }}, {{ j.origin_z_mm }} | {{ (j.min_deg ~ "°") if j.min_deg else "—" }} | {{ (j.max_deg ~ "°") if j.max_deg else "—" }} | {{ (j.value_deg ~ "°") if j.value_deg else "—" }} |
 {% endfor %}
 {% else %}
-!!! missing "MISSING — Joint table: the joints have not been exported from the Fusion model yet"
-    Export the joints of every linked design from Fusion; the table renders from `docs/data/joints.csv`
-    (joint name, owning component, axis and origin in that component's frame, limits in degrees).
+!!! missing "MISSING — Joint table: the export's per-component `joints.csv` (from `tools/fusion_export_modules/`) has not been written yet; the `joints.csv` that `fusion_export` writes holds only a header (no joint is reachable from the root component)"
+    Run `fusion_export_modules` in Fusion on the dated export folder, then `python tools/gen_part_properties.py ../cad/<export>`;
+    the table renders from `docs/data/joints.csv` (joint name, owning component, axis and origin in that component's frame, limits in degrees).
     *Owner: hardware lead (runs Fusion).*
 {% endif %}

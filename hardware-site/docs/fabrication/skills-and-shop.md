@@ -1,6 +1,6 @@
 # Skills and shop access
 
-!!! missing "MISSING — Prerequisite skills confirmed by an actual build"
+!!! note "Not recorded — the prerequisite skills an actual build confirmed"
     *Owner: whoever performs the first external build.*
 
 ## Fabrication
@@ -11,10 +11,10 @@
 | FDM (fused deposition modelling) printing | PLA and TPU parts |
 | SLS (selective laser sintering) printing, or a service bureau | Nylon parts |
 | Bearing and press fits | Bearings sit directly in machined housings |
-| Digital caliper (0.01 mm); ideally a bore gauge and surface plate | [Incoming inspection](../fabrication/incoming-inspection.md) |
+| Digital caliper (0.01 mm); ideally a bore gauge and surface plate | [Incoming inspection](#incoming-inspection) |
 
-!!! missing "MISSING — Whether 3 axes suffice (any 4/5-axis or turned part), minimum work envelope, FDM substitute for SLS parts, required finishes"
-    *Owner: hardware lead, from the CAD. Blocks [CNC guide](../fabrication/cnc-guide.md).*
+!!! note "Yours to determine — whether your machines cover the part set, from the published model"
+    *Owner: hardware lead, from the CAD. Blocks [CNC guide](#cnc-guide).*
 
 ## Electrical and assembly
 
@@ -34,13 +34,13 @@
 
 Planned grasps need a separate CUDA machine; see [Software](../software.md).
 
-!!! missing "MISSING — GPU machine specification and cost (GPU/VRAM, CPU, RAM, OS, CUDA version, the machine used)"
+!!! note "Yours to determine — GPU machine specification and cost (GPU/VRAM, CPU, RAM, OS, CUDA version, the machine used)"
     *Owner: controls lead.*
 
 ## People and space
 
 Two people, a bench, a gantry, a charging station away from flammables, and
-clear floor. See [Safety](safety.md).
+clear floor. See [Safety](#safety).
 
-!!! missing "MISSING — Bench and floor space used by the reference build"
+!!! note "Not recorded — the bench and floor space the reference build used"
     *Owner: hardware lead.*

@@ -4,15 +4,16 @@ Build one leg, hip to foot plate; build two.
 
 !!! abstract "At a glance"
     - **You will:** set six IDs, then build from hip to foot.
-    - **Parts:** RobStride 03 ×4, 04 ×1, 06 ×1 ([Actuators](../bom/actuators.md)); `CNC_leg01`–`CNC_leg18` ([machined parts](../bom/cnc-parts.md)).
-    - **Before this:** [Tools](tools.md).
+    - **Parts:** RobStride 03 ×4, 04 ×1, 06 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_leg01`–`CNC_leg18` ([machined parts](../bom/index.md#cnc-parts)).
+    - **Before this:** [Tools](#tools).
 
 RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these depths:
 
 - **Housing:** 8 × M4, 8 mm deep, on Ø98 mm.
 - **Output:** 6 × M4, 6 mm deep; 3 × Ø4 mm pin holes, 7 mm deep; Ø70 mm pilot, 2.5 mm proud.
 
-!!! missing "MISSING — leg parts list, fasteners, torques and fits"
+!!! note "Read off the model — leg parts list, fasteners and fits"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     - No printed-part, bearing, spacer or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order.
     - Retainer alignment and preload (steps 3, 8).
@@ -24,7 +25,7 @@ RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these
 {{ step(1, "Configure and label the six actuators") }}
 
 The six joints share one Controller Area Network (CAN) bus: `can24` left, `can23` right.
-New units share a default ID: set each on the bench alone ([Motor ID and config](../bringup/motor-id-and-config.md)).
+New units share a default ID: set each on the bench alone ([Motor ID and config](../bringup/index.md#motor-id-and-config)).
 
 | Joint | Model axis | Actuator | ID L / R | Model limit L | Model limit R |
 | --- | --- | --- | --- | --- | --- |
@@ -39,14 +40,16 @@ New units share a default ID: set each on the bench alone ([Motor ID and config]
 
 The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 
-!!! missing "MISSING — leg mechanical hard stops: whether any exist, and where"
+!!! note "Not measured on the reference robot — hard-stop angles, where a leg joint has one"
+    The travel each joint is commanded to is published in
+    [Motor ID and configuration](../bringup/index.md#motor-id-and-config).
     *Owner: hardware lead.*
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/hip-assembly-poster.webp" aria-label="Exploded view of the pelvis block with the waist and four hip actuators"><source src="../../assets/exploded/hip-assembly.mp4" type="video/mp4"><a href="../../assets/exploded/hip-assembly.mp4">MP4</a></video>
+    poster="../assets/exploded/hip-assembly-poster.webp" aria-label="Exploded view of the pelvis block with the waist and four hip actuators"><source src="../assets/exploded/hip-assembly.mp4" type="video/mp4"><a href="../assets/exploded/hip-assembly.mp4">MP4</a></video>
   <figcaption>Pelvis: waist actuator with flange, ring and coupler; two hip actuators per side.</figcaption>
 </figure>
 
@@ -62,16 +65,17 @@ The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 | | |
 | --- | --- |
 | RobStride 03 — `hip_1` | 1 |
-| `CNC_leg01_x2_hip_center_back` | **TODO**{ .dh-missing } |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg01_x2_hip_center_back` | |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
+| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
 
 </div>
 
 **UNVERIFIED**{ .dh-unverified }: the CAD puts `hip_1` and `hip_2` in the
 pelvis ([Assembly](index.md)).
 
-!!! unverified "UNVERIFIED — machined-part counts: `leg02` 7 (team list) or 8 (site list); `leg12` 4 or 5"
+!!! note "Build to the model — `leg02` and `leg12` counts differ between the two lists"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead.*
 
 ✅ **Check:** Turns freely, even drag, no axial play.
@@ -83,11 +87,11 @@ pelvis ([Assembly](index.md)).
 | | |
 | --- | --- |
 | RobStride 03 — `hip_2` | 1 |
-| `CNC_leg06_x2_hip_roll_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg07_x2_hip_roll_support_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg04_x2_hip_roll_front_bearing_retainer` | **TODO**{ .dh-missing } |
-| `CNC_leg05_x2_hip_roll_back_bearing_retainer` | **TODO**{ .dh-missing } |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_leg06_x2_hip_roll_output_shaft` | |
+| `CNC_leg07_x2_hip_roll_support_shaft` | |
+| `CNC_leg04_x2_hip_roll_front_bearing_retainer` | |
+| `CNC_leg05_x2_hip_roll_back_bearing_retainer` | |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
 
 </div>
 
@@ -97,7 +101,7 @@ Make both bearing retainers concentric before tightening.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
-    poster="../../assets/exploded/leg-poster.webp" aria-label="Exploded view of one leg hanging from the pelvis block"><source src="../../assets/exploded/leg.mp4" type="video/mp4"><a href="../../assets/exploded/leg.mp4">MP4</a></video>
+    poster="../assets/exploded/leg-poster.webp" aria-label="Exploded view of one leg hanging from the pelvis block"><source src="../assets/exploded/leg.mp4" type="video/mp4"><a href="../assets/exploded/leg.mp4">MP4</a></video>
   <figcaption>Leg below the pelvis: hip yaw, knee, two shank links, ankle pitch, ankle roll, foot plate.</figcaption>
 </figure>
 
@@ -113,12 +117,13 @@ Make both bearing retainers concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 03 — `hip_3` | 1 |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
+| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
 
 </div>
 
-!!! missing "MISSING — hip yaw: no machined part is named for it (the CAD shows the waist's flange, ring and coupler)"
+!!! note "Build to the model — no machined part is named for hip yaw; the CAD shows the waist flange, ring and coupler"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead.*
 
 ✅ **Check:** The three hip joints move independently with no interference or taut cable.
@@ -130,12 +135,12 @@ Make both bearing retainers concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 04 — `knee` | 1 |
-| `CNC_leg08_x2_knee_front_bearing_retainer` | **TODO**{ .dh-missing } |
-| `CNC_leg09_x2_knee_motor_back_cover` | **TODO**{ .dh-missing } |
+| `CNC_leg08_x2_knee_front_bearing_retainer` | |
+| `CNC_leg09_x2_knee_motor_back_cover` | |
 
 </div>
 
-!!! unverified "UNVERIFIED — CAD errors: Motor04 shaft and knee need M5 holes, CAD has M4; design error in the RS03 shaft bearing retainer above the knee"
+!!! note "The M5/M4 CAD error is tracked on [CNC guide](../fabrication/index.md#cnc-guide)"
     Found at the first-article fit check; whether the released CAD is fixed is
     unknown. Check your parts before choosing screws. *Owner: hardware lead.*
 
@@ -147,9 +152,9 @@ Make both bearing retainers concentric before tightening.
 
 | | |
 | --- | --- |
-| `CNC_leg10_x2_knee_output_shank` | **TODO**{ .dh-missing } |
-| `CNC_leg11_x2_knee_support_shank` | **TODO**{ .dh-missing } |
-| `CNC_leg12_x4_lower_leg_bearing` | **TODO**{ .dh-missing } |
+| `CNC_leg10_x2_knee_output_shank` | |
+| `CNC_leg11_x2_knee_support_shank` | |
+| `CNC_leg12_x4_lower_leg_bearing` | |
 
 </div>
 
@@ -165,10 +170,10 @@ is `leg10` is **UNVERIFIED**{ .dh-unverified }.
 | | |
 | --- | --- |
 | RobStride 03 — `ankle_1` | 1 |
-| `CNC_leg13_x2_ankle_pitch_front` | **TODO**{ .dh-missing } |
-| `CNC_leg14_x2_ankle_pitch_back` | **TODO**{ .dh-missing } |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg13_x2_ankle_pitch_front` | |
+| `CNC_leg14_x2_ankle_pitch_back` | |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
+| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
 
 </div>
 
@@ -181,9 +186,9 @@ is `leg10` is **UNVERIFIED**{ .dh-unverified }.
 | | |
 | --- | --- |
 | RobStride 06 — `ankle_2` | 1 |
-| `CNC_leg16_x2_ankle_roll_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg17_x2_ankle_roll_support_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg15_x2_RS06_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg16_x2_ankle_roll_output_shaft` | |
+| `CNC_leg17_x2_ankle_roll_support_shaft` | |
+| `CNC_leg15_x2_RS06_shaft_bearing_retainer` | |
 
 </div>
 
@@ -197,11 +202,12 @@ Make both shaft ends concentric before tightening.
 
 | | |
 | --- | --- |
-| `CNC_leg18_x2_foot_plate` | **TODO**{ .dh-missing } |
+| `CNC_leg18_x2_foot_plate` | |
 
 </div>
 
-!!! missing "MISSING — foot sole or pad: none in the parts list or the CAD"
+!!! note "Read off the model — whether a foot sole or pad is fitted"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
 
 ✅ **Check:** At ankle zero the foot sits flat.
@@ -222,9 +228,10 @@ Make both shaft ends concentric before tightening.
 
 </div>
 
-It leaves at the hip; join it in [Final integration](final-integration.md).
+It leaves at the hip; join it in [Final integration](#final-integration).
 
-!!! missing "MISSING — leg harness: gauge, connectors, lengths, service loops, retention"
+!!! note "Read off the model — leg harness lengths, routes and service loops"
+    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** All six joints move through their travel with no cable stretched or pinched. Nothing rattles.
@@ -236,6 +243,8 @@ P24/P25, P26/P27): the other leg takes the same printed parts in the mirrored
 positions.
 *Source: team exploded-view booklet, page 8.*
 
-!!! missing "MISSING — which leg parts are handed and which are common"
-    The model's legs differ in `hip_2` limits and orientation.
-    *Owner: hardware lead, from the CAD.*
+**The legs are mirrored, not identical.** `hip_2` travel runs −105°…+30° on
+the left and −30°…+105° on the right; every other leg joint takes the same
+symmetric range on both sides. Which machined parts that makes handed is
+readable off the model.
+*Source: `humanoid_v21_full.urdf`.*

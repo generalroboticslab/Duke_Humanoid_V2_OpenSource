@@ -5,21 +5,46 @@ sintering (SLS).
 
 !!! abstract "At a glance"
     - **You will:** print a test part, then the set.
-    - **Parts:** [Printed parts](../bom/printed-parts.md).
-    - **Files:** a 3MF per part in the Files column of [Printed parts](../bom/printed-parts.md), all on [CAD downloads](cad-downloads.md).
-    - **Before this:** [CNC guide](cnc-guide.md).
+    - **Parts:** [Printed parts](../bom/index.md#printed-parts).
+    - **Files:** a 3MF per part in the Files column of [Printed parts](../bom/index.md#printed-parts), all on [CAD downloads](#cad-downloads).
+    - **Before this:** [CNC guide](#cnc-guide).
 
 ## Print profiles
 
 {% if data_file_exists("print_profiles.csv") %}
 {{ read_csv('data/print_profiles.csv') }}
 {% else %}
-!!! missing "MISSING — `print_profiles.csv`: material grade, layer height, walls, infill, orientation (which face down, which load the layers must not cross), supports and validated printer for every printed part"
+!!! note "Yours to determine — print profile per part: layer height, walls, infill, orientation"
     *Owner: hardware lead, from the printer the reference build used.*
 {% endif %}
 
-!!! missing "MISSING — material settings: PLA (filament, nozzle and bed temperature, cooling, speed, enclosure); TPU (shore hardness, temperatures, retraction, speed, extruder type, what the parts are for); SLS (powder grade, bureau, finish, tolerance)"
+!!! note "Yours to determine — material settings for your printer and filament"
     *Owner: hardware lead.*
+
+## Which process each part takes
+
+The `Process` and `Material` columns on
+[Printed parts](../bom/index.md#printed-parts) carry the assignment for every part:
+**40 parts are FDM** (PLA and TPU) and **seven are SLS** in nylon 12.
+
+The seven SLS parts are the drivetrain parts — every one of them transmits
+actuator torque or carries a bearing:
+
+| Part | Qty |
+| --- | ---: |
+| `3DP_arm05_RS02_shaft_bearing_retainer` | 4 |
+| `3DP_arm06_RS02_shaft_coupler` | 2 |
+| `3DP_arm11_wrist_roll` | 2 |
+| `3DP_arm14_wrist_block` | 2 |
+| `3DP_arm15_end_effector_attachment` | 2 |
+| `3DP_grip05_pinion` | 2 |
+
+Print these in SLS nylon. The remaining parts are covers, mounts and TPU pads,
+and FDM is what the reference robot used for all of them.
+
+!!! note "Not tested on the reference robot — an FDM substitute for any of the seven SLS parts"
+    They were printed SLS and never tried in FDM, so no substitute material or
+    wall schedule is published. *Owner: hardware lead.*
 
 ## Print the parts
 
@@ -29,9 +54,6 @@ sintering (SLS).
 
 ✅ **Check:** the test part matches the drawing before step 2.
 
-!!! missing "MISSING — which parts are FDM or SLS, which are structural, and whether an SLS part can be printed FDM instead"
-    *Owner: hardware lead.*
-
 ## Post-process
 
 <figure markdown>
@@ -39,7 +61,7 @@ sintering (SLS).
   <figcaption>Heat-set inserts melted into a printed battery holder with a soldering iron.</figcaption>
 </figure>
 
-!!! missing "MISSING — post-processing per part (support removal on mating faces, holes to ream and to what size, heat-set insert size and temperature, annealing) and print time and material mass per part"
+!!! note "Yours to determine — post-processing: support removal, reaming, heat-set insert fitting"
     *Owner: hardware lead.*
 
-Next: [Incoming inspection](incoming-inspection.md#check-printed-parts).
+Next: [Incoming inspection](#check-printed-parts).

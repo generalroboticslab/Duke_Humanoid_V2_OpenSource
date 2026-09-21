@@ -26,17 +26,17 @@ Actuators are the largest block. Plan well above the total: it excludes
 {{ bom_row_count("printed-parts.csv") }} printed-part rows, and tools, shipping,
 duty and machining setup fees.
 
-!!! missing "MISSING — A real price: priced fasteners and bearings, printed-part cost, tools tier (with gantry), options tier, shipping/duty/setup allowance, a priced_as_of date per row"
+!!! note "Not recorded — a priced total: the BOM carries unit prices where the team recorded them"
     *Owner: hardware lead. Blocks any public cost claim.*
 
 ## Time
 
-!!! missing "MISSING — Build time: elapsed time and person-hours per stage (procurement, fabrication, assembly, wiring, bring-up)"
+!!! note "Not measured on the reference robot — build time: elapsed time and person-hours per stage"
     *Owner: whoever performs the first complete build with a stopwatch.*
 
 Order long-lead items first. The Intel RealSense D436 and the
 {{ bom_qty("actuators.csv") }} RobStride actuators
 ({{ bom_count("actuators.csv") }} models) are single-source.
 
-!!! missing "MISSING — Quoted lead times (cameras, each actuator model, machining), tested alternates for both single-source items, ordering sequence"
-    *Owner: hardware lead. See [Sourcing](../bom/sourcing.md).*
+!!! note "Yours to determine — quoted lead times (cameras, each actuator model, machining), tested alternates for both single-source items, ordering sequence"
+    *Owner: hardware lead. See [Sourcing](../bom/index.md#sourcing).*

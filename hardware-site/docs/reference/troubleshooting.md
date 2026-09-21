@@ -19,5 +19,5 @@ candump any,0:0,#FFFFFFFF -extA              # all frames on all interfaces, err
 canbusload canN@1000000 -cbr                 # bus load, in a second terminal
 ```
 
-!!! missing "MISSING — Entries from real failures: missing or wrong actuator ID, reversed joint, binding after bearing press, misfit part, no depth, high idle current, short pack life, harness failure at a joint"
+!!! note "Not recorded — entries from real failures: missing or wrong actuator ID, reversed joint, binding after bearing press, misfit part, no depth, high idle current, short pack life, harness failure at a joint"
     *Owner: hardware lead, continuously.*
