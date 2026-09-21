@@ -57,7 +57,7 @@ ones somebody has to close before this counts as a finished release.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [electronics → Power path](../bom/index.md#power-path) | 60 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
-| [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
+| [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage checker, which the team BOM identifies by a vendor link alone | electrical lead | no |
 | [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
 
 ## Assembly
@@ -76,9 +76,9 @@ across every step of every limb, and each carries the flag in its own right.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [harness-fabrication → Identify the connector pinouts](../electrical/index.md#identify-the-connector-pinouts) | Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation | electrical lead | no |
-| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charger model, charge rate, balance-charging procedure and charging location | hardware lead (retention) + electrical lead + safety officer | no |
+| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charge rate, balance-charging procedure and charging location | hardware lead (retention) + electrical lead + safety officer | no |
 | [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | TVS diodes fitted at each location (BOM: 10) | electrical lead | no |
-| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors, charger: diagram or team log only, not the BOM; no confirmed part numbers | BOM owner + electrical lead | no |
+| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors: diagram or team log only, not the BOM; no confirmed part numbers | BOM owner + electrical lead | no |
 | [power-system → Feed the 12 V rail](../electrical/index.md#feed-the-12-v-rail) | Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget | electrical lead | no |
 | [power-system → Protection and disconnect](../electrical/index.md#protection-and-disconnect) | Pack-path fuse (none drawn); surge protector part number and rating | electrical lead + safety officer | **yes** |
 

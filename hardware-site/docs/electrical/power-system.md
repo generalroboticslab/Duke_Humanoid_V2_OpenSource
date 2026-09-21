@@ -21,7 +21,7 @@ Wire the 48 V and 12 V rails.
     !!! note "Yours to make — the pack series link: match the pack connector, size the wire for the pack current and length"
         *Owner: hardware lead. Blocks release.*
 
-    !!! missing "MISSING — SAFETY — Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charger model, charge rate, balance-charging procedure and charging location"
+    !!! missing "MISSING — SAFETY — Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charge rate, balance-charging procedure and charging location"
         *Owner: hardware lead (retention) + electrical lead + safety officer.*
 
 2. Run free pack + → surge protector → bus; free pack − → ground distribution
@@ -43,9 +43,9 @@ Team log (not in the BOM):
 
 - Distribution blocks: double-row 8-hole copper terminal bars (AliExpress
   3256806176225478; 114 mm mount centres, 126 mm overall; M5 × 8 and M8 × 1 screws).
-- Pack connectors EC5; charger Amazon B09WKN863V ("ISDT ... DC600Wx2").
+- Pack connectors EC5; charger: [iSDT K4 Smart Dual Charger (AC400W / DC600W ×2)](https://www.getfpv.com/isdt-k4-smart-dual-charger-ac400w-dc600w-x2.html) (reference only — supplied by the team, not in the BOM).
 
-!!! unverified "UNVERIFIED — Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors, charger: diagram or team log only, not the BOM; no confirmed part numbers"
+!!! unverified "UNVERIFIED — Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors: diagram or team log only, not the BOM; no confirmed part numbers"
     *Owner: BOM owner + electrical lead.*
 
 ✅ **Check:** the series link passes C3 ([Pre-power checks](#pre-power-checks)).
