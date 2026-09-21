@@ -87,6 +87,7 @@ RS_ALT = ("SUPPLY RISK, no alternate published. A different actuator model chang
 # Link domain -> vendor name. A domain that is not here keeps its host name and
 # is reported, so no vendor is ever guessed silently.
 VENDORS = {
+    "mcmaster.com": "McMaster-Carr",
     "amazon.com": "Amazon",
     "aliexpress.us": "AliExpress",
     "digikey.com": "DigiKey",

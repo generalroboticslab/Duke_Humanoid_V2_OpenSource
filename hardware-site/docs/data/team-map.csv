@@ -61,7 +61,7 @@ P7,"Wrist Housing R, Nylon 12",3DP,3DP_arm14_wrist_block,1,2,p.9,Booklet p.9: th
 P8,"Wrist Output, Nylon 12",3DP,3DP_arm15_end_effector_attachment,2,2,p.9,"Booklet p.9: the end-effector plate below the wrist, one per arm.",settled
 P9,"Wrist Housing L, Nylon 12",3DP,3DP_arm14_wrist_block,1,2,p.11,Booklet p.11: the wrist housing of the mirrored arm: the same shape as P7 on p.9. One of 2 team BOM lines over 1 CAD parts; `part_id` and `qty_cad` are that group's.,settled
 P10,"Gripper Housing, PLA",3DP,3DP_grip01_base,2,2,p.13,"Booklet p.13: the gripper body, one per gripper.",settled
-P11,"Gipper Rack, PLA",3DP,3DP_grip03_rail,4,4,p.13,"Booklet p.13: the long slide arm with the rack teeth cut along it, two per gripper.",settled
+P11,"Gripper Rack, PLA",3DP,3DP_grip03_rail,4,4,p.13,"Booklet p.13: the long slide arm with the rack teeth cut along it, two per gripper.",settled
 P12,"Gear, Nylon 12",3DP,3DP_grip05_pinion,2,2,p.13,"Booklet p.13: the double-helix pinion on the servo, one per gripper.",settled
 P13,"UMI Fingers, TPU",3DP,3DP_grip02_finger,4,4,p.13,"Booklet p.13: the curved ribbed finger pad, two per gripper.",settled
 P14,"AprilTag Housing, PLA",3DP,3DP_grip04_apriltag_holder,4,4,p.13,"Booklet p.13: the flat tag holder, two per gripper.",settled
@@ -93,9 +93,9 @@ P39,"Arm Roll Shaft Protection, TPU",3DP,3DP_armP03_shoulder_cover_a 3DP_armP04_
 H0,45x58x7 Ball Bearing,Hardware,FAS_BEARING_45X58X7,13,,"p.1, p.4, p.5","Booklet p.1, p.4, p.5: the large bearing at the RS03 joints of the torso and of the legs.",settled
 H1,50x65x7 Ball Bearing,Hardware,FAS_BEARING_50X65X7,2,,p.5,"Booklet p.5: the bearing at the knee joint, one per leg.",settled
 H2,35x44x5 Ball Bearing,Hardware,FAS_BEARING_35X44X5,18,,"p.5, p.9","Booklet p.5, p.9: the bearings at the shank and at every arm joint.",settled
-H3,35x47x7 Ball Bearing,Hardware,FAS_BEARING_35X47X7,4,,p.5,"Booklet p.5: the bearings at the ankle, two per leg.",settled
-H4,30x37x4 Ball Bearing,Hardware,FAS_BEARING_30X37X4,2,,p.9,"Booklet p.9: the small bearing under the wrist housing, one per arm.",settled
+H3,35x47x7 6807-2RS Ball Bearing,Hardware,FAS_BEARING_35X47X7,4,,p.5,"Booklet p.5: the bearings at the ankle, two per leg.",settled
+H4,30x37x4  6706-2RS Ball Bearing,Hardware,FAS_BEARING_30X37X4,2,,p.9,"Booklet p.9: the small bearing under the wrist housing, one per arm.",settled
 H5,10x15x4 Ball Bearing,Hardware,FAS_BEARING_10X15X4,2,,p.14,"Booklet p.14: the small bearing on the support side of the gimbal, one per column.",settled
-H6,M3x10 Torx Button Head Screw,Hardware,FAS_SCREW_M3X10_TORX_BH,,,—,"Screws are not labelled in the booklet. OPEN: Quantity: the team BOM gives none, and screws are not labelled in the booklet.",open
-H7,M4x8 Torx Button Head Screw,Hardware,FAS_SCREW_M4X8_TORX_BH,,,—,"Screws are not labelled in the booklet. OPEN: Quantity: the team BOM gives none, and screws are not labelled in the booklet.",open
-H8,M4x10 Torx Button Head Screw,Hardware,FAS_SCREW_M4X10_TORX_BH,,,—,"Screws are not labelled in the booklet. OPEN: Quantity: the team BOM gives none, and screws are not labelled in the booklet.",open
+H6,M3x10 Torx Button Head Screw,Hardware,FAS_SCREW_M3X10_TORX_BH,5,,—,"Screws are not labelled in the booklet. OPEN: Quantity: the team BOM gives none, and screws are not labelled in the booklet.",open
+H7,M4x8 Torx Button Head Screw,Hardware,FAS_SCREW_M4X8_TORX_BH,1,,—,"Screws are not labelled in the booklet. OPEN: Quantity: the team BOM gives none, and screws are not labelled in the booklet.",open
+H8,M4x10 Torx Button Head Screw,Hardware,FAS_SCREW_M4X10_TORX_BH,4,,—,"Screws are not labelled in the booklet. OPEN: Quantity: the team BOM gives none, and screws are not labelled in the booklet.",open

@@ -55,7 +55,7 @@ ones somebody has to close before this counts as a finished release.
 | --- | --- | --- | :-: |
 | [electronics → Power path](../bom/index.md#power-path) | TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
 | [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and its holder | electrical lead | no |
-| [index → Find a part on the robot](../bom/index.md#find-a-part-on-the-robot) | A unit price and vendor link for the nine bearing and screw lines, and for the five machined parts the team BOM has no line for | BOM owner | no |
+| [index → Find a part on the robot](../bom/index.md#find-a-part-on-the-robot) | A unit price and vendor link for the five machined parts the team BOM has no line for | BOM owner | no |
 
 ## Assembly
 

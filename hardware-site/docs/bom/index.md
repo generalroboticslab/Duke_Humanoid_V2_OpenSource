@@ -33,17 +33,17 @@ Click **Preview** in any row below to see where that part sits; click a componen
 | | [Electronics](#electronics) | Computer, battery, power conversion, Controller Area Network (CAN) adapters, inertial measurement unit (IMU), cameras | {{ bom_subtotal("electronics.csv") }} |
 | | [CNC parts](#cnc-parts) | {{ bom_count("cnc-parts.csv") }} machined part rows, {{ bom_unpriced_count("cnc-parts.csv") }} of them with no team BOM line and no price **TODO**{ .dh-missing } | {{ bom_subtotal("cnc-parts.csv") }} |
 | | [Cables and connectors](#cables-and-connectors) | Harness material: the team BOM has one cable line and no connector, sleeving or bulk-wire line **TODO**{ .dh-missing } | {{ bom_subtotal("cables-connectors.csv") }} |
-| | [Fasteners and hardware](#fasteners-and-hardware) | {{ bom_count("fasteners.csv") }} bearing and screw lines, none priced; no fastener schedule yet **TODO**{ .dh-missing } | {{ bom_subtotal("fasteners.csv") }} |
-| | [Printed parts](#printed-parts) | {{ bom_count("printed-parts.csv") }} rows of fused-deposition (FDM) and laser-sintered (SLS) prints; the team BOM prices the nylon and torso parts only **TODO**{ .dh-missing } | {{ bom_subtotal("printed-parts.csv") }} |
+| | [Fasteners and hardware](#fasteners-and-hardware) | {{ bom_count("fasteners.csv") }} bearing and screw lines | {{ bom_subtotal("fasteners.csv") }} |
+| | [Printed parts](#printed-parts) | {{ bom_count("printed-parts.csv") }} rows of fused-deposition (FDM) and laser-sintered (SLS) prints | {{ bom_subtotal("printed-parts.csv") }} |
 | | **Robot subtotal (a floor, not a price)** | | **{{ bom_total() }}** |
 | **Tools** | Listed with specifications on [Tools](../assembly/index.md#tools); not priced, because what you already own decides the cost | | — |
 | **Optional** | A third camera module, spares and upgrades; quote them from the same vendors as the parts they duplicate | | — |
 
 - {{ bom_unpriced_count() }} of the {{ bom_row_count() }} rows carry no usable unit cost: the team BOM prices the line at `0`, leaves it blank, or has no line for the part. They read **TODO**{ .dh-missing } wherever a price would go, never `$0.00`, and no subtotal above includes them.
-- The robot subtotal therefore excludes every bearing and screw, most printed parts, bulk wire, tools, shipping, duty and labour.
+- The robot subtotal therefore excludes those parts, plus bulk wire, tools, shipping, duty and labour.
 - Prices are the team BOM's as of {{ bom_priced_as_of("actuators.csv") }}; order sequence, vendors and alternates: [Sourcing](#sourcing).
 
-!!! missing "MISSING — a unit price and vendor link for the nine bearing and screw lines, and for the five machined parts the team BOM has no line for"
+!!! missing "MISSING — a unit price and vendor link for the five machined parts the team BOM has no line for"
     *Owner: BOM owner.*
 
 **Data files:**

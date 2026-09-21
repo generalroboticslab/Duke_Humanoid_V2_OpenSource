@@ -1,20 +1,13 @@
 # Fasteners and hardware
 
-The team BOM lists {{ bom_count("fasteners.csv") }} hardware lines, six bearing
-sizes and three screw sizes, and prices none of them, so every cost cell reads
-**TODO**{ .dh-missing } and this category reads
-{{ bom_subtotal("fasteners.csv") }}.
+The team BOM lists {{ bom_count("fasteners.csv") }} hardware lines — six bearing sizes (Amazon) and three Torx button-head screw sizes (McMaster-Carr) — totalling {{ bom_subtotal("fasteners.csv") }}.
 
 | Team ref | Part ID | Description | Qty | Unit cost | Line total | Vendor |
 | --- | --- | --- | ---: | ---: | ---: | --- |
 {% for r in pd_read_csv("data/fasteners.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ "[" ~ r.vendor ~ "](" ~ r.vendor_url ~ ")" if r.vendor else "**TODO**{ .dh-missing }" }} |
 {% endfor %}
 
-**Team ref** is the team BOM line. No line there
-carries a price, a vendor or a link, and the three screw lines carry no
-quantity either, so those cells read TODO rather than zero. Nuts, washers,
-dowel pins, retaining rings, shims and threadlocker are not in the team BOM at
-all.
+**Team ref** is the team BOM line. Screw lines are counted as bought from McMaster-Carr (packs), not as pieces on the robot. Nuts, washers, dowel pins, retaining rings, shims and threadlocker are not in the team BOM.
 
 | Item | Specification |
 | --- | --- |
