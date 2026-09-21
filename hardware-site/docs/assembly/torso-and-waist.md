@@ -43,9 +43,9 @@ Set the RobStride 03 to Controller Area Network (CAN) ID 1 on the bench. Label i
 
 | | |
 | --- | --- |
-| `CNC_body01_x1_bottom_plate` | **TODO**{ .dh-missing } |
-| `CNC_body02_x2_side_plate` | **TODO**{ .dh-missing } |
-| `CNC_body04_x4_front_plate` — probably the four ribbed rails **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } |
+| `CNC_body01_x1_bottom_plate` | |
+| `CNC_body02_x2_side_plate` | |
+| `CNC_body04_x4_front_plate` — probably the four ribbed rails **UNVERIFIED**{ .dh-unverified } | |
 
 </div>
 
@@ -63,11 +63,6 @@ Square the frame before anything goes in: every limb and camera references it.
 Seat it in the bottom plate's round opening, driver board up, output down into
 the pelvis through a flange, a ring and a coupler.
 
-<figure markdown>
-  ![Waist actuator in the torso bottom plate](../assets/photos/body-box-waist-actuator.webp){ loading=lazy }
-  <figcaption>Waist actuator at the centre of the bottom plate.</figcaption>
-</figure>
-
 !!! note "Read off the model — waist flange, ring and coupler"
     Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
     *Owner: hardware lead.*
@@ -80,7 +75,7 @@ the pelvis through a flange, a ring and a coupler.
 
 | | |
 | --- | --- |
-| `CNC_body03_x1_top_plate` | **TODO**{ .dh-missing } |
+| `CNC_body03_x1_top_plate` | |
 
 </div>
 

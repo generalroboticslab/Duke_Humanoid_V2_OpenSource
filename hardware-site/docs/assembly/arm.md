@@ -56,7 +56,7 @@ Set each ID on the bench, one at a time. Label joint, ID **and bus**:
 | | |
 | --- | --- |
 | RobStride 03 — `shoulder_1` | 1 |
-| `CNC_arm10_x4_r03_back_cover` | **TODO**{ .dh-missing } |
+| `CNC_arm10_x4_r03_back_cover` | |
 
 </div>
 
@@ -80,10 +80,10 @@ starts with a square adapter on that output. Plate or arm first:
 | | |
 | --- | --- |
 | RobStride 06 — `shoulder_2` | 1 |
-| `CNC_arm03_x2_shoulder_roll_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_arm04_x4_shoulder_roll_support_shaft` | **TODO**{ .dh-missing } |
-| `CNC_arm01_x2_shoulder_roll_front_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm02_x2_shoulder_roll_back_bearing` | **TODO**{ .dh-missing } |
+| `CNC_arm03_x2_shoulder_roll_output_shaft` | |
+| `CNC_arm04_x4_shoulder_roll_support_shaft` | |
+| `CNC_arm01_x2_shoulder_roll_front_bearing` | |
+| `CNC_arm02_x2_shoulder_roll_back_bearing` | |
 
 </div>
 
@@ -98,8 +98,8 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 02 — `shoulder_3` | 1 |
-| `CNC_arm05_x4_RS02_shaft_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm06_x4_RS02_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm05_x4_RS02_shaft_bearing` | |
+| `CNC_arm06_x4_RS02_shaft_coupler` | |
 
 </div>
 
@@ -112,11 +112,11 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 02 — `elbow` | 1 |
-| `CNC_arm09_x2_elbow_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_arm07_x2_elbow_front_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm08_x2_elbow_back_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm05_x4_RS02_shaft_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm06_x4_RS02_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm09_x2_elbow_output_shaft` | |
+| `CNC_arm07_x2_elbow_front_bearing` | |
+| `CNC_arm08_x2_elbow_back_bearing` | |
+| `CNC_arm05_x4_RS02_shaft_bearing` | |
+| `CNC_arm06_x4_RS02_shaft_coupler` | |
 
 </div>
 
@@ -129,9 +129,9 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 02 — `wrist_1` | 1 |
-| `CNC_arm11_x2_wrist_roll` | **TODO**{ .dh-missing } |
-| `CNC_arm05_x4_RS02_shaft_bearing` | **TODO**{ .dh-missing } |
-| `CNC_arm06_x4_RS02_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm11_x2_wrist_roll` | |
+| `CNC_arm05_x4_RS02_shaft_bearing` | |
+| `CNC_arm06_x4_RS02_shaft_coupler` | |
 
 </div>
 
@@ -144,7 +144,7 @@ Make both bearing housings concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 00 — `wrist_2` | 1 |
-| `CNC_arm12_x2_wrist_pitch` | **TODO**{ .dh-missing } |
+| `CNC_arm12_x2_wrist_pitch` | |
 
 </div>
 
@@ -159,7 +159,7 @@ Check the RobStride 00 screw sizes; they may differ.
 | | |
 | --- | --- |
 | RobStride 05 — `wrist_3` | 1 |
-| `CNC_arm13_x2_RS05_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_arm13_x2_RS05_shaft_coupler` | |
 
 </div>
 

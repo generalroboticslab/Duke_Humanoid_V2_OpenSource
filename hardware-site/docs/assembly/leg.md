@@ -65,9 +65,9 @@ The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 | | |
 | --- | --- |
 | RobStride 03 — `hip_1` | 1 |
-| `CNC_leg01_x2_hip_center_back` | **TODO**{ .dh-missing } |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg01_x2_hip_center_back` | |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
+| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
 
 </div>
 
@@ -87,11 +87,11 @@ pelvis ([Assembly](index.md)).
 | | |
 | --- | --- |
 | RobStride 03 — `hip_2` | 1 |
-| `CNC_leg06_x2_hip_roll_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg07_x2_hip_roll_support_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg04_x2_hip_roll_front_bearing_retainer` | **TODO**{ .dh-missing } |
-| `CNC_leg05_x2_hip_roll_back_bearing_retainer` | **TODO**{ .dh-missing } |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
+| `CNC_leg06_x2_hip_roll_output_shaft` | |
+| `CNC_leg07_x2_hip_roll_support_shaft` | |
+| `CNC_leg04_x2_hip_roll_front_bearing_retainer` | |
+| `CNC_leg05_x2_hip_roll_back_bearing_retainer` | |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
 
 </div>
 
@@ -117,8 +117,8 @@ Make both bearing retainers concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 03 — `hip_3` | 1 |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
+| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
 
 </div>
 
@@ -135,8 +135,8 @@ Make both bearing retainers concentric before tightening.
 | | |
 | --- | --- |
 | RobStride 04 — `knee` | 1 |
-| `CNC_leg08_x2_knee_front_bearing_retainer` | **TODO**{ .dh-missing } |
-| `CNC_leg09_x2_knee_motor_back_cover` | **TODO**{ .dh-missing } |
+| `CNC_leg08_x2_knee_front_bearing_retainer` | |
+| `CNC_leg09_x2_knee_motor_back_cover` | |
 
 </div>
 
@@ -152,9 +152,9 @@ Make both bearing retainers concentric before tightening.
 
 | | |
 | --- | --- |
-| `CNC_leg10_x2_knee_output_shank` | **TODO**{ .dh-missing } |
-| `CNC_leg11_x2_knee_support_shank` | **TODO**{ .dh-missing } |
-| `CNC_leg12_x4_lower_leg_bearing` | **TODO**{ .dh-missing } |
+| `CNC_leg10_x2_knee_output_shank` | |
+| `CNC_leg11_x2_knee_support_shank` | |
+| `CNC_leg12_x4_lower_leg_bearing` | |
 
 </div>
 
@@ -170,10 +170,10 @@ is `leg10` is **UNVERIFIED**{ .dh-unverified }.
 | | |
 | --- | --- |
 | RobStride 03 — `ankle_1` | 1 |
-| `CNC_leg13_x2_ankle_pitch_front` | **TODO**{ .dh-missing } |
-| `CNC_leg14_x2_ankle_pitch_back` | **TODO**{ .dh-missing } |
-| `CNC_leg02_x7_RS03_shaft_coupler` | **TODO**{ .dh-missing } |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg13_x2_ankle_pitch_front` | |
+| `CNC_leg14_x2_ankle_pitch_back` | |
+| `CNC_leg02_x7_RS03_shaft_coupler` | |
+| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
 
 </div>
 
@@ -186,9 +186,9 @@ is `leg10` is **UNVERIFIED**{ .dh-unverified }.
 | | |
 | --- | --- |
 | RobStride 06 — `ankle_2` | 1 |
-| `CNC_leg16_x2_ankle_roll_output_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg17_x2_ankle_roll_support_shaft` | **TODO**{ .dh-missing } |
-| `CNC_leg15_x2_RS06_shaft_bearing_retainer` | **TODO**{ .dh-missing } |
+| `CNC_leg16_x2_ankle_roll_output_shaft` | |
+| `CNC_leg17_x2_ankle_roll_support_shaft` | |
+| `CNC_leg15_x2_RS06_shaft_bearing_retainer` | |
 
 </div>
 
@@ -202,7 +202,7 @@ Make both shaft ends concentric before tightening.
 
 | | |
 | --- | --- |
-| `CNC_leg18_x2_foot_plate` | **TODO**{ .dh-missing } |
+| `CNC_leg18_x2_foot_plate` | |
 
 </div>
 

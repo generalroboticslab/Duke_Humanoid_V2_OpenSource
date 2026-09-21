@@ -57,7 +57,7 @@ record each board's USB serial against its hand.
 | | |
 | --- | --- |
 | `left_rack`, `right_rack` | 1 each |
-| Slide or rail parts | **TODO**{ .dh-missing } |
+| Slide or rail parts | |
 
 </div>
 
