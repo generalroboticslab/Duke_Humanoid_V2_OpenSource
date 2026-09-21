@@ -14,9 +14,9 @@ Order these first:
 ## Supply-risk parts
 
 {% set risky = pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/electronics.csv", dtype="str", keep_default_na=False).to_dict("records") %}
-| Part ID | Description | Qty | Alternate | Vendor |
-| --- | --- | ---: | --- | --- |
-{% for r in risky if "SUPPLY RISK" in r.notes %}| `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot }} | {{ r.alt_mpn or "**TODO**{ .dh-missing } none published" }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
+| Part ID | Description | Qty | Vendor |
+| --- | --- | ---: | --- |
+{% for r in risky if "SUPPLY RISK" in r.notes %}| `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
 {% endfor %}
 
 No substitute is drop-in. Another actuator changes the mounting interface, the
@@ -24,8 +24,7 @@ shaft and the Controller Area Network (CAN) configuration. Another camera change
 the gimbal mount, the perception bridge and the 90° × 65° RGB field of view the
 design assumes.
 
-!!! note "Yours to determine — an alternate for the D436 and for each RobStride model, or what a substitution requires"
-    *Owner: hardware lead + perception lead.*
+No alternates are published: buy these from the vendors listed.
 
 ## Vendors
 

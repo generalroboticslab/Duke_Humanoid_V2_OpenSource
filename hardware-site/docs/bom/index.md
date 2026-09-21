@@ -43,13 +43,8 @@ Click **Preview** in any row below to see where that part sits; click a componen
 - The robot subtotal therefore excludes every bearing and screw, most printed parts, bulk wire, tools, shipping, duty and labour ([Cost and time](../fabrication/index.md#cost-and-time)).
 - Prices are the team BOM's as of {{ bom_priced_as_of("actuators.csv") }}; order sequence, vendors and alternates: [Sourcing](#sourcing).
 
-!!! missing "MISSING — a unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for"
-    The sheet carries a `0` or an empty cell there, so every table on this site shows a red
-    TODO in their place rather than a zero, and no robot cost on this site is a complete one.
+!!! missing "MISSING — a unit price and vendor link for the nine bearing and screw lines, and for the five machined parts the team BOM has no line for"
     *Owner: BOM owner.*
-
-!!! note "Yours to determine — allowance for tax, scrap and re-machining in the robot cost"
-    *Owner: hardware lead.*
 
 **Data files:**
 [actuators.csv](../data/actuators.csv) ·

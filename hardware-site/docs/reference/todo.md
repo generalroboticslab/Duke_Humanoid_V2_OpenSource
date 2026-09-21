@@ -54,8 +54,8 @@ ones somebody has to close before this counts as a finished release.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [electronics → Power path](../bom/index.md#power-path) | TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
-| [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage checker, which the team BOM identifies by a vendor link alone | electrical lead | no |
-| [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
+| [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and its holder | electrical lead | no |
+| [index → Find a part on the robot](../bom/index.md#find-a-part-on-the-robot) | A unit price and vendor link for the nine bearing and screw lines, and for the five machined parts the team BOM has no line for | BOM owner | no |
 
 ## Assembly
 

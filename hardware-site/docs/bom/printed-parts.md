@@ -13,9 +13,9 @@ The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-pa
 {{ bom_row_count("printed-parts.csv") }} rows read **TODO**{ .dh-missing } in **Unit cost** and
 **Line total** rather than zero. The printed subtotal below covers the priced rows only.
 
-| Team ref | Part ID | Description | Material | Process | Qty | Unit cost | Line total | Vendor | Mass / size | Files |
-| --- | --- | --- | --- | --- | ---: | ---: | ---: | --- | --- | --- |
-{% for r in pd_read_csv("data/printed-parts.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.material or "**TODO**{ .dh-missing }" }} | {{ r.process or "**TODO**{ .dh-missing }" }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ r.vendor or "**TODO**{ .dh-missing }" }} | {{ "—" if r.part_id.startswith("MAT_") else part_props(r.part_id) }} | {{ cad_links(r.part_id) }} |
+| Team ref | Part ID | Description | Material | Process | Qty | Mass / size | Files |
+| --- | --- | --- | --- | --- | ---: | --- | --- |
+{% for r in pd_read_csv("data/printed-parts.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.material or "**TODO**{ .dh-missing }" }} | {{ r.process or "**TODO**{ .dh-missing }" }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ "—" if r.part_id.startswith("MAT_") else part_props(r.part_id) }} | {{ cad_links(r.part_id) }} |
 {% endfor %}| | | **Printed total** | | | **{{ bom_qty("printed-parts.csv") }}** | | **{{ bom_subtotal("printed-parts.csv") }}** | | | |
 
 
