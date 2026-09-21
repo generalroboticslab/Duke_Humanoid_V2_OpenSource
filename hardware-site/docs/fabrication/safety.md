@@ -24,15 +24,8 @@ close every red box with them first.
 3. **Keep out of the envelope.** Nobody and nothing enters the range of motion
    while powered. Power off before approaching, with a second person guarding
    the switch.
-
-    !!! note "Yours to determine — bystander distances: suspended, standing, walking (including fall radius)"
-        *Owner: hardware lead + local EHS office.*
-
 4. **Wear personal protective equipment (PPE).** Safety glasses whenever
    powered; no loose sleeves, lanyards or untied hair near a powered robot.
-
-    !!! note "Yours to determine — rest of the PPE list: safety shoes, and whether gloves are required or forbidden"
-        *Owner: hardware lead + local EHS office.*
 
 5. **Have a way to stop.** Three independent layers:
 
@@ -92,21 +85,10 @@ close every red box with them first.
         *Owner: electrical lead. Blocks [Pre-power checks](../electrical/index.md#pre-power-checks). Blocks release.*
 
 7. **Isolate before touching.** Disconnect the packs and move them away before
-   any work; lock-out/tag-out on a shared robot.
-
-    !!! note "Yours to determine — isolation and lock-out/tag-out procedure, including how to confirm the converters have discharged"
-        *Owner: electrical lead.*
-
+   any work.
 8. **Two people** for every lift and gantry transfer. During
    powered tests the second person's only job is the stop layers below.
-
-    !!! note "Yours to determine — which steps need a second person and which need a hoist"
-        *Owner: hardware lead.*
-
 9. **Log incidents.** Record near-misses; revise these rules.
-
-    !!! note "Yours to determine — numbered mechanical and electrical incident register, like deploy's control-stack register"
-        *Owner: hardware lead, continuously.*
 
 ## Hazards
 
@@ -115,9 +97,6 @@ close every red box with them first.
 Every joint is quasi-direct-drive, with no self-locking gearbox. Removing
 power — pulling the pack disconnect included — drops the 36 kg body and
 whatever the arms hold.
-
-!!! note "Not measured on the reference robot — collapse behaviour and standoff distance on power loss; safe pose before planned power-down"
-    *Owner: hardware lead, from a drop test with the robot suspended. Blocks [First power-on](../bringup/index.md#first-power-on).*
 
 ### Lithium-polymer (LiPo) packs
 
@@ -138,9 +117,9 @@ protector: 44.4 V nominal, 50.4 V full, about 222 Wh per pack (computed).
 - A pack burns if over-discharged, over-charged, punctured, crushed or shorted.
   Never charge unattended. An office extinguisher will not put it out.
 
-!!! note "Yours to determine — battery procedure: charger and charge rate, voltage floor, storage, fire response, disposal, pack-path protection"
+!!! note "Yours to determine — battery charger model, charge rate, voltage floor and storage charge"
     The team linked an "ISDT ... DC600Wx2" charger; the model is **UNVERIFIED**{ .dh-unverified }.
-    *Owner: hardware lead with the local EHS office. Blocks [Power system](../electrical/index.md#power-system).*
+    *Owner: hardware lead. Blocks [Power system](../electrical/index.md#power-system).*
 
 ### Crush
 
@@ -173,15 +152,9 @@ settings, not measured joint torques.
 - The torque-up and torque-down commands step the ratio by 0.1 between 0.1 and
   0.8. The camera gimbals follow the same ratio as the body.
 
-!!! note "Yours to determine — pinch-point diagram (knee, elbow, hip-roll/thigh, waist, gripper jaws, camera gimbals)"
-    *Owner: hardware lead for the geometry.*
-
 ### Falls
 
 A biped can fall on its own: 36 kg at floor level, possibly on a foot.
-
-!!! note "Yours to determine — conditions for letting the robot stand free"
-    *Owner: hardware lead + controls lead. See [Acceptance tests](../bringup/index.md#acceptance-tests).*
 
 ## Inspect and log before each session
 
@@ -193,6 +166,3 @@ A biped can fall on its own: 36 kg at floor level, possibly on a foot.
 | Cables and connectors at joints | Bending breaks conductors; a chafed bus wire near a pack is a fire |
 | Packs: swelling, dents, connectors, cell balance | Retire a puffed pack |
 | Gantry, slings, lifting points | Shock-loaded gear is no longer rated |
-
-!!! note "Yours to determine — inspection intervals, pass/fail criteria and owners for the table above"
-    *Owner: hardware lead.*

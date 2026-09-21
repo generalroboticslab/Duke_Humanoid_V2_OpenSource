@@ -1,6 +1,6 @@
 # Fabrication
 
-Read [Safety](#safety) first. Then check what this release publishes
+Read [Safety](#safety) first. Then read what this release publishes
 ([What you get](#what-you-get)), that your shop covers the part set
 ([Skills and shop access](#skills-and-shop-access)) and what a build costs
 ([Cost and time](#cost-and-time)).
@@ -8,7 +8,7 @@ Read [Safety](#safety) first. Then check what this release publishes
 Then turn the CAD into parts, and check every part before assembly, in this
 order:
 
-1. [CAD downloads](#cad-downloads) — get and verify one release tag's files.
+1. [CAD downloads](#cad-downloads) — download one release tag's files and verify each SHA-256.
 2. [CNC guide](#cnc-guide) — order the machined parts first.
 3. [Printing guide](#printing-guide) — print while the machined parts are made.
 4. [Incoming inspection](#incoming-inspection) — count, measure and record every part.
