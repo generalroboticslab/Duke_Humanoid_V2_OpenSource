@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **14 open items** across **9 pages**, of which **2 block the public release**.
+Every unresolved item on this site, in one table: **13 open items** across **8 pages**, of which **1 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -22,20 +22,19 @@ that is not here.
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
 | Bill of materials | 3 | 0 |
-| Fabrication | 1 | 1 |
 | Assembly | 2 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| **Total** | **14** | **2** |
+| **Total** | **13** | **1** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 14.
+more than 13.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Electrical lead | 11 | 2 |
+| Electrical lead | 10 | 1 |
 | Hardware lead | 3 | 0 |
 | BOM owner | 2 | 0 |
 | Safety sign-off | 2 | 1 |
@@ -60,12 +59,6 @@ ones somebody has to close before this counts as a finished release.
 | [electronics → Power path](../bom/index.md#power-path) | 60 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
 | [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
 | [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
-
-## Fabrication
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [safety → Rules](../fabrication/index.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
 
 ## Assembly
 

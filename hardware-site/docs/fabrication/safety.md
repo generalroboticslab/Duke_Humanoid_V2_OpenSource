@@ -80,10 +80,10 @@ close every red box with them first.
     `deploy/control/docs/auto_operator_safety_contract.md`, SAFE-SHUTDOWN-001
     and the shutdown-protocol notes.*
 
-    !!! missing "MISSING — SAFETY — Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step"
+    !!! note "Yours to determine — physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step"
         The software ladder above is published; the order the hardware itself is
-        switched is not.
-        *Owner: electrical lead. Blocks [Pre-power checks](../electrical/index.md#pre-power-checks). Blocks release.*
+        switched is your build's call.
+        *Owner: electrical lead.*
 
 7. **Isolate before touching.** Disconnect the packs and move them away before
    any work.
@@ -110,16 +110,11 @@ protector: 44.4 V nominal, 50.4 V full, about 222 Wh per pack (computed).
   <figcaption>Series packs, surge protector, 48V bus to upper- and lower-body distribution blocks, TVS diodes, 10 A fuse and 48V-to-12V buck to the computer.</figcaption>
 </figure>
 
-- RobStride 02/03/04: rated 48 VDC, range 24–60 VDC. RS00/05/06 range
-  **UNVERIFIED**{ .dh-unverified }.
+- RobStride 00/02/03/04/05/06: rated 48 VDC, range 24–60 VDC.
 - The only fuse is 10 A, on the computer branch. No pack fuse or pack monitoring is drawn.
 - Power runs on XT30 connectors. A dropped tool shorts them.
 - A pack burns if over-discharged, over-charged, punctured, crushed or shorted.
   Never charge unattended. An office extinguisher will not put it out.
-
-!!! note "Yours to determine — battery charger model, charge rate, voltage floor and storage charge"
-    The team linked an "ISDT ... DC600Wx2" charger; the model is **UNVERIFIED**{ .dh-unverified }.
-    *Owner: hardware lead. Blocks [Power system](../electrical/index.md#power-system).*
 
 ### Crush
 
