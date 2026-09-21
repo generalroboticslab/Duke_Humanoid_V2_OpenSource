@@ -143,7 +143,7 @@ can be produced in a batch and dropped in without touching a page.
     - `EL_TVS_DIODE`
     - `EL_SERVO_DRIVER`
     - `EL_BUCK_12V_ENC`
-    - `EL_BUCK_60V_12V`
+    - `EL_BUCK_48V_12V`
     - `EL_CAN_ADAPTER`
     - `EL_CAM_D436`
     - `EL_SERVO_FEETECH`

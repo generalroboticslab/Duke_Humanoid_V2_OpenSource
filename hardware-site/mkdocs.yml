@@ -130,6 +130,7 @@ exclude_docs: |
   /electrical/*.md
   /bringup/*.md
   /reference/*.md
+  /data/README.md
   !index.md
 
 nav:

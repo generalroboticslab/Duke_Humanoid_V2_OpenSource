@@ -6,7 +6,7 @@
 **TODO**{ .dh-missing } rather than zero: {{ bom_unpriced("cnc-parts.csv") }}.
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
-Volume, centre of mass and inertia for every part: [Mass properties](../reference/index.md#mass-properties).
+Volume, centre of mass and inertia for every part: [part-properties.csv](../data/part-properties.csv){ download="" }.
 
 ## Leg
 

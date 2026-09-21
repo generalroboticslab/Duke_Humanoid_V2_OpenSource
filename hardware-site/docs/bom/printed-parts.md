@@ -6,7 +6,7 @@ camera-column parts, with three filament and powder rows at the end. Material, p
 price are the team BOM's where it has a line for the part. **Team ref** is that line. Print settings: [Printing guide](../fabrication/index.md#printing-guide).
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
-Volume, centre of mass and inertia for every part: [Mass properties](../reference/index.md#mass-properties).
+Volume, centre of mass and inertia for every part: [part-properties.csv](../data/part-properties.csv){ download="" }.
 **Qty** is the Fusion occurrence count per robot; the left and right arm and leg designs are separate, so
 their copies of one part are summed. Where the team BOM counts differently, the row's `notes` say both.
 The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-parts.csv") }} of

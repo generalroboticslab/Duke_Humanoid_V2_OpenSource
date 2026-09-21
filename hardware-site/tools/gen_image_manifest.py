@@ -1,4 +1,4 @@
-"""Generate docs/assets/MANIFEST.md — every image the site needs and lacks.
+"""Generate IMAGES_NEEDED.md (site root, not published) — every image the site needs and lacks.
 
 The site marks a missing figure with a blockquote placeholder rather than a real
 ``![](…)``, because ``mkdocs build --strict`` fails the whole build on a link to
@@ -19,7 +19,7 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
 DOCS = SITE / "docs"
-OUT = DOCS / "assets" / "MANIFEST.md"
+OUT = SITE / "IMAGES_NEEDED.md"
 SKIP = {"data/README.md", "reference/todo.md", "assets/MANIFEST.md"}
 
 

@@ -1,4 +1,4 @@
-"""Generate docs/reference/todo.md from the TODO blocks on the pages themselves.
+"""Generate PUNCHLIST.md (site root, not published) from the TODO blocks on the pages themselves.
 
 Why this is generated
 ---------------------
@@ -42,7 +42,7 @@ from pathlib import Path
 
 SITE = Path(__file__).resolve().parent.parent
 DOCS = SITE / "docs"
-OUT = DOCS / "reference" / "todo.md"
+OUT = SITE / "PUNCHLIST.md"
 
 # Pages that are not builder-facing content and carry no punch-list items.
 SKIP = {"data/README.md", "reference/todo.md", "assets/MANIFEST.md"}
@@ -475,7 +475,7 @@ def render(items: list[dict]) -> str:
     w("")
     w("Missing figures are not in this table. They are tracked separately, with the")
     w("exact path and a one-line brief for each, in the")
-    w("[image manifest](../assets/MANIFEST.md) — the list to hand to whoever renders")
+    w("[image manifest](IMAGES_NEEDED.md) — the list to hand to whoever renders")
     w("the exploded views.")
     w("")
     w("## Regenerating this page")

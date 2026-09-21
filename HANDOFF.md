@@ -11,8 +11,8 @@ Last worked on: 2026-09-20.
 | Item | State |
 |---|---|
 | Site (`hardware-site/`, MkDocs Material) | 50 pages, English, `mkdocs build --strict` exits 0 with zero `WARNING` |
-| Punch list (`docs/reference/todo.md`, generated) | **27 open items across 17 pages, 9 block release.** Recalibrated 2026-09-20, down from 184 items / 56 blockers. See *How the punch list was recalibrated* |
-| Images still needed (`docs/assets/MANIFEST.md`, generated) | **83** (2 placed, 26 named, 55 per-part). The whole-robot exploded view is no longer among them: the booklet's page 15 fills it on the home page and on `assembly/index.md` |
+| Punch list (`hardware-site/PUNCHLIST.md`, generated, not published) | **27 open items across 17 pages, 9 block release.** Recalibrated 2026-09-20, down from 184 items / 56 blockers. See *How the punch list was recalibrated* |
+| Images still needed (`hardware-site/IMAGES_NEEDED.md`, generated, not published) | **83** (2 placed, 26 named, 55 per-part). The whole-robot exploded view is no longer among them: the booklet's page 15 fills it on the home page and on `assembly/index.md` |
 | Team exploded-view booklet | `reference/team/duke_humanoid_v2_hardware.pdf` (Eric Lu, 2026-09-19, 15 pages). Rendered to `docs/assets/exploded/team/NN-<name>.webp` (2400 × 1350) and **published as the site's assembly figures**. The PDF is staged as `docs/files/drawings/duke_humanoid_v2_exploded_views_rev01.pdf` (untracked until committed) and indexed in `cad-files.csv`. Pages 08 and 12 read "switch A ↔ B": on the other leg / arm the covers labelled A and B swap sides (confirmed by the user) |
 | Exploded-view animations | 9 web MP4s in `docs/assets/exploded/`, embedded on the assembly pages |
 | Wiring diagrams | `hardware/*.jpg` → `docs/assets/wiring/`, on the electrical pages |

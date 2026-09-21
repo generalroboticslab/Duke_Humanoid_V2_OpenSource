@@ -44,8 +44,8 @@ not reference material.
   A block gates the release **only** when its owner line says `Blocks release.` —
   declared, never inferred from wording. Styles in `docs/stylesheets/extra.css`.
 - As-built only in build pages. Conflicts between sources: state both values, mark UNVERIFIED.
-- Generated files — never hand-edit: `docs/reference/todo.md` (punch list),
-  `docs/assets/MANIFEST.md` (images needed), `docs/data/cad-files.csv`,
+- Generated files — never hand-edit: `hardware-site/PUNCHLIST.md` (punch list, not published),
+  `hardware-site/IMAGES_NEEDED.md` (images needed, not published), `docs/data/cad-files.csv`,
   `docs/files/SHA256SUMS.txt`. Regenerate with the scripts in `tools/`.
 - `mkdocs build --strict` must pass with zero warnings before you stop.
 

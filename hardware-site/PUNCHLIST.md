@@ -104,7 +104,7 @@ on a page to generate a row from. Their presence here is checked against
 
 Missing figures are not in this table. They are tracked separately, with the
 exact path and a one-line brief for each, in the
-[image manifest](../assets/MANIFEST.md) — the list to hand to whoever renders
+[image manifest](IMAGES_NEEDED.md) — the list to hand to whoever renders
 the exploded views.
 
 ## Regenerating this page

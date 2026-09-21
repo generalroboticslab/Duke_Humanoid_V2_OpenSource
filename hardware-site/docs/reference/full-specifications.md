@@ -78,7 +78,7 @@ mechanical stops.
 ## Mass properties (Fusion model)
 
 CAD masses from the Fusion model (each component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
-[Mass properties](#mass-properties).
+[part-properties.csv](../data/part-properties.csv){ download="" }.
 
 | | |
 | --- | --- |
