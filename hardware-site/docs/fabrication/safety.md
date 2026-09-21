@@ -123,7 +123,6 @@ With no clutch, a limb closes on a hand with full commanded torque.
 - RobStride manuals: motor over-temperature warning 75 °C, fault 80 °C; driver
   board rated to 80 °C.
 - Do not change the torque limit, protection temperature or over-temperature time.
-- Mechanical end stops on any joint: **UNVERIFIED**{ .dh-unverified }.
 
 Deploy sets each RobStride joint's run-time torque limit (drive parameter
 0x700B) to a per-motor-type ceiling times one global ratio. These are software
