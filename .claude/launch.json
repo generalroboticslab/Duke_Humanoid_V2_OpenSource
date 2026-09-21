@@ -17,15 +17,10 @@
     },
     {
       "name": "hardware-site-macos",
-      "runtimeExecutable": "hardware-site/.venv/bin/python",
+      "runtimeExecutable": "sh",
       "runtimeArgs": [
-        "-m",
-        "mkdocs",
-        "serve",
-        "-f",
-        "hardware-site/mkdocs.yml",
-        "-a",
-        "127.0.0.1:8321"
+        "-c",
+        "cd hardware-site && .venv/bin/python -m mkdocs serve -a 127.0.0.1:8321"
       ],
       "port": 8321
     }
