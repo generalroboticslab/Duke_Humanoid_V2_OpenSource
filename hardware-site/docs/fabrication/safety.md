@@ -111,8 +111,7 @@ protector: 44.4 V nominal, 50.4 V full, about 222 Wh per pack (computed).
 
 - RobStride 02/03/04: rated 48 VDC, range 24–60 VDC. RS00/05/06 range
   **UNVERIFIED**{ .dh-unverified }.
-- The only fuse is 10 A, on the computer branch. No pack fuse, main
-  disconnect, pre-charge or pack monitoring is drawn.
+- The only fuse is 10 A, on the computer branch. No pack fuse or pack monitoring is drawn.
 - Power runs on XT30 connectors. A dropped tool shorts them.
 - A pack burns if over-discharged, over-charged, punctured, crushed or shorted.
   Never charge unattended. An office extinguisher will not put it out.

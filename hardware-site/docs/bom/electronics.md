@@ -64,7 +64,6 @@ waist) and upper-body pair (arms, both shoulder_1, gimbals, computer branch).
 | 10 A fuse and holder | Power diagram, computer branch only | Part not identified **TODO**{ .dh-missing } |
 | Battery charger | Design log links Amazon B09WKN863V (listing says ISDT) | Not in the team BOM; model **UNVERIFIED**{ .dh-unverified } |
 | EC5 battery connectors | [Cables and connectors](#cables-not-in-this-list) | — |
-| Main disconnect, pre-charge | Not drawn on the power diagram | [Power system](../electrical/index.md#power-system) **TODO**{ .dh-missing } |
 
 !!! missing "MISSING — a parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage checker, which the team BOM identifies by a vendor link alone"
     *Owner: electrical lead.*
