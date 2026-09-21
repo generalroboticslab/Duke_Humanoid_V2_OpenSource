@@ -67,12 +67,25 @@
       const h = document.querySelector(".md-header");
       return h ? h.getBoundingClientRect().bottom : 0;
     }
+    // The placeholder always holds the viewer's in-page height, measured while the viewer
+    // is in the page. If it grew only on docking, the threshold below would move by the
+    // viewer's height at the moment of docking and the card would flicker in and out at the
+    // boundary.
+    let anchorHeight = 0;
+    function measure() {
+      if (!docked && wrap.offsetHeight) anchorHeight = wrap.offsetHeight;
+    }
+    // The placeholder is empty while the viewer is in the page and takes the viewer's height
+    // while it is docked, so the test uses the remembered height, not the placeholder's own.
+    // Hysteresis: dock a little below the boundary, undock a little above it.
     function scrolledPast() {
-      return anchor.getBoundingClientRect().bottom < headerBottom() + 8;
+      const bottom = anchor.getBoundingClientRect().top + anchorHeight, limit = headerBottom() + 8;
+      return docked ? bottom < limit + 40 : bottom < limit;
     }
     function dock() {
       if (docked) return;
-      anchor.style.height = wrap.offsetHeight + "px";
+      measure();
+      anchor.style.height = anchorHeight + "px";
       wrap.classList.add("dh-docked");
       docked = true;
     }
@@ -105,8 +118,10 @@
       anchor.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
+    window.addEventListener("resize", () => { measure(); onScroll(); });
     desktop.addEventListener("change", onScroll);
+    mv.addEventListener("load", measure);
+    measure();
     update();
   }
 
