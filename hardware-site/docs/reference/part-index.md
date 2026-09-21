@@ -97,8 +97,7 @@ enforces are on [Full specifications](#joint-limits).
 {% for j in rev %}| `{{ j.joint }}` | `{{ j.component }}` | {{ j.kind }} | {{ j.axis_x }}, {{ j.axis_y }}, {{ j.axis_z }} | {{ j.origin_x_mm }}, {{ j.origin_y_mm }}, {{ j.origin_z_mm }} | {{ (j.min_deg ~ "°") if j.min_deg else "—" }} | {{ (j.max_deg ~ "°") if j.max_deg else "—" }} | {{ (j.value_deg ~ "°") if j.value_deg else "—" }} |
 {% endfor %}
 {% else %}
-!!! missing "MISSING — Joint table: the export's per-component `joints.csv` (from `tools/fusion_export_modules/`) has not been written yet; the `joints.csv` that `fusion_export` writes holds only a header (no joint is reachable from the root component)"
-    Run `fusion_export_modules` in Fusion on the dated export folder, then `python tools/gen_part_properties.py ../cad/<export>`;
-    the table renders from `docs/data/joints.csv` (joint name, owning component, axis and origin in that component's frame, limits in degrees).
+!!! missing "MISSING — Joint table: the joints have not been exported from the Fusion model yet"
+    Export the joints of every linked design from Fusion; the table renders from `docs/data/joints.csv` (joint name, owning component, axis and origin in that component's frame, limits in degrees).
     *Owner: hardware lead (runs Fusion).*
 {% endif %}
