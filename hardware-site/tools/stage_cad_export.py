@@ -85,6 +85,19 @@ LABELS = {".step": "STEP", ".stp": "STEP", ".stl": "STL", ".3mf": "3MF", ".pdf":
           ".f3z": "Fusion archive", ".f3d": "Fusion archive", ".zip": "STEP (zip)"}
 
 
+# Component names inherited from vendor CAD carry CJK text: RobStride's RS06
+# STEP is named "...(开模版)...", its tooling-version tag. The site is English
+# only, data files included, so those runs are translated on the way out. An
+# unknown run becomes a marker rather than a guess.
+CJK_TERMS = {"开模版": "tooling-version"}
+CJK_RUN = re.compile(r"[　-〿一-鿿＀-￯]+")
+
+
+def englishise(text: str) -> str:
+    """Replace every CJK run in ``text`` with its English tag."""
+    return CJK_RUN.sub(lambda m: CJK_TERMS.get(m.group(0), "cjk-name"), text)
+
+
 def strip_qty(name: str) -> str:
     return re.sub(r"_x\d+(?=_)", "", name)
 

@@ -305,17 +305,20 @@ def home_blockers() -> list[tuple[str, str]]:
     These rows used to be hardcoded literals below a line of prose claiming they
     were "the home page's own blocker rows". They had drifted apart: the page
     listed seven, the hardcoded copy six.
+
+    Anchored on the table's own header row rather than the admonition's title,
+    so rewording the heading cannot silently empty this table.
     """
     rows: list[tuple[str, str]] = []
     inside = False
     for ln in (DOCS / "index.md").read_text(encoding="utf-8").splitlines():
-        if not inside:
-            inside = ln.startswith('!!! missing "Not yet')
-            continue
-        if ln.strip() and not ln.startswith("    "):
-            break                                   # dedent ends the admonition
         cells = [c.strip() for c in ln.strip().strip("|").split("|")]
-        if len(cells) != 2 or cells[0] in ("Blocker", "") or set(cells[0]) <= {"-", ":"}:
+        if not inside:
+            inside = len(cells) == 2 and cells[0] == "Blocker"
+            continue
+        if not ln.strip().startswith("|"):
+            break                                   # first non-table line ends it
+        if len(cells) != 2 or set(cells[0]) <= {"-", ":"}:
             continue
         rows.append((cells[0], relink(cells[1])))
     return rows
@@ -324,18 +327,11 @@ def home_blockers() -> list[tuple[str, str]]:
 # Files the site renders a table from. A gap here is structural: there is no
 # sentence on a page to hang a TODO block on, so it can only be found by looking.
 DATA_GAPS = [
-    ("tools.csv",
-     "The Tools tier on [Bill of materials](../bom/index.md) and the subtotal on "
-     "[Tools](../assembly/tools.md) both render *not yet published*. A builder "
-     "cannot budget the tools",
-     "hardware lead + assembly lead", False),
-    ("optional.csv",
-     "The third camera module (~$600), spares and upgrades cannot be quoted",
-     "hardware lead", False),
     ("print_profiles.csv",
-     "The per-part table on [Printing guide](../fabrication/printing-guide.md) is "
-     "gated on the file and does not render at all",
-     "hardware lead", True),
+     "The per-part profile table on [Printing guide](../fabrication/printing-guide.md) "
+     "is gated on the file and does not render. Material and process per part are "
+     "published without it, on [Printed parts](../bom/printed-parts.md)",
+     "hardware lead", False),
 ]
 
 
@@ -400,11 +396,11 @@ def render(items: list[dict]) -> str:
         w(f"| {o} | {c} | {b} |")
     w("")
     hb = home_blockers()
-    w("## What stops a build outright")
+    w("## What the release still owes")
     w("")
     w("These are the home page's own blocker rows, read from that page and restated")
-    w("as work. Everything else in this list makes a build harder; these make it")
-    w("impossible.")
+    w("as work. Everything else in this list makes a build harder; these are the")
+    w("ones somebody has to close before this counts as a finished release.")
     w("")
     w("| Blocker | Where it is tracked |")
     w("| --- | --- |")

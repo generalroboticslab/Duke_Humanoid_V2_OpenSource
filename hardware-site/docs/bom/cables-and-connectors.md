@@ -35,8 +35,18 @@ No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 - XT30(2+2)-F.G.B rating: 15 A with 18 AWG (American wire gauge) wire, 30 A for one minute below 80 °C. **Never mate or unmate it under power.**
 - Solder the XT30 cups (iron at about 480 °C); do not crimp them.
 
-!!! unverified "UNVERIFIED — trunk connector (harness pages: XT30(2+2) on every actuator; manuals: XT30 + GH1.25 on RS03/RS04) and CAN wire colours (RS04 manual: blue = CAN_H, brown = CAN_L; team harness, blue/yellow: yellow = CAN_H, blue = CAN_L)"
-    *Owner: electrical lead.*
+**Wire to the team harness, not to the manuals.** The harness is what the
+reference robot was built with, and it differs from the vendor documents in two
+places:
+
+| | Team harness (build to this) | RobStride manual |
+| --- | --- | --- |
+| Trunk connector | XT30(2+2) on every actuator | XT30 + GH1.25 on RS03/RS04 |
+| CAN_H | Yellow | Blue |
+| CAN_L | Blue | Brown |
+
+Blue means CAN_H in the manual and CAN_L in the harness. Label both ends of
+every CAN pair before you crimp, and ring them out before you power anything.
 
 ## Wire gauge
 

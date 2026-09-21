@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **27 open items** across **15 pages**, of which **9 block the public release**.
+Every unresolved item on this site, in one table: **18 open items** across **11 pages**, of which **5 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -22,44 +22,40 @@ that is not here.
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
 | Before you start | 3 | 3 |
-| Bill of materials | 8 | 1 |
-| Fabrication | 2 | 2 |
-| Assembly | 4 | 0 |
+| Bill of materials | 4 | 0 |
+| Assembly | 2 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| Reference | 2 | 2 |
-| **Total** | **27** | **9** |
+| Reference | 1 | 1 |
+| **Total** | **18** | **5** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 27.
+more than 18.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Electrical lead | 13 | 3 |
-| Hardware lead | 11 | 3 |
-| Controls lead | 4 | 0 |
+| Electrical lead | 12 | 3 |
+| Hardware lead | 5 | 1 |
+| Controls lead | 3 | 0 |
 | BOM owner | 2 | 0 |
 | Safety sign-off | 2 | 1 |
-| PI | 2 | 2 |
-| Whoever stages the CAD export | 1 | 1 |
+| PI | 1 | 1 |
 
-## What stops a build outright
+## What the release still owes
 
 These are the home page's own blocker rows, read from that page and restated
-as work. Everything else in this list makes a build harder; these make it
-impossible.
+as work. Everything else in this list makes a build harder; these are the
+ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-| No per-part drawings, print plates or native Fusion archive (part and whole-robot STEP are published) | [CAD downloads](../fabrication/cad-downloads.md) |
-| No fastener schedule | [Fasteners](../bom/fasteners-and-hardware.md) |
-| No torque values (threadlocker: Loctite 222) | [Assembly](../assembly/index.md) |
-| No hardware or documentation licence | [Citation and licence](citation-and-license.md) |
-| No human-safety procedure | [Safety](../before-you-start/safety.md) |
-| No e-stop, pack fuse or main disconnect | [Power system](../electrical/power-system.md) |
-| No hardware/software contract | [Software](../software.md) |
+| No hardware or documentation licence — nobody may legally reuse the design | [Citation and licence](citation-and-license.md) |
+| No e-stop is specified, though the run scripts assume one | [Safety](../before-you-start/safety.md#rules) |
+| No fuse in the battery path | [Power system](../electrical/power-system.md#protection-disconnect-and-e-stop) |
+| No lifting points or sling route on the robot | [Safety](../before-you-start/safety.md#rules) |
+| No physical power-on and power-off order | [Safety](../before-you-start/safety.md#rules) |
 
 ## Before you start
 
@@ -67,27 +63,16 @@ impossible.
 | --- | --- | --- | :-: |
 | [safety → Rules](../before-you-start/safety.md#rules) | Lifting points on the robot, sling route and clearance zone — The gantry itself is specified above;; where to attach to the robot is not. | hardware lead | **yes** |
 | [safety → Rules](../before-you-start/safety.md#rules) | E-stop: none in the bill of materials or power diagram, yet the run scripts assume one; mounting, what it cuts, remote or dead-man switch, restart checks — Scripts: `humanoid_nav_step_test.py`, `humanoid_joint_monkey_hw.py`. | electrical lead | **yes** |
-| [safety → Rules](../before-you-start/safety.md#rules) | Physical power-on and power-off order (computer, USB-CAN adapters, motor bus, camera gimbals), with a check at each step, and the software shutdown order before power-off | electrical lead | **yes** |
+| [safety → Rules](../before-you-start/safety.md#rules) | Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step — The software ladder above is published;; the order the hardware itself is switched is not. | electrical lead | **yes** |
 
 ## Bill of materials
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [actuators → Which model goes in which joint](../bom/actuators.md#which-model-goes-in-which-joint) | 2 RS06: this table needs 4 (ankle_2 and shoulder_2 on both sides), the team BOM line `E6` buys 2 | hardware lead | no |
 | [actuators → Motor data](../bom/actuators.md#motor-data) | RS00, RS05, RS06 manual data (voltage range, reduction, encoder, `0x7018` range); firmware version and per-joint limits as run on the reference robot | hardware lead + controls lead | no |
-| [cables-and-connectors → Actuator-side connectors](../bom/cables-and-connectors.md#actuator-side-connectors) | Trunk connector (harness pages: XT30(2+2) on every actuator; manuals: XT30 + GH1.25 on RS03/RS04) and CAN wire colours (RS04 manual: blue = CAN_H, brown = CAN_L; team harness, blue/yellow: yellow = CAN_H, blue = CAN_L) | electrical lead | no |
-| [electronics → Where each part goes](../bom/electronics.md#where-each-part-goes) | IMU mounting screw: M3 (team log) vs Ø2.10 flange holes on 30 × 31 mm centres (vendor drawing) | hardware lead | no |
 | [electronics → Power path](../bom/electronics.md#power-path) | 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
 | [electronics → Not in this list](../bom/electronics.md#not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and holder and for the battery charger, and a manufacturer part number for the surge protector, the four distribution terminals, the USB hubs and the voltage … | electrical lead | no |
 | [index](../bom/index.md) | A unit price for every unpriced team BOM row: all nine bearing and screw lines, every printed part except the ten the sheet prices by weight, and the five machined parts the sheet has no line for — The sheet … | BOM owner | no |
-| [printed-parts](../bom/printed-parts.md) | STEP and STL of the shank covers `3DP_legP09_shank_cover_a` / `3DP_legP10_shank_cover_b`: the files published under those names are byte-identical to the shoulder covers `3DP_armP05` / `3DP_armP06` (both pairs … | whoever stages the export | **yes** |
-
-## Fabrication
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [cnc-guide → Known CAD errors](../fabrication/cnc-guide.md#known-cad-errors) | CAD errors: Motor04 shaft and knee need M5 holes, CAD has M4; RS03 shaft bearing retainer above the knee is a design error (enlarged by hand). Whether the released CAD is corrected is unknown | hardware lead | **yes** |
-| [printing-guide → Print the parts](../fabrication/printing-guide.md#print-the-parts) | Which parts are FDM or SLS, which are structural, and whether an SLS part can be printed FDM instead | hardware lead | **yes** |
 
 ## Assembly
 
@@ -98,8 +83,6 @@ across every step of every limb, and each carries the flag in its own right.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [gripper → Set the open and closed positions (step 7)](../assembly/gripper.md#step-7) | The uncalibrated service map reports 90 mm; measure the real gap in step 7 | hardware lead + controls | no |
-| [head-and-camera-gimbal → Configure the actuators and record the camera serials (step 1)](../assembly/head-and-camera-gimbal.md#step-1) | The CAD mirrors this, putting `cam_yaw_left` at y = −65 mm — A swap fails silently.; Confirm against the robot before wiring. | hardware lead + controls | no |
-| [head-and-camera-gimbal → Mount the camera (step 5)](../assembly/head-and-camera-gimbal.md#step-5) | The bracket CAD names a D435 body; confirm the D436 fits before machining — The STEP names the camera `IntelRealsense_D435_Multibody`; … | hardware lead | no |
 | [head-and-camera-gimbal → Route the camera cable (step 6)](../assembly/head-and-camera-gimbal.md#step-6) | Camera cable across the yaw and pitch axes — Real yaw travel; how the USB-C cable crosses yaw (slip ring, helix or stop).; Cable type, length, bend radius, service loop, retention. … | hardware lead + electrical | no |
 
 ## Electrical
@@ -129,7 +112,6 @@ and check below is written against a voltage nobody has confirmed.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [citation-and-license → Licence](citation-and-license.md#licence) | Hardware licence (e.g. CERN-OHL-S or -W) and documentation licence (e.g. CC-BY-4.0), with the licence file beside the CAD and on the download page; note V1 was MIT | PI + the university's licensing office | **yes** |
-| [citation-and-license → Third-party material](citation-and-license.md#third-party-material) | Licence file for the two Unitree G1 URDFs | PI | **yes** |
 
 ## Items that are not TODO blocks
 
@@ -139,9 +121,7 @@ on a page to generate a row from. Their presence here is checked against
 
 | Gap | What it means | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| `tools.csv` does not exist | The Tools tier on [Bill of materials](../bom/index.md) and the subtotal on [Tools](../assembly/tools.md) both render *not yet published*. A builder cannot budget the tools | hardware lead + assembly lead | no |
-| `optional.csv` does not exist | The third camera module (~$600), spares and upgrades cannot be quoted | hardware lead | no |
-| `print_profiles.csv` does not exist | The per-part table on [Printing guide](../fabrication/printing-guide.md) is gated on the file and does not render at all | hardware lead | **yes** |
+| `print_profiles.csv` does not exist | The per-part profile table on [Printing guide](../fabrication/printing-guide.md) is gated on the file and does not render. Material and process per part are published without it, on [Printed parts](../bom/printed-parts.md) | hardware lead | no |
 
 ## Images
 

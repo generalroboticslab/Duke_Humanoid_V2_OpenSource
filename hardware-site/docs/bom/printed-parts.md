@@ -65,11 +65,11 @@ and states no unit.
 The gripper's rack teeth are cut along the slide arm `3DP_grip03_rail` (`P11`, booklet p.13), so the empty
 Fusion component `double_helix_rack_30teeth_6mm v2` is a placeholder with no body, no STEP and no STL.
 
-!!! missing "MISSING — STEP and STL of the shank covers `3DP_legP09_shank_cover_a` / `3DP_legP10_shank_cover_b`: the files published under those names are byte-identical to the shoulder covers `3DP_armP05` / `3DP_armP06` (both pairs are named `Component42` / `Component43` in Fusion, and the earlier export wrote one file per component name)"
-    The export of 2026-09-19 16:46 writes one file per component (`Component42` / `Component43` for the shank
-    covers, `Component42~2`, `~3` / `Component43~2`, `~3` for the shoulder covers of the left and right arm);
-    re-staging it with `tools/stage_cad_export.py` closes this.
-    *Owner: whoever stages the export. Blocks release.*
+The shank covers and the shoulder covers are distinct files, despite sharing
+Fusion component names (`Component42` / `Component43`): the shank covers span
+261 × 66 × 25 mm, the shoulder covers 82 × 47 × 11 mm. Each pair's two halves
+are mirrors of each other, so they carry the same triangle count and the same
+bounding box and differ in file content.
 
 !!! note "Build to the model — quantities are Fusion occurrence counts"
     The published model is what you build to; the team's spreadsheet is a working document and differs here.

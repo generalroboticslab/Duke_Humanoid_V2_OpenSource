@@ -21,6 +21,31 @@ sintering (SLS).
 !!! note "Yours to determine — material settings for your printer and filament"
     *Owner: hardware lead.*
 
+## Which process each part takes
+
+The `Process` and `Material` columns on
+[Printed parts](../bom/printed-parts.md) carry the assignment for every part:
+**40 parts are FDM** (PLA and TPU) and **seven are SLS** in nylon 12.
+
+The seven SLS parts are the drivetrain parts — every one of them transmits
+actuator torque or carries a bearing:
+
+| Part | Qty |
+| --- | ---: |
+| `3DP_arm05_RS02_shaft_bearing_retainer` | 4 |
+| `3DP_arm06_RS02_shaft_coupler` | 2 |
+| `3DP_arm11_wrist_roll` | 2 |
+| `3DP_arm14_wrist_block` | 2 |
+| `3DP_arm15_end_effector_attachment` | 2 |
+| `3DP_grip05_pinion` | 2 |
+
+Print these in SLS nylon. The remaining parts are covers, mounts and TPU pads,
+and FDM is what the reference robot used for all of them.
+
+!!! note "Not tested on the reference robot — an FDM substitute for any of the seven SLS parts"
+    They were printed SLS and never tried in FDM, so no substitute material or
+    wall schedule is published. *Owner: hardware lead.*
+
 ## Print the parts
 
 1. Print one small fit-critical part: one that mates with a machined part or
@@ -28,9 +53,6 @@ sintering (SLS).
 2. Print the full set.
 
 ✅ **Check:** the test part matches the drawing before step 2.
-
-!!! missing "MISSING — which parts are FDM or SLS, which are structural, and whether an SLS part can be printed FDM instead"
-    *Owner: hardware lead. Blocks release.*
 
 ## Post-process
 

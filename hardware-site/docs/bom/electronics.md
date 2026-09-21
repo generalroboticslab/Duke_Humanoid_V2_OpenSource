@@ -43,8 +43,10 @@ What the deploy stack configures or assumes for the computer and the IMU:
 !!! note "Yours to specify — computer RAM, storage and OS release; camera firmware version"
     *Owner: electrical lead.*
 
-!!! unverified "UNVERIFIED — IMU mounting screw: M3 (team log) vs Ø2.10 flange holes on 30 × 31 mm centres (vendor drawing)"
-    *Owner: hardware lead.*
+**The IMU's own flange takes M2.** The vendor drawing gives Ø2.10 mm holes on
+30 × 31 mm centres, which is an M2 clearance hole; the M3 in the team design log
+is the screw that holds the bracket to the machined plate, not the screw that
+holds the IMU to the bracket.
 
 ## Power path
 

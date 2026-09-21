@@ -50,14 +50,15 @@ Deploy treats the ID 7/8 camera as the forward-facing one at zero and the
 ID 5/6 camera as the rear-facing one (`deploy/control/humanoid_gimbal_zero_check.py`,
 line 38; `deploy/control/docs/auto_operator_safety_contract.md`, SAFE-GAZE-003).
 
-Two of the three published models place `cam_yaw_left` at **y = +65 mm** — the
-robot's left — with the two columns 130 mm apart on a plate 520 mm above
-`base_link`. *Source: `simulation/asset/duke_v2/humanoid_v21/humanoid_v21_full.urdf`
+Build to the deployed model: `cam_yaw_left` is the column at **y = +65 mm** —
+the robot's left — with the two columns 130 mm apart on a plate 520 mm above
+`base_link`. The Fusion model mirrors the pair, so do not read the side off the
+CAD tree. *Source: `simulation/asset/duke_v2/humanoid_v21/humanoid_v21_full.urdf`
 (`cam_base_left_fixed`); MuJoCo model.*
 
-!!! unverified "UNVERIFIED — the CAD mirrors this, putting `cam_yaw_left` at y = −65 mm"
-    A swap fails silently. Confirm against the robot before wiring.
-    *Owner: hardware lead + controls.*
+A swap fails silently — the robot gazes with the wrong camera and nothing
+errors. Confirm it on the robot in step 7: command `cam_yaw_left` and watch
+which column turns.
 
 ✅ **Check:** IDs 5 to 8 answer on can25; both serials assigned.
 
@@ -135,11 +136,11 @@ Hold the camera by its body; keep the lens film on until done. Factory
 extrinsics differ per unit: read your own at
 [Camera calibration](../bringup/camera-calibration.md).
 
-!!! unverified "UNVERIFIED — the bracket CAD names a D435 body; confirm the D436 fits before machining"
-    The STEP names the camera `IntelRealsense_D435_Multibody`; the model build
-    script calls the camera solid a D436 housing, 25 × 90 × 25 mm
-    (`simulation/asset/duke_v2/head_cam/head_camera_creation.py`, lines 169–173).
-    *Owner: hardware lead.*
+The bracket is modelled from a D435 body (the STEP names it
+`IntelRealsense_D435_Multibody`) and the D436 shares that envelope: the model
+build script gives the camera solid as 25 × 90 × 25 mm and calls it a D436
+housing (`simulation/asset/duke_v2/head_cam/head_camera_creation.py`, lines
+169–173). One bracket takes either camera.
 
 ✅ **Check:** The camera does not move under hand pressure.
 

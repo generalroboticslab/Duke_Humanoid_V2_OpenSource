@@ -6,8 +6,8 @@ Gather these before the first assembly step.
     - **You will:** count every fastener into a divided tray by size; a leftover means a missed step.
     - **Before this:** [Incoming inspection](../fabrication/incoming-inspection.md).
 
-Tools subtotal: {{ bom_subtotal("tools.csv") }} — `tools.csv` is not written
-yet **TODO**{ .dh-missing }.
+Tools are not priced here: what a tool costs you depends on what your shop
+already owns. Specify from the table, then quote what you are short of.
 
 !!! note "Not verified — tool list derived from the parts list, not checked against a build"
     *Owner: hardware lead, from the first documented build.*
@@ -16,15 +16,15 @@ yet **TODO**{ .dh-missing }.
 
 | Tool | Use | Specification |
 | --- | --- | --- |
-| Torx drivers | Torx button-head M4x12 and M3x12 screws | Sizes **TODO**{ .dh-missing } |
-| Torque driver | Every torqued screw | Range **TODO**{ .dh-missing } |
+| Torx drivers | Torx button-head M4x12 and M3x12 screws | T10 for M3, T20 for M4 (ISO 7380 button head). Check the drive on your own screws |
+| Torque driver | Every torqued screw | Covering 1–5 N·m, the band M3 and M4 fall in |
 | Soldering iron and solder | XT30 solder cups; heat-set inserts in printed parts | About 480 °C for XT30 cups |
 | Heat gun, heat-shrink | Over soldered joints | Sized over XT30 joints |
 | Wire strippers, flush cutters | Harness | Gauges per [Harness fabrication](../electrical/harness-fabrication.md) |
-| Crimp tool | Signal connectors | **TODO**{ .dh-missing } |
+| Crimp tool | Signal connectors | Dies to match the connectors you fit; see [Harness fabrication](../electrical/harness-fabrication.md) |
 | Multimeter | Continuity, polarity, voltage | Any |
 | Hoist or gantry, sling | Lifting the robot; hanging it legs straight | 50 kg or more, 1.4 m or more of clear height ([reference](https://stemfinity.com/products/unitree-gantry)) |
-| Limb stand or jig | Holding a limb | **TODO**{ .dh-missing } |
+| Limb stand or jig | Holding a limb | Anything that holds a 5 kg limb at bench height without loading a joint |
 | Lithium-polymer (LiPo) balance charger | Two 6S 10000 mAh packs | 6S, balance leads to match |
 | Fire-rated LiPo bag | Charging and storing packs | Fits one pack |
 | Linux computer | Setting IDs on the bench | See [Software](../software.md) |
@@ -35,7 +35,7 @@ yet **TODO**{ .dh-missing }.
 | Item | Specification |
 | --- | --- |
 | Threadlocker | Loctite 222 (removable). Never a stronger grade |
-| Cable ties and anchors | **TODO**{ .dh-missing } |
+| Cable ties and anchors | Small ties for the limb harnesses, adhesive anchors inside the torso |
 | Masking tape, marker | Label every actuator before it goes into a limb |
 | Isopropyl alcohol, wipes | Clean cutting fluid off machined parts |
 | Cut-resistant gloves | Freshly machined aluminium |

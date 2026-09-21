@@ -39,12 +39,15 @@ Apache-2.0 grants no rights in a mechanical design.
 - The workspace-study comparison models keep their own licences; the **Fourier
   GR-3 model is GPL-3.0** (the README says how to remove it).
 - The two Unitree G1 URDFs in `simulation/asset/unitree_g1/` are cuRobo exports
-  and ship without a `LICENSE` file; the README points to
+  and ship without a `LICENSE` file. They belong to the code repository, not to
+  this hardware release: no G1 file is redistributed here, and nothing on this
+  site needs one to build the robot. Their mesh paths point into
   [mjlab](https://github.com/mujocolab/mjlab), which carries the MuJoCo
-  Menagerie model.
+  Menagerie model of the G1.
 
-    !!! missing "MISSING — Licence file for the two Unitree G1 URDFs"
-        *Owner: PI. Blocks release.*
+    !!! note "Yours to check — the upstream licence terms if you reuse the G1 URDFs"
+        Follow the mesh paths to mjlab and to Menagerie, and take the terms from
+        there. *Owner: PI.*
 
 - Vendor documents (not redistributed): RobStride 02/03/04
   manuals ([robstride.com/download](https://www.robstride.com/download)); SYD

@@ -55,7 +55,17 @@ close every red box with them first.
     4. Start `humanoid_real_env.py` and let it run for two minutes, watching
        for `██ WATCHDOG ██`, before anything else.
 
-    !!! missing "MISSING — SAFETY — Physical power-on and power-off order (computer, USB-CAN adapters, motor bus, camera gimbals), with a check at each step, and the software shutdown order before power-off"
+    Shut the software down in the reverse order, and **never cut power with a
+    hold active**: on Ctrl+C the arms hold their last target — there is no
+    robot-side retract — so clear anything in the grippers, wait for the holds
+    to release, and only then exit. The mission loop publishes
+    `nav_cmd [0, 0, 0]` on the way out. *Source:
+    `deploy/control/docs/auto_operator_safety_contract.md`, SAFE-SHUTDOWN-001
+    and the shutdown-protocol notes.*
+
+    !!! missing "MISSING — SAFETY — Physical power-on and power-off order: computer, USB-CAN adapters, motor bus, camera gimbals, with a check at each step"
+        The software ladder above is published; the order the hardware itself is
+        switched is not.
         *Owner: electrical lead. Blocks [Pre-power checks](../electrical/pre-power-checks.md). Blocks release.*
 
 7. **Isolate before touching.** Disconnect the packs and move them away before

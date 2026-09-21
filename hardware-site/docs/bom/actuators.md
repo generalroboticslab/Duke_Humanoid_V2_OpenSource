@@ -39,8 +39,10 @@ and the Cartesian-hand model's base group includes `CNC_arm13_x2_RS05_shaft_coup
 !!! note "Not checked on the reference robot — RS05 on `wrist_3` and the four camera joints"
     *Owner: hardware lead + controls lead.*
 
-!!! missing "MISSING — 2 RS06: this table needs 4 (ankle_2 and shoulder_2 on both sides), the team BOM line `E6` buys 2"
-    *Owner: hardware lead.*
+**Order four RS06, not two.** The robot has four RS06 joints — `ankle_2` and
+`shoulder_2` on both sides — and the team BOM line `E6` buys two. Deploy's
+joint-to-type map and the team's own booklet both show four. *Source:
+`deploy/control/humanoid_config.py`; the team booklet, p.5 and p.9.*
 
 ## Motor data
 

@@ -58,7 +58,7 @@ COLS = ["file_name", "fusion_name", "qty_in_model", "part_id", "bom_file", "desc
 REPORT_MIN_G = 20.0
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from stage_cad_export import (FASTENER, base_name, is_fastener, load_tree, mass_of,  # noqa: E402
+from stage_cad_export import (FASTENER, base_name, englishise, is_fastener, load_tree, mass_of,  # noqa: E402
                               resolve_site_parts, vendor_rows)
 
 ACTUATOR = re.compile(r"robstride[ _-]*0*(\d)(?!\d)", re.I)
@@ -351,7 +351,8 @@ def main() -> int:
     with open(OUT_CSV, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=COLS, lineterminator="\n")
         w.writeheader()
-        w.writerows(rows)
+        w.writerows({k: englishise(v) if isinstance(v, str) else v for k, v in r.items()}
+                    for r in rows)
     OUT_JSON.parent.mkdir(parents=True, exist_ok=True)
     OUT_JSON.write_text(json.dumps(vmap, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 

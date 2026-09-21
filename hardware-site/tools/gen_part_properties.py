@@ -80,7 +80,7 @@ SITE = Path(__file__).resolve().parent.parent
 OUT = SITE / "docs" / "data" / "part-properties.csv"
 OUT_JOINTS = SITE / "docs" / "data" / "joints.csv"
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from stage_cad_export import ALIASES, strip_qty, site_ids  # noqa: E402
+from stage_cad_export import ALIASES, englishise, strip_qty, site_ids  # noqa: E402
 from gen_printed import PRINTED, load_tree, pick  # noqa: E402
 
 COLS = ["part_id", "fusion_name", "material", "mass_g", "volume_cm3", "bbox_x_mm", "bbox_y_mm", "bbox_z_mm",
@@ -223,7 +223,8 @@ def write_joints(exp: Path) -> str:
     with open(OUT_JOINTS, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=JOINT_COLS, lineterminator="\n")
         w.writeheader()
-        w.writerows(out)
+        w.writerows({k: englishise(v) if isinstance(v, str) else v for k, v in o.items()}
+                    for o in out)
     n_rev = sum(1 for o in out if o["type"] == "revolute" and o["is_suppressed"] != "True")
     return (f"{OUT_JOINTS.relative_to(SITE).as_posix()}: {len(out)} joints from "
             f"{len({o['component'] for o in out})} components, {n_rev} revolute and not suppressed")
