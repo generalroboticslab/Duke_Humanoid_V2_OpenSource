@@ -19,21 +19,21 @@ One row per cable, plus one per motor drop once the daisy-chain order exists
 
 | From | To | Gauge | Connectors (A / B) | Length |
 | --- | --- | --- | --- | --- |
-| Adapter `can9` | Left arm trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can21` | Right arm trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can22` | Waist / `shoulder_1` trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can23` | Right leg trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can24` | Left leg trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Adapter `can25` | Camera gimbal trunk | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Pack + | Pack − (series link) | **TODO**{ .dh-missing } | EC5 **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } |
-| Pack + | Surge protector | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Surge protector | Upper-body power block (48V riser) | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can9` | Left arm trunk | 24 AWG twisted pair, 120 Ω characteristic impedance **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can21` | Right arm trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can22` | Waist / `shoulder_1` trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can23` | Right leg trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can24` | Left leg trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Adapter `can25` | Camera gimbal trunk | 24 AWG twisted pair, 120 Ω **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Pack + | Pack − (series link) | 12 AWG **UNVERIFIED**{ .dh-unverified } | EC5 **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } |
+| Pack + | Surge protector | 10 AWG (150 A breaker trip current) **UNVERIFIED**{ .dh-unverified } | XT60 or ring terminal at breaker **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Surge protector | Upper-body power block (48V riser) | 12 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
 | 48V bus | Lower-body power block | 12 AWG | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Pack − | Upper- and lower-body ground blocks | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| Upper-body power block | 10 A fuse, 48V-to-12V buck | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Pack − | Upper- and lower-body ground blocks | 10 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| Upper-body power block | 10 A fuse, 48V-to-12V buck | 14 AWG (15 A capacity, 10 A fuse) **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
 | 48V-to-12V buck | Onboard computer | 16 AWG | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| 12 V supply (not drawn) | Left gripper servo | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
-| 12 V supply | Right gripper servo | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| 12 V supply (not drawn) | Left gripper servo | 18 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
+| 12 V supply | Right gripper servo | 18 AWG **UNVERIFIED**{ .dh-unverified } | **TODO**{ .dh-missing } | **TODO**{ .dh-missing } |
 
 *Gauges: power wiring diagram.*
 
@@ -109,8 +109,8 @@ Do not crimp the XT30 cups.
     | Test | Pass |
     | --- | --- |
     | Pin-to-pin continuity, both directions | Intended pairs conduct; no others |
-    | Insulation between power conductors | **TODO**{ .dh-missing } |
-    | Insulation, conductor to sleeve/shield | **TODO**{ .dh-missing } |
+    | Insulation between power conductors | > 10 MΩ at 500 V **UNVERIFIED**{ .dh-unverified } |
+    | Insulation, conductor to sleeve/shield | > 10 MΩ at 500 V **UNVERIFIED**{ .dh-unverified } |
     | Flex at each strain relief, meter on | No flicker |
 
 !!! note "Yours to determine — pass criteria for the two insulation tests; pull-out force for a soldered joint; tool, die and strip length for any crimped contact"
