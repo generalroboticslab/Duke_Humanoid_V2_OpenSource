@@ -5,7 +5,7 @@ Energise the robot and prove all 31 actuators answer, **without enabling any**.
 !!! abstract "At a glance"
     - **Tools:** bench supply, two people.
     - **Operator:** connects power, runs commands, reads output aloud; never touches the robot.
-    - **Safety:** holds the operator kill switch (stops the mission process is the e-stop — see [Safety](../before-you-start/index.md#rules)), watches, calls the abort; never touches the keyboard.
+    - **Safety:** holds the operator kill switch — stopping the mission process *is* the e-stop here ([Safety](../before-you-start/index.md#rules)) — watches, calls the abort; never touches the keyboard.
     - **Before this:** [Pre-power checks](../electrical/index.md#pre-power-checks) passed and signed. Robot hung from a rated hoist, legs straight, clear space below.
 
 ## Prepare the host

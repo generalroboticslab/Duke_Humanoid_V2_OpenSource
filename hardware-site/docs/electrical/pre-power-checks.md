@@ -16,7 +16,7 @@ find a wiring fault.
 | A3 | Floor | Clear within the robot's reach and fall path |
 | A4 | Final-integration fastener check | Signed |
 | A5 | Both checks on [Routing](#verifying-a-routing-job) | Pass; wiggle-test power state **UNVERIFIED**{ .dh-unverified } |
-| A6 | Two people; the e-stop (emergency stop) holder does not connect the battery | Confirmed aloud |
+| A6 | Two people; whoever holds the operator kill switch does not connect the battery | Confirmed aloud |
 
 ## B. Test continuity and isolation
 

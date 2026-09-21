@@ -98,7 +98,7 @@ close every red box with them first.
         *Owner: electrical lead.*
 
 8. **Two people** for every lift and gantry transfer. During
-   powered tests the second person's only job is the e-stop.
+   powered tests the second person's only job is the stop layers below.
 
     !!! note "Yours to determine — which steps need a second person and which need a hoist"
         *Owner: hardware lead.*
@@ -113,7 +113,8 @@ close every red box with them first.
 ### Power loss means collapse
 
 Every joint is quasi-direct-drive, with no self-locking gearbox. Removing
-power, including an e-stop, drops the 36 kg body and whatever the arms hold.
+power — pulling the pack disconnect included — drops the 36 kg body and
+whatever the arms hold.
 
 !!! note "Not measured on the reference robot — collapse behaviour and standoff distance on power loss; safe pose before planned power-down"
     *Owner: hardware lead, from a drop test with the robot suspended. Blocks [First power-on](../bringup/index.md#first-power-on).*
@@ -131,7 +132,7 @@ protector: 44.4 V nominal, 50.4 V full, about 222 Wh per pack (computed).
 
 - RobStride 02/03/04: rated 48 VDC, range 24–60 VDC. RS00/05/06 range
   **UNVERIFIED**{ .dh-unverified }.
-- The only fuse is 10 A, on the computer branch. No pack fuse, e-stop, main
+- The only fuse is 10 A, on the computer branch. No pack fuse, main
   disconnect, pre-charge or pack monitoring is drawn.
 - Power runs on XT30 connectors. A dropped tool shorts them.
 - A pack burns if over-discharged, over-charged, punctured, crushed or shorted.

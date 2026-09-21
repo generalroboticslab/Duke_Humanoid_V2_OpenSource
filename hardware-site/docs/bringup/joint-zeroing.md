@@ -3,7 +3,7 @@
 Record each joint's encoder reading at the model's zero pose.
 
 !!! abstract "At a glance"
-    - **Before this:** [Motor ID and config](#motor-id-and-config). Robot hung, legs straight, emergency stop held, motors **not** enabled.
+    - **Before this:** [Motor ID and config](#motor-id-and-config). Robot hung, legs straight, a hand on the operator kill switch, motors **not** enabled.
 
 ## Set zeros
 

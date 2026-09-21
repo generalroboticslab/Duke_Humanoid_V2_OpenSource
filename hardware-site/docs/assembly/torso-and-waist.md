@@ -4,7 +4,7 @@ Build the torso that limbs and camera columns bolt to.
 
 !!! abstract "At a glance"
     - **You will:** build frame and waist; mount electronics, packs and covers.
-    - **Parts:** RobStride 03 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/index.md#cnc-parts)); electronics in steps 5–8 ([Electronics](../bom/index.md#electronics)).
+    - **Parts:** RobStride 03 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/index.md#cnc-parts)); electronics in steps 5–7 and the computer above them ([Electronics](../bom/index.md#electronics)).
     - **Before this:** [Arm](#arm).
 
 !!! note "Read off the model — torso fasteners, mounts and retention"
@@ -97,27 +97,12 @@ the base frame ([Head and camera gimbal](#head-and-camera-gimbal)).
 
 <figure markdown>
   ![Torso electronics exploded, parts labelled with team BOM ids](../assets/exploded/team/02-electronics-tray.webp){ loading=lazy }
-  <figcaption>Steps 5–8, both sides of the torso: computer E0, packs E7, CAN adapters E13, hubs E16, IMU E17, surge protector E18, distribution blocks E19, voltage checkers E20. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+  <figcaption>Steps 5–7, both sides of the torso, and the computer E0 on the spine: packs E7, CAN adapters E13, hubs E16, IMU E17, surge protector E18, distribution blocks E19, voltage checkers E20. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
 </figure>
 
-{{ step(5, "Mount the computer") }}
-
-<div class="parts-needed" markdown>
-
-| | |
-| --- | --- |
-| MINISFORUM X1-470 mini PC | 1 |
-
-</div>
-
-Retain it against walking shock, with intake, exhaust and ports clear.
-
-<figure markdown>
-  ![Computer in printed T-brackets](../assets/photos/body-computer-mount.webp){ loading=lazy }
-  <figcaption>Computer in printed T-brackets on a crossbar above the waist. Same mount on the finished robot: <strong class="dh-unverified">UNVERIFIED</strong>.</figcaption>
-</figure>
-
-✅ **Check:** Does not move when shaken; vents and ports clear.
+The computer (MINISFORUM X1-470 mini PC, ×1) sits on the spine above the waist,
+as the two views above place it. Retain it against walking shock, with intake,
+exhaust and ports clear.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
@@ -125,7 +110,7 @@ Retain it against walking shock, with intake, exhaust and ports clear.
   <figcaption>Rear bay: two packs upright behind the spine, terminal strip below. No pack retention is drawn.</figcaption>
 </figure>
 
-{{ step(6, "Mount the battery packs") }}
+{{ step(5, "Mount the battery packs") }}
 
 <div class="parts-needed" markdown>
 
@@ -148,7 +133,7 @@ Stand the packs upright, side by side, in the rear bay. They run **in series**
 
 ✅ **Check:** Packs cannot shift, no lead is taut or on an edge, each pack comes out.
 
-{{ step(7, "Mount the CAN adapters, hubs and power parts") }}
+{{ step(6, "Mount the CAN adapters, hubs and power parts") }}
 
 <div class="parts-needed" markdown>
 
@@ -171,7 +156,7 @@ serial. Wire per [Power system](../electrical/index.md#power-system) and
 
 ✅ **Check:** Every adapter bus-labelled; no board hangs on its cable; no converter's heat path blocked.
 
-{{ step(8, "Mount the IMU") }}
+{{ step(7, "Mount the IMU") }}
 
 <div class="parts-needed" markdown>
 
@@ -208,12 +193,13 @@ enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
 
 ✅ **Check:** Rigid, with axes checked against the robot frame.
 
-{{ step(9, "Fit the disconnect and emergency stop") }}
+{{ step(8, "Fit the pack disconnect") }}
 
-!!! note "The missing e-stop is tracked on [Safety](../before-you-start/index.md#rules)"
-    The run scripts assume a physical e-stop. Specify device, what it cuts,
-    rating and location.
-    *Owner: hardware lead + electrical + Safety sign-off.*
+Reachable from outside the working envelope, because pulling it is the third
+and last of the robot's stop layers; the first two are software
+([Safety](../before-you-start/index.md#rules)). The robot has no hand e-stop.
+
+✅ **Check:** Reachable without entering the envelope; opening it kills the 48 V bus.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1248" height="702"
@@ -226,7 +212,7 @@ enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
   <figcaption>Printed torso plates: covers P1, front plate P2, back plate P3. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
 </figure>
 
-{{ step(10, "Fit the front and back covers") }}
+{{ step(9, "Fit the front and back covers") }}
 
 !!! note "Read off the model — torso cover geometry and fixings"
     Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).

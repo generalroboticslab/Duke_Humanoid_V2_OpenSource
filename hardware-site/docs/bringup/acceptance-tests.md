@@ -266,8 +266,8 @@ A `[verdict]` banner names each abort:
 ## A11. Walk
 
 !!! danger "First run on the floor"
-    Hoist attached and slack, path clear, e-stop (emergency stop) held. Confirm the safety layers,
-    in order, before the first command.
+    Hoist attached and slack, path clear, a hand on the operator kill switch. Confirm the
+    safety layers, in order, before the first command.
 
 ```bash
 python humanoid_nav_step_test.py  # one measured velocity step; not a gamepad
@@ -278,7 +278,7 @@ python humanoid_nav_step_test.py  # one measured velocity step; not a gamepad
 | Step | Robot walks, hoist slack, path clear |
 | Coast after zero command | **TODO**{ .dh-missing } |
 | Post-stop yaw rate | Recorded against 0.10 rad/s |
-| Safety layers, before the run | Ctrl+C zeroes; process death zeroes after 1.0 s; gamepad seizes control; e-stop **TODO**{ .dh-missing } |
+| Safety layers, before the run | Ctrl+C zeroes; process death zeroes after 1.0 s; gamepad seizes control; stream silence fires the nav 1 s / arm 0.5 s / gaze 2 s failsafes |
 
 !!! note "Not measured on the reference robot — A11 coast distance and pass threshold"
     *Owner: controls lead.*

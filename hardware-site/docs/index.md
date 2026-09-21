@@ -23,8 +23,8 @@ How to build an identical Duke Humanoid V2. The code is open; see
 ## Build path
 
 !!! danger "Before step 1: read Safety"
-    36 kg, no self-locking joints: removing power, including an emergency stop
-    (e-stop), drops the robot and whatever it holds. Two 6S lithium-polymer packs
+    36 kg, no self-locking joints: removing power — pulling the pack disconnect
+    included — drops the robot and whatever it holds. Two 6S lithium-polymer packs
     in series reach 50.4 V. Read [Safety](before-you-start/index.md#safety) before
     ordering parts and before first power-on.
 

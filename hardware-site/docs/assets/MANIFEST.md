@@ -1,7 +1,7 @@
 # Image manifest
 
 Every image this site needs and does not have, with the exact path it must be
-saved to and one line on what it must show. **83 images are missing.**
+saved to and one line on what it must show. **82 images are missing.**
 
 This is the list to hand to whoever renders the remaining figures. It is not
 a wish list: each path below is already named on a page, so dropping a file
@@ -54,7 +54,7 @@ Each of these already has a placeholder blockquote on the page named.
 | `assets/assembly/head-axes-diagram.png` | `assembly/head-and-camera-gimbal.md` | Frame P with both yaw axes, the pitch axis and the optical centre, dimensioned |
 | `assets/assembly/subassembly-map.png` | `assembly/index.md` | The build order as a diagram |
 
-## Missing — named on a page but not yet placed (26)
+## Missing — named on a page but not yet placed (25)
 
 These are named in a TODO block or an image manifest but have no placeholder
 in the page body yet; add the placeholder in the commit that adds the file.
@@ -65,7 +65,6 @@ in the page body yet; add the placeholder in the commit that adds the file.
 | `assets/images/safety-pinch-points.png` | `before-you-start/safety.md` | The robot with every pinch point marked on the real link geometry: between limb and torso, inside each joint, and the jaw closing line. |
 | `assets/images/safety-lifting-points.png` | `before-you-start/safety.md, assembly/final-integration.md` | The sanctioned lifting points marked on the machine, with the sling route drawn, and the places that look like handles but are not. |
 | `assets/images/safety-hanging-legs-straight.png` | `before-you-start/safety.md` | The robot correctly suspended with the legs hanging straight, next to the same robot hung wrong with the legs bent. Three bring-up sessions were lost to this exact mistake; the pair of images is the whole lesson. |
-| `assets/images/safety-estop-location.png` | `before-you-start/safety.md, electrical/power-system.md` | Where the e-stop is mounted and how far an operator has to reach to hit it from outside the robot's envelope. Cannot be produced until an e-stop exists — see the punch list. |
 | `assets/bom/fasteners/fastener-size-chart.png` | `bom/fasteners-and-hardware.md` | One-page visual size chart for every fastener in the build, printed 1:1 so a screw can be laid on the page and identified. Blocked on the fastener schedule existing at all. |
 | `assets/electrical/system-wiring-diagram.svg` | `electrical/index.md` | Every load, rail, bus and connector on one sheet. The single most valuable missing artefact in the Electrical section. |
 | `assets/electrical/power-tree.svg` | `electrical/power-system.md` | Packs, their series/parallel configuration, each converter, each rail and what it feeds, with the fusing and the disconnect drawn where they belong. |
@@ -197,9 +196,9 @@ page, labelled with the team BOM ids. None of these replaces a step render.
 | | |
 | --- | ---: |
 | Referenced by a page, missing | 2 |
-| Named on a page, not yet placed | 26 |
+| Named on a page, not yet placed | 25 |
 | Per-part families | 55 |
-| **Missing, total** | **83** |
+| **Missing, total** | **82** |
 | Present | 19 |
 
 ## Regenerating this page

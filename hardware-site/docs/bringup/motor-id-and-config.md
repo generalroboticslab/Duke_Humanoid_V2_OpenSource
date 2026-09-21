@@ -5,7 +5,7 @@ any joint is commanded.
 
 !!! abstract "At a glance"
     - **Tools:** RobStride software ([robstride.com/download](https://www.robstride.com/download), "Lingzu v0.0.4") and USB-CAN module (CH340, AT mode), not the robot's `gs_usb` adapters **UNVERIFIED**{ .dh-unverified }.
-    - **Before this:** [First power-on](#first-power-on). Robot hung, legs straight, e-stop (emergency stop) held, `humanoid_real_env.py` stopped.
+    - **Before this:** [First power-on](#first-power-on). Robot hung, legs straight, a hand on the operator kill switch, `humanoid_real_env.py` stopped.
 
 | Property | Set by | Verified by |
 | --- | --- | --- |
@@ -86,7 +86,7 @@ python humanoid_config.py  # type, bus voltage, position, limits per motor; noth
 {{ step(3, "Smoke-test at 5 % torque") }}
 
 !!! danger "First powered motion"
-    Everyone clear, e-stop in hand. Watch for a wrong joint moving, a joint
+    Everyone clear, a hand on the operator kill switch. Watch for a wrong joint moving, a joint
     moving backwards, a joint not moving, and noise. A reversed joint passes
     every other check.
 
