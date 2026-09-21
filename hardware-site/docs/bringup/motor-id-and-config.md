@@ -54,10 +54,6 @@ RS03 and RS04 ship at CAN ID **127** (other models
 
 It writes `min(default × scale, 40 A)` per motor and **saves to the drives**.
 Values: [Power system](../electrical/index.md#configured-current-limits).
-Register `0x7018` range: RS02 0–23 A, RS03 0–43 A, RS04 0–90 A (RobStride manuals).
-
-!!! note "The `0x7018` range is tracked on [Actuators](../bom/index.md#actuators)"
-    *Owner: controls lead.*
 
 ## Set runtime torque limits
 

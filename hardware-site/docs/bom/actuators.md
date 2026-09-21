@@ -46,14 +46,14 @@ joint-to-type map and the team's own booklet both show four. *Source:
 
 ## Motor data
 
-| Model | Rated torque (N·m) | Max torque (N·m) | Torque constant (N·m/Arms) | `0x7018` current-limit range (A) |
-| --- | ---: | ---: | ---: | --- |
-| RS00 | 5 | 14 | 1.48 | **UNVERIFIED**{ .dh-unverified } |
-| RS02 | 6 | 17 | 1.22 | 0–23 |
-| RS03 | 20 | 60 | 2.36 | 0–43 |
-| RS04 | 40 | 120 | 2.1 | 0–90 |
-| RS05 | 1.6 | 5.5 | 0.94 | **UNVERIFIED**{ .dh-unverified } |
-| RS06 | 11 | 36 | 1.1 | **UNVERIFIED**{ .dh-unverified } |
+| Model | Rated torque (N·m) | Max torque (N·m) | Torque constant (N·m/Arms) |
+| --- | ---: | ---: | ---: |
+| RS00 | 5 | 14 | 1.48 |
+| RS02 | 6 | 17 | 1.22 |
+| RS03 | 20 | 60 | 2.36 |
+| RS04 | 40 | 120 | 2.1 |
+| RS05 | 1.6 | 5.5 | 0.94 |
+| RS06 | 11 | 36 | 1.1 |
 
 *Source: team motor spec; RobStride 02/03/04 manuals.*
 
