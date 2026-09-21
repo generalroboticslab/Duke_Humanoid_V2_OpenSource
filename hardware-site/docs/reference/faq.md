@@ -27,7 +27,7 @@ and 8 for the left (`deploy/control/humanoid_config.py`).
 no alternate is recorded. See [Sourcing](../bom/index.md#sourcing).
 
 **Do I need a 5-axis mill?** **TODO**{ .dh-missing }: unknown. See
-[Skills and shop access](../fabrication/index.md#skills-and-shop-access).
+[Skills and shop access](../fabrication/index.md#what-you-need).
 
 **Do I need a GPU?** Not on the robot; the planner needs a separate CUDA machine.
 

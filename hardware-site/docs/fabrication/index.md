@@ -1,26 +1,25 @@
 # Fabrication
 
-Read [Safety](#safety) first. Then read what this release publishes
-([What you get](#what-you-get)), that your shop covers the part set
-([Skills and shop access](#skills-and-shop-access)) and what a build costs
-([Cost and time](#cost-and-time)).
+Turn the CAD into parts: order the machined parts, print the rest, check every part before assembly.
 
-Then turn the CAD into parts, and check every part before assembly, in this
-order:
+1. [Safety](#safety) — read once before ordering, again before first power-on.
+2. [CAD downloads](#cad-downloads) — one release tag; verify each SHA-256.
+3. [CNC guide](#cnc-guide) — order the machined parts first; they take longest.
+4. [Printing guide](#printing-guide) — print while the shop works.
+5. [Incoming inspection](#incoming-inspection) — count, measure, record.
 
-1. [CAD downloads](#cad-downloads) — download one release tag's files and verify each SHA-256.
-2. [CNC guide](#cnc-guide) — order the machined parts first.
-3. [Printing guide](#printing-guide) — print while the machined parts are made.
-4. [Incoming inspection](#incoming-inspection) — count, measure and record every part.
+## What you need
 
-Not published: per-part drawings, per-part material, tolerance and finish, and
-slicer profiles **TODO**{ .dh-missing }.
+| | |
+| --- | --- |
+| Machining | 3-axis CNC milling or a machine shop: {{ bom_count("cnc-parts.csv") }} parts in aluminium 6061 |
+| Printing | An FDM printer for PLA and TPU; SLS nylon 12 from a print service for the drivetrain parts |
+| Tools | Digital caliper (0.01 mm); soldering iron for XT30 cups and heat-set inserts; crimp tool for signal connectors |
+| Space | Two people, a bench, a gantry rated 50 kg with 1.4 m clear height, a charging spot away from flammables |
+
+Not published: per-part tolerances and finishes, slicer profiles **TODO**{ .dh-missing }.
 
 {% include "fabrication/safety.md" %}
-
-{% include "fabrication/what-you-get.md" %}
-
-{% include "fabrication/skills-and-shop.md" %}
 
 {% include "fabrication/cost-and-time.md" %}
 

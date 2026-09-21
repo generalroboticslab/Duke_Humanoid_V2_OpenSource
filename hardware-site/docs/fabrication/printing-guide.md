@@ -1,36 +1,11 @@
 # Printing guide
 
-Print PLA and TPU by fused deposition (FDM) and nylon powder by laser
-sintering (SLS).
+| Process | Parts | Material |
+| --- | --- | --- |
+| FDM | 40 covers, mounts, plates and pads | PLA; TPU for the pads and covers |
+| SLS | The drivetrain parts below — each transmits actuator torque or carries a bearing | Nylon 12 |
 
-!!! abstract "At a glance"
-    - **You will:** print a test part, then the set.
-    - **Parts:** [Printed parts](../bom/index.md#printed-parts).
-    - **Files:** a 3MF per part in the Files column of [Printed parts](../bom/index.md#printed-parts), all on [CAD downloads](#cad-downloads).
-    - **Before this:** [CNC guide](#cnc-guide).
-
-## Print profiles
-
-{% if data_file_exists("print_profiles.csv") %}
-{{ read_csv('data/print_profiles.csv') }}
-{% else %}
-!!! note "Yours to determine — print profile per part: layer height, walls, infill, orientation"
-    *Owner: hardware lead, from the printer the reference build used.*
-{% endif %}
-
-!!! note "Yours to determine — material settings for your printer and filament"
-    *Owner: hardware lead.*
-
-## Which process each part takes
-
-The `Process` and `Material` columns on
-[Printed parts](../bom/index.md#printed-parts) carry the assignment for every part:
-**40 parts are FDM** (PLA and TPU) and **seven are SLS** in nylon 12.
-
-The seven SLS parts are the drivetrain parts — every one of them transmits
-actuator torque or carries a bearing:
-
-| Part | Qty |
+| SLS part | Qty |
 | --- | ---: |
 | `3DP_arm05_RS02_shaft_bearing_retainer` | 4 |
 | `3DP_arm06_RS02_shaft_coupler` | 2 |
@@ -39,29 +14,17 @@ actuator torque or carries a bearing:
 | `3DP_arm15_end_effector_attachment` | 2 |
 | `3DP_grip05_pinion` | 2 |
 
-Print these in SLS nylon. The remaining parts are covers, mounts and TPU pads,
-and FDM is what the reference robot used for all of them.
+Process and material per part: [Printed parts](../bom/index.md#printed-parts). Files: the STL in each row.
 
-!!! note "Not tested on the reference robot — an FDM substitute for any of the seven SLS parts"
-    They were printed SLS and never tried in FDM, so no substitute material or
-    wall schedule is published. *Owner: hardware lead.*
+Print profiles (layer height, walls, infill, orientation) **TODO**{ .dh-missing }.
 
-## Print the parts
-
-1. Print one small fit-critical part: one that mates with a machined part or
-   takes a heat-set insert.
-2. Print the full set.
-
-✅ **Check:** the test part matches the drawing before step 2.
-
-## Post-process
+1. Print one fit-critical part first — one that mates with a machined part or takes a heat-set insert — and check the fit.
+2. Print the set.
+3. Ream holes to size (FDM prints undersize); melt heat-set inserts in with a soldering iron.
 
 <figure markdown>
   ![Soldering iron setting a heat-set insert in a printed battery holder](../assets/photos/body-heat-set-inserts.webp){ loading=lazy width="400" }
-  <figcaption>Heat-set inserts melted into a printed battery holder with a soldering iron.</figcaption>
+  <figcaption>Heat-set insert going into a printed battery holder.</figcaption>
 </figure>
 
-!!! note "Yours to determine — post-processing: support removal, reaming, heat-set insert fitting"
-    *Owner: hardware lead.*
-
-Next: [Incoming inspection](#check-printed-parts).
+✅ **Check:** the test part fits before the set is printed.
