@@ -22,10 +22,12 @@ The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-pa
 {% endfor %}| | | **Printed total** | | | **{{ bom_qty("printed-parts.csv") }}** | | **{{ bom_subtotal("printed-parts.csv") }}** | | | |
 
 
-!!! missing "MISSING — SAFETY — for every printed part: filament or powder grade (the covers only carry a Fusion material name such as `hip3_protection`), structural or cosmetic, print orientation and infill; and a unit cost and vendor for every row the team BOM does not price"
+!!! note "Read off the model — Fusion material name per printed part"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
-!!! unverified "UNVERIFIED — materials: the four torso plates `3DP_body06`–`09` are PLA in the team BOM and `ABS Plastic 60%infill` in Fusion, and the team BOM's PLA is what this table shows; the material of the gripper parts `3DP_grip01`–`06` and the camera-column parts `3DP_cam01`–`04` is the team BOM's alone (their Fusion material names `rail`, `Base`, `Neck`, `Arm` are not print materials); `3DP_armP11` has no team BOM line at all and is listed as printed on its Fusion material name only"
+!!! note "Build to the model — torso plates `3DP_body06`–`09`: PLA in the team sheet, ABS in Fusion"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead.*
 
 Every printed line of the team BOM is matched to its CAD part by the team's exploded-view booklet, which
@@ -33,7 +35,8 @@ labels each assembly with the spreadsheet's own ids and is reproduced on the
 [assembly pages](../assembly/index.md).
 What is left open is which half of a two-piece cover each *A*/*B* line is, and two piece counts.
 
-!!! unverified "UNVERIFIED — which half of a cover each line is: the booklet draws both halves of a pair but does not say which is A and which is B, so the pairs below are matched as pairs only"
+!!! note "Build to the model — which half of a cover pair each line is"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     - `P20`/`P21` *Hip 1 Protection A/B* and `P24`/`P25` *Hip 3 Protection A/B* → the four
       Fusion covers `3DP_legP01`–`P04`. Booklet p.6 draws four covers on one leg, over the
       hip-1 and the hip-3 motor: 4 lines × 2 = 8 pieces = the CAD's 8 occurrences. In the
@@ -47,7 +50,8 @@ What is left open is which half of a two-piece cover each *A*/*B* line is, and t
       at the forearm end, so those two lines may split by joint rather than by half.
     *Owner: hardware lead.*
 
-!!! unverified "UNVERIFIED — two piece counts: `P15` *AprilTags* ×12 against 16 tiles (booklet p.13 draws eight on one gripper, Fusion has 16), and `P28` *Shank Protection* ×4 against the 2 occurrences Fusion carries (booklet p.6 draws two straps on one leg, and the CAD holds the pair on the right leg only)"
+!!! note "Build to the model — `P15` and `P28` piece counts differ from the booklet"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The table above shows the Fusion count, so `P15` reads 16 and `P28` reads 1 per cover.
     *Owner: hardware lead.*
 
@@ -65,9 +69,10 @@ Fusion component `double_helix_rack_30teeth_6mm v2` is a placeholder with no bod
     The export of 2026-09-19 16:46 writes one file per component (`Component42` / `Component43` for the shank
     covers, `Component42~2`, `~3` / `Component43~2`, `~3` for the shoulder covers of the left and right arm);
     re-staging it with `tools/stage_cad_export.py` closes this.
-    *Owner: whoever stages the export.*
+    *Owner: whoever stages the export. Blocks release.*
 
-!!! unverified "UNVERIFIED — quantities are Fusion occurrence counts, and the left and right arm designs reuse one component name per cover, so one STL may serve both sides or one side may need a mirrored print"
+!!! note "Build to the model — quantities are Fusion occurrence counts"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead, from the CAD.*
 
 ## Not in this list

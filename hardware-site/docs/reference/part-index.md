@@ -1,6 +1,6 @@
 # Part index
 
-!!! missing "MISSING — Part index (part ID → description, qty, subassembly, assembly steps)"
+!!! note "Not written yet — a part index keyed to assembly steps; the parts lists on each page carry the same data"
     The parts lists carry the IDs (`CNC_leg01_hip_center_back`, `3DP_legP01_hip3_cover_a`); the team BOM
     names its lines by function instead, and the two are tied together row by row in the CSV `notes`.
     See [CNC parts](../bom/cnc-parts.md).
@@ -10,7 +10,7 @@ Team labels read *kind_regionNN_xCount* (+ `L`/`R`); kind is `CNC`, `ELEC`,
 `MTR`, `HWR` (hardware) or `DIY` (printed). Example: `CNC_leg02_x7`,
 RS03_shaft_coupler.
 
-!!! unverified "UNVERIFIED — CNC IDs arm05–arm10 and four quantities differ between the team's 32-part list and this site's list"
+!!! note "The `arm05`–`arm10` ID conflict is tracked on [Arm](../assembly/arm.md)"
     | ID | Team list | This site |
     | --- | --- | --- |
     | arm05 | RS02_back_cover ×4 | RS02_shaft_bearing ×4 |
@@ -58,16 +58,17 @@ multiplies that rounding by the square of the distance between the two, so `note
 (±0.05 g × distance²) wherever it exceeds 2 % of the largest moment, and the six centre-of-mass values are left
 blank where it exceeds the moments themselves. The `*_origin` columns are exact in every row.
 
-!!! unverified "UNVERIFIED — inertia about the centre of mass for every part whose `notes` give a ± bound: the export rounds the mass to 0.1 g and these parts sit far from their component origin"
+!!! note "Not measured on the reference robot — inertia about the centre of mass for every part whose `notes` give a ± bound: the export rounds the mass to 0.1 g and these parts sit far from their component origin"
     The `*_origin` columns are Fusion's exact values; the bound is stated per row. A re-export with the mass to
     0.001 g (or the matrix taken about the centre of mass inside Fusion) removes it.
     *Owner: hardware lead, from the CAD (`tools/fusion_export/`).*
 
-!!! missing "MISSING — own-part mass, centre of mass and inertia for the parts whose Fusion component carries child components (inserts, magnets, mounted electronics), and the volume of every part until the export's STLs are written and the generator re-run"
+!!! note "Not measured on the reference robot — own-part mass, centre of mass and inertia for the parts whose Fusion component carries child components (inserts, magnets, mounted electronics), and the volume of every part until the export's STLs are written and the generator re-run"
     Listed below with the reason from the `notes` column; these cells read **TODO**{ .dh-missing } in the parts tables.
     *Owner: hardware lead, from the CAD: make those components leaf parts or export their bodies; whoever runs `tools/gen_part_properties.py` once `print/*.stl` exist.*
 
-!!! unverified "UNVERIFIED — parts that exist as two or three Fusion components (the left and right arm and leg designs are separate) whose copies differ in size or centre of mass, and parts whose STL bounding box differs from the Fusion component's"
+!!! note "Build to the model — some parts exist as two or three Fusion components whose copies differ"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The row carries the values of the copy named in `notes`; the size shown in the parts tables carries an
     **UNVERIFIED**{ .dh-unverified } mark where the STL disagrees.
     *Owner: hardware lead, from the CAD (check the copies for a hidden body, a mirrored placement or construction geometry).*

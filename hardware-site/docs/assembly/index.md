@@ -17,7 +17,7 @@ Build the robot (31 RobStride-driven joints, Feetech bus servos in the grippers;
 
 Then [Electrical](../electrical/index.md) and [Bring-up](../bringup/index.md).
 
-!!! unverified "UNVERIFIED — build order and subassembly boundaries"
+!!! note "Yours to determine — build order and subassembly boundaries"
     Open, pending a build:
 
     - whether harness branches go into a limb before it closes;
@@ -41,7 +41,7 @@ Then [Electrical](../electrical/index.md) and [Bring-up](../bringup/index.md).
   sheet's `_xN` names disagree with its quantity column
   ([machined parts](../bom/cnc-parts.md)).
 
-!!! missing "MISSING — build time and crew size per subassembly"
+!!! note "Not measured on the reference robot — build time and crew size per subassembly"
     *Owner: whoever performs the first externally documented build.*
 
 ## Figures still needed

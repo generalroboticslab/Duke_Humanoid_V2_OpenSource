@@ -20,5 +20,5 @@
 | Hardware and documentation licences | **TODO**{ .dh-missing } | [Citation and licence](../reference/citation-and-license.md) |
 | Tagged release pinning all of the above | **TODO**{ .dh-missing } | [Revisions](../reference/revisions.md) |
 
-!!! missing "MISSING — Scope: in or out for teleoperation setup, training workstation, mocap rig, test fixtures, perception cube targets and tripods, charging bench and gantry"
+!!! note "Yours to determine — scope: in or out for teleoperation setup, training workstation, mocap rig, test fixtures, perception cube targets and tripods, charging bench and gantry"
     *Owner: hardware lead.*

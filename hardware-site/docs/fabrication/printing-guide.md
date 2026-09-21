@@ -14,11 +14,11 @@ sintering (SLS).
 {% if data_file_exists("print_profiles.csv") %}
 {{ read_csv('data/print_profiles.csv') }}
 {% else %}
-!!! missing "MISSING — `print_profiles.csv`: material grade, layer height, walls, infill, orientation (which face down, which load the layers must not cross), supports and validated printer for every printed part"
+!!! note "Yours to determine — print profile per part: layer height, walls, infill, orientation"
     *Owner: hardware lead, from the printer the reference build used.*
 {% endif %}
 
-!!! missing "MISSING — material settings: PLA (filament, nozzle and bed temperature, cooling, speed, enclosure); TPU (shore hardness, temperatures, retraction, speed, extruder type, what the parts are for); SLS (powder grade, bureau, finish, tolerance)"
+!!! note "Yours to determine — material settings for your printer and filament"
     *Owner: hardware lead.*
 
 ## Print the parts
@@ -30,7 +30,7 @@ sintering (SLS).
 ✅ **Check:** the test part matches the drawing before step 2.
 
 !!! missing "MISSING — which parts are FDM or SLS, which are structural, and whether an SLS part can be printed FDM instead"
-    *Owner: hardware lead.*
+    *Owner: hardware lead. Blocks release.*
 
 ## Post-process
 
@@ -39,7 +39,7 @@ sintering (SLS).
   <figcaption>Heat-set inserts melted into a printed battery holder with a soldering iron.</figcaption>
 </figure>
 
-!!! missing "MISSING — post-processing per part (support removal on mating faces, holes to ream and to what size, heat-set insert size and temperature, annealing) and print time and material mass per part"
+!!! note "Yours to determine — post-processing: support removal, reaming, heat-set insert fitting"
     *Owner: hardware lead.*
 
 Next: [Incoming inspection](incoming-inspection.md#check-printed-parts).

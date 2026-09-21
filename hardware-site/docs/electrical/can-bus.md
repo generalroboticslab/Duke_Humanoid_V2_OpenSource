@@ -70,7 +70,7 @@ Whether the first D436, `can9` and `can25` plug into the hub or the computer is
    ([connectors and pinouts](harness-fabrication.md#identify-the-connector-pinouts)).
 2. Fit 120 Ω at each physical end. No terminator is in the parts list.
 
-!!! missing "MISSING — Per bus: terminator location and type, reference-robot measured value, daisy-chain order and path; CANable PRO termination setting, CAN wire gauge and shielding, stub-length limit, adapter USB retention"
+!!! note "Not measured on the reference robot — per-bus terminator location and measured resistance"
     *Owner: electrical lead, from a photographed build. Blocks pre-power checks.*
 
 ✅ **Check:** a finished, unpowered bus reads **about 60 Ω** across CAN_H–CAN_L.
@@ -104,7 +104,7 @@ Whether the first D436, `can9` and `can25` plug into the hub or the computer is
     sudo udevadm control --reload-rules && sudo systemctl restart systemd-udevd && sudo udevadm trigger
     ```
 
-!!! unverified "UNVERIFIED — candleLight firmware version on the reference adapters"
+!!! note "Not recorded — candleLight firmware version on the reference adapters"
     *Owner: electrical lead.*
 
 ## Bring the buses up

@@ -34,7 +34,7 @@ the page of the team's exploded-view booklet that settles it.
     TODO in their place rather than a zero, and no robot cost on this site is a complete one.
     *Owner: BOM owner.*
 
-!!! missing "MISSING — allowance for tax, scrap and re-machining in the robot cost"
+!!! note "Yours to determine — allowance for tax, scrap and re-machining in the robot cost"
     *Owner: hardware lead.*
 
 **Data files:**

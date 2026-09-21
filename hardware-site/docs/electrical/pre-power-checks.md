@@ -31,7 +31,7 @@ Nothing energised.
 | B5 | 12 V rail + to − | **TODO**{ .dh-missing } |
 | B6 | Each conductor to its sleeve or shield | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — SAFETY — Resistance thresholds for B3–B6 from a known-good robot"
+!!! note "Not measured on the reference robot — resistance thresholds for B3–B6"
     *Owner: electrical lead.*
 
 ## C. Check polarity
@@ -60,7 +60,7 @@ fitted: **UNVERIFIED**{ .dh-unverified } ([Power system](power-system.md#feed-th
 | D4 | Each converter at expected load | **TODO**{ .dh-missing } |
 | D5 | Supply current at each step | Stop above **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — Bench supply settings, output tolerance and expected load for D1–D5"
+!!! note "Not measured on the reference robot — bench supply settings, output tolerance and expected load for D1–D5"
     *Owner: electrical lead.*
 
 ## E. Test CAN buses
@@ -86,7 +86,7 @@ after F1–F4 pass.
 | F3 | Condition | No swelling, damaged wrap or lead |
 | F4 | Pack-to-pack voltage difference | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — SAFETY — Pack acceptance thresholds for F1, F2 and F4"
+!!! note "Yours to determine — pack acceptance thresholds for F1, F2 and F4"
     *Owner: electrical lead + safety officer.*
 
 ## G. Check safety systems

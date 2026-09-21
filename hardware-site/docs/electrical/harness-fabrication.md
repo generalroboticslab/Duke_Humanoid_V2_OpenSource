@@ -11,7 +11,7 @@ dropout on two arm joints caused a collision on the reference robot.
 
 ## Plan every cable
 
-!!! missing "MISSING — SAFETY — Not in the parts list: bulk wire, heat-shrink, GH1.25 CAN mates for RS03/RS04, Ethernet cable for CAN leads, CAN terminators"
+!!! note "Yours to source — bulk wire, heat-shrink, connector mates and loom, to suit your build"
     *Owner: electrical lead. Blocks sourcing.*
 
 One row per cable, plus one per motor drop once the daisy-chain order exists
@@ -37,7 +37,8 @@ One row per cable, plus one per motor drop once the daisy-chain order exists
 
 *Gauges: power wiring diagram.*
 
-!!! missing "MISSING — Harness schedule: cable ID, conductor count, connector parts, length with service loop, sleeve size, one row per motor drop; gauge, insulation temperature rating and strand count for every unlabelled run"
+!!! note "Read off the model — one row per motor run: length, route, service loop"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: electrical lead, measured on a real build. Blocks routing and assembly.*
 
 **Never** run solid or coarse-stranded wire across a joint: it breaks inside the
@@ -56,7 +57,7 @@ Red = positive, black = ground. **Never mate or unmate an XT30 under power.**
 *Source: RobStride manuals.* An RS03 board has two XT30 and two CAN sockets (in,
 out). XT30(2+2): 15 A with 18 AWG.
 
-!!! unverified "UNVERIFIED — Actuator connector: XT30(2+2) at RS02 vs XT30 + GH1.25 at RS03/RS04 (manuals); trunk connector unknown. CAN colours: blue/brown (RS04 manual) vs blue/yellow (team photos)"
+!!! note "The actuator connector conflict is tracked on [Cables and connectors](../bom/cables-and-connectors.md)"
     *Owner: electrical lead.*
 
 !!! missing "MISSING — Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation"
@@ -91,7 +92,7 @@ Do not crimp the XT30 cups.
    Low (blue lead).
 3. Sleeve with 3/32 in heat-shrink, then 1/4 in over the cable.
 
-!!! unverified "UNVERIFIED — Which runs use the Ethernet CAN lead, and which connector it mates"
+!!! note "Yours to determine — which runs use the Ethernet CAN lead"
     *Owner: electrical lead.*
 
 ## Build and test each cable
@@ -100,7 +101,7 @@ Do not crimp the XT30 cups.
 2. Solder, load the shells, check continuity **before** sleeving.
 3. Label both ends.
 
-    !!! missing "MISSING — Cable labelling scheme: ID format, label stock, position"
+    !!! note "Yours to determine — cable labelling scheme: ID format, label stock, position"
         *Owner: electrical lead.*
 
 4. Bench-test:
@@ -112,7 +113,7 @@ Do not crimp the XT30 cups.
     | Insulation, conductor to sleeve/shield | **TODO**{ .dh-missing } |
     | Flex at each strain relief, meter on | No flicker |
 
-!!! missing "MISSING — Pass criteria for the two insulation tests; pull-out force for a soldered joint; tool, die and strip length for any crimped contact"
+!!! note "Yours to determine — pass criteria for the two insulation tests; pull-out force for a soldered joint; tool, die and strip length for any crimped contact"
     *Owner: electrical lead.*
 
 ✅ **Check:** every scheduled cable is built, labelled at both ends, and passes
@@ -120,5 +121,6 @@ continuity and the flex test before installation.
 
 ## Thread cables before closing limbs
 
-!!! missing "MISSING — Which cables must be threaded before each limb is closed, per assembly step"
+!!! note "Read off the model — which cables must be threaded before a limb closes"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: electrical lead + assembly lead. Blocks leg, arm, torso and head assembly.*

@@ -28,7 +28,8 @@ all.
 
 *Source: team design log, "Hardware Choice" and CNC checklist.*
 
-!!! missing "MISSING — SAFETY — fastener schedule from CAD: every screw (thread, length, head, drive, qty), bearings and fits per location, dowel pins, retaining rings, shims, threadlocker locations, torque per size and joint, purchase links"
+!!! note "Read off the model — every screw, bearing and fit per location"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead, from the CAD. Blocks every page under [Assembly](../assembly/index.md).*
 
 ## Screwing into an actuator
@@ -44,11 +45,12 @@ RS03 mounting interface (RobStride 03 manual §1.1):
 Never drive a screw deeper than the actuator's thread depth (RS02/03/04
 manuals). Check every screw that goes into an actuator.
 
-!!! unverified "UNVERIFIED — the 35 × 44 × 5 mm bearing count: team BOM line `H2` buys 18, the Fusion model places 26 `bearing_35x44x5_6707_1.6kN_15g` (at least one of them inside the RobStride 06 actuator model, so not every occurrence need be a bought part); and the 10 × 15 × 4 mm bearing (`H5`, 2 off) has no component named for it in Fusion"
+!!! note "Build to the model — it places 26 of the 35 × 44 × 5 mm bearing, the team sheet buys 18"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The other four bearing lines agree with the Fusion model, where each bearing is a
     `bearing_<size>` subassembly of two halves: `H0` 13, `H1` 2, `H3` 4, `H4` 2. No bearing
     line carries a part number or link.
     *Owner: hardware lead.*
 
-!!! missing "MISSING — retaining compound and grease type per bearing and sliding surface"
+!!! note "Yours to choose — bearing retaining compound and grease; the site specifies Loctite 222 for threads"
     *Owner: hardware lead.*

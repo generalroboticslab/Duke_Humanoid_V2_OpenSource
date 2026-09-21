@@ -15,7 +15,7 @@ distribution block; each D436 connects to the onboard PC over USB (team wiring
 and power diagrams). Deploy configures IDs 5 and 6 for the right module and 7
 and 8 for the left (`deploy/control/humanoid_config.py`).
 
-!!! missing "MISSING — Camera module interface for another robot: mounting"
+!!! note "Yours to determine — camera module interface for another robot: mounting"
     *Owner: hardware lead.*
 
 <figure markdown>
@@ -37,5 +37,5 @@ and calibration match; that contract is **TODO**{ .dh-missing }, see
 
 **Where do I get help?** The GitHub issue trackers of the three repositories.
 
-!!! missing "MISSING — Issue template, contribution guide, support policy; what to do with an out-of-tolerance part; kits; build-log review"
+!!! note "Yours to determine — issue template, contribution guide, support policy; what to do with an out-of-tolerance part; kits; build-log review"
     *Owner: PI + hardware lead.*

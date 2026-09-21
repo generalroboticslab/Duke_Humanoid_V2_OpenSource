@@ -97,7 +97,7 @@ The asset READMEs cite these paths, which are not in the export:
 | `head_cam/README.md` | `source/HeadCameraV2.step`, `source/HeadCameraV2_dual.step`, `meshes/components_high_res/` |
 | `parallel_gripper/README.md` | `mini_gripper_old/ParallelGripper0710/` (`ParallelGripper0710.step`), `CNC.step` |
 
-!!! missing "MISSING — Asset READMEs cite paths absent from the export"
+!!! note "Yours to check — a few asset READMEs cite paths absent from the export"
     Whether the files above will be published, and where a builder gets the
     STEP originals, is not stated.
 
@@ -113,7 +113,7 @@ meshes; see [CAD downloads](fabrication/cad-downloads.md).
 | Checkpoint | `humanoid_site.DEPLOY_TASK` (`…BankFlatDecoupledCosine`, `policy_deployed.pt`) runs on the calibrated `robot.xml` of `DEPLOY_MODEL_TASK` (`…v159bMixedArmsCam`); both ship in `deploy/control/legged_env_bundle/` |
 | Fresh install | Deploy `control/docs/SETUP.md`: Python 3.12, `requirements.txt` pins, CMake ≥ 3.26, CAN, servo ports, hand-eye calibration, network, RealSense; the robot runs `torch` 2.9.1+rocm6.3 |
 
-!!! missing "MISSING — Hardware/software contract: per-joint sign check, checkpoint per hardware revision, tested OS, kernel and drivers"
+!!! note "Yours to determine — the OS, kernel and driver baseline you run"
     Still unknown: the positive rotation direction of each joint as a builder
     checks it on a freshly wired robot, which checkpoint matches which hardware
     revision, and the tested OS, kernel, driver and firmware versions.

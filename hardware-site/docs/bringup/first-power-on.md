@@ -178,7 +178,7 @@ Use a **current-limited bench supply**, not the packs: a fault then trips the
 limit, not a fire. Packs: two 6S LiPo (lithium polymer) in series, 44.4 V
 nominal, 50.4 V full.
 
-!!! missing "MISSING — SAFETY — Bench-supply voltage and current limit per stage; what to do without one"
+!!! note "Not measured on the reference robot — bench-supply voltage and current limit per stage; what to do without one"
     *Owner: electrical lead.*
 
 1. Safety holds the e-stop.
@@ -189,7 +189,7 @@ nominal, 50.4 V full.
 
 ✅ **Check:** current steady and low (value **TODO**{ .dh-missing }).
 
-!!! missing "MISSING — Expected quiescent current, 31 drives powered, none enabled, with tolerance"
+!!! note "Not measured on the reference robot — expected quiescent current, 31 drives powered, none enabled, with tolerance"
     *Owner: electrical lead.*
 
 {{ step(5, "Read every motor") }}
@@ -228,5 +228,5 @@ python humanoid_profile_motor_latency.py  # latency per motor and bus
 4. Remove motor bus power.
 5. Disconnect the supply or packs.
 
-!!! missing "MISSING — SAFETY — Specified power-on and power-off order of the rails; the order above is unverified"
+!!! note "Power-on and power-off order is tracked on [Safety](../before-you-start/safety.md#rules)"
     *Owner: electrical lead + controls lead.*

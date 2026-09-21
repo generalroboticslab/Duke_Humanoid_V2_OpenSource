@@ -18,8 +18,8 @@ Wire the 48 V and 12 V rails.
    full (computed); bus labelled 48V. Not parallel (22.2 V): RobStride
    RS02/RS03/RS04 drives are rated 48 VDC, range 24–60 VDC.
 
-    !!! missing "MISSING — SAFETY — Series-link connector part number, wire gauge and length"
-        *Owner: hardware lead.*
+    !!! note "Yours to make — the pack series link: match the pack connector, size the wire for the pack current and length"
+        *Owner: hardware lead. Blocks release.*
 
     !!! missing "MISSING — SAFETY — Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charger model, charge rate, balance-charging procedure and charging location"
         *Owner: hardware lead (retention) + electrical lead + safety officer.*
@@ -57,7 +57,7 @@ Run upper-body power block → 10 A fuse → 48V-to-12V buck → MINISFORUM X1-4
 is energised. The two gripper servos are the other 12 V loads (supply not
 drawn).
 
-!!! unverified "UNVERIFIED — 12 V conversion: power diagram draws one 48V-to-12V buck (computer only); BOM lists three (2 × 48 V→12 V, 1 × 20–60 V→12 V)"
+!!! note "The 12 V conversion conflict is tracked on [Electronics](../bom/electronics.md)"
     *Owner: electrical lead.*
 
 !!! missing "MISSING — Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget"
@@ -65,11 +65,11 @@ drawn).
 
 ## Protection, disconnect and e-stop
 
-!!! missing "MISSING — SAFETY — No e-stop, main disconnect or pre-charge in the power diagram or BOM, though `humanoid_nav_step_test.py` and `humanoid_joint_monkey_hw.py` require a physical e-stop; part, location and what it cuts unspecified"
+!!! note "The missing e-stop is tracked on [Safety](../before-you-start/safety.md#rules)"
     *Owner: electrical lead + safety officer. Blocks pre-power checks and first power-on.*
 
 !!! missing "MISSING — SAFETY — Pack-path fuse (none drawn); surge protector part number and rating"
-    *Owner: electrical lead + safety officer.*
+    *Owner: electrical lead + safety officer. Blocks release.*
 
 ## Configured current limits
 
@@ -89,10 +89,10 @@ drawn).
 every motor (default scale 0.6). Per-motor phase limits: never sum them to size
 wire or fuses.
 
-!!! unverified "UNVERIFIED — RS00, RS05, RS06 voltage range and constants not checked against a manual; back-EMF basis (rotor or output speed) unknown for all models; scale the reference robot ran (script default 0.6, script comment `04 --> scale=0.55`)"
+!!! note "RS00/RS05/RS06 manual data is tracked on [Actuators](../bom/actuators.md)"
     *Owner: controls lead + hardware lead.*
 
-!!! missing "MISSING — SAFETY — Measured bus current (quiescent, standing, walking) and peak inrush at pack connection"
+!!! note "Not measured on the reference robot — bus current (quiescent, standing, walking) and peak inrush at pack connection"
     *Owner: electrical lead + controls lead.*
 
 ✅ **Check:** before any pack is connected: packs in series, bus voltage measured,

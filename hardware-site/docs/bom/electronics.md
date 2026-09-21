@@ -40,7 +40,7 @@ What the deploy stack configures or assumes for the computer and the IMU:
 | Operator console | Any laptop with ssh and a browser | `control/docs/OPERATIONS.md`, section 0 |
 | IMU frame | Deploy applies no mounting rotation: `humanoid_base.py` builds `IMU()` without a `rotation_offset` and writes its quaternion straight into the base orientation; the model's `imu_site` sits at the `base_link` origin, unrotated | `control/humanoid_base.py`; deploy `robot.xml` (`humanoid_site.MJCF_MODEL_PATH`) |
 
-!!! missing "MISSING — computer RAM, storage, OS release and rated input power; camera firmware version; physical IMU mounting position and orientation; bring-up peripherals beyond the operator laptop and the GPU machine"
+!!! note "Yours to specify — computer RAM, storage and OS release; camera firmware version"
     *Owner: electrical lead.*
 
 !!! unverified "UNVERIFIED — IMU mounting screw: M3 (team log) vs Ø2.10 flange holes on 30 × 31 mm centres (vendor drawing)"

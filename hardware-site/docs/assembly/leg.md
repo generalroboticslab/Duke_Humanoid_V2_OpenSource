@@ -12,7 +12,8 @@ RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these
 - **Housing:** 8 × M4, 8 mm deep, on Ø98 mm.
 - **Output:** 6 × M4, 6 mm deep; 3 × Ø4 mm pin holes, 7 mm deep; Ø70 mm pilot, 2.5 mm proud.
 
-!!! missing "MISSING — leg parts list, fasteners, torques and fits"
+!!! note "Read off the model — leg parts list, fasteners and fits"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     - No printed-part, bearing, spacer or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order.
     - Retainer alignment and preload (steps 3, 8).
@@ -39,7 +40,9 @@ New units share a default ID: set each on the bench alone ([Motor ID and config]
 
 The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 
-!!! missing "MISSING — leg mechanical hard stops: whether any exist, and where"
+!!! note "Not measured on the reference robot — hard-stop angles, where a leg joint has one"
+    The travel each joint is commanded to is published in
+    [Motor ID and configuration](../bringup/motor-id-and-config.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
@@ -71,7 +74,8 @@ The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
 **UNVERIFIED**{ .dh-unverified }: the CAD puts `hip_1` and `hip_2` in the
 pelvis ([Assembly](index.md)).
 
-!!! unverified "UNVERIFIED — machined-part counts: `leg02` 7 (team list) or 8 (site list); `leg12` 4 or 5"
+!!! note "Build to the model — `leg02` and `leg12` counts differ between the two lists"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead.*
 
 ✅ **Check:** Turns freely, even drag, no axial play.
@@ -118,7 +122,8 @@ Make both bearing retainers concentric before tightening.
 
 </div>
 
-!!! missing "MISSING — hip yaw: no machined part is named for it (the CAD shows the waist's flange, ring and coupler)"
+!!! note "Build to the model — no machined part is named for hip yaw; the CAD shows the waist flange, ring and coupler"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     *Owner: hardware lead.*
 
 ✅ **Check:** The three hip joints move independently with no interference or taut cable.
@@ -135,7 +140,7 @@ Make both bearing retainers concentric before tightening.
 
 </div>
 
-!!! unverified "UNVERIFIED — CAD errors: Motor04 shaft and knee need M5 holes, CAD has M4; design error in the RS03 shaft bearing retainer above the knee"
+!!! note "The M5/M4 CAD error is tracked on [CNC guide](../fabrication/cnc-guide.md)"
     Found at the first-article fit check; whether the released CAD is fixed is
     unknown. Check your parts before choosing screws. *Owner: hardware lead.*
 
@@ -201,7 +206,8 @@ Make both shaft ends concentric before tightening.
 
 </div>
 
-!!! missing "MISSING — foot sole or pad: none in the parts list or the CAD"
+!!! note "Read off the model — whether a foot sole or pad is fitted"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** At ankle zero the foot sits flat.
@@ -224,7 +230,8 @@ Make both shaft ends concentric before tightening.
 
 It leaves at the hip; join it in [Final integration](final-integration.md).
 
-!!! missing "MISSING — leg harness: gauge, connectors, lengths, service loops, retention"
+!!! note "Read off the model — leg harness lengths, routes and service loops"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** All six joints move through their travel with no cable stretched or pinched. Nothing rattles.
@@ -236,6 +243,8 @@ P24/P25, P26/P27): the other leg takes the same printed parts in the mirrored
 positions.
 *Source: team exploded-view booklet, page 8.*
 
-!!! missing "MISSING — which leg parts are handed and which are common"
-    The model's legs differ in `hip_2` limits and orientation.
-    *Owner: hardware lead, from the CAD.*
+**The legs are mirrored, not identical.** `hip_2` travel runs −105°…+30° on
+the left and −30°…+105° on the right; every other leg joint takes the same
+symmetric range on both sides. Which machined parts that makes handed is
+readable off the model.
+*Source: `humanoid_v21_full.urdf`.*

@@ -68,15 +68,6 @@ SECTIONS = [
     ("", "Top level"),
 ]
 
-# Pages whose every open item blocks the public release, because the home page's
-# "Can you build this robot today?" banner names them as blockers.
-BLOCKING_PAGES = {
-    "fabrication/cad-downloads.md",
-    "bom/fasteners-and-hardware.md",
-    "reference/citation-and-license.md",
-    "before-you-start/safety.md",
-}
-
 ROLES = [
     (r"hardware lead", "Hardware lead"),
     (r"electrical lead|\belectrical\b", "Electrical lead"),
@@ -88,17 +79,16 @@ ROLES = [
     (r"BOM owner", "BOM owner"),
     (r"assembly lead", "Assembly lead"),
     (r"maintains CI", "Whoever maintains CI"),
+    (r"stages the export", "Whoever stages the CAD export"),
     (r"performs the first|re-sources the parts|first external",
      "Whoever does the first build / re-sourcing"),
 ]
 
 SECTION_NOTE = {
     "Assembly": (
-        "Almost every row here reads `no`, and that is a reporting artefact rather\n"
-        "than an all-clear: the home page names *no torque values and no threadlocker\n"
-        "specification* as one single release blocker, and it is these rows, spread\n"
-        "across every step of every limb. Treat the section as blocking and the rows\n"
-        "as its inventory."
+        "The home page names *no torque values and no threadlocker specification* as\n"
+        "one single release blocker. It is not one item: it is these rows, spread\n"
+        "across every step of every limb, and each carries the flag in its own right."
     ),
     "Bring-up": (
         "Bring-up cannot start until Electrical closes the pack-configuration item.\n"
@@ -264,12 +254,17 @@ def summarise(item: dict, limit: int = 210) -> str:
 
 
 def blocking(item: dict) -> bool:
-    if "SAFETY" in item["title"]:
-        return True
-    if item["file"] in BLOCKING_PAGES:
-        return True
-    return bool(re.search(r"\bblocks?\b|\bblocking\b",
-                          item["title"] + " " + item["body"], re.I))
+    """A block gates the release only when it says so, in those words.
+
+    This used to be inferred three ways and all three misfired. ``SAFETY`` in
+    the title auto-gated, so a lock-out/tag-out procedure carried the same
+    weight as *no e-stop exists in the design*. Every item on four hardcoded
+    pages gated regardless of content. And the word ``block`` anywhere in the
+    body gated, which fired on *"4 distribution blocks"*. Meanwhile the eight
+    genuine gaps on ``assembly/leg.md`` — including a CAD error that makes
+    parts unbuildable as drawn — matched none of the three and read ``no``.
+    """
+    return bool(re.search(r"\bblocks\s+release\b", item["body"], re.I))
 
 
 def owner_text(item: dict) -> str:
@@ -293,6 +288,55 @@ def section_of(f: str) -> str:
         if (f.startswith(pref) if pref else True):
             return name
     return "Top level"
+
+
+def relink(cell: str) -> str:
+    """Rewrite docs-root-relative links for a page that lives in ``reference/``."""
+    return re.sub(
+        r"\]\((?!https?:|#|/)([^)#]+)(#[^)]*)?\)",
+        lambda m: "](" + posixpath.relpath(m.group(1), "reference") + (m.group(2) or "") + ")",
+        cell,
+    )
+
+
+def home_blockers() -> list[tuple[str, str]]:
+    """The home page's own blocker table, read rather than transcribed.
+
+    These rows used to be hardcoded literals below a line of prose claiming they
+    were "the home page's own blocker rows". They had drifted apart: the page
+    listed seven, the hardcoded copy six.
+    """
+    rows: list[tuple[str, str]] = []
+    inside = False
+    for ln in (DOCS / "index.md").read_text(encoding="utf-8").splitlines():
+        if not inside:
+            inside = ln.startswith('!!! missing "Not yet')
+            continue
+        if ln.strip() and not ln.startswith("    "):
+            break                                   # dedent ends the admonition
+        cells = [c.strip() for c in ln.strip().strip("|").split("|")]
+        if len(cells) != 2 or cells[0] in ("Blocker", "") or set(cells[0]) <= {"-", ":"}:
+            continue
+        rows.append((cells[0], relink(cells[1])))
+    return rows
+
+
+# Files the site renders a table from. A gap here is structural: there is no
+# sentence on a page to hang a TODO block on, so it can only be found by looking.
+DATA_GAPS = [
+    ("tools.csv",
+     "The Tools tier on [Bill of materials](../bom/index.md) and the subtotal on "
+     "[Tools](../assembly/tools.md) both render *not yet published*. A builder "
+     "cannot budget the tools",
+     "hardware lead + assembly lead", False),
+    ("optional.csv",
+     "The third camera module (~$600), spares and upgrades cannot be quoted",
+     "hardware lead", False),
+    ("print_profiles.csv",
+     "The per-part table on [Printing guide](../fabrication/printing-guide.md) is "
+     "gated on the file and does not render at all",
+     "hardware lead", True),
+]
 
 
 # --------------------------------------------------------------------------- #
@@ -329,9 +373,9 @@ def render(items: list[dict]) -> str:
     w("    the surrounding facts are, and where the answer must be written. **Who can")
     w("    supply it** is copied from the block's own owner line; it names a role, not")
     w("    a person, because roles survive a graduation. **Blocks release** is `yes`")
-    w("    when the title says `MISSING — SAFETY`, when the block itself says what it")
-    w("    blocks, or when it sits on a page the home page already names as a blocker")
-    w("    (CAD downloads, the fastener schedule, the licence, safety).")
+    w("    only when the block's own owner line says `Blocks release.` — it is declared,")
+    w("    never inferred from wording, so a row carries that weight only because")
+    w("    somebody decided it should.")
     w("")
     w("## Where the work sits")
     w("")
@@ -355,19 +399,17 @@ def render(items: list[dict]) -> str:
         b = sum(1 for i in items if o in i["_roles"] and i["_block"])
         w(f"| {o} | {c} | {b} |")
     w("")
-    w("## The six that stop a build outright")
+    hb = home_blockers()
+    w("## What stops a build outright")
     w("")
-    w("These are the home page's own blocker rows, restated as work. Everything else")
-    w("in this list makes a build harder; these make it impossible.")
+    w("These are the home page's own blocker rows, read from that page and restated")
+    w("as work. Everything else in this list makes a build harder; these make it")
+    w("impossible.")
     w("")
     w("| Blocker | Where it is tracked |")
     w("| --- | --- |")
-    w("| No drawings, print plates or native Fusion archive — per-part and whole-robot STEP are published | [CAD downloads](../fabrication/cad-downloads.md) |")
-    w("| No fastener schedule — the team BOM's bearing and screw lines carry no price, no vendor and no screw quantity | [Fasteners and hardware](../bom/fasteners-and-hardware.md) |")
-    w("| No torque values and no threadlocker grade, anywhere | [Assembly](../assembly/index.md), [Tools](../assembly/tools.md) |")
-    w("| No hardware licence and no documentation licence | [Citation and licence](citation-and-license.md) |")
-    w("| No human-safety procedure: no e-stop doctrine, no power-down order, no bystander distance | [Safety](../before-you-start/safety.md) |")
-    w("| No hardware e-stop exists in the design at all — the only stop is a software velocity limit | [Power system](../electrical/power-system.md), [Torso and waist](../assembly/torso-and-waist.md) |")
+    for what, where in hb:
+        w(f"| {what} | {where} |")
     w("")
 
     for _, name in SECTIONS:
@@ -397,17 +439,20 @@ def render(items: list[dict]) -> str:
             w(f"| [{text}]({rel}{anchor}) | {it['_sum']} | {it['_owner']} | {flag} |")
         w("")
 
-    w("## Items that are not TODO blocks")
-    w("")
-    w("Three gaps are structural rather than a missing fact, so they have no block on")
-    w("a page to generate a row from:")
-    w("")
-    w("| Gap | What it means | Who can supply it | Blocks release |")
-    w("| --- | --- | --- | :-: |")
-    w("| `tools.csv` does not exist | The Tools tier on [Bill of materials](../bom/index.md) and the subtotal on [Tools](../assembly/tools.md) both render *not yet published*. A builder cannot budget the tools | hardware lead + assembly lead | no |")
-    w("| `optional.csv` does not exist | The third camera module (~$600), spares and upgrades cannot be quoted | hardware lead | no |")
-    w("| `print_profiles.csv` does not exist | The per-part table on [Printing guide](../fabrication/printing-guide.md) is gated on the file and does not render at all | hardware lead | **yes** |")
-    w("")
+    absent = [g for g in DATA_GAPS if not (DOCS / "data" / g[0]).exists()]
+    if absent:
+        w("## Items that are not TODO blocks")
+        w("")
+        w("These gaps are structural rather than a missing fact, so they have no block")
+        w("on a page to generate a row from. Their presence here is checked against")
+        w("`docs/data/` on every run, so a row leaves this table when the file lands.")
+        w("")
+        w("| Gap | What it means | Who can supply it | Blocks release |")
+        w("| --- | --- | --- | :-: |")
+        for name, means, owner, blocks in absent:
+            w(f"| `{name}` does not exist | {means} | {owner} | "
+              f"{'**yes**' if blocks else 'no'} |")
+        w("")
     w("## Images")
     w("")
     w("Missing figures are not in this table. They are tracked separately, with the")

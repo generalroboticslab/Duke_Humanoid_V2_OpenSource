@@ -36,7 +36,7 @@ The CAD-derived head-camera note names RS05 as the yaw and pitch motors
 and the Cartesian-hand model's base group includes `CNC_arm13_x2_RS05_shaft_coupler`
 (`simulation/asset/duke_v2/cartesian_hand_v3/source/groups.json`).
 
-!!! unverified "UNVERIFIED — RS05 on wrist_3 and the four camera joints is not checked on the robot"
+!!! note "Not checked on the reference robot — RS05 on `wrist_3` and the four camera joints"
     *Owner: hardware lead + controls lead.*
 
 !!! missing "MISSING — 2 RS06: this table needs 4 (ankle_2 and shoulder_2 on both sides), the team BOM line `E6` buys 2"

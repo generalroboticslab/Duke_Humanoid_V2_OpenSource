@@ -18,7 +18,7 @@ encoder 0 equals model `qpos` 0. The model is `robot.xml` in the
 | `cam_yaw_*`, `cam_pitch_*` | Camera looks straight ahead (gimbal FK assumption) |
 | `left_wrist_1`, `right_wrist_1` | The model sets `ref` −π/2 (left), +π/2 (right) to keep encoder 0 at `qpos` 0, 90° from the upstream model's wrist_1 zero ("working pose") |
 
-!!! missing "MISSING — Zero pose: figure, physical per-joint description for legs, waist and arms, holding method or fixture"
+!!! note "Not recorded — a zero-pose photograph and holding fixture from the reference build"
     *Owner: hardware lead + controls lead.*
 
 The wrist encoders wrap at ±π. Keep the wrists' zero well away from the wrap
@@ -78,10 +78,10 @@ agrees with the cameras, and the offsets are saved and backed up. Pass values:
 
 ## Back up zeros
 
-!!! missing "MISSING — Reading out, backing up and restoring the 31 zero offsets; what to redo after a drive swap"
+!!! note "Yours to determine — how you back up and restore the zero offsets"
     *Owner: controls lead.*
 
 ## Check accuracy
 
-!!! missing "MISSING — Zeroing accuracy target per joint"
+!!! note "Not measured on the reference robot — zeroing accuracy target per joint"
     *Owner: controls lead + hardware lead.*

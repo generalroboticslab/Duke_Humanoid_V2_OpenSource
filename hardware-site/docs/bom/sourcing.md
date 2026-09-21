@@ -8,7 +8,7 @@ Order these first:
 | Intel RealSense D436 ×2 | Supply risk: the RealSense line has had availability gaps |
 | RobStride actuators, {{ bom_qty("actuators.csv") }} units, {{ bom_subtotal("actuators.csv") }} | Supply risk |
 
-!!! missing "MISSING — quoted lead times, with the quote date, for machining, the D436 and the RobStride actuators"
+!!! note "Yours to determine — quoted lead times, with the quote date, for machining, the D436 and the RobStride actuators"
     *Owner: hardware lead.*
 
 ## Supply-risk parts
@@ -24,7 +24,7 @@ shaft and the Controller Area Network (CAN) configuration. Another camera change
 the gimbal mount, the perception bridge and the 90° × 65° RGB field of view the
 design assumes.
 
-!!! missing "MISSING — an alternate for the D436 and for each RobStride model, or what a substitution requires"
+!!! note "Yours to determine — an alternate for the D436 and for each RobStride model, or what a substitution requires"
     *Owner: hardware lead + perception lead.*
 
 ## Vendors
@@ -37,7 +37,7 @@ design assumes.
 
 Machining vendor: [CNC guide](../fabrication/cnc-guide.md#order-the-parts).
 
-!!! missing "MISSING — manufacturer part numbers for the marketplace lines"
+!!! note "Yours to source — marketplace lines carry a link, not a manufacturer part number"
     *Owner: hardware lead.*
 
 ## Price dates
@@ -45,5 +45,5 @@ Machining vendor: [CNC guide](../fabrication/cnc-guide.md#order-the-parts).
 Every price on this site is the team BOM's, dated
 {{ bom_priced_as_of("actuators.csv") }}.
 
-!!! missing "MISSING — a re-check of each price against its vendor, with the date it was checked"
+!!! note "Yours to determine — a re-check of each price against its vendor, with the date it was checked"
     *Owner: whoever re-sources the parts.*

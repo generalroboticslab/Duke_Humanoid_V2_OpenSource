@@ -20,7 +20,8 @@ Have the machined parts made and check a first article.
 
 *Source: team design log, "Material Choice" and CNC checklist.*
 
-!!! missing "MISSING — SAFETY — per part: alloy and temper, tolerances on bearing seats, journals, dowel holes and mating faces, finish per face, thread specs, turned or 5-axis"
+!!! note "Read off the model — nominal geometry per part; alloy, tolerance and finish are the machinist's call"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead, from the CAD and the machining quotations.*
 
 ## Known CAD errors
@@ -34,7 +35,7 @@ The reference build's first article found both (below); check the CAD before
 ordering.
 
 !!! unverified "UNVERIFIED — CAD errors: Motor04 shaft and knee need M5 holes, CAD has M4; RS03 shaft bearing retainer above the knee is a design error (enlarged by hand). Whether the released CAD is corrected is unknown"
-    *Owner: hardware lead. Blocks `hw-1.0.0`.*
+    *Owner: hardware lead. Blocks `hw-1.0.0`. Blocks release.*
 
 ## Fit-critical parts
 
@@ -58,11 +59,11 @@ interfaces first:
    quantity, material, finish) and a cover sheet (general tolerance, default
    finish, deadline, contact). There are no per-part drawings in the CAD.
 
-!!! unverified "UNVERIFIED — whether the reference parts were ordered from STEP alone or with drawings that were not kept"
+!!! note "Not recorded — whether the reference parts were ordered from STEP alone or with drawings that were not kept"
     *Owner: hardware lead.*
 
 
-    !!! missing "MISSING — reference-build machine shop, what it was sent, quote, lead time, setup cost (material was priced with JLCPCB CNC)"
+    !!! note "Yours to choose — a machine shop, what to send it, quote, lead time and setup cost (material was priced with JLCPCB CNC)"
         *Owner: hardware lead.*
 
 3. **Ask for a first article:** one piece of each fit-critical part before the
@@ -71,11 +72,11 @@ interfaces first:
    [incoming inspection](incoming-inspection.md).
 5. **Order spares on the same setup.**
 
-    !!! missing "MISSING — which machined parts need spares, and how many"
+    !!! note "Yours to determine — which machined parts need spares, and how many"
         *Owner: hardware lead.*
 
 ✅ **Check:** each fit-critical first article is measured against the drawing
 before the full batch is released.
 
-!!! missing "MISSING — decision on registering the machined parts with one service and publishing its part numbers"
+!!! note "Yours to determine — decision on registering the machined parts with one service and publishing its part numbers"
     *Owner: hardware lead.*

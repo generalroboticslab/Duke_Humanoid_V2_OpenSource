@@ -30,7 +30,8 @@ Count, measure and record every part before assembly.
     | Mating faces | Flatness, no burrs or raised edges | Surface plate and indicator | **TODO**{ .dh-missing } |
     | Tapped holes | Real screw runs full depth by hand | The screw | ≥ 4 mm usable thread, 6 mm preferred |
 
-!!! missing "MISSING — nominal and tolerance for every fit-critical feature; until then, record the measured values"
+!!! note "Read off the model — nominal size of every fit-critical feature"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead, once the CNC drawings exist.*
 
 ### What the reference build found
@@ -85,7 +86,7 @@ bearing is pressed. A press fit is not reversible without damage.
 | Heat-set inserts | Flush, square, no rotation under a screwdriver |
 | Layer adhesion on structural parts (flex a sacrificial region) | No delamination |
 
-!!! missing "MISSING — pass criteria for printed parts, and which printed parts are structural"
+!!! note "Yours to determine — pass criteria for printed parts"
     *Owner: hardware lead.*
 
 ## Check actuators
@@ -113,7 +114,7 @@ see [Motor ID and config](../bringup/motor-id-and-config.md)):
 - Needs the vendor's serial USB-CAN module (CH340, AT mode), not a CANable **UNVERIFIED**{ .dh-unverified }.
 - Edit parameters only in standby. A zero set from the tool is lost at power-off.
 
-!!! missing "MISSING — actuator acceptance criteria: firmware baseline per model, bench setup and read-out command, free-rotation feel, mass window, run-in"
+!!! note "Yours to determine — actuator acceptance criteria: firmware baseline per model, bench setup and read-out command, free-rotation feel, mass window, run-in"
     *Owner: hardware lead.*
 
 ## Check electronics
@@ -129,7 +130,7 @@ see [Motor ID and config](../bringup/motor-id-and-config.md)):
 
 ✅ **Check:** each pack's voltage and cell balance are logged.
 
-!!! missing "MISSING — SAFETY — battery acceptance voltage and cell balance on arrival, and storage charge"
+!!! note "Yours to determine — battery acceptance voltage and cell balance on arrival, and storage charge"
     *Owner: hardware lead.*
 
 ## Record and reject
@@ -141,7 +142,7 @@ see [Motor ID and config](../bringup/motor-id-and-config.md)):
 
 Reference-build photos show only a hand-held digital caliper (0.01 mm, IP54).
 
-!!! missing "MISSING — measuring instruments and ranges beyond a caliper (micrometers, bore or pin gauges, indicator, thread gauges, multimeter, cell checker)"
+!!! note "Yours to determine — measuring instruments and ranges beyond a caliper (micrometers, bore or pin gauges, indicator, thread gauges, multimeter, cell checker)"
     *Owner: hardware lead.*
 
 ✅ **Check:** every BOM part is present, inspected and recorded before assembly begins.

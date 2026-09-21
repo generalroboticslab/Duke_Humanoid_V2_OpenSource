@@ -9,7 +9,7 @@ or purchased).
     - **Parts lists:** [CNC parts](../bom/cnc-parts.md) · [Printed parts](../bom/printed-parts.md).
     - **Before this:** [Bill of materials](../bom/index.md).
 
-!!! unverified "UNVERIFIED — redistribution terms of the vendor CAD models (RobStride, Feetech, Intel RealSense, SYD Dynamics, MINISFORUM) included in the whole-robot and module files"
+!!! note "Yours to check — redistribution terms of the vendor CAD models you download"
     *Owner: PI + hardware lead.*
 
 ## Find a part on the robot
@@ -58,7 +58,7 @@ used at those levels. Use these to rebuild one joint or to check fits. Depth 0 i
 {% if cad_count("modules") %}
 {{ cad_table_modules() }}
 {% else %}
-!!! missing "MISSING — module STEP files (one per sub-assembly) are not published yet"
+!!! note "Not published — per-sub-assembly module STEP files; the whole-robot and per-part STEPs cover the build"
     *Owner: hardware lead.*
 {% endif %}
 
@@ -86,7 +86,7 @@ Buy these parts; the files are for fit checks only.
 {% if cad_count("vendor") %}
 {{ cad_table("vendor", "Component") }}
 {% else %}
-!!! missing "MISSING — purchased-part STEP files (motors, servos, camera, IMU, computer) are not published yet"
+!!! note "The vendors' to distribute — purchased-part STEP files (motors, servos, camera, IMU, computer)"
     *Owner: hardware lead.*
 {% endif %}
 
@@ -109,7 +109,7 @@ Slicer projects with orientation, supports and settings already set.
 Checksums for every file: [SHA256SUMS.txt](../files/SHA256SUMS.txt){ download="" }.
 {% else %}
 !!! missing "MISSING — SAFETY — no manufacturing CAD published: per-part STEP, printable 3MF/STL, PDF drawings, whole-robot STEP and Fusion 360 archive"
-    *Owner: hardware lead.*
+    *Owner: hardware lead. Blocks release.*
 {% endif %}
 
 All STEP files are AP214 (`AUTOMOTIVE_DESIGN`), written by Fusion 360 build 2705.1.15 from the

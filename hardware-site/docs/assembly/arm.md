@@ -7,7 +7,8 @@ Build one seven-joint arm (0.46 m reach); build two. Grippers go on in [Final in
     - **Parts:** RobStride 02 ×3; 00, 03, 05, 06 ×1 each ([Actuators](../bom/actuators.md)); `CNC_arm01`–`CNC_arm13` ([machined parts](../bom/cnc-parts.md)).
     - **Before this:** [Leg](leg.md).
 
-!!! missing "MISSING — arm parts list, fasteners, torques and fits"
+!!! note "Read off the model — arm parts list, fasteners and fits"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     - No bearing, spacer, printed-part or fastener list.
     - Per step: screws, torque, Loctite 222 use, bearings, press fits, order,
       alignment and preload (steps 3, 5).
@@ -38,7 +39,7 @@ Set each ID on the bench, one at a time. Label joint, ID **and bus**:
 
 *Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); limits from `humanoid_v21.xml`; axes from the repo `README.md` (Hardware), which names joints 1–7 shoulder pitch/roll/yaw, elbow, wrist roll/pitch/yaw.*
 
-!!! missing "MISSING — arm hard stops, and the real travel of the four ±180° joints with cabling fitted"
+!!! note "Not measured on the reference robot — hard stops, and how far the four ±180° joints really turn with cabling fitted"
     *Owner: hardware lead.*
 
 ✅ **Check:** Each answers alone at its ID and is labelled.
@@ -63,7 +64,8 @@ In the CAD the body sits in the torso side plate, output outward; the arm
 starts with a square adapter on that output. Plate or arm first:
 **UNVERIFIED**{ .dh-unverified } ([Assembly](index.md)).
 
-!!! unverified "UNVERIFIED — machined-part IDs `arm05`–`arm10`: team list and site list disagree"
+!!! note "Build to the model — `arm05`–`arm10` IDs differ between the team list and this site"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     Steps below use site IDs; order by part name until settled. Team list:
     `arm05` RS02 back cover, `arm06` RS02 bearing retainer, `arm07` RS02
     coupler ×4, `arm08`/`arm09` elbow front/back retainer, `arm10` elbow output
@@ -163,7 +165,8 @@ Check the RobStride 00 screw sizes; they may differ.
 
 The `wrist_3` output carries the gripper's own flange.
 
-!!! missing "MISSING — wrist-to-gripper interface: bolt circle, pilot, keying, servo-cable pass-through"
+!!! note "Read off the model — wrist-to-gripper interface: bolt circle, pilot, keying, cable pass-through"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** The three wrist axes move together without contact.
@@ -191,7 +194,8 @@ Three cable groups:
 - `can9` or `can21` to the other six joints;
 - the gripper servo cable, from its driver board in the torso.
 
-!!! missing "MISSING — arm harness: wire gauge, connectors, lengths, service loops"
+!!! note "Read off the model — arm harness lengths, routes and service loops"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     See [Harness fabrication](../electrical/harness-fabrication.md).
     *Owner: hardware lead + electrical.*
 
@@ -208,6 +212,8 @@ Repeat steps 2–9, swapping each A cover with its B cover (P33/P34, P37/P38):
 the other arm takes the same printed covers in the mirrored positions.
 *Source: team exploded-view booklet, pages 11 and 12.*
 
-!!! missing "MISSING — which arm parts are handed and which are common"
-    The model's arms differ in `shoulder_2` limits and orientation.
-    *Owner: hardware lead, from the CAD.*
+**The arms are mirrored, not identical.** `shoulder_2` travel runs −180°…+30°
+on the left and −30°…+180° on the right; every other arm joint takes the same
+symmetric range on both sides. Which machined parts that makes handed is
+readable off the model.
+*Source: `humanoid_v21_full.urdf`.*

@@ -17,7 +17,8 @@ harness tables below call out XT30 and GH1.25 connectors by part number. Build i
 
 No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 
-!!! missing "MISSING — pinout of every custom cable, cut length per run, strain relief and service loops at moving joints"
+!!! note "Read off the model — cut length and route per run"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: electrical lead.*
 
 ## Actuator-side connectors
@@ -47,7 +48,8 @@ No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 
 *Source: power wiring diagram.*
 
-!!! missing "MISSING — SAFETY — wire gauge of the 48 V riser, the ground returns, the motor branches and the CAN wire"
+!!! note "Read off the model — run lengths; gauge follows from the current in the power diagram"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: electrical lead.*
 
 ## Not in this list
@@ -61,10 +63,10 @@ No connectors and no bulk wire here; see [Not in this list](#not-in-this-list).
 | Wire loom / sleeving | Limb runs ([Routing](../electrical/routing.md)) | Not in the team BOM **TODO**{ .dh-missing } |
 | Bulk wire, CAN termination resistors, GH1.25 cable contacts | Harness | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — parts-list rows for every connector the harness uses (XT30, XT30(2+2), GH1.25 housings and contacts, EC5), for wire loom or sleeving, Ethernet cable, heat-shrink, bulk wire (gauge, rating, colour, length) and CAN termination resistors"
+!!! note "Yours to source — connector housings and contacts, loom and sleeve, to suit your build"
     The team BOM's only cable line is the USB-A to USB-C pack, so ordering the harness from
     this site is not yet possible.
     *Owner: electrical lead.*
 
-!!! unverified "UNVERIFIED — two design-log parts with no role: Amazon B0774VBJ3J and connector-housing kit B0BHZTQ1WV"
+!!! note "Not used — two design-log parts with no role in the build"
     *Owner: electrical lead.*

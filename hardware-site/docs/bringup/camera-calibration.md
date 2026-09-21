@@ -83,7 +83,7 @@ Encoder zero must mean the camera looks straight ahead.
 
 *Source: deploy repo, `humanoid_gimbal_zero_check.py`, `humanoid_set_zero.py`.*
 
-!!! missing "MISSING — Gimbal zero tolerance and pointing reference"
+!!! note "Not measured on the reference robot — gimbal zero tolerance and pointing reference"
     *Owner: perception lead + hardware lead.*
 
     No source gives the allowed error in degrees or what holds each camera
@@ -110,7 +110,7 @@ Needs the camera streaming on its port, motors powered, CAN
 3. Record the printed `gear ≈` for yaw and pitch. The tool stores nothing;
    `humanoid_camera_point.py` hard-codes `GEAR_RATIO = 5.5` for both gimbals.
 
-!!! missing "MISSING — Designed gimbal gear ratio and allowed spread"
+!!! note "Not measured on the reference robot — gear-ratio spread across the four gimbal joints"
     *Owner: perception lead.*
 
     5.5 is only what deploy configures; no CAD or BOM source gives the designed
@@ -162,7 +162,7 @@ Run in `<deploy-repo>/control` with telemetry on port 9870, cameras on
 | Rotation mean / max | 0.21 / 0.89° | max > 5° |
 | Valid frames per port | ≥ 100 | < 50 |
 
-!!! unverified "UNVERIFIED — Reference residuals come from example output in SETUP.md, not a recorded solve"
+!!! note "Not recorded — the residuals quoted come from example output in SETUP.md, not a recorded solve"
     *Owner: perception lead.*
 
 {{ step(3, "Apply") }}
@@ -200,7 +200,7 @@ quiet zone on each face.
 *Source: deploy repo, `perception/tagged_bodies/tag_cube/`,
 `perception/tagged_bodies/grasp_cube/`, `perception/asset/tag_cube_creation/`.*
 
-!!! missing "MISSING — Tag cubes: print process and material, wrist fasteners, printable `grasp_cube_40mm` file (not in the bill of materials)"
+!!! note "Yours to print — tag cubes: any rigid 40 mm cube with the tag family below"
     *Owner: perception lead. Blocks [CAD downloads](../fabrication/cad-downloads.md).*
 
 Tag size limits range: 30 mm tags stop decoding beyond about 2 m **UNVERIFIED**{ .dh-unverified }. Keep the cubes within 2 m of the cameras. *Source: deploy repo, `OPERATIONS.md`.*
@@ -209,5 +209,5 @@ Tag size limits range: 30 mm tags stop decoding beyond about 2 m **UNVERIFIED**{
 
 After any `humanoid_set_zero.py` run; after replacing a camera (with section 1).
 
-!!! missing "MISSING — Full re-calibration triggers and interval"
+!!! note "Yours to determine — full re-calibration triggers and interval"
     *Owner: perception lead.*

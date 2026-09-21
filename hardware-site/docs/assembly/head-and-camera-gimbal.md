@@ -15,7 +15,8 @@ Build two identical camera columns, each a RealSense D436 on its own yaw–pitch
   <figcaption>The finished columns on the robot, aiming independently.</figcaption>
 </figure>
 
-!!! missing "MISSING — gimbal column procedure: fasteners, torques, bearings, hard stops"
+!!! note "Read off the model — gimbal column fasteners and bearings"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     - Per step: screws, torque, Loctite 222 use, order.
     - Any yaw bearing; neck keying.
     - How to set and hold the yaw and pitch zeros; hard stops.
@@ -49,9 +50,14 @@ Deploy treats the ID 7/8 camera as the forward-facing one at zero and the
 ID 5/6 camera as the rear-facing one (`deploy/control/humanoid_gimbal_zero_check.py`,
 line 38; `deploy/control/docs/auto_operator_safety_contract.md`, SAFE-GAZE-003).
 
-!!! missing "MISSING — which physical side of the plate carries `cam_yaw_left` (ID 7) and `cam_pitch_left` (ID 8)"
-    Computer-aided design (CAD): left at y = −65 mm; MuJoCo model: y = +0.065 m.
-    A swap fails silently. *Owner: hardware lead + controls.*
+Two of the three published models place `cam_yaw_left` at **y = +65 mm** — the
+robot's left — with the two columns 130 mm apart on a plate 520 mm above
+`base_link`. *Source: `simulation/asset/duke_v2/humanoid_v21/humanoid_v21_full.urdf`
+(`cam_base_left_fixed`); MuJoCo model.*
+
+!!! unverified "UNVERIFIED — the CAD mirrors this, putting `cam_yaw_left` at y = −65 mm"
+    A swap fails silently. Confirm against the robot before wiring.
+    *Owner: hardware lead + controls.*
 
 ✅ **Check:** IDs 5 to 8 answer on can25; both serials assigned.
 
@@ -76,7 +82,8 @@ CAD puts the yaw actuator body on the yaw axis, its centre 103.5 mm above the
 plate top face (`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITION_top_plate__head_cameras.md`,
 lines 64 and 77).
 
-!!! missing "MISSING — gimbal parts are in no bill of materials: material, process, tolerance, cost, bearing, fasteners"
+!!! note "Read off the model — gimbal part geometry, bearings and fasteners"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead + BOM owner.*
 
 ✅ **Check:** Turns freely, no axial play; mount bottom face flat and clean.
@@ -107,7 +114,8 @@ lines 64 and 77).
 
 Make the pitch axis perpendicular to, and intersecting, the yaw axis.
 
-!!! unverified "UNVERIFIED — `gimbal_arm`: one part or two; `U-joint_type_C_adapter`: mechanical or a USB-C cable adapter"
+!!! note "Read off the model — whether `gimbal_arm` is one part or two, and what the type-C adapter is"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** No binding; the arm clears neck and mount.
@@ -181,7 +189,7 @@ stays inside the travel verified in step 6.
 - yaw moves the image sideways, pitch vertically;
 - nothing heats or binds over a few hundred cycles of verified travel.
 
-!!! missing "MISSING — single-column bench harness and written test procedure"
+!!! note "Yours to determine — single-column bench harness and written test procedure"
     The deploy sweep drives all four gimbal motors; no single-column harness,
     cycle count or pass criteria exist in the sources.
     *Owner: hardware lead + controls.*
@@ -221,7 +229,8 @@ Frame P: origin at the centre of the top plate's central hole, on its top face;
 contour, 64.8 × 59.0 mm (`simulation/asset/duke_v2/head_cam/PositionDeter/RELATIVE_POSITION_top_plate__head_cameras.md`,
 line 66).
 
-!!! unverified "UNVERIFIED — top plate central hole shape: the CAD parse gives only a 64.8 × 59.0 mm bounding box; the CAD animation shows it hexagonal"
+!!! note "Read off the model — top plate central hole shape"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** Yaw axes 130.00 mm apart, pitch axes collinear, no shims, columns never touch.

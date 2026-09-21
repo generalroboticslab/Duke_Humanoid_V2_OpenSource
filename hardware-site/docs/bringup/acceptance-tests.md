@@ -29,7 +29,7 @@ Unpowered. *Source: [project README](https://github.com/generalroboticslab/duke_
 | Degrees of freedom | 31 | Exact |
 | Actuators RS00 / RS02 / RS03 / RS04 / RS05 / RS06 | 2 / 6 / 11 / 2 / 6 / 4 | Exact |
 
-!!! missing "MISSING — A0 tolerances; mass breakdown by subassembly; source of the model's 967 g cable mass"
+!!! note "Not measured on the reference robot — A0 tolerances; mass breakdown by subassembly; source of the model's 967 g cable mass"
     *Owner: hardware lead.*
 
 ## A1. Prove bus integrity
@@ -62,7 +62,7 @@ python humanoid_profile_motor_latency.py  # 1 % torque, no position command
 | Spread across one bus | **TODO**{ .dh-missing } |
 | Headroom against the 200 Hz (5 ms) loop | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A2 reference latency per bus and the harness-fault threshold"
+!!! note "Not measured on the reference robot — A2 latency per bus and the harness-fault threshold"
     *Owner: controls lead.*
 
 ## A3. Wiggle the harness
@@ -94,7 +94,7 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 | Tracking error, current | **TODO**{ .dh-missing } |
 | Noise | No grinding, knocking or binding |
 
-!!! missing "MISSING — A4 motion test for legs, waist, gimbals; reference tracking and current; range-of-motion sweep"
+!!! note "Not measured on the reference robot — A4 motion test for legs, waist and gimbals; tracking, current, range-of-motion sweep"
     *Owner: controls lead.*
 
 ## A5. Check zero and model fidelity
@@ -119,7 +119,7 @@ python humanoid_test_motor.py  # 5 % torque, 0.1 rad sine, arm joints
 | Residual, `shoulder_2`, `shoulder_3`, `elbow`, `wrist_1` | `MATCH`: each ≤ 0.35 N·m, the script's default `--tol` |
 | Residual pattern | Not growing from wrist to shoulder |
 
-!!! missing "MISSING — A5 reference residual per joint measured on the reference robot"
+!!! note "Not measured on the reference robot — A5 residual per joint"
     *Owner: controls lead.*
 
 ## A6. Check perception
@@ -135,7 +135,7 @@ Procedure: [Camera calibration](camera-calibration.md).
 | Hand-eye solve | `VALID`, within the residual table, YAML loaded |
 | Gimbal tracking | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A6 gimbal tracking test with error and lag figures"
+!!! note "Not measured on the reference robot — A6 gimbal tracking error and lag"
     *Owner: perception lead.*
 
 ## A7. Test grippers
@@ -164,7 +164,7 @@ fingers of the tested side.
 | Carry and park torque | About 1.5× that level |
 | Symmetry, cycle endurance | **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — A7 reference no-slip level per side, test-cube size and mass, asymmetry limit, endurance test"
+!!! note "Not measured on the reference robot — A7 no-slip level per side, test-cube size and mass, asymmetry limit, endurance"
     *Owner: controls lead.*
 
 ## A8. Hold whole-body posture
@@ -195,7 +195,7 @@ RobStride defaults: fault 80 °C, warning 75 °C (stored × 10). Do not change
 torque limit, protection temperature or over-temperature time. On a tilt
 refusal, straighten the hang; never widen the envelope.
 
-!!! missing "MISSING — A8 reference motor temperatures and standing current, with fail values"
+!!! note "Not measured on the reference robot — A8 motor temperatures and standing current, with fail values"
     *Owner: controls lead.*
 
 ## A9. Test arm transit
@@ -260,7 +260,7 @@ A `[verdict]` banner names each abort:
 - envelope or no-progress → tags, placement;
 - clearance-standoff → object too near the torso.
 
-!!! missing "MISSING — A10 reference grasp success rate over N attempts"
+!!! note "Not measured on the reference robot — A10 grasp success rate over N attempts"
     *Owner: controls lead.*
 
 ## A11. Walk
@@ -280,10 +280,10 @@ python humanoid_nav_step_test.py  # one measured velocity step; not a gamepad
 | Post-stop yaw rate | Recorded against 0.10 rad/s |
 | Safety layers, before the run | Ctrl+C zeroes; process death zeroes after 1.0 s; gamepad seizes control; e-stop **TODO**{ .dh-missing } |
 
-!!! missing "MISSING — SAFETY — A11 coast distance and pass threshold; the coast constant was never measured"
+!!! note "Not measured on the reference robot — A11 coast distance and pass threshold"
     *Owner: controls lead.*
 
-!!! unverified "UNVERIFIED — A11 stillness threshold 0.10 rad/s is untested"
+!!! note "Not measured on the reference robot — A11 stillness threshold 0.10 rad/s is untested"
     *Owner: controls lead.*
 
 ✅ **Check:** every test passes against the published reference values.

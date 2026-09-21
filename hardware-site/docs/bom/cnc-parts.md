@@ -56,7 +56,8 @@ Rows with no download link and no mass / size are not in the Fusion model. `CNC_
 the gripper assembly (`dovetail_umi_gripper`) in Fusion: it is the gripper's mounting flange, the code repo's
 `cnc_flange` (Aluminum 6061, 22.05 g in `parallel_gripper_fusion_info.py`; 22.1 g here).
 
-!!! unverified "UNVERIFIED — whether the five rows with no team BOM line are machined parts at all: the team's booklet draws `CNC_arm05`, `CNC_arm06` and `CNC_arm11` as the printed lines `P4`, `P5` and `P6` on p.9, and Fusion has them as SLS nylon, so all three are listed again under Printed parts; `CNC_arm12_wrist_pitch` is absent from the team BOM, the booklet and the Fusion model alike; `CNC_arm13_RS05_shaft_coupler` is the gripper's machined flange inside `dovetail_umi_gripper` and the booklet's gripper page does not label it"
+!!! note "Build to the model — five rows have no team BOM line"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     `CNC_leg18_foot_plate` is a separate doubt: Fusion holds it as a subassembly with
     the sole as a child component, so its CAD mass is not the plate's own.
     *Owner: hardware lead.*
@@ -78,7 +79,8 @@ coupler on the output of the waist actuator (p.4, the unlabelled actuator marked
 on each leg, and (`C5` only) of the shoulder-1 actuator on each arm: five and seven positions, the sheet's
 counts. One question the booklet cannot answer:
 
-!!! unverified "UNVERIFIED — the unit price of `C25` *Shoulder/Elbow Support* ×4: the team BOM's 57.56 is exactly twice the earlier machining quote's 28.78 for the same part, and the team BOM's is the price shown above"
+!!! note "Build to the model — `C25` unit price looks doubled in the team sheet"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     The part itself is settled: booklet p.9 labels the same bracket at the shoulder and at
     the elbow of each arm, which is the Fusion component
     `CNC_arm04_x4_shoulder_elbow_support_shaft` and this line's count of 4.

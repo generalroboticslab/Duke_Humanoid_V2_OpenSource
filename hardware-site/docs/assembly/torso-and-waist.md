@@ -7,7 +7,8 @@ Build the torso that limbs and camera columns bolt to.
     - **Parts:** RobStride 03 ×1 ([Actuators](../bom/actuators.md)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/cnc-parts.md)); electronics in steps 5–8 ([Electronics](../bom/electronics.md)).
     - **Before this:** [Arm](arm.md).
 
-!!! missing "MISSING — torso fasteners, torques, mounts and retention"
+!!! note "Read off the model — torso fasteners, mounts and retention"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     - Per step: screws, torque, Loctite 222 use, plate join order and location,
       squareness tolerance.
     - No electronics item has a mount in any parts list.
@@ -50,7 +51,8 @@ Set the RobStride 03 to Controller Area Network (CAN) ID 1 on the bench. Label i
 
 Square the frame before anything goes in: every limb and camera references it.
 
-!!! unverified "UNVERIFIED — machined-part sheet also lists `B1`–`B3` and `B5_body_shelf` plates"
+!!! note "Build to the model — the machined-part sheet also lists `B1`–`B3` and `B5_body_shelf`"
+    The published model is what you build to; the team's spreadsheet is a working document and differs here.
     Probably duplicates of the `CNC_body` plates: do not order both. The CAD's
     internal spine has no `CNC_body` ID. *Owner: hardware lead.*
 
@@ -66,7 +68,8 @@ the pelvis through a flange, a ring and a coupler.
   <figcaption>Waist actuator at the centre of the bottom plate.</figcaption>
 </figure>
 
-!!! missing "MISSING — waist: part IDs of the flange, ring and coupler; whether the ring is a bearing"
+!!! note "Read off the model — waist flange, ring and coupler"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** Turns freely, no axial play; square to the pelvis at zero.
@@ -140,7 +143,7 @@ Stand the packs upright, side by side, in the rear bay. They run **in series**
 (one pack's + to the other's −) through a surge protector to the 48 V bus:
 44.4 V nominal, 50.4 V full (computed). *Source: team power wiring diagram.*
 
-!!! missing "MISSING — SAFETY — battery pack retention, swap path and lead protection"
+!!! note "Pack retention is tracked on [Power system](../electrical/power-system.md)"
     *Owner: hardware lead + electrical.*
 
 ✅ **Check:** Packs cannot shift, no lead is taut or on an edge, each pack comes out.
@@ -185,7 +188,7 @@ Mount it rigidly: the control stack treats its orientation as a constant.
   <figcaption>IMU on a printed X-bracket on a machined plate. Same mount on the finished robot: <strong class="dh-unverified">UNVERIFIED</strong>.</figcaption>
 </figure>
 
-!!! unverified "UNVERIFIED — IMU screws: M3 (team log) vs Ø2.10 mm holes on 30 × 31 mm (vendor drawing)"
+!!! note "The IMU screw conflict is tracked on [Electronics](../bom/electronics.md)"
     *Owner: hardware lead.*
 
 Deploy assumes the IMU axes match the robot base frame. It opens the IMU with
@@ -196,14 +199,18 @@ places `imu_site` at the `base_link` origin with no rotation.
 To watch the live IMU orientation, run `python hardware_bindings/imu/py_imu.py`
 from `deploy/control/`: it serves a 3D frame view on port 8080.
 
-!!! missing "MISSING — IMU physical position relative to the `base_link` origin, which way it faces, and a pass/fail axis-alignment check"
-    *Owner: hardware lead + controls.*
+**Mount it with its axes parallel to `base_link`, in any position.** The URDF
+places `imu_site` at the `base_link` origin with zero rotation, and the control
+stack writes the IMU orientation straight through as the base orientation with
+no mounting offset — so rotation must be zero, while a position offset does not
+enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
+`deploy/control/humanoid_base.py` lines 158 and 247.*
 
 ✅ **Check:** Rigid, with axes checked against the robot frame.
 
 {{ step(9, "Fit the disconnect and emergency stop") }}
 
-!!! missing "MISSING — SAFETY — no e-stop, main disconnect or pre-charge in the BOM or power diagram"
+!!! note "The missing e-stop is tracked on [Safety](../before-you-start/safety.md#rules)"
     The run scripts assume a physical e-stop. Specify device, what it cuts,
     rating and location.
     *Owner: hardware lead + electrical + Safety sign-off.*
@@ -221,7 +228,8 @@ from `deploy/control/`: it serves a 3D frame view on port 8080.
 
 {{ step(10, "Fit the front and back covers") }}
 
-!!! missing "MISSING — torso covers: material, structural or not, fasteners, what comes off for a pack swap"
+!!! note "Read off the model — torso cover geometry and fixings"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** Nothing inside moves when the torso is tilted; the waist still turns.

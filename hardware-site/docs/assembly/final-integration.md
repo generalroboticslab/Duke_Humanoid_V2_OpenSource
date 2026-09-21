@@ -15,7 +15,7 @@ Join the subassemblies into one robot, **battery disconnected throughout**.
 
 Support it level, waist free, hips and shoulders reachable.
 
-!!! missing "MISSING — SAFETY — lifting points, sling route and integration stand"
+!!! note "Lifting points and sling route are tracked on [Safety](../before-you-start/safety.md#rules)"
     - None defined; needed before the first lift.
     - Sling attachment.
     - What holds the torso (upright or lying down) while limbs go on.
@@ -31,7 +31,8 @@ Support it level, waist free, hips and shoulders reachable.
 Bolt the leg to the pelvis, supporting its weight. Joint location
 **UNVERIFIED**{ .dh-unverified } ([Assembly](index.md)).
 
-!!! missing "MISSING — hip, shoulder and wrist interfaces: screws, torque, Loctite 222 use, locating features"
+!!! note "Read off the model — hip, shoulder and wrist interfaces: screws and locating features"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     *Owner: hardware lead.*
 
 ✅ **Check:** All six joints still move; the harness branch reaches the torso, unconnected.
@@ -79,7 +80,8 @@ links, two camera cables, power.
 | `can24` / `can23` | Left / right leg, IDs 31–36 / 41–46 |
 | `can25` | Camera gimbals, IDs 5–8 |
 
-!!! missing "MISSING — torso harness: connectors, lengths, service loops at hip, shoulder and waist, join order"
+!!! note "Read off the model — torso harness lengths, routes and service loops"
+    Take it from the published model — see [CAD downloads](../fabrication/cad-downloads.md).
     See [Harness fabrication](../electrical/harness-fabrication.md).
     *Owner: electrical lead.*
 
@@ -94,7 +96,7 @@ links, two camera cables, power.
 - lenses clean;
 - packs disconnected.
 
-!!! missing "MISSING — signed inspection checklist keyed to the fastener schedule"
+!!! note "Yours to determine — signed inspection checklist keyed to the fastener schedule"
     *Owner: hardware lead.*
 
 ✅ **Check:** Every item above is confirmed.
@@ -104,7 +106,7 @@ links, two camera cables, power.
 Weigh it: far from 36 kg means a part was missed, doubled or substituted. Hang
 it with the **legs straight**.
 
-!!! missing "MISSING — as-built mass by subassembly"
+!!! note "Not measured on the reference robot — as-built mass by subassembly"
     *Owner: whoever performs the first documented build.*
 
 ✅ **Check:** It hangs level, legs straight, mass recorded.

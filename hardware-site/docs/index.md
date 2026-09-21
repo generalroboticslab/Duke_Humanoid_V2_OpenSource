@@ -66,7 +66,7 @@ are open gaps, listed on [Open items](reference/todo.md).
 | Control | 50 Hz learned whole-body policy onboard, 200 Hz CAN motor loop |
 | Parts cost | {{ bom_total() }}, a floor: fasteners, printed parts, tools, shipping and setup fees unpriced |
 | Build time | **TODO**{ .dh-missing } not measured |
-| Also needed | A CUDA machine for the planner; a gantry rated well over 36 kg |
+| Also needed | A CUDA machine for the planner; a gantry rated 50 kg or more, 1.4 m or more of clear height |
 | People | At least two |
 
 *Source: project README (first seven rows).* See also

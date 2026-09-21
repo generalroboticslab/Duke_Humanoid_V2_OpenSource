@@ -12,22 +12,26 @@ close every red box with them first.
 
 2. **Suspend the robot for every early test.** Keep it on the gantry, **legs
    straight**, until the acceptance tests pass. Bent legs tilt the torso and
-   corrupt the perception geometry.
+   corrupt the perception geometry. Any gantry rated **50 kg or more** with
+   **1.4 m or more of clear height** under the beam suits a 36 kg, 1256 mm
+   robot; the reference build used a
+   [Unitree G1 gantry](https://stemfinity.com/products/unitree-gantry).
 
-    !!! missing "MISSING — SAFETY — Lifting specification: gantry rating over 36 kg, lifting points, slings, clearance zone; the gantry is in no parts list"
-        *Owner: hardware lead.*
+    !!! missing "MISSING — SAFETY — Lifting points on the robot, sling route and clearance zone"
+        The gantry itself is specified above; where to attach to the robot is not.
+        *Owner: hardware lead. Blocks release.*
 
 3. **Keep out of the envelope.** Nobody and nothing enters the range of motion
    while powered. Power off before approaching, with a second person guarding
    the switch.
 
-    !!! missing "MISSING — SAFETY — Bystander distances: suspended, standing, walking (including fall radius)"
+    !!! note "Yours to determine — bystander distances: suspended, standing, walking (including fall radius)"
         *Owner: hardware lead + local EHS office.*
 
 4. **Wear personal protective equipment (PPE).** Safety glasses whenever
    powered; no loose sleeves, lanyards or untied hair near a powered robot.
 
-    !!! missing "MISSING — SAFETY — Rest of the PPE list: safety shoes, and whether gloves are required or forbidden"
+    !!! note "Yours to determine — rest of the PPE list: safety shoes, and whether gloves are required or forbidden"
         *Owner: hardware lead + local EHS office.*
 
 5. **Have an emergency stop (e-stop)** within reach of a person outside the
@@ -36,7 +40,7 @@ close every red box with them first.
 
     !!! missing "MISSING — SAFETY — E-stop: none in the bill of materials or power diagram, yet the run scripts assume one; mounting, what it cuts, remote or dead-man switch, restart checks"
         Scripts: `humanoid_nav_step_test.py`, `humanoid_joint_monkey_hw.py`.
-        *Owner: electrical lead. Blocks [First power-on](../bringup/first-power-on.md).*
+        *Owner: electrical lead. Blocks [First power-on](../bringup/first-power-on.md). Blocks release.*
 
 6. **Follow the power sequence.** After power-on, start the software in the
    order of deploy's runbook (`deploy/control/docs/OPERATIONS.md`, section 2)
@@ -52,23 +56,23 @@ close every red box with them first.
        for `██ WATCHDOG ██`, before anything else.
 
     !!! missing "MISSING — SAFETY — Physical power-on and power-off order (computer, USB-CAN adapters, motor bus, camera gimbals), with a check at each step, and the software shutdown order before power-off"
-        *Owner: electrical lead. Blocks [Pre-power checks](../electrical/pre-power-checks.md).*
+        *Owner: electrical lead. Blocks [Pre-power checks](../electrical/pre-power-checks.md). Blocks release.*
 
 7. **Isolate before touching.** Disconnect the packs and move them away before
    any work; lock-out/tag-out on a shared robot.
 
-    !!! missing "MISSING — SAFETY — Isolation and lock-out/tag-out procedure, including how to confirm the converters have discharged"
+    !!! note "Yours to determine — isolation and lock-out/tag-out procedure, including how to confirm the converters have discharged"
         *Owner: electrical lead.*
 
 8. **Two people** for every lift and gantry transfer. During
    powered tests the second person's only job is the e-stop.
 
-    !!! missing "MISSING — SAFETY — Which steps need a second person and which need a hoist"
+    !!! note "Yours to determine — which steps need a second person and which need a hoist"
         *Owner: hardware lead.*
 
 9. **Log incidents.** Record near-misses; revise these rules.
 
-    !!! missing "MISSING — SAFETY — Numbered mechanical and electrical incident register, like deploy's control-stack register"
+    !!! note "Yours to determine — numbered mechanical and electrical incident register, like deploy's control-stack register"
         *Owner: hardware lead, continuously.*
 
 ## Hazards
@@ -78,7 +82,7 @@ close every red box with them first.
 Every joint is quasi-direct-drive, with no self-locking gearbox. Removing
 power, including an e-stop, drops the 36 kg body and whatever the arms hold.
 
-!!! missing "MISSING — SAFETY — Collapse behaviour and standoff distance on power loss; safe pose before planned power-down"
+!!! note "Not measured on the reference robot — collapse behaviour and standoff distance on power loss; safe pose before planned power-down"
     *Owner: hardware lead, from a drop test with the robot suspended. Blocks [First power-on](../bringup/first-power-on.md).*
 
 ### Lithium-polymer (LiPo) packs
@@ -100,7 +104,7 @@ protector: 44.4 V nominal, 50.4 V full, about 222 Wh per pack (computed).
 - A pack burns if over-discharged, over-charged, punctured, crushed or shorted.
   Never charge unattended. An office extinguisher will not put it out.
 
-!!! missing "MISSING — SAFETY — Battery procedure: charger and charge rate, voltage floor, storage, fire response, disposal, pack-path protection"
+!!! note "Yours to determine — battery procedure: charger and charge rate, voltage floor, storage, fire response, disposal, pack-path protection"
     The team linked an "ISDT ... DC600Wx2" charger; the model is **UNVERIFIED**{ .dh-unverified }.
     *Owner: hardware lead with the local EHS office. Blocks [Power system](../electrical/power-system.md).*
 
@@ -135,14 +139,14 @@ settings, not measured joint torques.
 - The torque-up and torque-down commands step the ratio by 0.1 between 0.1 and
   0.8. The camera gimbals follow the same ratio as the body.
 
-!!! missing "MISSING — SAFETY — Pinch-point diagram (knee, elbow, hip-roll/thigh, waist, gripper jaws, camera gimbals)"
+!!! note "Yours to determine — pinch-point diagram (knee, elbow, hip-roll/thigh, waist, gripper jaws, camera gimbals)"
     *Owner: hardware lead for the geometry.*
 
 ### Falls
 
 A biped can fall on its own: 36 kg at floor level, possibly on a foot.
 
-!!! missing "MISSING — SAFETY — Conditions for letting the robot stand free"
+!!! note "Yours to determine — conditions for letting the robot stand free"
     *Owner: hardware lead + controls lead. See [Acceptance tests](../bringup/acceptance-tests.md).*
 
 ## Inspect and log before each session
@@ -156,5 +160,5 @@ A biped can fall on its own: 36 kg at floor level, possibly on a foot.
 | Packs: swelling, dents, connectors, cell balance | Retire a puffed pack |
 | Gantry, slings, lifting points | Shock-loaded gear is no longer rated |
 
-!!! missing "MISSING — SAFETY — Inspection intervals, pass/fail criteria and owners for the table above"
+!!! note "Yours to determine — inspection intervals, pass/fail criteria and owners for the table above"
     *Owner: hardware lead.*

@@ -9,7 +9,7 @@ Gather these before the first assembly step.
 Tools subtotal: {{ bom_subtotal("tools.csv") }} — `tools.csv` is not written
 yet **TODO**{ .dh-missing }.
 
-!!! unverified "UNVERIFIED — tool list derived from the parts list, not checked against a build"
+!!! note "Not verified — tool list derived from the parts list, not checked against a build"
     *Owner: hardware lead, from the first documented build.*
 
 ## Required
@@ -23,7 +23,7 @@ yet **TODO**{ .dh-missing }.
 | Wire strippers, flush cutters | Harness | Gauges per [Harness fabrication](../electrical/harness-fabrication.md) |
 | Crimp tool | Signal connectors | **TODO**{ .dh-missing } |
 | Multimeter | Continuity, polarity, voltage | Any |
-| Hoist or gantry, sling | Lifting the robot; hanging it legs straight | Rated well above 36 kg |
+| Hoist or gantry, sling | Lifting the robot; hanging it legs straight | 50 kg or more, 1.4 m or more of clear height ([reference](https://stemfinity.com/products/unitree-gantry)) |
 | Limb stand or jig | Holding a limb | **TODO**{ .dh-missing } |
 | Lithium-polymer (LiPo) balance charger | Two 6S 10000 mAh packs | 6S, balance leads to match |
 | Fire-rated LiPo bag | Charging and storing packs | Fits one pack |
@@ -44,5 +44,5 @@ yet **TODO**{ .dh-missing }.
 powered screwdriver (finish with the torque driver), third-hand clamp, bench
 power supply, thermal camera, 0.01 mm digital calipers.
 
-!!! missing "MISSING — tools that cannot be specified yet: bearing press and arbors, driver sizes, torque range, crimp dies, retaining-ring pliers, zeroing fixtures"
+!!! note "Yours to determine — press arbors, driver sizes, torque range, crimp dies, zeroing fixtures"
     *Owner: hardware lead.*
