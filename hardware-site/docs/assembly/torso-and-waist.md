@@ -137,7 +137,7 @@ Stand the packs upright, side by side, in the rear bay. They run **in series**
 | CANable PRO V2.0 — `can9`, `can21`–`can25` | 6 |
 | Vention USB hub | 3 |
 | Waveshare ST/SC bus servo driver board | 2 |
-| Buck converters: DC 20–60 V to 12 V ×1, 48 V to 12 V ×2 | 3 **UNVERIFIED**{ .dh-unverified } |
+| Buck converters: DC 20–60 V to 12 V ×1, 60 V to 12 V ×2 | 3 **UNVERIFIED**{ .dh-unverified } |
 | Distribution block pairs, upper and lower body | 2 |
 | Surge protector (pack lead), 10 A fuse (computer branch) | 1 each |
 | TVS diode M1.5KE62CA | 10 |

@@ -17,14 +17,14 @@ every quantity and price on this page comes from.
 
 | Part ID | Use |
 | --- | --- |
-| `EL_COMPUTE_MINIPC` | Onboard computer, fed from the upper-body distribution block via a 10 A fuse and a 48 V→12 V buck converter |
+| `EL_COMPUTE_MINIPC` | Onboard computer, fed from the upper-body distribution block via a 10 A fuse and a `EL_BUCK_60V_12V` (60 V→12 V) buck converter |
 | `EL_BATTERY_6S` | 2-pack = both packs, in series (one pack's + to the other's −): 44.4 V nominal, 50.4 V full |
 | `EL_CAN_ADAPTER` | One per CAN bus, 1 Mbit/s: can9 left arm, can21 right arm, can22 waist and both shoulder_1, can23 right leg, can24 left leg, can25 camera gimbals |
 | `EL_CAM_D436` | One per camera gimbal. Needs librealsense 2.58.1 or later ([Camera calibration](../bringup/index.md#camera-calibration)) |
 | `EL_IMU_TM171` | Body inertial measurement unit (IMU), 40 × 34 × 12.6 mm, read over USB. Configuration: [Software](../software.md) |
 | `EL_SERVO_FEETECH`, `EL_SERVO_DRIVER` | One servo per gripper, each on its own Waveshare driver board ([Gripper](../assembly/index.md#gripper)) |
 | `EL_TVS_DIODE` | Transient-voltage-suppression (TVS) diode across power and ground at each distribution-block pair |
-| `EL_BUCK_48V_12V`, `EL_BUCK_12V_ENC` | 48 V→12 V conversion; conflict under [Power path](#power-path) |
+| `EL_BUCK_60V_12V`, `EL_BUCK_12V_ENC` | 60 V→12 V conversion (E12) and 20–60 V→12 V encased (E11); conflict under [Power path](#power-path) |
 | `EL_SURGE_PROTECTOR` | Pack lead, before the 48 V bus. That this is the surge protector drawn on the power diagram is **UNVERIFIED**{ .dh-unverified }: the team BOM gives a vendor storefront, not one product |
 | `EL_DIST_BLOCK` | The four distribution-block terminals, two power + ground pairs. That the drawn blocks are this part is **UNVERIFIED**{ .dh-unverified } |
 | `EL_USB_HUB` | 3 off. Which devices hang off which hub is **UNVERIFIED**{ .dh-unverified } |
@@ -54,7 +54,7 @@ Packs → surge protector → 48 V bus → lower-body distribution-block pair (l
 waist) and upper-body pair (arms, both shoulder_1, gimbals, computer branch).
 *Source: power wiring diagram.* Full drawing: [Power system](../electrical/index.md#power-system).
 
-!!! unverified "UNVERIFIED — 48 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair"
+!!! unverified "UNVERIFIED — 60 V→12 V conversion (power diagram: one buck converter, computer only, no 5 V rail; this list: three); TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair"
     *Owner: electrical lead.*
 
 ## Not in this list { #electronics-not-in-this-list }
