@@ -16,8 +16,6 @@
 
 Process and material per part: [Printed parts](../bom/index.md#printed-parts). Files: the STL in each row.
 
-Print profiles (layer height, walls, infill, orientation) **TODO**{ .dh-missing }.
-
 1. Print one fit-critical part first — one that mates with a machined part or takes a heat-set insert — and check the fit.
 2. Print the set.
 3. Ream holes to size (FDM prints undersize); melt heat-set inserts in with a soldering iron.
