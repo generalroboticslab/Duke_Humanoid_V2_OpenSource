@@ -1,5 +1,5 @@
-// Looping clips (exploded views, demos): click to pause on a frame, click again to
-// resume. While paused a scrub bar appears under the frame so any moment can be found.
+// Exploded-view clips only (assets/exploded/*.mp4): click to pause on a frame, click
+// again to resume. The demo clips elsewhere keep looping untouched. While paused a scrub bar appears under the frame so any moment can be found.
 // Native <video controls> are deliberately not used: browsers also toggle playback on a
 // click when controls are shown, which would cancel our own toggle.
 (function () {
@@ -46,5 +46,8 @@
     scrub.addEventListener("input", function () { video.pause(); video.currentTime = parseFloat(scrub.value); });
     refresh();
   }
-  document.querySelectorAll("video.dh-clip").forEach(setup);
+  document.querySelectorAll("video.dh-clip").forEach(function (v) {
+    var src = v.querySelector("source");
+    if (src && /\/assets\/exploded\//.test(src.getAttribute("src") || "")) setup(v);
+  });
 })();
