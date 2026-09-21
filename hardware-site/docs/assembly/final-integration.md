@@ -10,19 +10,9 @@ Join the subassemblies into one robot, **battery disconnected throughout**.
 {{ step(1, "Support the torso") }}
 
 !!! danger "Two people or a hoist from here on"
-    The robot is 36 kg and 1.2 m tall, and less stable with each limb. Read
-    [Safety](../fabrication/index.md#safety).
+    The robot is 36 kg and 1.2 m tall, and less stable with each limb. Lift by the body top plate.
 
 Support it level, waist free, hips and shoulders reachable.
-
-!!! note "Lifting points and sling route are tracked on [Safety](../fabrication/index.md#rules)"
-    - None defined; needed before the first lift.
-    - Sling attachment.
-    - What holds the torso (upright or lying down) while limbs go on.
-    - How the robot hangs with its legs straight: a bent-leg hang tilts the
-      torso and corrupts the camera geometry.
-
-    *Owner: hardware lead + Safety sign-off.*
 
 ✅ **Check:** The torso cannot fall or rotate when a limb is offered up.
 

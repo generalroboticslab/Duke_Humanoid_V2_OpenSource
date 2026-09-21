@@ -68,8 +68,7 @@ Two converters serve two loads:
 
 ## Protection and disconnect
 
-The deployed robot's first stop is software, not hardware: see the three
-layers on [Safety](../fabrication/index.md#rules). Hardware still needs
+The deployed robot's first stop is software, not hardware: the silence failsafe (nav 1 s, arm 0.5 s, gaze 2 s) and the CAN watchdog in `humanoid_real_env.py`. Hardware still needs
 two things — a pack-path fuse and a confirmed surge protector.
 
 !!! missing "MISSING — SAFETY — Pack-path fuse (none drawn); surge protector part number and rating"

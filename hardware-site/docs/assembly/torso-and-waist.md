@@ -116,8 +116,7 @@ exhaust and ports clear.
 </div>
 
 !!! danger "Keep both packs disconnected"
-    Until [Pre-power checks](../electrical/index.md#pre-power-checks) pass. See
-    [Safety](../fabrication/index.md#safety).
+    Until [Pre-power checks](../electrical/index.md#pre-power-checks) pass.
 
 Stand the packs upright, side by side, in the rear bay. They run **in series**
 (one pack's + to the other's −) through a surge protector to the 48 V bus:
@@ -191,8 +190,7 @@ enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
 {{ step(8, "Fit the pack disconnect") }}
 
 Reachable from outside the working envelope, because pulling it is the third
-and last of the robot's stop layers; the first two are software
-([Safety](../fabrication/index.md#rules)). The robot has no hand e-stop.
+and last of the robot's stop layers; the first two are software (the silence failsafe and the CAN watchdog). The robot has no hand e-stop.
 
 ✅ **Check:** Reachable without entering the envelope; opening it kills the 48 V bus.
 

@@ -5,7 +5,7 @@ Energise the robot and prove all 31 actuators answer, **without enabling any**.
 !!! abstract "At a glance"
     - **Tools:** bench supply, two people.
     - **Operator:** connects power, runs commands, reads output aloud; never touches the robot.
-    - **Safety:** holds the operator kill switch — stopping the mission process *is* the e-stop here ([Safety](../fabrication/index.md#rules)) — watches, calls the abort; never touches the keyboard.
+    - **Safety:** holds the operator kill switch — stopping the mission process *is* the e-stop here — watches, calls the abort; never touches the keyboard.
     - **Before this:** [Pre-power checks](../electrical/index.md#pre-power-checks) passed and signed. Robot hung from a rated hoist, legs straight, clear space below.
 
 ## Prepare the host
@@ -80,7 +80,7 @@ Fault came and went? Run the
 any power cycle.
 
 !!! note "Every layer of stopping is software here — confirm each one is armed before you press Enter"
-    The three layers on [Safety](../fabrication/index.md#rules) fire from the
+    The silence failsafe (nav 1 s, arm 0.5 s, gaze 2 s) and the CAN watchdog fire from the
     moment the mission loop starts: silence in, action out, no pack needed.
     *Owner: electrical lead.*
 
@@ -229,5 +229,3 @@ python humanoid_profile_motor_latency.py  # latency per motor and bus
 4. Remove motor bus power.
 5. Disconnect the supply or packs.
 
-!!! note "Power-on and power-off order is tracked on [Safety](../fabrication/index.md#rules)"
-    *Owner: electrical lead + controls lead.*
