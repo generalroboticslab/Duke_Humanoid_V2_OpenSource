@@ -266,15 +266,10 @@
       return id.startsWith("vendor:") ? target("vendor", id.slice(7)) : target("part", id);
     }
 
-    // ---- file rows: every table row on the page with a files/ download link ------------
-    document.querySelectorAll(".md-typeset table tr").forEach((tr) => {
-      const links = Array.from(tr.querySelectorAll("a[href]")).filter((a) => fileRef(a.getAttribute("href")));
-      let t = null;
-      for (const a of links) {
-        t = targetForRef(fileRef(a.getAttribute("href")));
-        if (t) break;
-      }
-      if (!t) return;
+    // ---- rows: a table row previews a target when it links a files/ download, or, failing
+    // that, when its first <code> cell is a site part id (BOM tables list purchased parts by
+    // part id only; vendor-map.json gives the Fusion components that make up each one) -------
+    function wireRow(tr, t, links) {
       tr.dataset.target = t.key;
       tr.classList.add("dh-part-row");
       tr.tabIndex = 0;
@@ -286,16 +281,16 @@
         a.title = "Download " + a.textContent.trim();
         if (!a.querySelector("svg")) a.insertAdjacentHTML("afterbegin", ICON_DOWNLOAD);
       });
-      // Preview: an explicit button in front of the file links, so it stays paired with
-      // Download whatever the table's first column is (the file tables lead with the
-      // team BOM ref, the parts lists with the part id).
+      // Preview: an explicit button in front of the file links (or the part id), so it stays
+      // paired with Download whatever the table's first column is.
       const btn = document.createElement("button");
       btn.type = "button";
       btn.className = "dh-preview";
       btn.title = "Show on the robot";
       btn.innerHTML = ICON_PREVIEW + "<span>Preview</span>";
       btn.addEventListener("click", (ev) => { ev.stopPropagation(); select(t, true); });
-      const cell = (links[0] && links[0].closest("td")) || tr.querySelector("td");
+      const idCode = Array.from(tr.querySelectorAll("td code")).find((c) => c.textContent.trim() === t.id) || tr.querySelector("td code");
+      const cell = (links[0] && links[0].closest("td")) || (idCode && idCode.closest("td")) || tr.querySelector("td");
       if (cell) cell.insertBefore(btn, cell.firstChild);
 
       tr.addEventListener("mouseenter", () => hover(t, true));
@@ -309,6 +304,42 @@
         ev.preventDefault();
         select(t, true);
       });
+    }
+    // A purchased part listed by part id: every Fusion component vendor-map.json assigns to it.
+    const vendorFilesByPart = new Map();
+    Object.keys(data.vendorMap).forEach((file) => {
+      const pid = data.vendorMap[file] && data.vendorMap[file].part_id;
+      if (pid && data.vendor.has(file)) (vendorFilesByPart.get(pid) || vendorFilesByPart.set(pid, []).get(pid)).push(file);
+    });
+    function targetForPartId(id) {
+      const t = target("part", id);
+      if (t) return t;
+      const files = vendorFilesByPart.get(id);
+      if (!files) return null;
+      const key = "bom:" + id;
+      if (targets.has(key)) return targets.get(key);
+      const meshes = files.flatMap((f) => data.vendor.get(f));
+      const bt = { key, kind: "vendor", id, meshes, rows: [], nodes: new Set(meshes.map((m) => m.node)) };
+      targets.set(key, bt);
+      return bt;
+    }
+    document.querySelectorAll(".md-typeset table tr").forEach((tr) => {
+      const links = Array.from(tr.querySelectorAll("a[href]")).filter((a) => fileRef(a.getAttribute("href")));
+      let t = null;
+      for (const a of links) {
+        t = targetForRef(fileRef(a.getAttribute("href")));
+        if (t) break;
+      }
+      if (!t) {
+        // BOM tables lead with the team ref (E7, C21) in a code cell too: try every code cell.
+        for (const code of tr.querySelectorAll("td code")) {
+          t = targetForPartId(code.textContent.trim());
+          if (t) break;
+        }
+        if (t) return wireRow(tr, t, []);
+        return;
+      }
+      wireRow(tr, t, links);
     });
 
     // ---- model colours: originals remembered at load, amber on hover, red when selected --

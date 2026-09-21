@@ -6,6 +6,27 @@ Quantities and prices are the team's own bill of materials for the reference rob
 each table is the line of that list a row comes from (`E3`, `C21`, `P20`, `H1`);
 [team-map.csv](../data/team-map.csv) lists every line with its CAD part.
 
+## Find a part on the robot
+
+Click **Preview** in any row below to see where that part sits; click a component on the robot to find its row.
+
+<div class="dh-viewer-block">
+<model-viewer id="dh-viewer" data-base="../" src="../assets/viewer/robot.glb" camera-controls
+  camera-orbit="35deg 75deg auto" min-camera-orbit="auto auto 0.3m" max-camera-orbit="auto auto 6m"
+  interaction-prompt="none" shadow-intensity="0.6" exposure="1.1" loading="eager"
+  alt="Duke Humanoid V2, every component in its Fusion 360 appearance">
+  <button slot="hotspot-x" class="dh-axis dh-axis-x" type="button" tabindex="-1" data-position="0m 0m 0m" aria-label="X axis">X</button>
+  <button slot="hotspot-y" class="dh-axis dh-axis-y" type="button" tabindex="-1" data-position="0m 0m 0m" aria-label="Y axis">Y</button>
+  <button slot="hotspot-z" class="dh-axis dh-axis-z" type="button" tabindex="-1" data-position="0m 0m 0m" aria-label="Z axis">Z</button>
+</model-viewer>
+<div class="dh-viewer-bar">
+  <button id="dh-viewer-reset" class="md-button" type="button">Show all</button>
+  <span class="dh-viewer-legend"><span>Colours are the Fusion appearances</span><span><i class="dh-sw-amber"></i>hovered row</span><span><i class="dh-sw-red"></i>selected</span></span>
+  <div id="dh-viewer-info" hidden></div>
+</div>
+<p class="dh-viewer-note">Axes are the STEP file axes (right-handed, Z up).</p>
+</div>
+
 | Tier | Category | Covers | Subtotal |
 | --- | --- | --- | --- |
 | **Robot** | [Actuators](#actuators) | {{ bom_qty("actuators.csv") }} RobStride units, {{ bom_count("actuators.csv") }} models | {{ bom_subtotal("actuators.csv") }} |
