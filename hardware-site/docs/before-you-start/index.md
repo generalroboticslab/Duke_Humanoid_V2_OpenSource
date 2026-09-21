@@ -16,9 +16,6 @@ Read [Safety](#safety) first.
 - [ ] You have downloaded and checksummed one release tag of the CAD ([CAD downloads](../fabrication/index.md#cad-downloads)); it is Apache-2.0 ([Citation and licence](../reference/index.md#citation-and-licence)).
 - [ ] No unpriced BOM rows in what you buy ([BOM](../bom/index.md)).
 
-!!! note "Yours to determine — budget and calendar thresholds, and the last point where a build can stop cheaply"
-    *Owner: hardware lead.*
-
 {% include "before-you-start/safety.md" %}
 
 {% include "before-you-start/what-you-get.md" %}
