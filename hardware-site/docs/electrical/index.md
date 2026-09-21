@@ -1,8 +1,7 @@
 # Electrical
 
-!!! danger "No battery connected in this section"
-    Connect a pack only after [Pre-power checks](#pre-power-checks) pass, under
-    [First power-on](../bringup/index.md#first-power-on), robot suspended.
+Work packs dry — connect only at [Pre-power checks](#pre-power-checks), under
+[First power-on](../bringup/index.md#first-power-on), robot suspended.
 
 ## Work in this order
 
