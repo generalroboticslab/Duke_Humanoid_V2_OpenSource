@@ -53,6 +53,54 @@
     tools.append(expand, close);
     wrap.appendChild(tools);
 
+    // Drag handle: a strip along the top of the card. The card body is the model (drag =
+    // orbit), so moving the card needs its own grip. Position persists per browser.
+    const handle = document.createElement("div");
+    handle.className = "dh-dock-handle";
+    handle.title = "Drag to move; double-click to send back to the corner";
+    handle.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M9 4h2v2H9V4m4 0h2v2h-2V4M9 8h2v2H9V8m4 0h2v2h-2V8m-4 4h2v2H9v-2m4 0h2v2h-2v-2m-4 4h2v2H9v-2m4 0h2v2h-2v-2"/></svg><span>Drag</span>';
+    wrap.appendChild(handle);
+    const POS_KEY = "dh-dock-pos";
+    let pos = null;
+    try { pos = JSON.parse(localStorage.getItem(POS_KEY) || "null"); } catch (err) { pos = null; }
+    function clampPos(p) {
+      const w = wrap.offsetWidth, h = wrap.offsetHeight;
+      return { left: Math.min(Math.max(0, p.left), Math.max(0, innerWidth - w)),
+               top: Math.min(Math.max(0, p.top), Math.max(0, innerHeight - h)) };
+    }
+    function applyPos() {
+      if (!docked) return;
+      if (!pos) { wrap.style.left = wrap.style.top = wrap.style.right = wrap.style.bottom = ""; return; }
+      const p = clampPos(pos);
+      wrap.style.left = p.left + "px"; wrap.style.top = p.top + "px";
+      wrap.style.right = "auto"; wrap.style.bottom = "auto";
+    }
+    function savePos() { try { if (pos) localStorage.setItem(POS_KEY, JSON.stringify(pos)); else localStorage.removeItem(POS_KEY); } catch (err) { /* private mode */ } }
+    let drag = null;
+    handle.addEventListener("pointerdown", (e) => {
+      if (!docked || e.button !== 0) return;
+      const r = wrap.getBoundingClientRect();
+      drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+      wrap.classList.add("dh-dragging");
+      handle.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    handle.addEventListener("pointermove", (e) => {
+      if (!drag) return;
+      pos = clampPos({ left: e.clientX - drag.dx, top: e.clientY - drag.dy });
+      applyPos();
+    });
+    function endDrag(e) {
+      if (!drag) return;
+      drag = null;
+      wrap.classList.remove("dh-dragging");
+      try { handle.releasePointerCapture(e.pointerId); } catch (err) { /* already released */ }
+      savePos();
+    }
+    handle.addEventListener("pointerup", endDrag);
+    handle.addEventListener("pointercancel", endDrag);
+    handle.addEventListener("dblclick", () => { pos = null; savePos(); applyPos(); });
+
     const pill = document.createElement("button");
     pill.type = "button";
     pill.className = "dh-dock-pill md-button";
@@ -88,10 +136,12 @@
       anchor.style.height = anchorHeight + "px";
       wrap.classList.add("dh-docked");
       docked = true;
+      applyPos();
     }
     function undock() {
       if (!docked) return;
       wrap.classList.remove("dh-docked");
+      wrap.style.left = wrap.style.top = wrap.style.right = wrap.style.bottom = "";
       anchor.style.height = "";
       docked = false;
     }
@@ -118,7 +168,7 @@
       anchor.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", () => { measure(); onScroll(); });
+    window.addEventListener("resize", () => { measure(); applyPos(); onScroll(); });
     desktop.addEventListener("change", onScroll);
     mv.addEventListener("load", measure);
     measure();

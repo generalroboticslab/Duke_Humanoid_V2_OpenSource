@@ -84,3 +84,19 @@
 }
 .dh-dock-pill[hidden] { display: none; }
 .dh-dock-pill:hover { color: var(--md-accent-fg-color); border-color: var(--md-accent-fg-color); }
+
+/* Drag handle along the top of the docked card (viewer-dock.js). */
+.dh-dock-handle { display: none; }
+.dh-viewer-wrap.dh-docked .dh-dock-handle {
+  display: flex; position: absolute; top: 0; left: 0; right: 4.2rem; height: 1.7rem; z-index: 2;
+  align-items: center; justify-content: center; gap: .3rem;
+  font-size: .6rem; color: var(--md-default-fg-color--light);
+  background: linear-gradient(var(--md-default-bg-color) 60%, transparent);
+  cursor: move; user-select: none; touch-action: none; opacity: 0; transition: opacity .15s;
+}
+.dh-viewer-wrap.dh-docked:hover .dh-dock-handle,
+.dh-viewer-wrap.dh-docked:focus-within .dh-dock-handle,
+.dh-viewer-wrap.dh-docked.dh-dragging .dh-dock-handle { opacity: 1; }
+@media (hover: none) { .dh-viewer-wrap.dh-docked .dh-dock-handle { opacity: 1; } }
+.dh-viewer-wrap.dh-docked.dh-dragging { animation: none; cursor: grabbing; }
+.dh-viewer-wrap.dh-docked .dh-dock-tools { z-index: 3; }
