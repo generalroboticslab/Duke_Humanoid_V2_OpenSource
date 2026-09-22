@@ -537,7 +537,7 @@ PRINTED_MAP: list[tuple[tuple[str, ...], tuple[str, ...], str]] = [
      "Booklet p.10: the two curved covers around the shoulder-pitch motor of one arm, which are the "
      "two Fusion components on `shoulder_pitch_protection` (2 occurrences each) once the four smooth "
      "shaft covers of the same page are settled as `P39`. Which line is A and which is B is UNVERIFIED."),
-    (("P35", "P36"), ("3DP_armP09_shoulder_yaw_cover_a", "3DP_armP10_shoulder_yaw_cover_b"),
+    (("P35", "P36"), ("3DP_armP09_shoulder_yaw_cover_a", "3DP_armP10_shoulder_yaw_cover_b", "3DP_armP11_shoulder_yaw_cover_c"),
      "Booklet p.10 labels P35 twice and P36 twice on one arm: four curved covers, which is 4 pieces "
      "per line over two arms and the 4 occurrences of each Fusion half of the two-piece cover "
      "`shoulder_yaw_protection`, placed twice per arm. Which Fusion half is Front and which is Back "
@@ -565,10 +565,6 @@ QTY_SETTLED = {"P15"}
 
 # Notes for printed CAD components that no team BOM line covers.
 PRINTED_EXTRA_NOTE: dict[str, str] = {
-    "3DP_armP11_shoulder_yaw_cover_c": (
-        "The booklet labels twelve covers per arm on p.10 and this is the one printed component left "
-        "over: it is the own body of the Fusion `shoulder_yaw_protection` group, 2.6 g once its two "
-        "cover halves (`P35`, `P36`) are subtracted. Whether it is a part at all is UNVERIFIED."),
 }
 
 # The three filament / powder rows. The team BOM has no line for them, but it

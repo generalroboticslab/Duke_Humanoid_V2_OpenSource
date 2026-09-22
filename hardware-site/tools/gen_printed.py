@@ -98,6 +98,7 @@ PRINTED = [
 
 # Fusion material name (substring, first match wins) -> site material, process.
 MATERIALS = [
+    ("protection", "TPU", "FDM"),   # team rule 2026-09-21: every protection cover is TPU, FDM-printed
     ("Nylon 12", "Nylon 12, SLS (Formlabs Fuse 1)", "SLS"),
     ("ABS Plastic 60%", "ABS, 60 % infill", "FDM"),
     ("ABS Plastic", "ABS", "FDM"),
