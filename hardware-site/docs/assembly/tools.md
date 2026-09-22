@@ -4,7 +4,6 @@ Gather these before the first assembly step.
 
 !!! abstract "At a glance"
     - **You will:** count every fastener into a divided tray by size; a leftover means a missed step.
-    - **Before this:** [Incoming inspection](../fabrication/index.md#incoming-inspection).
 
 Tools are not priced here: what a tool costs you depends on what your shop
 already owns. Specify from the table, then quote what you are short of.

@@ -4,7 +4,7 @@ Order these first — long lead time or supply risk, and no drop-in substitute:
 
 | Item | Why |
 | --- | --- |
-| {{ bom_count("cnc-parts.csv") }} machined parts, {{ bom_subtotal("cnc-parts.csv") }} | Large custom order ([CNC guide](../fabrication/index.md#order-the-parts)) |
+| {{ bom_count("cnc-parts.csv") }} machined parts, {{ bom_subtotal("cnc-parts.csv") }} | Large custom order ([CNC guide](../fabrication/index.md#cnc-guide)) |
 | RobStride actuators, {{ bom_qty("actuators.csv") }} units, {{ bom_subtotal("actuators.csv") }} | Supply risk |
 | Intel RealSense D436 ×2 | Supply risk |
 

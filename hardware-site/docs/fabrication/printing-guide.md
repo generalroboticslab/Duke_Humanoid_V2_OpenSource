@@ -16,13 +16,9 @@
 
 Process and material per part: [Printed parts](../bom/index.md#printed-parts). Files: [CAD downloads](#cad-downloads).
 
-1. Print one fit-critical part first — one that mates with a machined part or takes a heat-set insert — and check the fit.
-2. Print the set.
-3. Ream holes to size (FDM prints undersize); melt heat-set inserts in with a soldering iron.
+FDM holes print undersize: ream them to size. Set heat-set inserts with a soldering iron.
 
 <figure markdown>
   ![Soldering iron setting a heat-set insert in a printed battery holder](../assets/photos/body-heat-set-inserts.webp){ loading=lazy width="400" }
   <figcaption>Heat-set insert going into a printed battery holder.</figcaption>
 </figure>
-
-✅ **Check:** the test part fits before the set is printed.

@@ -140,9 +140,6 @@ Make both bearing retainers concentric before tightening.
 
 </div>
 
-!!! note "The M5/M4 CAD error is tracked on [CNC guide](../fabrication/index.md#cnc-guide)"
-    Found at the first-article fit check; whether the released CAD is fixed is
-    unknown. Check your parts before choosing screws. *Owner: hardware lead.*
 
 ✅ **Check:** Turns freely, no axial play; back cover sits without a gap.
 

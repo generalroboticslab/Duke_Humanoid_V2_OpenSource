@@ -1,7 +1,7 @@
 # Image manifest
 
 Every image this site needs and does not have, with the exact path it must be
-saved to and one line on what it must show. **82 images are missing.**
+saved to and one line on what it must show. **75 images are missing.**
 
 This is the list to hand to whoever renders the remaining figures. It is not
 a wish list: each path below is already named on a page, so dropping a file
@@ -54,7 +54,7 @@ Each of these already has a placeholder blockquote on the page named.
 | `assets/assembly/head-axes-diagram.png` | `assembly/head-and-camera-gimbal.md` | Frame P with both yaw axes, the pitch axis and the optical centre, dimensioned |
 | `assets/assembly/subassembly-map.png` | `assembly/index.md` | The build order as a diagram |
 
-## Missing — named on a page but not yet placed (25)
+## Missing — named on a page but not yet placed (23)
 
 These are named in a TODO block or an image manifest but have no placeholder
 in the page body yet; add the placeholder in the commit that adds the file.
@@ -82,23 +82,21 @@ in the page body yet; add the placeholder in the commit that adds the file.
 | `assets/bringup/joint-direction-convention.svg` | `bringup/motor-id-and-config.md` | Every joint with its positive direction drawn as an arrow on the real geometry. A backwards joint passes every other check in the site. |
 | `assets/bringup/tag-cube-wrist-mounting.jpg` | `bringup/camera-calibration.md` | The tag cube mounted on the wrist interface, with the tag family, tag size and orientation visible. Without this fixture the robot cannot be calibrated. |
 | `assets/fabrication/cad-release-assets.png` | `fabrication/cad-downloads.md` | Screenshot of a tagged release page with the CAD archives attached, so a reader knows what a correct release looks like when they see one. |
-| `assets/fabrication/machined-parts-laid-out.jpg` | `fabrication/incoming-inspection.md` | The full machined batch laid out and counted on arrival, grouped as the inspection procedure groups them. |
-| `assets/fabrication/bearing-bore-measurement.jpg` | `fabrication/incoming-inspection.md` | A bearing bore being measured correctly, showing the instrument and where it sits on the part. |
 | `assets/fabrication/printed-parts-orientation.png` | `fabrication/printing-guide.md` | Each structural printed part shown in its validated print orientation, with the load direction the layer lines must not align with drawn on it. |
 | `assets/fabrication/heat-set-insert-seated.jpg` | `fabrication/printing-guide.md` | A heat-set insert correctly seated, next to one pressed in too far and one left proud. |
 
-## Missing — per-part families (55)
+## Missing — per-part families (50)
 
 One image per row of a BOM CSV. The filename **is** the `part_id`, so these
 can be produced in a batch and dropped in without touching a page.
 
 | Path pattern | Count | Page | What each must show |
 | --- | ---: | --- | --- |
-| `assets/bom/cnc/<part_id>.png` | 35 | `bom/cnc-parts.md` | One render per machined part, filename exactly the `part_id` in `cnc-parts.csv`. A machined part a builder cannot see is a part they will order wrong. |
+| `assets/bom/cnc/<part_id>.png` | 30 | `bom/cnc-parts.md` | One render per machined part, filename exactly the `part_id` in `cnc-parts.csv`. A machined part a builder cannot see is a part they will order wrong. |
 | `assets/bom/electronics/<part_id>.jpg` | 14 | `bom/electronics.md` | One photograph per bought electronic part, filename exactly the `part_id` in `electronics.csv`, so a builder can confirm the thing in the box is the thing on the list. |
 | `assets/bom/actuators/<part_id>.jpg` | 6 | `bom/actuators.md` | One photograph per Robstride model, filename exactly the `part_id` in `actuators.csv`. The models look alike and are not interchangeable. |
 
-??? note "The 35 filenames for `assets/bom/cnc/<part_id>.png`"
+??? note "The 30 filenames for `assets/bom/cnc/<part_id>.png`"
 
     - `CNC_leg01_hip_center_back`
     - `CNC_leg02_RS03_shaft_coupler`
@@ -122,15 +120,10 @@ can be produced in a batch and dropped in without touching a page.
     - `CNC_arm02_shoulder_roll_back_bearing`
     - `CNC_arm03_shoulder_roll_output_shaft`
     - `CNC_arm04_shoulder_roll_support_shaft`
-    - `CNC_arm05_RS02_shaft_bearing`
-    - `CNC_arm06_RS02_shaft_coupler`
     - `CNC_arm07_elbow_front_bearing`
     - `CNC_arm08_elbow_back_bearing`
     - `CNC_arm09_elbow_output_shaft`
     - `CNC_arm10_r03_back_cover`
-    - `CNC_arm11_wrist_roll`
-    - `CNC_arm12_wrist_pitch`
-    - `CNC_arm13_RS05_shaft_coupler`
     - `CNC_body01_bottom_plate`
     - `CNC_body02_side_plate`
     - `CNC_body03_top_plate`
@@ -196,9 +189,9 @@ page, labelled with the team BOM ids. None of these replaces a step render.
 | | |
 | --- | ---: |
 | Referenced by a page, missing | 2 |
-| Named on a page, not yet placed | 25 |
-| Per-part families | 55 |
-| **Missing, total** | **82** |
+| Named on a page, not yet placed | 23 |
+| Per-part families | 50 |
+| **Missing, total** | **75** |
 | Present | 19 |
 
 ## Regenerating this page

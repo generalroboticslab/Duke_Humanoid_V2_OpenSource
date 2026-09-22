@@ -2,9 +2,6 @@
 
 Download the whole robot, one module, or one part. Part files are named `<part_id>_rev<NN>`, matching the parts lists; left and right parts are separate files.
 
-!!! note "Yours to check — redistribution terms of the vendor CAD models you download"
-    *Owner: PI + hardware lead.*
-
 ## Find a part on the robot
 
 <div class="dh-viewer-block">
@@ -66,8 +63,4 @@ The overall-dimension drawing and the exploded-view booklet, whose part labels a
 
 Everything ships under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) ([`LICENSE`](../files/LICENSE){ download="" }).
 
-## Check a download
-
-`shasum -a 256 <file>` must match the file's line in [SHA256SUMS.txt](../files/SHA256SUMS.txt){ download="" }; if not, download again. Write the `_revNN` of every file you use into your build log.
-
-✅ **Check:** every file matches its checksum before anything goes to a shop.
+Checksums: [SHA256SUMS.txt](../files/SHA256SUMS.txt){ download="" } (`shasum -a 256 <file>`).
