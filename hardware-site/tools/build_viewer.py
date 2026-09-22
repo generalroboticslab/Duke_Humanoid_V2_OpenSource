@@ -1,7 +1,7 @@
 """Build the interactive part viewer assets from a fusion_export folder (v2 scene builder).
 
     python tools/build_viewer.py ../cad/<export> [--old ../cad/<older export>] [--wait 25]
-        [--part-faces 3000 --vendor-faces 1500 --hardware-faces 100 --total-faces 900000]
+        [--part-faces 10000 --vendor-faces 6000 --hardware-faces 200 --total-faces 3000000]
         [--qbits 14 --level 10] [--normals] [--cache DIR] [--out docs/assets/viewer]
 
 Writes docs/assets/viewer/robot.glb and docs/assets/viewer/parts.json for the page
@@ -598,10 +598,10 @@ def main() -> int:
     ap.add_argument("--transforms", help="use this transforms.csv (overrides the folder's and --old)")
     ap.add_argument("--modules", help="use this modules.csv (default: the folder's, else the one next to --transforms)")
     ap.add_argument("--wait", type=float, default=25, help="minutes to wait for <folder>/export.log")
-    ap.add_argument("--part-faces", type=int, default=3000)
-    ap.add_argument("--vendor-faces", type=int, default=1500)
-    ap.add_argument("--hardware-faces", type=int, default=100)
-    ap.add_argument("--total-faces", type=int, default=900_000)
+    ap.add_argument("--part-faces", type=int, default=10_000)
+    ap.add_argument("--vendor-faces", type=int, default=6000)
+    ap.add_argument("--hardware-faces", type=int, default=200)
+    ap.add_argument("--total-faces", type=int, default=3_000_000)
     ap.add_argument("--qbits", type=int, default=14)
     ap.add_argument("--level", type=int, default=10)
     ap.add_argument("--normals", action="store_true",
