@@ -44,7 +44,7 @@ waist) and upper-body pair (arms, both shoulder_1, gimbals, computer branch).
 | --- | --- | --- |
 | 10 A fuse and holder | Power diagram, computer branch only | Part not identified **TODO**{ .dh-missing } |
 | Battery charger | Design log | [iSDT K4 Smart Dual Charger (AC400W / DC600W ×2)](https://www.getfpv.com/isdt-k4-smart-dual-charger-ac400w-dc600w-x2.html), reference only — not in the team BOM |
-| EC5 battery connectors | [Cables and connectors](#cables-not-in-this-list) | — |
+| EC5 battery connectors | [Cables and connectors](#consumables-not-itemised) | — |
 
 !!! missing "MISSING — a parts-list row (MPN, qty, link) for the 10 A fuse and its holder"
     *Owner: electrical lead.*
