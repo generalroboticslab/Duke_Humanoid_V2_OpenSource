@@ -277,6 +277,12 @@ OPEN: dict[str, str] = {
 ACT_FILE, EL_FILE, CAB_FILE, FAS_FILE = (
     "actuators.csv", "electronics.csv", "cables-connectors.csv", "fasteners.csv")
 
+# Quantities the site publishes instead of the team sheet's, where the robot is known to
+# differ from the spreadsheet. The line total follows the published quantity.
+QTY_OVERRIDE: dict[str, str] = {
+    "E6": "4",   # RS06: ankle_2 + shoulder_2, both sides (team sheet: 2)
+}
+
 PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
     # --- actuators ---------------------------------------------------------
     ("E1", ACT_FILE, "ACT_RS00", "actuators", "RobStride 00 quasi-direct-drive actuator", "RobStride 00", RS_ALT),
@@ -287,10 +293,9 @@ PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
      "Quoted below the RS 02 and the RS 00, which does not follow the model numbering; "
      "re-check with the vendor before ordering. " + RS_ALT),
     ("E6", ACT_FILE, "ACT_RS06", "actuators", "RobStride 06 quasi-direct-drive actuator", "RobStride 06",
-     "QUANTITY CONFLICT: the team BOM lists 2, but the robot has four RS06 joints (ankle_2 and "
-     "shoulder_2 on both sides, from `deploy/control/humanoid_config.py` and the CAN bus list), "
-     "so two more are needed than the team BOM buys. The team's booklet shows the same four: p.5 "
-     "labels E6 at the ankle roll of one leg and p.9 at the shoulder of one arm. " + RS_ALT),
+     "Quantity is the robot's, not the team BOM's: the sheet buys 2, the robot has four RS06 "
+     "joints (ankle_2 and shoulder_2 on both sides, `deploy/control/humanoid_config.py`; booklet "
+     "p.5 and p.9). Decided 2026-09-21 by the team: build to the robot. " + RS_ALT),
     # --- electronics -------------------------------------------------------
     ("E0", EL_FILE, "EL_COMPUTE_MINIPC", "electronics", "MINISFORUM X1-470 mini PC (onboard computer)", "X1-470",
      "Module (III) on the hardware overview figure. The 2026-09-19 link is the X1-Pro-470 listing; "
@@ -715,7 +720,7 @@ def build_purchased(sheet: Sheet, unknown_hosts: set[str]) -> dict[str, list[dic
         out[csv_name].append(new_row(
             subassembly=sub, **{"class": "off_the_shelf"}, part_id=pid, description=desc, mpn=mpn,
             vendor=vendor_of(src["link"], unknown_hosts), vendor_url=src["link"],
-            qty_per_robot=_plain(src["qty"]), **costs(src),
+            qty_per_robot=QTY_OVERRIDE.get(ref, _plain(src["qty"])), **costs(src),
             notes=joined(notes), team_ref=ref))
     return out
 

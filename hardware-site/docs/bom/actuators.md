@@ -9,9 +9,6 @@ Every joint is a RobStride quasi-direct-drive actuator:
 {% for r in pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | {{ r.mpn }} | `{{ r.part_id }}` | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
 {% endfor %}| | **Total** | | **{{ bom_qty("actuators.csv") }}** | | **{{ bom_subtotal("actuators.csv") }}** | |
 
-!!! unverified "UNVERIFIED — RS06 quantity: the team BOM line `E6` buys 2, the robot has 4 (`ankle_2` and `shoulder_2`, both sides)."
-    *Owner: BOM owner.*
-
 ## Which model goes in which joint
 
 | Model | Qty | Joints (both sides unless noted) |

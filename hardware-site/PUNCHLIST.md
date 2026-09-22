@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **11 open items** across **7 pages**, of which **1 block the public release**.
+Every unresolved item on this site, in one table: **10 open items** across **6 pages**, of which **1 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,24 +21,23 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Bill of materials | 1 | 0 |
 | Assembly | 2 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| **Total** | **11** | **1** |
+| **Total** | **10** | **1** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 11.
+more than 10.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
 | Electrical lead | 8 | 1 |
 | Hardware lead | 3 | 0 |
 | Safety sign-off | 2 | 1 |
-| BOM owner | 2 | 0 |
 | Controls lead | 2 | 0 |
+| BOM owner | 1 | 0 |
 
 ## What the release still owes
 
@@ -48,12 +47,6 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-
-## Bill of materials
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [actuators](../bom/index.md) | RS06 quantity: the team BOM line `E6` buys 2, the robot has 4 (`ankle_2` and `shoulder_2`, both sides). | BOM owner | no |
 
 ## Assembly
 
