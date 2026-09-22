@@ -59,6 +59,7 @@ extra_javascript:
   - javascripts/viewer.js
   - javascripts/viewer-dock.js
   - javascripts/clips.js
+  - javascripts/gaps.js
 
 extra:
   # Consumed by main.py. Keep release-wide constants here, never in page prose.
