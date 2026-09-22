@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **13 open items** across **8 pages**, of which **1 block the public release**.
+Every unresolved item on this site, in one table: **12 open items** across **7 pages**, of which **1 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,24 +21,24 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Bill of materials | 3 | 0 |
+| Bill of materials | 2 | 0 |
 | Assembly | 2 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| **Total** | **13** | **1** |
+| **Total** | **12** | **1** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 13.
+more than 12.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
 | Electrical lead | 10 | 1 |
 | Hardware lead | 3 | 0 |
 | Safety sign-off | 2 | 1 |
-| BOM owner | 2 | 0 |
 | Controls lead | 2 | 0 |
+| BOM owner | 1 | 0 |
 
 ## What the release still owes
 
@@ -55,7 +55,6 @@ ones somebody has to close before this counts as a finished release.
 | --- | --- | --- | :-: |
 | [electronics → Power path](../bom/index.md#power-path) | TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair | electrical lead | no |
 | [electronics → Not in this list](../bom/index.md#electronics-not-in-this-list) | A parts-list row (MPN, qty, link) for the 10 A fuse and its holder | electrical lead | no |
-| [index → Find a part on the robot](../bom/index.md#find-a-part-on-the-robot) | A unit price and vendor link for the five machined parts the team BOM has no line for | BOM owner | no |
 
 ## Assembly
 

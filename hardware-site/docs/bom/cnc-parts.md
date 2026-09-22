@@ -2,8 +2,6 @@
 
 {{ bom_count("cnc-parts.csv") }} machined part rows, {{ bom_subtotal("cnc-parts.csv") }}.
 **Qty** and **Unit cost** are the team BOM's; **Team ref** is its line.
-{{ bom_unpriced_count("cnc-parts.csv") }} rows have no team BOM line, so no price and no quantity, and read
-**TODO**{ .dh-missing } rather than zero: {{ bom_unpriced("cnc-parts.csv") }}.
 
 **Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
 Volume, centre of mass and inertia for every part: [part-properties.csv](../data/part-properties.csv){ download="" }.
@@ -48,9 +46,6 @@ Volume, centre of mass and inertia for every part: [part-properties.csv](../data
 The part IDs are the Fusion component names without their `_x<qty>` token, so every row with a
 download link is checked against the CAD. Fusion occurrence counts per robot: `leg02` 7, `leg03` 5,
 `leg09` 2, `leg10` 2, `leg11` 2, `leg12` 4, `arm04` 4, `arm10` 4, `body04` 4, all other linked rows 2 (body plates 1).
-Rows with no download link and no mass / size are not in the Fusion model. `CNC_arm13_RS05_shaft_coupler` sits in
-the gripper assembly (`dovetail_umi_gripper`) in Fusion: it is the gripper's mounting flange, the code repo's
-`cnc_flange` (Aluminum 6061, 22.05 g in `parallel_gripper_fusion_info.py`; 22.1 g here).
 
 !!! note "Build to the model — five rows have no team BOM line"
     The published model is what you build to; the team's spreadsheet is a working document and differs here.

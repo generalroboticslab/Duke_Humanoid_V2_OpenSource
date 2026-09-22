@@ -416,28 +416,9 @@ CNC_MAP: list[tuple[str, str, str]] = [
     ("C29", "CNC_arm08_elbow_back_bearing", ""),             # Elbow Bearing Retainer 65.65 x2 = quote CNC_arm08_x2
 ]
 
-# Machined parts the release already publishes that the team BOM has no row
-# for. They keep their IDs because the assembly pages, docs/files/ and the
-# viewer use them; they lose the superseded quote's price.
-# (part_id, subassembly, description, note)
-CNC_EXTRA: list[tuple[str, str, str, str]] = [
-    ("CNC_arm05_RS02_shaft_bearing", "arm", "RS02 shaft bearing",
-     "NOT A MACHINED PART: booklet p.9 labels this cone `P4`, a printed line, and in Fusion it is the "
-     "SLS nylon `3DP_arm05_RS02_shaft_bearing_retainer` (see Printed parts)."),
-    ("CNC_arm06_RS02_shaft_coupler", "arm", "RS02 shaft coupler",
-     "NOT A MACHINED PART: booklet p.9 labels this coupler block `P5`, a printed line, and in Fusion it "
-     "is the SLS nylon `3DP_arm06_RS02_shaft_coupler` (see Printed parts)."),
-    ("CNC_arm11_wrist_roll", "arm", "wrist roll",
-     "NOT A MACHINED PART: booklet p.9 labels this barrel `P6`, a printed line, and in Fusion it is the "
-     "SLS nylon `3DP_arm11_wrist_roll` (see Printed parts)."),
-    ("CNC_arm12_wrist_pitch", "arm", "wrist pitch",
-     "Not in the Fusion model and not labelled anywhere in the booklet: no CAD file, no mass, no team "
-     "BOM line. Whether the part exists at all is UNVERIFIED."),
-    ("CNC_arm13_RS05_shaft_coupler", "arm", "RS05 shaft coupler",
-     "In Fusion it is the gripper's machined mounting flange inside `dovetail_umi_gripper` "
-     "(the code repo's `cnc_flange`, Aluminium 6061, 2 occurrences). The booklet's gripper page (p.13) "
-     "does not label it."),
-]
+# Machined parts outside the team BOM are not listed (CNC_arm05/06/11 are the SLS-printed
+# 3DP_arm05/06/11; CNC_arm12 is not in the model; CNC_arm13 is the gripper flange).
+CNC_EXTRA: list[tuple[str, str, str, str]] = []   # team decision 2026-09-21: the parts list is the team BOM's machined lines only
 
 # --------------------------------------------------------------------------- #
 # 3DP rows P0-P39 -> the CAD-derived part_id(s).
