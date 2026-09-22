@@ -1,7 +1,7 @@
 # Image manifest
 
 Every image this site needs and does not have, with the exact path it must be
-saved to and one line on what it must show. **75 images are missing.**
+saved to and one line on what it must show. **73 images are missing.**
 
 This is the list to hand to whoever renders the remaining figures. It is not
 a wish list: each path below is already named on a page, so dropping a file
@@ -45,14 +45,12 @@ Filenames are lowercase with hyphens, except the per-part families below, whose
 filenames must match a `part_id` character for character so the page can find
 them without a lookup table.
 
-## Missing — referenced by a page (2)
+## Missing — referenced by a page (0)
 
 Each of these already has a placeholder blockquote on the page named.
 
 | Path | Page | What it must show |
 | --- | --- | --- |
-| `assets/assembly/head-axes-diagram.png` | `assembly/head-and-camera-gimbal.md` | Frame P with both yaw axes, the pitch axis and the optical centre, dimensioned |
-| `assets/assembly/subassembly-map.png` | `assembly/index.md` | The build order as a diagram |
 
 ## Missing — named on a page but not yet placed (23)
 
@@ -188,10 +186,10 @@ page, labelled with the team BOM ids. None of these replaces a step render.
 
 | | |
 | --- | ---: |
-| Referenced by a page, missing | 2 |
+| Referenced by a page, missing | 0 |
 | Named on a page, not yet placed | 23 |
 | Per-part families | 50 |
-| **Missing, total** | **75** |
+| **Missing, total** | **73** |
 | Present | 19 |
 
 ## Regenerating this page

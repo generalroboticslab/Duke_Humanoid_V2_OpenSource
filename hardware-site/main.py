@@ -314,6 +314,40 @@ def define_env(env):
         return f"`{ref}`" if ref else TODO
 
     @env.macro
+    def booklet_parts(page: str, per: str = "") -> str:
+        """Parts table for one exploded-view figure of the team booklet.
+
+        One row per label drawn on that page (``team-map.csv`` ``booklet_page``): the
+        label is the team BOM line (the BOM tables' Team ref), the Part ID is the CAD id
+        the file tables and the 3D viewer use, the description is the parts list's own.
+        ``per`` names what the quantity is counted for ("column", "leg"); the quantity
+        shown is always per robot, as the BOM counts it.
+        """
+        directory = _data_dir(env)
+        desc: dict[str, str] = {}
+        for name in _robot_csv_names(directory):
+            for row in _read(os.path.join(directory, name)):
+                pid = (row.get(COL_ID) or "").strip()
+                if pid and row.get("description"):
+                    desc.setdefault(pid, row["description"].split(" (Fusion")[0].strip())
+        order = {"C": 0, "P": 1, "E": 2, "H": 3}
+        rows = []
+        for r in _read(os.path.join(directory, "team-map.csv")):
+            pages = [x.strip() for x in (r.get("booklet_page") or "").split(",")]
+            if page not in pages:
+                continue
+            ref = r["team_ref"]
+            rows.append((order.get(ref[0], 9), int(re.sub(r"\D", "", ref) or 0), r))
+        rows.sort(key=lambda t: t[:2])
+        out = ["| Label | Part ID | Description | Qty per robot |", "| --- | --- | --- | ---: |"]
+        for _, _, r in rows:
+            pids = (r.get("part_id") or "").split()
+            pid_cell = " ".join(f"`{x}`" for x in pids) if pids else TODO
+            d = " / ".join(dict.fromkeys(desc.get(x, "") for x in pids if desc.get(x))) or r.get("item", "")
+            out.append(f"| **{r['team_ref']}** | {pid_cell} | {d} | {r.get('qty_team') or TODO} |")
+        return "\n".join(out)
+
+    @env.macro
     def bom_priced_as_of(csv_name: str) -> str:
         """Newest ``priced_as_of`` date in the file, so prices carry a date."""
         rows = _read(os.path.join(_data_dir(env), csv_name))

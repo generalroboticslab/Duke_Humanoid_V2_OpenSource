@@ -33,7 +33,7 @@ more than 10.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Electrical lead | 8 | 1 |
+| Electrical lead | 7 | 1 |
 | Hardware lead | 3 | 0 |
 | Safety sign-off | 2 | 1 |
 | Controls lead | 2 | 0 |
@@ -57,7 +57,7 @@ across every step of every limb, and each carries the flag in its own right.
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
 | [gripper → Set the open and closed positions (step 7)](../assembly/index.md#step-gripper-7) | The uncalibrated service map reports 90 mm; measure the real gap in step 7 | hardware lead + controls | no |
-| [head-and-camera-gimbal → Route the camera cable (step 6)](../assembly/index.md#step-head-and-camera-gimbal-6) | Camera cable across the yaw and pitch axes — Real yaw travel; how the USB-C cable crosses yaw (slip ring, helix or stop).; Cable type, length, bend radius, service loop, retention. … | hardware lead + electrical | no |
+| [head-and-camera-gimbal → Route the camera cable (step 7)](../assembly/index.md#step-head-and-camera-gimbal-7) | How the camera cable crosses the yaw axis (travel, service loop, retention). | hardware lead | no |
 
 ## Electrical
 

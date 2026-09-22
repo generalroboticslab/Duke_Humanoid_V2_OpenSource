@@ -5,7 +5,6 @@ Build one leg, hip to foot plate; build two.
 !!! abstract "At a glance"
     - **You will:** set six IDs, then build from hip to foot.
     - **Parts:** RobStride 03 ×4, 04 ×1, 06 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_leg01`–`CNC_leg18` ([machined parts](../bom/index.md#cnc-parts)).
-    - **Before this:** [Tools](#tools).
 
 RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these depths:
 
