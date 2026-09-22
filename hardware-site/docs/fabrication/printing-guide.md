@@ -17,8 +17,3 @@
 Process and material per part: [Printed parts](../bom/index.md#printed-parts). Files: [CAD downloads](#cad-downloads).
 
 FDM holes print undersize: ream them to size. Set heat-set inserts with a soldering iron.
-
-<figure markdown>
-  ![Soldering iron setting a heat-set insert in a printed battery holder](../assets/photos/body-heat-set-inserts.webp){ loading=lazy width="400" }
-  <figcaption>A heat-set insert pressed into a printed battery holder with the soldering iron.</figcaption>
-</figure>
