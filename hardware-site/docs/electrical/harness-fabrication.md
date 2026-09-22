@@ -4,14 +4,14 @@ Every cable on the robot is one of the types below. Red is +, black is −; CAN_
 
 | Cable | Conductors | End A | End B | Carries |
 | --- | --- | --- | --- | --- |
-| Actuator drop | 2 × 18 AWG power + 1 twisted pair CAN | XT30(2+2) female, cable side (Amass XT30(2+2)-F.G.B) | XT30(2+2) female | 48 V and CAN in one shell: pin 1 +, pin 2 −, pin 3 CAN_L, pin 4 CAN_H. Every actuator has an in and an out socket (board side XT30PB(2+2)-M.G.B), so the drops chain motor to motor |
+| Actuator drop | 2 × 18 AWG power **UNVERIFIED**{ .dh-unverified } + 1 twisted pair CAN | XT30(2+2) female, cable side (Amass XT30(2+2)-F.G.B) | XT30(2+2) female | 48 V and CAN in one shell: pin 1 +, pin 2 −, pin 3 CAN_L, pin 4 CAN_H. Every actuator has an in and an out socket (board side XT30PB(2+2)-M.G.B), so the drops chain motor to motor |
 | Bus head | 1 twisted pair | CANable PRO screw terminals, 120 Ω across H–L | XT30(2+2) female, power pins unused | CAN only, adapter to the first motor |
-| Bus tail terminator | — | 120 Ω resistor across CAN_H–CAN_L in an XT30(2+2) shell | — | Plugs into the last motor's out socket |
+| Bus tail terminator | — | 120 Ω resistor across CAN_H–CAN_L in an XT30(2+2) shell **UNVERIFIED**{ .dh-unverified } | — | Plugs into the last motor's out socket |
 | CAN twisted pair | One pair from Ethernet cable | — | — | Coloured conductor → CAN_H (yellow lead), white → CAN_L (blue lead); 3/32 in heat-shrink per lead, 1/4 in over the pair |
-| Pack lead and series link | 12 AWG silicone | EC5 | EC5 / screw terminal | 48 V trunk |
+| Pack lead and series link | 12 AWG silicone **UNVERIFIED**{ .dh-unverified } | EC5 | EC5 / screw terminal | 48 V trunk |
 | Block feeds | 12 AWG silicone | Screw terminal | Screw terminal | 48 V bus to each power block; pack − to each ground block |
 | Computer feed | 16 AWG silicone | Converter (E11) 12 V terminals | Computer DC plug | 12 V; 10 A inline fuse on the 48 V side |
-| Gripper servo feed | 18 AWG silicone | Converter (E12) 12 V terminals | Servo driver board (E10) terminals | 12 V, one per gripper |
+| Gripper servo feed | 18 AWG silicone **UNVERIFIED**{ .dh-unverified } | Converter (E12) 12 V terminals | Servo driver board (E10) terminals | 12 V, one per gripper |
 | Camera USB | Belkin USB-A to USB-C (E9) | Computer / hub 1 | Right-angle USB-C adapter (E21) on the camera | USB 3 (5 Gbit/s) |
 | Gripper servo signal | Servo's own lead | Servo (E15) | Driver board (E10) | Serial bus |
 
