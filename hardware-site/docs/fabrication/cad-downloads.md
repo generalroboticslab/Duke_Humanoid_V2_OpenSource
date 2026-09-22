@@ -64,7 +64,7 @@ The overall-dimension drawing and the exploded-view booklet, whose part labels a
 
 {{ cad_table("drawings") }}
 
-Everything ships under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) ([`LICENSE`](../files/LICENSE){ download="" }). Known CAD errors: [CNC guide](#known-cad-errors).
+Everything ships under [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0) ([`LICENSE`](../files/LICENSE){ download="" }).
 
 ## Check a download
 

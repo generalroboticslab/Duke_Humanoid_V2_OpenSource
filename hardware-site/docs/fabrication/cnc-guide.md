@@ -13,22 +13,6 @@ Order the machined parts from the STEP files. There are no per-part drawings.
 | Tapped holes | ≥ 4 mm usable thread, 6 mm preferred |
 | Edges | No sharp internal corners; chamfers, not fillets |
 
-## Known CAD errors
-
-The published CAD still carries both. Fix them at the machinist, not on the robot.
-
-<figure markdown>
-  ![CAD render of an actuator and its output shaft part](../assets/photos/tolerance-cad-m4-vs-m5.webp){ loading=lazy width="480" }
-  <figcaption>"Motor04 shaft needs M5 holes, but the CAD has M4 holes. Same in the knee motor."</figcaption>
-</figure>
-
-| Part | In the CAD | Needed |
-| --- | --- | --- |
-| Motor04 shaft and knee motor pattern | M4 clearance (Ø4.25 mm) — every part except `CNC_leg10_knee_output_shank` (Ø5.3 mm × 14) | M5 clearance, Ø5.3 mm. Dry-fit the shaft to the actuator first to find which pattern |
-| `CNC_leg03` RS03 shaft bearing retainer above the knee | Bore undersize as drawn | Opened to 57.88 mm on the reference build |
-
-Other rework on the reference build: waist and knee motor shafts filed to 8.03 mm; Motor04 shaft hole enlarged to 6.02 mm and flange filed to 50.02 mm.
-
 ## Fit-critical parts
 
 Measure these interfaces first:
