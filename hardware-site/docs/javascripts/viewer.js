@@ -732,6 +732,11 @@
       select(t, false);
       const tr = t.rows[0];
       if (!tr) return;
+      // The row may sit in a collapsed block (the CAD file tables): open every closed
+      // <details> above it, or the scroll and the flash land on nothing.
+      for (let el = tr.parentElement; el; el = el.parentElement) {
+        if (el.tagName === "DETAILS" && !el.open) el.open = true;
+      }
       tr.scrollIntoView({ behavior: "smooth", block: "center" });
       tr.focus({ preventScroll: true });
       tr.classList.add("dh-flash");
