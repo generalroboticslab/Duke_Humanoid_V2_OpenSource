@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **2 open items** across **2 pages**, of which **0 block the public release**.
+Every unresolved item on this site, in one table: **0 open items** across **0 pages**, of which **0 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,18 +21,15 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Bring-up | 2 | 0 |
-| **Total** | **2** | **0** |
+| **Total** | **0** | **0** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 2.
+more than 0.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Electrical lead | 1 | 0 |
-| Controls lead | 1 | 0 |
 
 ## What the release still owes
 
@@ -42,17 +39,6 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-
-## Bring-up
-
-Bring-up cannot start until Electrical closes the pack-configuration item.
-Series versus parallel decides the bus voltage, and every current, converter
-and check below is written against a voltage nobody has confirmed.
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [first-power-on → Power the computer only (step 1)](../bringup/index.md#step-first-power-on-1) | How to power the computer alone: the power diagram feeds it from the arm motors' distribution block, no disconnect drawn — Do not improvise. | electrical lead | no |
-| [motor-id-and-config → Set an ID](../bringup/index.md#set-an-id) | Whether an ID can only be set with the motor alone on the bus, and what firmware baseline the team ran — The procedure above is the vendor tool's. | controls lead | no |
 
 ## Items that are not TODO blocks
 

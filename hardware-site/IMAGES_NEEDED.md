@@ -1,7 +1,7 @@
 # Image manifest
 
 Every image this site needs and does not have, with the exact path it must be
-saved to and one line on what it must show. **73 images are missing.**
+saved to and one line on what it must show. **74 images are missing.**
 
 This is the list to hand to whoever renders the remaining figures. It is not
 a wish list: each path below is already named on a page, so dropping a file
@@ -83,7 +83,7 @@ in the page body yet; add the placeholder in the commit that adds the file.
 | `assets/fabrication/printed-parts-orientation.png` | `fabrication/printing-guide.md` | Each structural printed part shown in its validated print orientation, with the load direction the layer lines must not align with drawn on it. |
 | `assets/fabrication/heat-set-insert-seated.jpg` | `fabrication/printing-guide.md` | A heat-set insert correctly seated, next to one pressed in too far and one left proud. |
 
-## Missing — per-part families (50)
+## Missing — per-part families (51)
 
 One image per row of a BOM CSV. The filename **is** the `part_id`, so these
 can be produced in a batch and dropped in without touching a page.
@@ -91,7 +91,7 @@ can be produced in a batch and dropped in without touching a page.
 | Path pattern | Count | Page | What each must show |
 | --- | ---: | --- | --- |
 | `assets/bom/cnc/<part_id>.png` | 30 | `bom/cnc-parts.md` | One render per machined part, filename exactly the `part_id` in `cnc-parts.csv`. A machined part a builder cannot see is a part they will order wrong. |
-| `assets/bom/electronics/<part_id>.jpg` | 14 | `bom/electronics.md` | One photograph per bought electronic part, filename exactly the `part_id` in `electronics.csv`, so a builder can confirm the thing in the box is the thing on the list. |
+| `assets/bom/electronics/<part_id>.jpg` | 15 | `bom/electronics.md` | One photograph per bought electronic part, filename exactly the `part_id` in `electronics.csv`, so a builder can confirm the thing in the box is the thing on the list. |
 | `assets/bom/actuators/<part_id>.jpg` | 6 | `bom/actuators.md` | One photograph per Robstride model, filename exactly the `part_id` in `actuators.csv`. The models look alike and are not interchangeable. |
 
 ??? note "The 30 filenames for `assets/bom/cnc/<part_id>.png`"
@@ -127,7 +127,7 @@ can be produced in a batch and dropped in without touching a page.
     - `CNC_body03_top_plate`
     - `CNC_body04_front_plate`
 
-??? note "The 14 filenames for `assets/bom/electronics/<part_id>.jpg`"
+??? note "The 15 filenames for `assets/bom/electronics/<part_id>.jpg`"
 
     - `EL_COMPUTE_MINIPC`
     - `EL_BATTERY_6S`
@@ -143,6 +143,7 @@ can be produced in a batch and dropped in without touching a page.
     - `EL_SURGE_PROTECTOR`
     - `EL_DIST_BLOCK`
     - `EL_VOLTAGE_CHECKER`
+    - `EL_USBC_ADAPTER`
 
 ??? note "The 6 filenames for `assets/bom/actuators/<part_id>.jpg`"
 
@@ -188,8 +189,8 @@ page, labelled with the team BOM ids. None of these replaces a step render.
 | --- | ---: |
 | Referenced by a page, missing | 0 |
 | Named on a page, not yet placed | 23 |
-| Per-part families | 50 |
-| **Missing, total** | **73** |
+| Per-part families | 51 |
+| **Missing, total** | **74** |
 | Present | 19 |
 
 ## Regenerating this page

@@ -22,6 +22,22 @@
    marker for figures that are not published yet. Everything else is the theme. */
 
 /* --------------------------------------------------------------------------
+   0. Type: smaller and tighter than the theme default (user request, 2026-09-21)
+   -------------------------------------------------------------------------- */
+.md-typeset { font-size: .74rem; line-height: 1.55; }
+.md-typeset h1 { font-size: 1.7em; margin: 0 0 .9em; }
+.md-typeset h2 { font-size: 1.3em; margin: 1.6em 0 .6em; }
+.md-typeset h3 { font-size: 1.05em; margin: 1.3em 0 .5em; }
+.md-typeset p, .md-typeset ul, .md-typeset ol { margin: .6em 0; }
+.md-typeset li { margin: .15em 0; }
+.md-typeset table:not([class]) { font-size: .66rem; }
+.md-typeset table:not([class]) th, .md-typeset table:not([class]) td { padding: .5em .8em; }
+.md-typeset .admonition, .md-typeset details { font-size: .66rem; margin: 1em 0; }
+.md-typeset pre > code { font-size: .68rem; }
+.md-typeset figure { margin: 1em auto; }
+.md-typeset figcaption { font-size: .66rem; }
+
+/* --------------------------------------------------------------------------
    2. Step number badge — emitted by the step() macro in main.py
    -------------------------------------------------------------------------- */
 .md-typeset h3.step {

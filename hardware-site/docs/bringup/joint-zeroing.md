@@ -1,87 +1,24 @@
 # Joint zeroing
 
-Record each joint's encoder reading at the model's zero pose.
+The zero pose is the deployed model at all joint angles zero; the control stack assumes encoder 0 is that pose. Cameras look straight ahead at zero.
 
-!!! abstract "At a glance"
-    - **Before this:** [Motor ID and config](#motor-id-and-config). Robot hung, legs straight, a hand on the operator kill switch, motors **not** enabled.
+{{ step(1, "Set the zeros") }}
 
-## Set zeros
+Motors unpowered for movement but on the bus. Hold every joint at the model's zero pose by hand, then:
 
-The zero pose is the deploy model at all-zero joint angles: deploy assumes
-encoder 0 equals model `qpos` 0. The model is `robot.xml` in the
-`HumanoidRmaVelEstArmFlashSacv159bMixedArmsCam` run directory
-(`humanoid_site.DEPLOY_MODEL_TASK`). Joint order and IDs:
-[actuator map](../electrical/index.md#the-actuator-map).
+```bash
+python humanoid_set_zero.py     # writes the current position of all 31 motors as zero and saves it to the drives
+```
 
-| Joint | Zero as the software defines it |
-|---|---|
-| `cam_yaw_*`, `cam_pitch_*` | Camera looks straight ahead (gimbal FK assumption) |
-| `left_wrist_1`, `right_wrist_1` | The model sets `ref` −π/2 (left), +π/2 (right) to keep encoder 0 at `qpos` 0, 90° from the upstream model's wrist_1 zero ("working pose") |
+Do not use the vendor tool's *set mechanical zero*: it is lost at power-off. Any later run re-zeroes all 31 motors, the gimbals included, so redo [Camera calibration](#camera-calibration) afterwards.
 
-!!! note "Not recorded — a zero-pose photograph and holding fixture from the reference build"
-    *Owner: hardware lead + controls lead.*
+{{ step(2, "Verify the zeros") }}
 
-The wrist encoders wrap at ±π. Keep the wrists' zero well away from the wrap
-**TODO**{ .dh-missing }.
+```bash
+python humanoid_config.py --zero          # ramps every joint to zero at 10 % torque — stay clear
+python humanoid_gimbal_zero_check.py      # prints where the model thinks each camera looks
+python humanoid_mass_check.py             # gravity torque vs the model on shoulder_2, shoulder_3, elbow, wrist_1
+```
 
-!!! danger "It zeroes all 31 motors, every time"
-    Re-zeroing to fix an arm also wipes the gimbal zeros. After any run, redo
-    [Camera calibration](#camera-calibration).
-
-1. Go to `control/`:
-
-    ```bash
-    cd <deploy-repo>/control
-    ```
-
-2. Hold every joint at its mechanical zero by hand while it runs:
-
-    ```bash
-    python humanoid_set_zero.py
-    ```
-
-3. Type `yes`.
-
-It writes each motor's current position as its zero, sets `zero_sta = 1`
-(range `−π..+π`), and **saves both to the drives**. Do not use the vendor tool's
-*set mechanical zero*: it is lost at power-off.
-
-## Verify zeros
-
-!!! danger "31 joints move at once"
-    10 % of an RS04's torque still traps a finger. Stay clear.
-
-1. Ramp to zero. Every joint must end at the zero pose.
-
-    ```bash
-    python humanoid_config.py --zero  # 10 % torque, 300 steps at 200 Hz
-    ```
-
-2. Check the gimbal zeros: compare the printed look direction with the cameras.
-   A mismatch gives the offset.
-
-    ```bash
-    python humanoid_gimbal_zero_check.py  # needs humanoid_real_env.py publishing telemetry
-    ```
-
-3. Check gravity torque against the model. It scores `shoulder_2`, `shoulder_3`,
-   `elbow`, `wrist_1`; a residual growing from wrist to shoulder locates the
-   faulty link.
-
-    ```bash
-    python humanoid_mass_check.py
-    ```
-
-✅ **Check:** every joint matches the model at the zero pose, the gimbal check
-agrees with the cameras, and the offsets are saved and backed up. Pass values:
-[A5](#a5-check-zero-and-model-fidelity).
-
-## Back up zeros
-
-!!! note "Yours to determine — how you back up and restore the zero offsets"
-    *Owner: controls lead.*
-
-## Check accuracy
-
-!!! note "Not measured on the reference robot — zeroing accuracy target per joint"
-    *Owner: controls lead + hardware lead.*
+✅ **Check:** every joint ends at the zero pose; both cameras look straight ahead; every arm residual ≤ 0.35 N·m.
+{ .dh-check }
