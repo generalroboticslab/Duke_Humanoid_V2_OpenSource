@@ -657,6 +657,13 @@
   "qty_in_model": 1,
   "via": "IntelRealsense_D435_Multibody v9 (1)"
  },
+ "U-joint_type_C_adapter_v3_1": {
+  "part_id": "EL_USBC_ADAPTER",
+  "bom_file": "electronics.csv",
+  "description": "USB-C right-angle adapter, camera cable to the D436",
+  "qty_in_model": 1,
+  "via": ""
+ },
  "0001755652_1_1_30_GR-2202_ASM_1_ASM_1_1_30_GR-2202_ASM_FL46BLW10-48V-5N.m-DE_2__FL46BLW10-48V-5N.m-DE_1_1": {
   "part_id": "ACT_RS05",
   "bom_file": "actuators.csv",
@@ -929,6 +936,20 @@
   "description": "Intel RealSense D436 depth camera",
   "qty_in_model": 1,
   "via": "IntelRealsense_D435_Multibody v9"
+ },
+ "U-joint_type_C_adapter": {
+  "part_id": "EL_USBC_ADAPTER",
+  "bom_file": "electronics.csv",
+  "description": "USB-C right-angle adapter, camera cable to the D436",
+  "qty_in_model": 1,
+  "via": ""
+ },
+ "bearing": {
+  "part_id": "FAS_BEARING_10X15X4",
+  "bom_file": "fasteners.csv",
+  "description": "Ball bearing, 10 x 15 x 4 mm",
+  "qty_in_model": 1,
+  "via": ""
  },
  "0001755652_1_1_30_GR-2202_ASM_1_ASM_1_1_30_GR-2202_ASM_FL46BLW10-48V-5N.m-DE_2__FL46BLW10-48V-5N.m-DE_1": {
   "part_id": "ACT_RS05",

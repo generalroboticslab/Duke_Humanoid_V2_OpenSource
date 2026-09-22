@@ -158,6 +158,7 @@ BOOKLET: dict[str, tuple[str, str]] = {
     "C15": ("p.5", "two small rings at the lower end of the shank arms, two per leg, which is this line's 4"),
     "C16": ("p.5", "the ring bracket at the ankle-pitch joint, one per leg"),
     "C17": ("p.5", "the forked retainer behind the ankle-pitch actuator, one per leg"),
+    "E21": ("p.14", "the small angled connector between the camera and the arms, drawn with an unlabelled arrow"),
     "C18": ("p.5", "the ring on the RS06 ankle-roll actuator, one per leg"),
     "C19": ("p.5", "the short shaft arm on the driven side of the ankle roll, one per leg"),
     "C20": ("p.5", "the short shaft arm on the support side of the ankle roll, one per leg"),
@@ -288,6 +289,18 @@ PRINTED_QTY_OVERRIDE: dict[str, int] = {
     "3DP_legP09_shank_cover_a": 2,
     "3DP_legP10_shank_cover_b": 2,
 }
+
+# Small purchased parts the robot has that the team xlsx has no line for. Numbered on from
+# the team's series (decided with the user, 2026-09-21) and listed as lab consumables: no
+# price, no vendor, by decision ("鸡毛蒜皮的东西不标价"). (ref, csv, part_id, subassembly,
+# description, mpn, qty, note)
+SITE_PURCHASED: list[tuple[str, str, str, str, str, str, str, str]] = [
+    ("E21", EL_FILE, "EL_USBC_ADAPTER", "electronics",
+     "USB-C right-angle adapter, camera cable to the D436", "", "2",
+     "Site-added line E21 (2026-09-21): the Fusion component `U-joint_type_C_adapter v3`, one per "
+     "camera column, drawn on booklet p.14 with an unlabelled arrow. Not in the team xlsx yet: "
+     "no price, no vendor."),
+]
 
 PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
     # --- actuators ---------------------------------------------------------
@@ -728,6 +741,11 @@ def build_purchased(sheet: Sheet, unknown_hosts: set[str]) -> dict[str, list[dic
             vendor=vendor_of(src["link"], unknown_hosts), vendor_url=src["link"],
             qty_per_robot=QTY_OVERRIDE.get(ref, _plain(src["qty"])), **costs(src),
             notes=joined(notes), team_ref=ref))
+    for ref, csv_name, pid, sub, desc, mpn, qty, note in SITE_PURCHASED:
+        # class "consumable": the tables print a dash, not a red TODO, for price and vendor.
+        out[csv_name].append(new_row(
+            subassembly=sub, **{"class": "consumable"}, part_id=pid, description=desc, mpn=mpn,
+            qty_per_robot=qty, notes=note, team_ref=ref))
     return out
 
 
@@ -950,6 +968,13 @@ def write_team_map(sheet: Sheet, cnc: list[dict], printed: list[dict],
                          part_id=" ".join(pids), qty_team=_plain(src["qty"]), qty_cad=cad,
                          booklet_page=page, evidence=joined(evidence),
                          status="open" if ref in OPEN else "settled"))
+
+    for ref, _, pid, _, desc, _, qty, note in SITE_PURCHASED:
+        page, seen = BOOKLET.get(ref, ("—", "not labelled in the booklet"))
+        rows.append(dict(team_ref=ref, item=desc, category="Electronics", part_id=pid,
+                         qty_team=qty, qty_cad="", booklet_page=page,
+                         evidence=joined([f"Booklet {page}: {seen}." if page != "—" else "", note]),
+                         status="settled"))
 
     with open(DATA / TEAM_MAP, "w", newline="", encoding="utf-8") as fh:
         w = csv.DictWriter(fh, fieldnames=TEAM_MAP_COLS, lineterminator="\n")

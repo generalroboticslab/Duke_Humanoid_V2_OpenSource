@@ -11,18 +11,21 @@ Join the subassemblies into one robot, battery disconnected throughout. Two peop
 Support it level, waist free, hips and shoulders reachable.
 
 ✅ **Check:** the torso cannot fall or rotate when a limb is offered up.
+{ .dh-check }
 
 {{ step(2, "Attach the legs") }}
 
 Bolt each leg's hip-pitch bracket (C6) to the pelvis, supporting the leg's weight. Check the side: the legs differ by bus and IDs.
 
 ✅ **Check:** all twelve leg joints move; each harness tail reaches the torso, unconnected.
+{ .dh-check }
 
 {{ step(3, "Attach the arms") }}
 
 Bolt each arm to its shoulder-pitch coupler (C27). Check the side: the arms differ by bus, IDs and wrist housing.
 
 ✅ **Check:** each arm moves through its travel without touching the torso or a leg.
+{ .dh-check }
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1154" height="650"
@@ -35,12 +38,14 @@ Bolt each arm to its shoulder-pitch coupler (C27). Check the side: the arms diff
 Bolt both columns to the top plate as in [Head and camera gimbal](#head-and-camera-gimbal), step 9.
 
 ✅ **Check:** yaw axes 130 mm apart; no column touches an arm in any pose.
+{ .dh-check }
 
 {{ step(5, "Mount the grippers") }}
 
 Bolt each gripper to its wrist output (P8) as in [Gripper](#gripper), step 7; run the servo cable up the arm to its driver board.
 
 ✅ **Check:** both grippers work; their tags face the cameras in some arm pose.
+{ .dh-check }
 
 {{ step(6, "Join the harnesses") }}
 
@@ -54,11 +59,13 @@ Join one branch at a time against the bus table; wiring detail is on [Electrical
 | `can25` | Camera gimbals, IDs 5–8 |
 
 ✅ **Check:** every branch is labelled; waist, hips and shoulders move with nothing pulled or pinched.
+{ .dh-check }
 
 {{ step(7, "Inspect and hang the robot") }}
 
 Every joint moves by hand, alone and in combination; no cable is stretched, pinched or kinked in any pose; nothing rattles; lenses clean; packs disconnected. Hang the robot from the top plate with the legs straight.
 
 ✅ **Check:** it hangs level, legs straight.
+{ .dh-check }
 
 Next: [Electrical](../electrical/index.md), then [Bring-up](../bringup/index.md).

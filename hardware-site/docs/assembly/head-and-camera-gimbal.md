@@ -8,12 +8,11 @@ Two identical camera columns: a RealSense D436 on a yaw–pitch gimbal of two Ro
 
 <figure markdown>
   ![One camera column exploded, parts labelled with team BOM ids](../assets/exploded/team/14-camera-gimbal.webp){ loading=lazy }
-  <figcaption>One column (build two). Base P16, yaw actuator E5, neck P17, pitch actuator E5, arms P18 and P19, bearing H5, camera E14.</figcaption>
+  <figcaption>One column (build two). Base P16, yaw actuator E5, neck P17, pitch actuator E5, arms P18 and P19, bearing H5, camera E14, USB-C adapter E21.</figcaption>
 </figure>
 
 {{ booklet_parts("p.14") }}
 
-Not labelled: the camera bracket `U-joint_type_C_adapter` between the arms and the camera, in the CAD but in no parts list **TODO**{ .dh-missing }.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
@@ -33,18 +32,21 @@ Set and label the four IDs on the bench, before anything is assembled.
 | `cam_pitch_right` | 6 | `can25` |
 
 ✅ **Check:** IDs 5 to 8 answer on `can25`.
+{ .dh-check }
 
 {{ step(2, "Fit the yaw actuator into the base") }}
 
 Seat the yaw actuator (E5) in the base (P16), body on the yaw axis.
 
 ✅ **Check:** the output turns freely, no axial play.
+{ .dh-check }
 
 {{ step(3, "Fit the neck to the yaw output") }}
 
 Bolt the neck (P17) to the yaw actuator output.
 
 ✅ **Check:** the neck turns square to the yaw axis, no wobble.
+{ .dh-check }
 
 {{ step(4, "Fit the pitch actuator into the neck") }}
 
@@ -55,21 +57,24 @@ Seat the pitch actuator (E5) in the neck (P17), its axis horizontal and crossing
 Bolt the arm (P18) to the pitch actuator output. On the other side, press the bearing (H5) into the support arm (P19) and fit it over the neck's idler pin.
 
 ✅ **Check:** both arms swing together through the full pitch travel without binding.
+{ .dh-check }
 
 {{ step(6, "Mount the camera") }}
 
-Fit the camera (E14) between the two arms with the bracket. Hold the camera by its body; leave the lens film on until the build is done.
+Fit the camera (E14) between the two arms and plug the right-angle USB-C adapter (E21) into it. Hold the camera by its body; leave the lens film on until the build is done.
 
 ✅ **Check:** the camera does not move under hand pressure.
+{ .dh-check }
 
 {{ step(7, "Route the camera cable") }}
 
-Run a USB-A to USB-C cable (`E9` **UNVERIFIED**{ .dh-unverified }) from the camera down the column, with slack across the pitch and yaw axes and no tight bends: a flexed USB 3 cable drops the camera to USB 2.
+Run a USB-A to USB-C cable (`E9` **UNVERIFIED**{ .dh-unverified }) from the adapter (E21) down the column, with slack across the pitch and yaw axes and no tight bends: a flexed USB 3 cable drops the camera to USB 2.
 
 !!! missing "MISSING — how the camera cable crosses the yaw axis (travel, service loop, retention)."
     *Owner: hardware lead.*
 
 ✅ **Check:** the camera streams USB 3 at every extreme of hand-turned travel.
+{ .dh-check }
 
 {{ step(8, "Build the second column") }}
 
@@ -80,6 +85,7 @@ Repeat steps 2–7 with the other side's IDs.
 Bolt each base flush on the top plate (`CNC_body03_top_plate`), through the concentric holes, yaw axes 130 mm apart. The right column is the left rotated 180°. `cam_yaw_left` (IDs 7/8) is the column on the robot's left.
 
 ✅ **Check:** yaw axes 130 mm apart; the columns never touch through full travel.
+{ .dh-check }
 
 {{ step(10, "Zero the joints") }}
 

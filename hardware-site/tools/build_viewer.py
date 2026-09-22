@@ -677,6 +677,8 @@ def main() -> int:
         sample = v[RNG.choice(len(v), size=min(400, len(v)), replace=False)]
         return float(np.median(kd.query(sample)[0]))
 
+    _vm = SITE / "docs" / "assets" / "viewer" / "vendor-map.json"
+    vendor_mapped = set(json.loads(_vm.read_text(encoding="utf-8")).keys()) if _vm.is_file() else set()
     for r in trows:
         path, name = r["path"], r["fusion_name"]
         if r["visible"] != "True":
@@ -720,6 +722,8 @@ def main() -> int:
         pid = lookup.pid(name, path)
         if pid:
             cls = "part"
+        elif row["file_name"] in vendor_mapped:
+            cls = "vendor"      # a BOM part (vendor-map.json), however light: the H5 bearing is 2.5 g
         elif FASTENER_RE.search(name) or fnum(row["mass_g"], 1e9) < FASTENER_MAX_G:
             cls = "hardware"
         else:

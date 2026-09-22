@@ -20,6 +20,7 @@ Set and label each ID on the bench, one actuator at a time. All six joints of a 
 | `ankle_2` (roll) | RobStride 06 | 36 / 46 | `can24` / `can23` |
 
 ✅ **Check:** each actuator answers alone at its ID and carries its label.
+{ .dh-check }
 
 ## Hip
 
@@ -41,12 +42,14 @@ Set and label each ID on the bench, one actuator at a time. All six joints of a 
 Bolt the actuator (E3) into the bracket (C6). Fit the output shaft (C5) on the output and the bearing (H0) in its retainer (C4) on the far side.
 
 ✅ **Check:** turns freely, even drag, no axial play.
+{ .dh-check }
 
 {{ step(3, "Build the hip-roll joint") }}
 
 Bolt the actuator (E3) into the front bracket (C7). Fit the output shaft (C5) on the output; seat the bearing (H0) in the back retainer (C8). Make both retainers concentric before tightening.
 
 ✅ **Check:** turns end to end without binding, equal drag both ways, no axial play.
+{ .dh-check }
 
 ## Knee, shank, ankle and foot
 
@@ -68,36 +71,42 @@ Bolt the actuator (E3) into the front bracket (C7). Fit the output shaft (C5) on
 Fit the output shaft (C9) on the actuator (E3) output and the support shaft (C10) over the bearing on the other side; the output shaft (C5) and retainer (C4) sit on the actuator as in step 2.
 
 ✅ **Check:** the three hip joints move independently, nothing touches.
+{ .dh-check }
 
 {{ step(5, "Build the knee joint") }}
 
 Bolt the actuator (E4) into the bracket (C11); fit the bearing retainer (C12) with its bearing on the back.
 
 ✅ **Check:** turns freely, no axial play; the retainer sits without a gap.
+{ .dh-check }
 
 {{ step(6, "Join the shank to the knee") }}
 
 Bolt the shank shaft (C13) to the knee output and the shank support (C14) to the far side; close each shank joint with a cap (C15).
 
 ✅ **Check:** the knee still turns freely.
+{ .dh-check }
 
 {{ step(7, "Build the ankle-pitch joint") }}
 
 Bolt the actuator (E3) into the bracket (C16); fit the output shaft (C5), the retainer (C4) with its bearing, and the back retainer (C17).
 
 ✅ **Check:** no axial play; clears the shank at both ends of travel.
+{ .dh-check }
 
 {{ step(8, "Build the ankle-roll joint") }}
 
 Bolt the actuator (E6) with its retainer (C18); fit the foot shaft (C19) on the output and the foot support (C20) over the bearing on the other side. Make both shaft ends concentric before tightening.
 
 ✅ **Check:** no axial play; pitch and roll never collide.
+{ .dh-check }
 
 {{ step(9, "Fit the foot") }}
 
 Bolt the foot (C21) to the foot shaft and support.
 
 ✅ **Check:** at ankle zero the foot sits flat.
+{ .dh-check }
 
 ## Covers
 
@@ -113,6 +122,7 @@ Bolt the foot (C21) to the foot shaft and support.
 Run the leg's CAN chain and power branch from the foot up to the hip, leaving the tail free at the hip for [Final integration](#final-integration); then fit the covers, sole (P32) and foot front (P31).
 
 ✅ **Check:** all six joints move through their travel with no cable stretched or pinched; nothing rattles.
+{ .dh-check }
 
 ## Build the second leg
 

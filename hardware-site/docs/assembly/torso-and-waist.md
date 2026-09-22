@@ -13,6 +13,7 @@ The torso: a machined plate frame carrying the waist actuator, both shoulder-pit
 | `waist` | RobStride 03 | 1 | `can22` (shared with both `shoulder_1`) |
 
 ✅ **Check:** answers at ID 1; labelled.
+{ .dh-check }
 
 ## Frame
 
@@ -34,18 +35,21 @@ The torso: a machined plate frame carrying the waist actuator, both shoulder-pit
 Bolt the two side plates (C2) and the four front/back plates (C3) to the bottom plate (C1); fit the interior plate (P0). Square the frame before anything goes in: every limb and camera references it.
 
 ✅ **Check:** flat on a surface plate, square, no racking when pushed.
+{ .dh-check }
 
 {{ step(3, "Seat the waist actuator") }}
 
 Seat the actuator (E3) in the bottom plate's round opening, driver board up, output down into the pelvis, with its output shaft (C5), retainer (C4) and bearing (H0) as on the hip joints.
 
 ✅ **Check:** turns freely, no axial play; square to the pelvis at zero.
+{ .dh-check }
 
 {{ step(4, "Seat the shoulder-pitch actuators and fit the top plate") }}
 
 Seat one shoulder-pitch actuator (E3) in each side plate, output outward, with its bearing (H0). Bolt the top plate (C0) on last: it is the datum for both camera columns.
 
 ✅ **Check:** flat and square to the frame; both shoulder outputs turn freely.
+{ .dh-check }
 
 ## Electronics and packs
 
@@ -77,18 +81,21 @@ Bolt the computer (E0) to the interior plate above the waist, intake, exhaust an
 Mount the six CAN adapters (E13), three USB hubs (E16), surge protector (E18), four distribution blocks (E19) and two voltage checkers (E20) in the front bay. Label each CAN adapter with its bus before wiring; wire per [Power system](../electrical/index.md#power-system) and [CAN bus](../electrical/index.md#can-bus).
 
 ✅ **Check:** every adapter carries its bus label; no board hangs on its cable.
+{ .dh-check }
 
 {{ step(7, "Mount the IMU") }}
 
 Bolt the IMU (E17) rigidly, its axes parallel to the robot base frame: the control software applies no mounting rotation.
 
 ✅ **Check:** rigid; axes checked against the frame.
+{ .dh-check }
 
 {{ step(8, "Fit the battery packs") }}
 
 Stand the two packs (E7) upright, side by side, in the rear bay. Leave both disconnected until [Pre-power checks](../electrical/index.md#pre-power-checks) pass.
 
 ✅ **Check:** packs cannot shift; no lead is taut or on an edge; each pack comes out.
+{ .dh-check }
 
 ## Covers
 
@@ -110,3 +117,4 @@ Stand the two packs (E7) upright, side by side, in the rear bay. Leave both disc
 Fit the two covers (P1) front and back, then the removable front plate (P2) and back plate (P3).
 
 ✅ **Check:** nothing inside moves when the torso is tilted; the waist still turns.
+{ .dh-check }

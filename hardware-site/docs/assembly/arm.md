@@ -21,6 +21,7 @@ Set and label each ID on the bench, one actuator at a time. `shoulder_1` is on t
 | `wrist_3` (yaw) | RobStride 05 | 16 / 26 | `can9` / `can21` |
 
 ✅ **Check:** each actuator answers alone at its ID and carries its label.
+{ .dh-check }
 
 ## Shoulder, elbow and wrist
 
@@ -42,42 +43,49 @@ Set and label each ID on the bench, one actuator at a time. `shoulder_1` is on t
 The actuator (E3) sits in the torso side plate, output outward. Fit the output shaft (C5) on the output and the coupler (C27) over it: the arm hangs from this coupler.
 
 ✅ **Check:** turns freely, no axial play.
+{ .dh-check }
 
 {{ step(3, "Build the shoulder-roll joint") }}
 
 Bolt the actuator (E6) into the bracket (C22). Fit the shoulder shaft (C24) on the output and the support shaft (C25) over the bearing (H2) in the retainer (C23). Make both sides concentric before tightening.
 
 ✅ **Check:** turns end to end, equal drag both ways, no axial play.
+{ .dh-check }
 
 {{ step(4, "Build the shoulder-yaw joint") }}
 
 Fit the actuator (E2) with its shaft cover (P4) and bearing (H2).
 
 ✅ **Check:** the three shoulder joints move independently, nothing touches.
+{ .dh-check }
 
 {{ step(5, "Build the elbow joint") }}
 
 Bolt the actuator (E2) into the bracket (C28). Fit the elbow shaft (C26) on the output through the coupler (P5) and cover (C27); fit the support shaft (C25) over the bearing (H2) in the retainer (C29).
 
 ✅ **Check:** no axial play; clears the upper arm at both ends of travel.
+{ .dh-check }
 
 {{ step(6, "Build the wrist-roll joint") }}
 
 Fit the actuator (E2) with its shaft cover (P4); bolt the wrist shaft (P6) to the output.
 
 ✅ **Check:** turns freely, no axial play.
+{ .dh-check }
 
 {{ step(7, "Build the wrist-pitch joint") }}
 
 Seat the actuator (E1) in the wrist housing (P7 on the right arm, P9 on the left) with its bearing (H4).
 
 ✅ **Check:** no binding; clears the wrist-roll body at both ends of travel.
+{ .dh-check }
 
 {{ step(8, "Build the wrist-yaw joint") }}
 
 Fit the actuator (E5) and bolt the wrist output (P8) to it. The gripper bolts to this output.
 
 ✅ **Check:** the three wrist axes move together without contact.
+{ .dh-check }
 
 ## Covers
 
@@ -93,6 +101,7 @@ Fit the actuator (E5) and bolt the wrist output (P8) to it. The gripper bolts to
 Run three cable groups down the arm — `can22` to `shoulder_1`, the arm bus to the other six joints, and the gripper servo cable to the wrist — leaving the tails free at the shoulder for [Final integration](#final-integration); then fit the covers.
 
 ✅ **Check:** all seven joints move through their travel with no cable stretched or pinched; nothing rattles.
+{ .dh-check }
 
 ## Build the second arm
 

@@ -67,6 +67,10 @@ ACTUATOR_IDS = {"0": "ACT_RS00", "2": "ACT_RS02", "3": "ACT_RS03", "4": "ACT_RS0
 # (regex on a Fusion component name, part_id, note). Tested on the component
 # itself, then on its ancestors nearest first; the first hit wins.
 RULES: list[tuple[re.Pattern, str, str]] = [
+    (re.compile(r"^U-joint[ _-]*type[ _-]*C[ _-]*adapter", re.I), "EL_USBC_ADAPTER",
+     "Fusion name `U-joint_type_C_adapter v3`: the USB-C right-angle adapter on each camera (site line E21)"),
+    (re.compile(r"^bearing$", re.I), "FAS_BEARING_10X15X4",
+     "Fusion component `bearing` in the camera column, 15 x 15 x 4 mm box: the 10 x 15 x 4 bearing H5"),
     (re.compile(r"^FEETECH[ _-]*HL[ _-]*3915", re.I), "EL_SERVO_FEETECH", ""),
     (re.compile(r"^wa[rv]eshare[ _-]*st[ _-]*servo", re.I), "EL_SERVO_DRIVER",
      "Fusion name `wareshare_st_servo_controller`; BOM row is the Waveshare bus servo driver"),
