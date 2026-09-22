@@ -60,3 +60,4 @@ Standard lab stock; buy to suit your build.
 | Wire loom / sleeving, 1/4 in and 3/8 in | Limb runs ([Routing](../electrical/index.md#routing)) |
 | Heat-shrink, 3/32 in and 1/4 in | Connector wires; cable jackets |
 | 120 Ω CAN termination resistors | Both ends of each bus |
+| 10 A fuse and inline fuse holder | Computer branch, after the 48 V→12 V buck converter ([Power system](../electrical/index.md#power-system)) |
