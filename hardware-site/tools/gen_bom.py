@@ -238,8 +238,6 @@ BOOKLET: dict[str, tuple[str, str]] = {
 OPEN: dict[str, str] = {
     "C25": "Unit price: the team BOM's 57.56 is exactly twice the retired machining quote's 28.78 for the "
            "same part. A drawing cannot price a part.",
-    "E6": "Count: the booklet shows the actuator at four joints (ankle roll and shoulder, both sides), the "
-          "team BOM buys 2.",
     "P20": "Which of the four hip covers this line is, and whether Hip 1 has a cover of its own: the "
            "booklet draws four covers over two motors that do not all look alike, the 2026-09-19 CAD "
            "holds one two-piece design for all eight pieces, and neither names a line.",
@@ -281,6 +279,14 @@ ACT_FILE, EL_FILE, CAB_FILE, FAS_FILE = (
 # differ from the spreadsheet. The line total follows the published quantity.
 QTY_OVERRIDE: dict[str, str] = {
     "E6": "4",   # RS06: ankle_2 + shoulder_2, both sides (team sheet: 2)
+}
+
+# Printed-part quantities the site publishes instead of the Fusion occurrence count. The
+# 2026-09-19 model carries the shank covers on the right leg only; the team BOM (P28, 4 off)
+# and every other leg cover (both legs) say the robot has them on both legs.
+PRINTED_QTY_OVERRIDE: dict[str, int] = {
+    "3DP_legP09_shank_cover_a": 2,
+    "3DP_legP10_shank_cover_b": 2,
 }
 
 PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
@@ -782,6 +788,12 @@ def build_printed(sheet: Sheet, tree: dict[str, list[dict]]) -> tuple[list[dict]
             continue
         first = occ[0]
         qty = sum(int(r["qty"]) for r in occ)
+        if pid in PRINTED_QTY_OVERRIDE:
+            cad_qty, qty = qty, PRINTED_QTY_OVERRIDE[pid]
+            override_note = (f"Quantity is the robot's ({qty}), not the model's: the Fusion model places "
+                             f"{cad_qty} (right leg only); the team BOM and the other leg covers give both legs.")
+        else:
+            override_note = ""
         cad_material, cad_process = material_of(first["material"])
         fusion_name = re.sub(r" \(\d+\)$", "", first["fusion_name"])
         cad_note = (f"Fusion component `{fusion_name}`, material `{first['material']}`, "
@@ -822,6 +834,8 @@ def build_printed(sheet: Sheet, tree: dict[str, list[dict]]) -> tuple[list[dict]
             notes.append(NOT_IN_BOM)
             if pid in PRINTED_EXTRA_NOTE:
                 notes.append(PRINTED_EXTRA_NOTE[pid])
+        if override_note:
+            notes.append(override_note)
         notes.append(cad_note)
         if int(first["children"]):
             notes.append(f"The Fusion component carries {first['children']} child component(s): "
