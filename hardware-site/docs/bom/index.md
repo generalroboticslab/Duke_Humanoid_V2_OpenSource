@@ -25,8 +25,6 @@ Click **Preview** in any row below to see where that part sits; click a componen
 
 | Category | Covers | Subtotal |
 | --- | --- | --- |
-| Category | Covers | Subtotal |
-| --- | --- | --- |
 | [Actuators](#actuators) | {{ bom_qty("actuators.csv") }} RobStride units, {{ bom_count("actuators.csv") }} models | {{ bom_subtotal("actuators.csv") }} |
 | [Electronics](#electronics) | Computer, battery, power conversion, Controller Area Network (CAN) adapters, inertial measurement unit (IMU), cameras | {{ bom_subtotal("electronics.csv") }} |
 | [CNC parts](#cnc-parts) | {{ bom_count("cnc-parts.csv") }} machined parts | {{ bom_subtotal("cnc-parts.csv") }} |
