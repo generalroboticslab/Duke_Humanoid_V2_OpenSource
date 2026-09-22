@@ -339,12 +339,30 @@ def define_env(env):
             ref = r["team_ref"]
             rows.append((order.get(ref[0], 9), int(re.sub(r"\D", "", ref) or 0), r))
         rows.sort(key=lambda t: t[:2])
-        out = ["| Label | Part ID | Description | Qty per robot |", "| --- | --- | --- | ---: |"]
+        # Labels that share one group of CAD parts (the A/B halves of a cover) are one row:
+        # the group is printed as a set, and the team counts it per label.
+        merged: dict[str, dict] = {}
         for _, _, r in rows:
             pids = (r.get("part_id") or "").split()
-            pid_cell = " ".join(f"`{x}`" for x in pids) if pids else TODO
-            d = " / ".join(dict.fromkeys(desc.get(x, "") for x in pids if desc.get(x))) or r.get("item", "")
-            out.append(f"| **{r['team_ref']}** | {pid_cell} | {d} | {r.get('qty_team') or TODO} |")
+            key = " ".join(pids) if len(pids) > 1 else f"{r['team_ref']}|{r.get('part_id', '')}"
+            m = merged.setdefault(key, {"refs": [], "pids": pids, "items": [], "qty": 0, "qty_ok": True})
+            m["refs"].append(r["team_ref"])
+            m["items"].append(r.get("item", ""))
+            q = (r.get("qty_team") or "").strip()
+            if q.isdigit():
+                m["qty"] += int(q)
+            else:
+                m["qty_ok"] = False
+        out = ["| Label | Part ID | Description | Qty per robot |", "| --- | --- | --- | ---: |"]
+        for m in merged.values():
+            pids = m["pids"]
+            pid_cell = "<br>".join(f"`{x}`" for x in pids) if pids else TODO
+            d = " / ".join(dict.fromkeys(desc.get(x, "") for x in pids if desc.get(x)))
+            if not d or len(pids) > 1:
+                d = d or " / ".join(dict.fromkeys(m["items"]))
+            label = " / ".join(f"**{x}**" for x in m["refs"])
+            qty = str(m["qty"]) if m["qty_ok"] else TODO
+            out.append(f"| {label} | {pid_cell} | {d} | {qty} |")
         return "\n".join(out)
 
     @env.macro

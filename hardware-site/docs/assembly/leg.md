@@ -1,246 +1,119 @@
 # Leg
 
-Build one leg, hip to foot plate; build two.
+One leg, hip to foot: six RobStride joints in a chain of machined brackets and shafts. Build two; the second is the mirror of the first.
 
 !!! abstract "At a glance"
-    - **You will:** set six IDs, then build from hip to foot.
-    - **Parts:** RobStride 03 ×4, 04 ×1, 06 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_leg01`–`CNC_leg18` ([machined parts](../bom/index.md#cnc-parts)).
+    - **You will:** set six IDs, build the hip (three joints), then the knee, shank, ankle and foot, then fit the covers.
+    - **Before this:** nothing; the leg is the first subassembly.
 
-RobStride 03 mounting interface (*manual, §1.1*); keep every screw within these depths:
+{{ step(1, "Set the six actuator IDs") }}
 
-- **Housing:** 8 × M4, 8 mm deep, on Ø98 mm.
-- **Output:** 6 × M4, 6 mm deep; 3 × Ø4 mm pin holes, 7 mm deep; Ø70 mm pilot, 2.5 mm proud.
+Set and label each ID on the bench, one actuator at a time. All six joints of a leg share one CAN bus.
 
-!!! note "Read off the model — leg parts list, fasteners and fits"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    - No printed-part, bearing, spacer or fastener list.
-    - Per step: screws, torque, Loctite 222 use, bearings, press fits, order.
-    - Retainer alignment and preload (steps 3, 8).
-    - Whether the knee back cover is structural.
-    - Whether ankle cabling must pass through the shank before it closes.
+| Joint | Actuator | ID left / right | Bus left / right |
+| --- | --- | --- | --- |
+| `hip_1` (pitch) | RobStride 03 | 31 / 41 | `can24` / `can23` |
+| `hip_2` (roll) | RobStride 03 | 32 / 42 | `can24` / `can23` |
+| `hip_3` (yaw) | RobStride 03 | 33 / 43 | `can24` / `can23` |
+| `knee` | RobStride 04 | 34 / 44 | `can24` / `can23` |
+| `ankle_1` (pitch) | RobStride 03 | 35 / 45 | `can24` / `can23` |
+| `ankle_2` (roll) | RobStride 06 | 36 / 46 | `can24` / `can23` |
 
-    *Owner: hardware lead, from the computer-aided design (CAD) and a photographed build.*
+✅ **Check:** each actuator answers alone at its ID and carries its label.
 
-{{ step(1, "Configure and label the six actuators") }}
+## Hip
 
-The six joints share one Controller Area Network (CAN) bus: `can24` left, `can23` right.
-New units share a default ID: set each on the bench alone ([Motor ID and config](../bringup/index.md#motor-id-and-config)).
+<figure markdown>
+  ![Hip pitch and roll exploded, parts labelled with team BOM ids](../assets/exploded/team/04-leg-upper.webp){ loading=lazy }
+  <figcaption>Hip pitch and hip roll, body outward: brackets and retainers C4–C8, actuators E3, bearings H0.</figcaption>
+</figure>
 
-| Joint | Model axis | Actuator | ID L / R | Model limit L | Model limit R |
-| --- | --- | --- | --- | --- | --- |
-| `hip_1` | pitch | RobStride 03 | 31 / 41 | ±105° | ±105° |
-| `hip_2` | roll | RobStride 03 | 32 / 42 | −105° to +30° | −30° to +105° |
-| `hip_3` | yaw | RobStride 03 | 33 / 43 | ±90° | ±90° |
-| `knee` | — | RobStride 04 | 34 / 44 | ±130° | ±130° |
-| `ankle_1` | pitch | RobStride 03 | 35 / 45 | ±50° | ±50° |
-| `ankle_2` | roll | RobStride 06 | 36 / 46 | ±60° | ±60° |
-
-*Source: [`humanoid_config.py`](https://github.com/generalroboticslab/duke_humanoid_v2_deploy/blob/main/control/humanoid_config.py); axes (at zero pose) and limits from `humanoid_v21.xml`.*
-
-The model tilts the `hip_1` axis 15° from horizontal; `hip_3` is vertical.
-
-!!! note "Not measured on the reference robot — hard-stop angles, where a leg joint has one"
-    The travel each joint is commanded to is published in
-    [Motor ID and configuration](../bringup/index.md#motor-id-and-config).
-    *Owner: hardware lead.*
-
-✅ **Check:** Each answers alone at its ID and is labelled.
+{{ booklet_parts("p.4") }}
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../assets/exploded/hip-assembly-poster.webp" aria-label="Exploded view of the pelvis block with the waist and four hip actuators"><source src="../assets/exploded/hip-assembly.mp4" type="video/mp4"><a href="../assets/exploded/hip-assembly.mp4">MP4</a></video>
-  <figcaption>Pelvis: waist actuator with flange, ring and coupler; two hip actuators per side.</figcaption>
-</figure>
-
-<figure markdown>
-  ![Hip pitch and roll exploded, parts labelled with team BOM ids](../assets/exploded/team/04-leg-upper.webp){ loading=lazy }
-  <figcaption>Steps 2–3, body outward: brackets, retainers and shafts C4–C8, actuators E3, bearings H0. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+  <figcaption>The pelvis block: waist actuator in the middle, hip pitch and hip roll on each side. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
 
 {{ step(2, "Build the hip-pitch joint") }}
 
-<div class="parts-needed" markdown>
+Bolt the actuator (E3) into the bracket (C6). Fit the output shaft (C5) on the output and the bearing (H0) in its retainer (C4) on the far side.
 
-| | |
-| --- | --- |
-| RobStride 03 — `hip_1` | 1 |
-| `CNC_leg01_x2_hip_center_back` | |
-| `CNC_leg02_x7_RS03_shaft_coupler` | |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
-
-</div>
-
-**UNVERIFIED**{ .dh-unverified }: the CAD puts `hip_1` and `hip_2` in the
-pelvis ([Assembly](index.md)).
-
-!!! note "Build to the model — `leg02` and `leg12` counts differ between the two lists"
-    The published model is what you build to; the team's spreadsheet is a working document and differs here.
-    *Owner: hardware lead.*
-
-✅ **Check:** Turns freely, even drag, no axial play.
+✅ **Check:** turns freely, even drag, no axial play.
 
 {{ step(3, "Build the hip-roll joint") }}
 
-<div class="parts-needed" markdown>
+Bolt the actuator (E3) into the front bracket (C7). Fit the output shaft (C5) on the output; seat the bearing (H0) in the back retainer (C8). Make both retainers concentric before tightening.
 
-| | |
-| --- | --- |
-| RobStride 03 — `hip_2` | 1 |
-| `CNC_leg06_x2_hip_roll_output_shaft` | |
-| `CNC_leg07_x2_hip_roll_support_shaft` | |
-| `CNC_leg04_x2_hip_roll_front_bearing_retainer` | |
-| `CNC_leg05_x2_hip_roll_back_bearing_retainer` | |
-| `CNC_leg02_x7_RS03_shaft_coupler` | |
+✅ **Check:** turns end to end without binding, equal drag both ways, no axial play.
 
-</div>
+## Knee, shank, ankle and foot
 
-Make both bearing retainers concentric before tightening.
+<figure markdown>
+  ![Hip yaw to foot plate exploded, parts labelled with team BOM ids](../assets/exploded/team/05-leg-lower.webp){ loading=lazy }
+  <figcaption>Hip yaw down to the foot: machined parts C4, C5 and C9–C21, actuators E3, E4 and E6, bearings H0–H3.</figcaption>
+</figure>
 
-✅ **Check:** Turns end to end without binding, equal drag both ways, no axial play.
+{{ booklet_parts("p.5") }}
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../assets/exploded/leg-poster.webp" aria-label="Exploded view of one leg hanging from the pelvis block"><source src="../assets/exploded/leg.mp4" type="video/mp4"><a href="../assets/exploded/leg.mp4">MP4</a></video>
-  <figcaption>Leg below the pelvis: hip yaw, knee, two shank links, ankle pitch, ankle roll, foot plate.</figcaption>
-</figure>
-
-<figure markdown>
-  ![Hip yaw to foot plate exploded, parts labelled with team BOM ids](../assets/exploded/team/05-leg-lower.webp){ loading=lazy }
-  <figcaption>Steps 4–9, hip yaw down to the foot plate: machined parts C4, C5 and C9–C21, actuators E3, E4 and E6, bearings H0–H3. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+  <figcaption>The leg below the pelvis: hip yaw, knee, the two shank links, ankle pitch, ankle roll, foot. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
 
 {{ step(4, "Build the hip-yaw joint") }}
 
-<div class="parts-needed" markdown>
+Fit the output shaft (C9) on the actuator (E3) output and the support shaft (C10) over the bearing on the other side; the output shaft (C5) and retainer (C4) sit on the actuator as in step 2.
 
-| | |
-| --- | --- |
-| RobStride 03 — `hip_3` | 1 |
-| `CNC_leg02_x7_RS03_shaft_coupler` | |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
-
-</div>
-
-!!! note "Build to the model — no machined part is named for hip yaw; the CAD shows the waist flange, ring and coupler"
-    The published model is what you build to; the team's spreadsheet is a working document and differs here.
-    *Owner: hardware lead.*
-
-✅ **Check:** The three hip joints move independently with no interference or taut cable.
+✅ **Check:** the three hip joints move independently, nothing touches.
 
 {{ step(5, "Build the knee joint") }}
 
-<div class="parts-needed" markdown>
+Bolt the actuator (E4) into the bracket (C11); fit the bearing retainer (C12) with its bearing on the back.
 
-| | |
-| --- | --- |
-| RobStride 04 — `knee` | 1 |
-| `CNC_leg08_x2_knee_front_bearing_retainer` | |
-| `CNC_leg09_x2_knee_motor_back_cover` | |
-
-</div>
-
-
-✅ **Check:** Turns freely, no axial play; back cover sits without a gap.
+✅ **Check:** turns freely, no axial play; the retainer sits without a gap.
 
 {{ step(6, "Join the shank to the knee") }}
 
-<div class="parts-needed" markdown>
+Bolt the shank shaft (C13) to the knee output and the shank support (C14) to the far side; close each shank joint with a cap (C15).
 
-| | |
-| --- | --- |
-| `CNC_leg10_x2_knee_output_shank` | |
-| `CNC_leg11_x2_knee_support_shank` | |
-| `CNC_leg12_x4_lower_leg_bearing` | |
-
-</div>
-
-Two links, knee to ankle: a flat plate and a pocketed truss. Which
-is `leg10` is **UNVERIFIED**{ .dh-unverified }.
-
-✅ **Check:** The knee still turns freely; ankle cabling moves freely in the shank.
+✅ **Check:** the knee still turns freely.
 
 {{ step(7, "Build the ankle-pitch joint") }}
 
-<div class="parts-needed" markdown>
+Bolt the actuator (E3) into the bracket (C16); fit the output shaft (C5), the retainer (C4) with its bearing, and the back retainer (C17).
 
-| | |
-| --- | --- |
-| RobStride 03 — `ankle_1` | 1 |
-| `CNC_leg13_x2_ankle_pitch_front` | |
-| `CNC_leg14_x2_ankle_pitch_back` | |
-| `CNC_leg02_x7_RS03_shaft_coupler` | |
-| `CNC_leg03_x5_RS03_shaft_bearing_retainer` | |
-
-</div>
-
-✅ **Check:** No axial play; clears the shank at both ends.
+✅ **Check:** no axial play; clears the shank at both ends of travel.
 
 {{ step(8, "Build the ankle-roll joint") }}
 
-<div class="parts-needed" markdown>
+Bolt the actuator (E6) with its retainer (C18); fit the foot shaft (C19) on the output and the foot support (C20) over the bearing on the other side. Make both shaft ends concentric before tightening.
 
-| | |
-| --- | --- |
-| RobStride 06 — `ankle_2` | 1 |
-| `CNC_leg16_x2_ankle_roll_output_shaft` | |
-| `CNC_leg17_x2_ankle_roll_support_shaft` | |
-| `CNC_leg15_x2_RS06_shaft_bearing_retainer` | |
+✅ **Check:** no axial play; pitch and roll never collide.
 
-</div>
+{{ step(9, "Fit the foot") }}
 
-Make both shaft ends concentric before tightening.
+Bolt the foot (C21) to the foot shaft and support.
 
-✅ **Check:** No axial play; pitch and roll never collide.
+✅ **Check:** at ankle zero the foot sits flat.
 
-{{ step(9, "Fit the foot plate") }}
-
-<div class="parts-needed" markdown>
-
-| | |
-| --- | --- |
-| `CNC_leg18_x2_foot_plate` | |
-
-</div>
-
-!!! note "Read off the model — whether a foot sole or pad is fitted"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: hardware lead.*
-
-✅ **Check:** At ankle zero the foot sits flat.
+## Covers
 
 <figure markdown>
   ![Printed leg covers exploded, parts labelled with team BOM ids](../assets/exploded/team/06-leg-covers.webp){ loading=lazy }
-  <figcaption>Printed leg covers P20–P32, hip to sole. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+  <figcaption>Printed TPU covers P20–P32, hip to sole.</figcaption>
 </figure>
 
-{{ step(10, "Route the harness and close the leg") }}
+{{ booklet_parts("p.6") }}
 
-<div class="parts-needed" markdown>
+{{ step(10, "Route the harness and fit the covers") }}
 
-| | |
-| --- | --- |
-| Leg harness branch: one CAN daisy chain plus power | 1 |
-| Cable ties and anchors | As needed |
+Run the leg's CAN chain and power branch from the foot up to the hip, leaving the tail free at the hip for [Final integration](#final-integration); then fit the covers, sole (P32) and foot front (P31).
 
-</div>
-
-It leaves at the hip; join it in [Final integration](#final-integration).
-
-!!! note "Read off the model — leg harness lengths, routes and service loops"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: hardware lead + electrical.*
-
-✅ **Check:** All six joints move through their travel with no cable stretched or pinched. Nothing rattles.
+✅ **Check:** all six joints move through their travel with no cable stretched or pinched; nothing rattles.
 
 ## Build the second leg
 
-Repeat steps 2–10, swapping each A cover with its B cover (P20/P21, P22/P23,
-P24/P25, P26/P27): the other leg takes the same printed parts in the mirrored
-positions.
-*Source: team exploded-view booklet, page 8.*
-
-**The legs are mirrored, not identical.** `hip_2` travel runs −105°…+30° on
-the left and −30°…+105° on the right; every other leg joint takes the same
-symmetric range on both sides. Which machined parts that makes handed is
-readable off the model.
-*Source: `humanoid_v21_full.urdf`.*
+Repeat steps 2–10. The legs are mirrors: every A cover swaps with its B cover (P20/P21, P22/P23, P24/P25, P26/P27, P29/P30).

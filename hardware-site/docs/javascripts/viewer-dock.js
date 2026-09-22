@@ -100,6 +100,8 @@
     handle.addEventListener("pointerup", endDrag);
     handle.addEventListener("pointercancel", endDrag);
     handle.addEventListener("dblclick", () => { pos = null; savePos(); applyPos(); });
+    // A position remembered from a wider window is pulled back inside the current one.
+    window.addEventListener("resize", () => { if (docked && pos) applyPos(); });
 
     const pill = document.createElement("button");
     pill.type = "button";
