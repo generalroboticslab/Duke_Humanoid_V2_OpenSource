@@ -30,7 +30,7 @@ theme:
     - content.tabs.link
     - content.action.edit
   logo: assets/brand/grl-logo-white.svg
-  favicon: assets/brand/grl-logo.svg
+  favicon: assets/brand/grl-logo-black.svg
   icon:
     repo: fontawesome/brands/github
   palette:
