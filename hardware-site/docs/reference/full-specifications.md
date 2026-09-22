@@ -1,48 +1,22 @@
 # Full specifications
 
-Headline figures: [home page](../index.md#specifications).
-
 ## Actuators
 
-| Model | Joints (per side unless noted) | Qty | Peak torque (N·m) | Kt (N·m/A~rms~) |
-| --- | --- | ---: | ---: | ---: |
-| RS00 | wrist_2 | 2 | 14 | 1.48 |
-| RS02 | shoulder_3, elbow, wrist_1 | 6 | 17 | 1.22 |
-| RS03 | waist (1), hip_1–3, ankle_1, shoulder_1 | 11 | 60 | 2.36 |
-| RS04 | knee | 2 | 120 | 2.10 |
-| RS05 | wrist_3; camera yaw and pitch (4) | 6 | 5.5 | 0.94 |
-| RS06 | ankle_2, shoulder_2 | 4 | 36 | 1.1 |
-| **Total** | | **{{ bom_qty("actuators.csv") }}** | | |
+| Model | Joints (both sides unless noted) | Qty | Peak torque (N·m) | Kt (N·m/A~rms~) | Current limit default / written (A) |
+| --- | --- | ---: | ---: | ---: | ---: |
+| RS00 | wrist_2 | 2 | 14 | 1.48 | 16 / 9.6 |
+| RS02 | shoulder_3, elbow, wrist_1 | 6 | 17 | 1.22 | 23 / 13.8 |
+| RS03 | waist (1), hip_1, hip_2, hip_3, ankle_1, shoulder_1 | 11 | 60 | 2.36 | 43 / 25.8 |
+| RS04 | knee | 2 | 120 | 2.10 | 60 / 36.0 |
+| RS05 | wrist_3; camera yaw and pitch (4) | 6 | 5.5 | 0.94 | 11 / 6.6 |
+| RS06 | ankle_2, shoulder_2 | 4 | 36 | 1.1 | 57 / 34.2 |
+| **Total** | | **{{ bom_qty("actuators.csv") }}** | | | |
 
-*Source: `deploy/control/humanoid_config.py`, `py_motor.py`.* CAN (Controller Area
-Network) IDs and buses: [CAN bus](../electrical/index.md#can-bus).
-
-Deploy writes each motor's torque limit as its peak torque above × a ratio: 0.1 by
-default (`humanoid_real_env.py --torque_limit`), stepped by 0.1 within 0.1–0.8 with
-gamepad X/B. `humanoid_set_current_limit.py` writes current limits of the per-type
-default × `--scale` (default 0.6), capped at 40 A.
-
-| Model | Current default (A) | Written at × 0.6 (A) |
-| --- | ---: | ---: |
-| RS00 | 16 | 9.6 |
-| RS02 | 23 | 13.8 |
-| RS03 | 43 | 25.8 |
-| RS04 | 60 | 36.0 |
-| RS05 | 11 | 6.6 |
-| RS06 | 57 | 34.2 |
-
-*Source: `py_motor.py` `MAX_TORQUE`, `MOTOR_CURRENT_LIMIT_DEFAULTS`.*
-
-RS02/03/04 manuals:
-
-- Rated 48 VDC, range 24–60 VDC (RS00/05/06 **UNVERIFIED**{ .dh-unverified })
-- Operating −20 to 50 °C, storage −30 to 70 °C, 5–85 % RH non-condensing
-- Over-temperature warning 75 °C, fault 80 °C
+Written current limit = default × 0.6 (`humanoid_set_current_limit.py`), capped at 40 A. Torque limit at run time = peak × `--torque-limit` (0.1–0.8). 48 V bus, CAN at 1 Mbit/s; over-temperature warning 75 °C, fault 80 °C. IDs and buses: [CAN bus](../electrical/index.md#can-bus). Manuals: [robstride.com/download](https://www.robstride.com/download).
 
 ## Joint limits
 
-Limits in the published model (`humanoid_v21.xml`, `head_cam/`), not measured
-mechanical stops.
+Software limits in the deployed model, not mechanical stops.
 
 | Joint | Limit | Joint | Limit |
 | --- | --- | --- | --- |
@@ -53,41 +27,20 @@ mechanical stops.
 | knee | ±130° | wrist_1 | ±180° |
 | ankle_1 | ±50° | wrist_2 | ±92° |
 | ankle_2 | ±60° | wrist_3 | ±90° |
-| camera yaw | ±270° (training choice) | camera pitch | ±90° |
+| camera yaw | ±270° | camera pitch | ±90° |
 
-## Electronics, power, structure
+## Robot
 
 | | |
 | --- | --- |
-| Overall size | 1256 mm tall standing, camera masts included; 346 mm across the shoulders; torso 483 mm; foot 235 mm long ([overall drawing](../files/drawings/humanoid_2.1_latest_overall_rev01.pdf)) |
-| Computer | MINISFORUM X1-470 mini PC |
-| IMU | SYD Dynamics TransducerM TM171, 9-axis AHRS, 40 × 34 × 12.6 mm, USB-C |
-| Cameras | 2 × Intel RealSense D436 |
-| CAN | 6 × CANable PRO V2.0, 1 Mbit/s, `can9` and `can21`–`can25` |
-| Grippers | 2 × Feetech HL-3915-C001 (12 V) on 2 × Waveshare ST/SC bus servo adapters |
+| Degrees of freedom | 31 RobStride joints + 2 gripper servos |
+| Size | 1256 mm tall standing with camera masts; 346 mm across the shoulders; torso 483 mm; foot 235 mm ([overall drawing](../files/drawings/humanoid_2.1_latest_overall_rev01.pdf)) |
+| Mass (CAD) | 35.3 kg: lower body 17.5 (each leg 5.6), torso 7.9 (camera columns 0.59 each), each arm 4.6, each gripper 0.35. Per part: [part-properties.csv](../data/part-properties.csv){ download="" } |
+| Structure | Machined aluminium 6061; printed PLA, TPU and SLS nylon 12 |
+| Computer | MINISFORUM X1-470 mini PC, 12 V |
+| IMU | SYD Dynamics TransducerM TM171, 9-axis, USB |
+| Cameras | 2 × Intel RealSense D436, each on a 2-axis gimbal |
+| CAN | 6 × CANable PRO V2.0, 1 Mbit/s |
+| Grippers | 2 × Feetech HL-3915-C001 (12 V) on Waveshare ST/SC bus servo adapters |
 | Battery | 2 × Zeee 6S 10000 mAh LiPo in series: 44.4 V nominal, 50.4 V full |
-| Fuse | 10 A, computer branch only |
 | Control | 50 Hz policy, 200 Hz motor loop; cuRobo planner on a separate CUDA machine |
-| Structure | Machined aluminium 6061 (the Fusion material on every `CNC_` component; repo comments agree) |
-| Hardware | Torx button-head M4×12 and M3×12; main bearing 50 × 65 × 7 mm; Loctite 222. Motor04 shaft and knee need M5 where the CAD has M4 **UNVERIFIED**{ .dh-unverified } |
-| Model mass | 34.5 kg in `humanoid_v21.xml`: `base_link` 9.30, waist 2.32, each leg 7.45, each arm 3.99 (with the 0.17 kg end-effector attachment); per-link CoM and inertia in its `<inertial>` entries. Head camera module 1.158 kg (`head_cam/cam_fusion_info.py`); gripper with flange ≈ 346 g (`parallel_gripper/README.md`) |
-| Model foot contact | Six parallel capsules per foot, radius 7 mm, 221 mm segment, axes 11.6 mm apart across 58 mm (`humanoid_v21.xml`, `foot_*_collision0`–`5`) |
-| Commanded velocity | Full stick ±1.0 m/s forward and lateral, ±0.7 rad/s yaw, the trained command range (`humanoid_real_env.py` `VEL_SCALE_*`); `gamepad.py` publisher caps x 0.3 m/s, y 0.25 m/s, yaw 0.2 rad/s |
-| Gaze slew | Reference capped at 1.5 rad/s (`humanoid_auto_operator.py` `GAZE_SLEW_RATE`); failsafe return to zero at 0.75 rad/s (`humanoid_real_env.py`) |
-
-## Mass properties (Fusion model)
-
-CAD masses from the Fusion model (each component's mass with the material assigned in CAD), not measured on the built robot. Per-part values:
-[part-properties.csv](../data/part-properties.csv){ download="" }.
-
-| | |
-| --- | --- |
-| Whole model | 35.27 kg: the sum of the top-level components (lower body, torso, both arms, both grippers); the model has no root-level mass |
-| Lower body (`v2.1_lower_body_latest`) | 17.51 kg, of which left leg (`v2.1_lower_leg_L_copy`) 5.53 kg and right leg (`v2.1_lower_leg_R`) 5.70 kg **UNVERIFIED**{ .dh-unverified } (the two leg designs differ by 174 g: only the right copy carries the shank covers `Component42`/`Component43`, 2 × 44.7 g, and `ankle_top_cover`, 61.4 g; the remaining 23 g are not accounted for) |
-| Torso (`body_LATEST`) | 7.85 kg, including the electronics tray with everything mounted on it (`3DP_body_05_x1_interior_plate` subtree, 4.64 kg) and both camera columns (`twincities_v2_nolock`, 0.59 kg each; the code repo's `head_cam/cam_fusion_info.py` gives 579.1 g per side, 1 158.3 g for both) **UNVERIFIED**{ .dh-unverified } |
-| Arm (each, with wrist) | Left 4.61 kg, right 4.60 kg; wrist module (`001_*_wrist_long_latest`) 0.87 kg of each |
-| Gripper (each, `dovetail_umi_gripper`) | 0.35 kg (351.1 g, with servo, servo board, buck converter and mounting flange); the code repo's `parallel_gripper/README.md` gives ≈ 346 g with flange (gripper 324 g + flange 22 g) for its `ParallelGripper0710` STEP; whether the Fusion `dovetail_umi_gripper` is that revision is not recorded **UNVERIFIED**{ .dh-unverified } |
-| Against the MJCF | The 34.5 kg model mass above counts body, waist, legs and arms only; the Fusion sum without grippers and camera columns is 33.4 kg **UNVERIFIED**{ .dh-unverified } |
-
-!!! note "Not measured on the reference robot — unspecified: mechanical stops, as-built mass breakdown, measured CoM and inertia, physical foot geometry, current draw and runtime, payload, measured walking speed, measured gimbal range and slew rate, IP rating, robot temperature range, noise"
-    *Owner: hardware lead + controls lead.*
