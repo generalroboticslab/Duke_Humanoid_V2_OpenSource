@@ -100,6 +100,14 @@ from stage_cad_export import ALIASES, DUPLICATE_NAMES, strip_qty, site_ids  # no
 # Fusion exports Z up in millimetres; glTF/model-viewer is Y up in metres.
 # Rotation block [[1,0,0],[0,0,1],[0,-1,0]]: det +1, a -90 deg turn about X.
 FUSION_TO_GLTF = np.array([[0.001, 0, 0, 0], [0, 0, 0.001, 0], [0, -0.001, 0, 0], [0, 0, 0, 1]])
+VENDOR_MODEL_NAMES = ("IntelRealsense_D435",)   # vendor sub-assemblies whose children never match a site part
+
+
+def strip_copy_suffix(name: str) -> str:
+    """Fusion names a copied component `gimbal_neck (1)`; the part is the same."""
+    return re.sub(r" \(\d+\)$", "", name)
+
+
 LEG_SCOPE_PREFIX = "v2.1_lower_body"      # gen_printed: `|leg` names live under the lower body
 MAX_PIECE_MM = 450.0                      # larger connected pieces are not parts (D435 view wedges)
 FASTENER_RE = re.compile(r"(?<![a-z])(screw|bolt|nut|washer|insert|magnet|pin|rivet)(?![a-z])", re.I)  # as stage_cad_export
@@ -141,7 +149,11 @@ class PartLookup:
                 self.plain[strip_qty(dup)] = self.plain[strip_qty(canon)]
 
     def pid(self, fusion_name: str, path: str) -> str | None:
-        key = strip_qty(fusion_name)
+        # A component inside a vendor model (the D435's own `Component34`..`Component37`)
+        # is never a site part, whatever it is called.
+        if any(v in path for v in VENDOR_MODEL_NAMES):
+            return None
+        key = strip_qty(strip_copy_suffix(fusion_name))
         scope = "leg" if path.startswith(LEG_SCOPE_PREFIX) else "arm"
         if (key, scope) in self.scoped:
             return self.scoped[(key, scope)]

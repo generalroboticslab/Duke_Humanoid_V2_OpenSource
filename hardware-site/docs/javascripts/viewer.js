@@ -261,7 +261,14 @@
       }
       return ref.kind === "assembly" || ref.kind === "drawings" ? target("robot") : null;
     }
+    // parts.json is the authority on which target a mesh node belongs to; the node's own
+    // name is only a fallback (a re-homed mesh keeps the name it was exported under).
+    const nodeOwner = new Map();
+    data.parts.forEach((meshes, id) => meshes.forEach((m) => nodeOwner.set(m.node, ["part", id])));
+    data.vendor.forEach((meshes, id) => meshes.forEach((m) => nodeOwner.set(m.node, ["vendor", id])));
     function targetForNode(name) {
+      const own = nodeOwner.get(name);
+      if (own) return target(own[0], own[1]);
       const id = name.replace(/#\d+$/, "");
       return id.startsWith("vendor:") ? target("vendor", id.slice(7)) : target("part", id);
     }
