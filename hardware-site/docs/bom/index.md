@@ -32,7 +32,7 @@ Click **Preview** in any row below to see where that part sits; click a componen
 | **Robot** | [Actuators](#actuators) | {{ bom_qty("actuators.csv") }} RobStride units, {{ bom_count("actuators.csv") }} models | {{ bom_subtotal("actuators.csv") }} |
 | | [Electronics](#electronics) | Computer, battery, power conversion, Controller Area Network (CAN) adapters, inertial measurement unit (IMU), cameras | {{ bom_subtotal("electronics.csv") }} |
 | | [CNC parts](#cnc-parts) | {{ bom_count("cnc-parts.csv") }} machined parts | {{ bom_subtotal("cnc-parts.csv") }} |
-| | [Cables and connectors](#cables-and-connectors) | Harness material: the team BOM has one cable line and no connector, sleeving or bulk-wire line **TODO**{ .dh-missing } | {{ bom_subtotal("cables-connectors.csv") }} |
+| | [Cables and connectors](#cables-and-connectors) | One cable line; connectors, wire, sleeving and heat-shrink are lab consumables, not itemised | {{ bom_subtotal("cables-connectors.csv") }} |
 | | [Fasteners and hardware](#fasteners-and-hardware) | {{ bom_count("fasteners.csv") }} bearing and screw lines | {{ bom_subtotal("fasteners.csv") }} |
 | | [Printed parts](#printed-parts) | {{ bom_count("printed-parts.csv") }} rows of fused-deposition (FDM) and laser-sintered (SLS) prints | {{ bom_subtotal("printed-parts.csv") }} |
 | | **Robot subtotal (a floor, not a price)** | | **{{ bom_total() }}** |

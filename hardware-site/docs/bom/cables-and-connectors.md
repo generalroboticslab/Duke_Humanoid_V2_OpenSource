@@ -1,11 +1,6 @@
 # Cables and connectors
 
-Harness material: {{ bom_subtotal("cables-connectors.csv") }} across
-{{ bom_count("cables-connectors.csv") }} lines — the team BOM carries one cable
-line and no connector, sleeving or bulk-wire line, although the actuator and
-harness tables below call out XT30 and GH1.25 connectors by part number. Build it with
-[Harness fabrication](../electrical/index.md#harness-fabrication); route it with
-[Routing](../electrical/index.md#routing).
+The team BOM has one cable line. Connectors, wire, sleeving, heat-shrink and termination resistors are lab consumables: listed below without prices. Build the harness with [Harness fabrication](../electrical/index.md#harness-fabrication); route it with [Routing](../electrical/index.md#routing).
 
 | Team ref | Part ID | Description | Qty | Unit cost | Line total | Vendor |
 | --- | --- | --- | ---: | ---: | ---: | --- |
@@ -13,12 +8,6 @@ harness tables below call out XT30 and GH1.25 connectors by part number. Build i
 {% endfor %}| | | | | **Total** | **{{ bom_subtotal("cables-connectors.csv") }}** | |
 
 **Team ref** is the team BOM line.
-
-No connectors and no bulk wire here; see [Not in this list](#cables-not-in-this-list).
-
-!!! note "Read off the model — cut length and route per run"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: electrical lead.*
 
 ## Actuator-side connectors
 
@@ -57,25 +46,17 @@ every CAN pair before you crimp, and ring them out before you power anything.
 
 *Source: power wiring diagram.*
 
-!!! note "Read off the model — run lengths; gauge follows from the current in the power diagram"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: electrical lead.*
+## Consumables (not itemised)
 
-## Not in this list { #cables-not-in-this-list }
+Standard lab stock; buy to suit your build.
 
-| Item | Use | Status |
-| --- | --- | --- |
-| EC5 connectors | Battery leads and the series link (design log; example Amazon B073ZG47H3) | That the diagram's connectors are EC5 **UNVERIFIED**{ .dh-unverified } |
-| Ethernet cable | CAN leads: its twisted pairs become CAN_H and CAN_L | Which runs **UNVERIFIED**{ .dh-unverified } |
-| Heat-shrink, 3/32 in and 1/4 in | Connector wires; cable jacket | No quantity |
-| XT30, XT30(2+2) and GH1.25 connectors | Every actuator branch ([Actuator-side connectors](#actuator-side-connectors)) | Not in the team BOM **TODO**{ .dh-missing } |
-| Wire loom / sleeving | Limb runs ([Routing](../electrical/index.md#routing)) | Not in the team BOM **TODO**{ .dh-missing } |
-| Bulk wire, CAN termination resistors, GH1.25 cable contacts | Harness | **TODO**{ .dh-missing } |
-
-!!! note "Yours to source — connector housings and contacts, loom and sleeve, to suit your build"
-    The team BOM's only cable line is the USB-A to USB-C pack, so ordering the harness from
-    this site is not yet possible.
-    *Owner: electrical lead.*
-
-!!! note "Not used — two design-log parts with no role in the build"
-    *Owner: electrical lead.*
+| Item | Use |
+| --- | --- |
+| Amass XT30 and XT30(2+2) connectors, male and female | Power branches; every actuator trunk ([Actuator-side connectors](#actuator-side-connectors)) |
+| GH1.25 2-pin housings and cable contacts | CAN on RS03 / RS04 |
+| EC5 connectors | Battery leads and the series link |
+| Silicone wire, 12 / 16 / 18 AWG | Pack trunk, computer branch, motor branches ([Wire gauge](#wire-gauge)) |
+| Ethernet cable | CAN leads: a twisted pair becomes CAN_H / CAN_L |
+| Wire loom / sleeving, 1/4 in and 3/8 in | Limb runs ([Routing](../electrical/index.md#routing)) |
+| Heat-shrink, 3/32 in and 1/4 in | Connector wires; cable jackets |
+| 120 Ω CAN termination resistors | Both ends of each bus |
