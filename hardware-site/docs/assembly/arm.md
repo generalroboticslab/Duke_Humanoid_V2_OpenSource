@@ -26,7 +26,7 @@ Set and label each ID on the bench, one actuator at a time. `shoulder_1` is on t
 
 <figure markdown>
   ![Right arm exploded, parts labelled with team BOM ids](../assets/exploded/team/09-arm.webp){ loading=lazy }
-  <figcaption>The right arm, body outward to the wrist: machined parts C5 and C22–C29, printed parts P4–P8, actuators E1, E2, E5 and E6, bearings H2 and H4.</figcaption>
+  <figcaption>The right arm, body outward to the wrist: machined parts C5 and C22–C29, printed parts P4–P8, actuators E1, E2, E5 and E6, bearings H2 and H4. The unlabelled actuator at the top left, marked <em>Body</em>, is the shoulder-pitch actuator (E3), seated in the torso side plate.</figcaption>
 </figure>
 
 {{ booklet_parts("p.9") }}

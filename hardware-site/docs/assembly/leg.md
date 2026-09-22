@@ -25,7 +25,7 @@ Set and label each ID on the bench, one actuator at a time. All six joints of a 
 
 <figure markdown>
   ![Hip pitch and roll exploded, parts labelled with team BOM ids](../assets/exploded/team/04-leg-upper.webp){ loading=lazy }
-  <figcaption>Hip pitch and hip roll, body outward: brackets and retainers C4–C8, actuators E3, bearings H0.</figcaption>
+  <figcaption>Hip pitch and hip roll, body outward: brackets and retainers C4–C8, actuators E3, bearings H0. The unlabelled actuator at the top, marked <em>Body</em>, is the waist actuator (E3) of the torso.</figcaption>
 </figure>
 
 {{ booklet_parts("p.4") }}
