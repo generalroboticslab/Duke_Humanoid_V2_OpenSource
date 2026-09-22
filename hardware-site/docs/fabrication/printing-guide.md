@@ -14,7 +14,7 @@
 | `3DP_arm15_end_effector_attachment` | 2 |
 | `3DP_grip05_pinion` | 2 |
 
-Process and material per part: [Printed parts](../bom/index.md#printed-parts). Files: the STL in each row.
+Process and material per part: [Printed parts](../bom/index.md#printed-parts). Files: [CAD downloads](#cad-downloads).
 
 1. Print one fit-critical part first — one that mates with a machined part or takes a heat-set insert — and check the fit.
 2. Print the set.
