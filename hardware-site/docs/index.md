@@ -1,86 +1,37 @@
 # Duke Humanoid V2 — Hardware
 
-<figure markdown>
-  ![Duke Humanoid V2 in simulation and on hardware](assets/images/teaser.webp)
-  <figcaption>
-    Duke Humanoid V2: 31 degrees of freedom (DoF), 36&nbsp;kg, 1.2&nbsp;m, two
-    independently aimed RGB-D camera modules.
-  </figcaption>
-</figure>
-
-How to build an identical Duke Humanoid V2. The code is open; see
-[Software](software.md).
+Everything needed to build an identical Duke Humanoid V2: what to buy, what to machine and print, how to assemble, wire and bring it up. The control code is open too: [Software](software.md).
 
 <figure markdown>
-  ![The robot with both camera columns and both grippers lifted off](assets/exploded/team/15-whole-robot.webp){ loading=lazy }
-  <figcaption markdown="span">
-    What you build: torso, two legs, two arms, two camera columns, two
-    grippers. Exploded views of each are on the
-    [Assembly](assembly/index.md) pages.
-  </figcaption>
+  ![Duke Humanoid V2 hardware overview with joints numbered](assets/images/hardware.webp){ loading=lazy }
+  <figcaption>Orange: the 31 actuated joints — (1–7) shoulder pitch / roll / yaw, elbow, wrist roll / pitch / yaw; (8) waist; (9–14) hip pitch / roll / yaw, knee, ankle pitch / roll; (15–16) camera yaw / pitch. Green: (I) camera, (II) gripper, (III) onboard computer. Dimensions in mm.</figcaption>
 </figure>
 
 ## Build path
 
 <div class="grid cards" markdown>
 
--   :material-cart: **1 · Buy** — what to buy and have made. [Bill of materials →](bom/index.md)
--   :material-hammer-screwdriver: **2 · Make** — CAD, machining, printing, inspection. [Fabrication →](fabrication/index.md)
--   :material-wrench: **3 · Assemble** — subassembly by subassembly. [Assembly →](assembly/index.md)
--   :material-flash: **4 · Wire** — power, harnesses, six CAN (Controller Area Network) buses. [Electrical →](electrical/index.md)
--   :material-power: **5 · Bring up** — motor IDs, zeroing, calibration. [Bring-up →](bringup/index.md)
--   :material-check-decagram: **6 · Verify** — before leaving the gantry. [Acceptance tests →](bringup/index.md#acceptance-tests)
+-   :material-cart: **1 · Buy** — every part, quantity and price. [Bill of materials →](bom/index.md)
+-   :material-hammer-screwdriver: **2 · Make** — CAD files, {{ bom_count("cnc-parts.csv") }} machined parts, {{ bom_count("printed-parts.csv") }} printed parts. [Fabrication →](fabrication/index.md)
+-   :material-wrench: **3 · Assemble** — legs, arms, torso, camera columns, grippers, then the whole robot. [Assembly →](assembly/index.md)
+-   :material-flash: **4 · Wire** — 48 V power, six CAN buses, every cable to make. [Electrical →](electrical/index.md)
+-   :material-power: **5 · Bring up** — motor IDs, zeroing, camera calibration. [Bring-up →](bringup/index.md)
+-   :material-check-decagram: **6 · Verify** — eleven acceptance tests, hung then walking. [Acceptance tests →](bringup/index.md#acceptance-tests)
 
 </div>
 
-## Specifications
+## At a glance
 
 | | |
 | --- | --- |
-| DoF | 31: 27-DoF body (waist ×1, legs 2×6, arms 2×7) + two 2-DoF camera gimbals, +1 per gripper |
-| Mass / height | 36 kg / 1.2 m |
-| Arm reach / leg length | 0.46 m / 0.39 m |
-| Cameras | 2 × Intel RealSense D436, 90°×65° RGB field of view, 0.1–3.0 m, each on its own yaw-pitch gimbal |
-| End effectors | parallel grippers, 350 g each, one mimic-coupled jaw slide |
-| Actuation | quasi-direct-drive throughout |
-| Control | 50 Hz learned whole-body policy onboard, 200 Hz CAN motor loop |
-| Parts cost | {{ bom_total() }}, a floor: fasteners, printed parts, tools, shipping and setup fees unpriced |
-| Also needed | A CUDA machine for the planner; a gantry rated 50 kg or more, 1.4 m or more of clear height |
-| People | At least two |
+| Joints | 31 RobStride quasi-direct-drive actuators: waist 1, each leg 6, each arm 7, each camera gimbal 2 |
+| Size and mass | 1.26 m tall with camera masts; 35 kg (CAD) |
+| Cameras | 2 × Intel RealSense D436, each on its own yaw–pitch gimbal |
+| Grippers | 2 × rack-and-pinion parallel grippers, one Feetech bus servo each |
+| Power | 2 × 6S 10 000 mAh LiPo in series (44.4 V); 12 V for the computer and grippers |
+| Computer | MINISFORUM X1-470 mini PC onboard; a separate CUDA machine runs the planner |
+| Structure | Machined aluminium 6061 frame and joints; printed PLA, TPU and SLS nylon covers and brackets |
+| Parts cost | {{ bom_total() }} for the parts list; consumables, tools and shipping not included |
+| Also needed | A gantry rated 50 kg or more with 1.4 m of clear height, and two people |
 
-*Source: project README (first seven rows).* See also
-[Full specifications](reference/index.md#full-specifications).
-
-<figure markdown>
-  ![Duke Humanoid V2 hardware overview with joints numbered](assets/images/hardware.webp){ loading=lazy }
-  <figcaption>
-    Orange: actuated joints. (1&ndash;7) shoulder pitch/roll/yaw, elbow, wrist
-    roll/pitch/yaw; (8) waist; (9&ndash;14) hip pitch/roll/yaw, knee, ankle
-    pitch/roll; (15&ndash;16) camera yaw/pitch. Green: (I) camera, (II) gripper,
-    (III) onboard computer. Dimensions in mm.
-  </figcaption>
-</figure>
-
-## The camera modules
-
-<figure markdown>
-  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="450" poster="assets/images/hardware_tracking-poster.webp" aria-label="Each camera module tracking its own target">
-    <source src="assets/images/hardware_tracking.mp4" type="video/mp4">
-    <a href="assets/images/hardware_tracking.mp4">Each camera module tracking its own target</a>
-  </video>
-  <figcaption markdown="span">
-    Each module tracks its own target. The
-    [camera gimbal](assembly/index.md#head-and-camera-gimbal) is why this robot exists.
-  </figcaption>
-</figure>
-
-<figure markdown>
-  <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="800" height="400" poster="assets/images/vrw_fixed_vs_actuated-poster.webp" aria-label="Visible-reachable workspace, fixed versus actuated cameras">
-    <source src="assets/images/vrw_fixed_vs_actuated.mp4" type="video/mp4">
-    <a href="assets/images/vrw_fixed_vs_actuated.mp4">Visible-reachable workspace, fixed versus actuated cameras</a>
-  </video>
-  <figcaption>
-    Volume the robot can see and reach at once, fixed head versus actuated
-    modules. Without gimbals it is a different robot.
-  </figcaption>
-</figure>
+Full numbers: [Reference](reference/index.md).
