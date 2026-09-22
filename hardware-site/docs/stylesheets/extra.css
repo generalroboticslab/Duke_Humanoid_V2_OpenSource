@@ -282,3 +282,7 @@
   font-size: .62rem; font-weight: 800; line-height: 1.5; text-align: center; vertical-align: .1em;
 }
 .md-typeset .admonition-title .dh-gap-no { vertical-align: 0; }
+
+/* The header link is the lab's project page, not a repository: no star / fork facts
+   (Material caches them in the browser from the earlier GitHub URL). */
+.md-source__facts { display: none !important; }
