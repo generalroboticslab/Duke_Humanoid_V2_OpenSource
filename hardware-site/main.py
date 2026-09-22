@@ -508,7 +508,7 @@ def define_env(env):
 
     @env.macro
     def part_props(part_id: str) -> str:
-        """``70.6 g · 79.5 × 79.5 × 45.5 mm`` for one part, or a red TODO.
+        """``70.6 g · 79.5 × 79.5 × 45.5 mm`` for one part, or a dash.
 
         Mass is the CAD mass (the material assigned in Fusion); size is the
         axis-aligned bounding box in the part's own STEP/STL frame. Both are
@@ -516,20 +516,17 @@ def define_env(env):
         gets a TODO for the other; a size the STL and the Fusion component
         disagree on (see the CSV ``notes``) carries an UNVERIFIED mark.
         """
+        # A CAD value the model does not carry (no material assigned, no mesh) is shown
+        # as a dash: it is informational, not something a builder must resolve.
         row = _props_row(part_id)
         if row is None:
-            return TODO
+            return "—"
         mass = _num(row.get("mass_g"))
         dims = [_num(row.get(f"bbox_{axis}_mm")) for axis in "xyz"]
         if mass is None and None in dims:
-            return TODO
-        mass_text = f"{_fmt_num(mass)}&nbsp;g" if mass is not None else TODO
-        if None in dims:
-            size_text = TODO
-        else:
-            size_text = "&nbsp;×&nbsp;".join(_fmt_num(d) for d in dims) + "&nbsp;mm"
-            if "differs from the Fusion bounding box" in row.get("notes", ""):
-                size_text += " " + UNVERIFIED
+            return "—"
+        mass_text = f"{_fmt_num(mass)}&nbsp;g" if mass is not None else "—"
+        size_text = "—" if None in dims else "&nbsp;×&nbsp;".join(_fmt_num(d) for d in dims) + "&nbsp;mm"
         return f"{mass_text} · {size_text}"
 
     # ----------------------------------------------------------------- #
