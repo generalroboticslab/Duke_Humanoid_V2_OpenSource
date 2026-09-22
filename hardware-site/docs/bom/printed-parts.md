@@ -9,9 +9,6 @@ price are the team BOM's where it has a line for the part. **Team ref** is that 
 Volume, centre of mass and inertia for every part: [part-properties.csv](../data/part-properties.csv){ download="" }.
 **Qty** is the Fusion occurrence count per robot; the left and right arm and leg designs are separate, so
 their copies of one part are summed. Where the team BOM counts differently, the row's `notes` say both.
-The team BOM prices ten printed lines only, so {{ bom_unpriced_count("printed-parts.csv") }} of
-{{ bom_row_count("printed-parts.csv") }} rows read **TODO**{ .dh-missing } in **Unit cost** and
-**Line total** rather than zero. The printed subtotal below covers the priced rows only.
 
 | Team ref | Part ID | Description | Material | Process | Qty | Mass / size | Files |
 | --- | --- | --- | --- | --- | ---: | --- | --- |
