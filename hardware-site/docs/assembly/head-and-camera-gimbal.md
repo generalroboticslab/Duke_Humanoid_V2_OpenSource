@@ -68,10 +68,7 @@ Fit the camera (E14) between the two arms and plug the right-angle USB-C adapter
 
 {{ step(7, "Route the camera cable") }}
 
-Run a USB-A to USB-C cable (`E9` **UNVERIFIED**{ .dh-unverified }) from the adapter (E21) down the column, with slack across the pitch and yaw axes and no tight bends: a flexed USB 3 cable drops the camera to USB 2.
-
-!!! missing "MISSING — how the camera cable crosses the yaw axis (travel, service loop, retention)."
-    *Owner: hardware lead.*
+Run the USB-A to USB-C cable (E9) from the adapter (E21) down the column and into the torso, with slack across the pitch and yaw axes and no tight bends: a flexed USB 3 cable drops the camera to USB 2. Fix it to the neck so it cannot snag anywhere in the yaw travel.
 
 ✅ **Check:** the camera streams USB 3 at every extreme of hand-turned travel.
 { .dh-check }

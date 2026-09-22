@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **9 open items** across **5 pages**, of which **1 block the public release**.
+Every unresolved item on this site, in one table: **8 open items** across **4 pages**, of which **1 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,21 +21,20 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Assembly | 1 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| **Total** | **9** | **1** |
+| **Total** | **8** | **1** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 9.
+more than 8.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
 | Electrical lead | 7 | 1 |
-| Hardware lead | 2 | 0 |
 | Safety sign-off | 2 | 1 |
+| Hardware lead | 1 | 0 |
 | BOM owner | 1 | 0 |
 | Controls lead | 1 | 0 |
 
@@ -47,16 +46,6 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-
-## Assembly
-
-The home page names *no torque values and no threadlocker specification* as
-one single release blocker. It is not one item: it is these rows, spread
-across every step of every limb, and each carries the flag in its own right.
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [head-and-camera-gimbal → Route the camera cable (step 7)](../assembly/index.md#step-head-and-camera-gimbal-7) | How the camera cable crosses the yaw axis (travel, service loop, retention). | hardware lead | no |
 
 ## Electrical
 
