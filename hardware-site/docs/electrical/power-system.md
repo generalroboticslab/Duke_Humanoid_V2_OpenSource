@@ -7,7 +7,7 @@
 
 | From | To | Voltage | Wire | Connectors |
 | --- | --- | --- | --- | --- |
-| Pack 1 − | Pack 2 + (series link) | 44.4 V nominal, 50.4 V full | 12 AWG silicone **UNVERIFIED**{ .dh-unverified } | EC5 |
+| Pack 1 − | Pack 2 + (series link) | 44.4 V nominal, 50.4 V full | 10 AWG silicone | EC5 |
 | Pack + | Surge protector (E18) → 48 V bus | 48 V | 12 AWG silicone | EC5 at the pack; screw terminals |
 | 48 V bus, pack − | Lower-body power and ground blocks (E19): both legs, waist | 48 V | 12 AWG silicone | Screw terminals |
 | 48 V bus, pack − | Upper-body power and ground blocks (E19): both arms, both `shoulder_1`, four camera motors | 48 V | **TODO**{ .dh-missing } | Screw terminals |
