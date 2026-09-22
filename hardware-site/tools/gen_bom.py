@@ -295,16 +295,16 @@ PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
     ("E0", EL_FILE, "EL_COMPUTE_MINIPC", "electronics", "MINISFORUM X1-470 mini PC (onboard computer)", "X1-470",
      "Module (III) on the hardware overview figure. The 2026-09-19 link is the X1-Pro-470 listing; "
      "the model on the site is the X1-470 **UNVERIFIED**."),
-    ("E7", EL_FILE, "EL_BATTERY_6S", "electronics", "Zeee 6S LiPo battery, 10000 mAh, 22.2 V, 2-pack", "",
+    ("E7", EL_FILE, "EL_BATTERY_6S", "electronics", "Zeee 6S LiPo battery, 10000 mAh, 22.2 V, 2-pack", "10000mah-22-2v-120c-ec5",
      "Priced as one 2-pack, which is how the team BOM records it (its item text ends in x2). "
      "Whether both packs are carried at once is not stated there."),
     ("E8", EL_FILE, "EL_TVS_DIODE", "electronics", "TVS diode, 53 V working / 85 V clamping", "M1.5KE62CA",
      "Manufacturer part number read from the DigiKey link. Where the ten diodes are installed "
      "is not documented in the team BOM."),
-    ("E10", EL_FILE, "EL_SERVO_DRIVER", "electronics", "Waveshare serial bus servo driver board, ST/SC series", "",
+    ("E10", EL_FILE, "EL_SERVO_DRIVER", "electronics", "Waveshare serial bus servo driver board, ST/SC series", "25514",
      "Two boards for the two Feetech bus servos."),
-    ("E11", EL_FILE, "EL_BUCK_12V_ENC", "electronics", "DC 20-60 V to 12 V encased buck converter", "", ""),
-    ("E12", EL_FILE, "EL_BUCK_48V_12V", "electronics", "48 V to 12 V buck converter", "", ""),
+    ("E11", EL_FILE, "EL_BUCK_12V_ENC", "electronics", "DC 20-60 V to 12 V encased buck converter", "B0G2SV9PFY", ""),
+    ("E12", EL_FILE, "EL_BUCK_48V_12V", "electronics", "48 V to 12 V buck converter", "6.5V-60V To 5V/12V Dc", ""),
     ("E13", EL_FILE, "EL_CAN_ADAPTER", "electronics", "CANable PRO V2.0 USB-CAN controller", "CANable PRO V2.0",
      "Six adapters, one per CAN bus."),
     ("E14", EL_FILE, "EL_CAM_D436", "electronics", "Intel RealSense D436 depth camera", "D436",
@@ -313,17 +313,17 @@ PURCHASED: list[tuple[str, str, str, str, str, str, str]] = [
      "design was optimised for."),
     ("E15", EL_FILE, "EL_SERVO_FEETECH", "electronics", "Feetech HL-3915-C001 12 V servo, 14.2 kg-cm",
      "HL-3915-C001", "One servo per gripper."),
-    ("E16", EL_FILE, "EL_USB_HUB", "electronics", "Vention USB hub", "", ""),
+    ("E16", EL_FILE, "EL_USB_HUB", "electronics", "Vention USB hub", "B0D2XWJ99H", ""),
     ("E17", EL_FILE, "EL_IMU_TM171", "electronics", "SYD Dynamics TransducerM TM171 9-axis AHRS, dual-port",
      "TM171", "Listed in the team BOM only as \"IMU\"; the model is read from the vendor link."),
-    ("E18", EL_FILE, "EL_SURGE_PROTECTOR", "electronics", "TTocas surge protector", "",
+    ("E18", EL_FILE, "EL_SURGE_PROTECTOR", "electronics", "TTocas surge protector", "E9",
      "New in the 2026-09-19 team BOM. The power wiring diagram puts a surge protector in the "
      "pack lead before the 48 V bus; that this is that part is **UNVERIFIED**, and the link is "
      "a vendor storefront, not one product."),
-    ("E19", EL_FILE, "EL_DIST_BLOCK", "electronics", "Power distribution block terminals", "",
+    ("E19", EL_FILE, "EL_DIST_BLOCK", "electronics", "Power distribution block terminals", "6x8-7",
      "New in the 2026-09-19 team BOM. Four off, which matches the two power + ground pairs "
      "drawn on the power wiring diagram; that the drawn blocks are this part is **UNVERIFIED**."),
-    ("E20", EL_FILE, "EL_VOLTAGE_CHECKER", "electronics", "LiPo voltage checker, 1-8S, with case", "",
+    ("E20", EL_FILE, "EL_VOLTAGE_CHECKER", "electronics", "LiPo voltage checker, 1-8S, with case", "Aoicrie 1S-8S 2-pack",
      "New in the 2026-09-19 team BOM. Two off; where they sit on the robot is not stated."),
     # --- cables and connectors --------------------------------------------
     ("E9", CAB_FILE, "CBL_USBA_USBC_BELKIN", "harness", "Belkin USB-A to USB-C cable, 6.6 ft, 2-pack", "",
