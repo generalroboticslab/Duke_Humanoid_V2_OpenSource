@@ -32,7 +32,6 @@ Last worked on: 2026-09-20.
 | 2 | E-stop: none in the BOM or power diagram, yet the run scripts assume one | `before-you-start/safety.md` | electrical lead |
 | 3 | Physical power-on / power-off order of the rails | `before-you-start/safety.md` | electrical lead |
 | 4 | Shank-cover STEP/STL are byte-identical to the shoulder covers — wrong geometry ships today | `bom/printed-parts.md` | whoever stages the export |
-| 5 | CAD errors: Motor04 shaft and knee need M5, CAD has M4; RS03 shaft bearing retainer above the knee | `fabrication/cnc-guide.md` | hardware lead |
 | 6 | Which printed parts are FDM, which are SLS, and which are structural | `fabrication/printing-guide.md` | hardware lead |
 | 7 | Pack-path fuse (none drawn); surge protector part number and rating | `electrical/power-system.md` | electrical lead |
 | 8 | Hardware and documentation licence not declared | `reference/citation-and-license.md` | PI + licensing office |

@@ -12,7 +12,6 @@ The team BOM lists {{ bom_count("fasteners.csv") }} hardware lines — six beari
 | Item | Specification |
 | --- | --- |
 | Screws | Torx button-head. Team BOM: M3x10, M4x8, M4x10. Team design log: M4x12 (McMaster-Carr 90991A123) and M3x12 (90991A115) **UNVERIFIED**{ .dh-unverified } |
-| Exception | M5 on the Motor04 shaft and the knee. The published CAD has M4 clearance there; enlarge to Ø5.3 mm at the machinist — see [CNC guide](../fabrication/index.md#known-cad-errors) |
 | Thread engagement | At least 4 mm of usable thread, 6 mm preferred |
 | Main bearing | 50 × 65 × 7 mm, 2 off (team BOM line `H1`; the Fusion model has two `bearing_50x65x7_6810_6.1kN_52g`). No part number in the team BOM **TODO**{ .dh-missing }; the team design log models McMaster-Carr 6656K229 |
 | Ankle thrust bearing | Not specified **UNVERIFIED**{ .dh-unverified } |
