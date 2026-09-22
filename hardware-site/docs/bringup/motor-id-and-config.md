@@ -53,7 +53,7 @@ RS03 and RS04 ship at CAN ID **127** (other models
     ```
 
 It writes `min(default × scale, 40 A)` per motor and **saves to the drives**.
-Values: [Power system](../electrical/index.md#configured-current-limits).
+Values: [Full specifications](../reference/index.md#actuators).
 
 ## Set runtime torque limits
 

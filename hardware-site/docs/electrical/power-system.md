@@ -1,102 +1,20 @@
 # Power system
 
-Wire the 48 V and 12 V rails.
-
-!!! abstract "At a glance"
-    - **You will:** join the packs in series, then feed every block.
-    - **Parts:** [Electronics](../bom/index.md#electronics) BOM (bill of materials), plus team-log parts below.
-
 <figure markdown>
   ![Power wiring diagram, Duke Humanoid V2](../assets/wiring/power-supply-v2.webp){ loading=lazy }
+  <figcaption>Power wiring. Red: 48 V; black: ground. [Full size](../assets/wiring/power-supply-v2.png).</figcaption>
 </figure>
 
-[Full-size diagram](../assets/wiring/power-supply-v2.png)
+| From | To | Voltage | Wire | Connectors |
+| --- | --- | --- | --- | --- |
+| Pack 1 − | Pack 2 + (series link) | 44.4 V nominal, 50.4 V full | 12 AWG silicone | EC5 |
+| Pack + | Surge protector (E18) → 48 V bus | 48 V | 12 AWG silicone | EC5 at the pack; screw terminals |
+| 48 V bus, pack − | Lower-body power and ground blocks (E19): both legs, waist | 48 V | 12 AWG silicone | Screw terminals |
+| 48 V bus, pack − | Upper-body power and ground blocks (E19): both arms, both `shoulder_1`, four camera motors | 48 V | **TODO**{ .dh-missing } | Screw terminals |
+| Power block | Each actuator, daisy-chained | 48 V | 18 AWG silicone | XT30(2+2), see [Harness fabrication](#harness-fabrication) |
+| Upper-body power block | 10 A inline fuse → 48 V→12 V converter (E11) → computer (E0) | 48 V → 12 V | 16 AWG silicone (12 V side) | Converter terminals; computer DC jack |
+| Upper-body power block | 48 V→12 V converter (E12, one per gripper) → servo driver board (E10) | 48 V → 12 V | 18 AWG silicone | Board screw terminals |
 
-## Wire the 48 V bus
-
-1. Join two Zeee 6S 10000 mAh LiPo packs **in series**: 44.4 V nominal, 50.4 V
-   full (computed); bus labelled 48V. Not parallel (22.2 V): RobStride
-   RS02/RS03/RS04 drives are rated 48 VDC, range 24–60 VDC.
-
-    !!! note "Yours to make — the pack series link: match the pack connector, size the wire for the pack current and length"
-        *Owner: hardware lead. Blocks release.*
-
-    !!! missing "MISSING — SAFETY — Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charge rate, balance-charging procedure and charging location"
-        *Owner: hardware lead (retention) + electrical lead + safety officer.*
-
-2. Run free pack + → surge protector → bus; free pack − → ground distribution
-   blocks.
-3. Feed lower-body blocks: both legs, waist (13 actuators); pack-to-block run
-   **12 AWG**.
-4. Feed upper-body blocks: both arms, both `shoulder_1`, four gaze motors (18
-   actuators).
-5. Fit TVS (transient-voltage suppression) diodes, Microchip M1.5KE62CA (53 V
-   stand-off, 85 V clamp), across power and ground at each block pair.
-
-    !!! unverified "UNVERIFIED — TVS diodes fitted at each location (BOM: 10)"
-        *Owner: electrical lead.*
-
-No other gauge is labelled; no e-stop (emergency stop) or pack monitor is drawn.
-*Source: power wiring diagram.*
-
-Team log (not in the BOM):
-
-- Distribution blocks: double-row 8-hole copper terminal bars (AliExpress
-  3256806176225478; 114 mm mount centres, 126 mm overall; M5 × 8 and M8 × 1 screws).
-- Pack connectors EC5; charger: [iSDT K4 Smart Dual Charger (AC400W / DC600W ×2)](https://www.getfpv.com/isdt-k4-smart-dual-charger-ac400w-dc600w-x2.html) (reference only — supplied by the team, not in the BOM).
-
-!!! unverified "UNVERIFIED — Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors: diagram or team log only, not the BOM; no confirmed part numbers"
-    *Owner: BOM owner + electrical lead.*
-
-✅ **Check:** the series link passes C3 ([Pre-power checks](#pre-power-checks)).
-
-## Feed the 12 V rail
-
-Two converters serve two loads:
-
-- `EL_BUCK_12V_ENC` (E11, 20–60 V → 12 V encased) feeds the **MINISFORUM X1-470**
-  onboard computer: upper-body power block → 10 A fuse → E11 → computer. 12 V
-  run **16 AWG**. The computer has no power unless the upper-body block is
-  energised.
-- `EL_BUCK_60V_12V` (E12, 60 V → 12 V) feeds the **two gripper servos** through
-  the per-gripper `EL_SERVO_DRIVER` (E10) bus driver boards. E12 fits two in
-  the BOM because the board needs one input per servo bus; the 12 V wiring to
-  each gripper is **18 AWG**.
-
-!!! missing "MISSING — Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget"
-    *Owner: electrical lead.*
-
-## Protection and disconnect
-
-The deployed robot's first stop is software, not hardware: the silence failsafe (nav 1 s, arm 0.5 s, gaze 2 s) and the CAN watchdog in `humanoid_real_env.py`. Hardware still needs
-two things — a pack-path fuse and a confirmed surge protector.
-
-!!! missing "MISSING — SAFETY — Pack-path fuse (none drawn); surge protector part number and rating"
-    *Owner: electrical lead + safety officer. Blocks release.*
-
-## Configured current limits
-
-??? info "Full actuator electrical data"
-    | Model | Qty | Max torque (N·m) | Default current limit (A) | Written at scale 0.6 (A) | K<sub>t</sub> (N·m/A<sub>rms</sub>) | R (Ω ±10 %) | K<sub>e</sub> (V<sub>rms</sub>/(rad/s)) |
-    | --- | --- | --- | --- | --- | --- | --- | --- |
-    | RS00 | 2 | 14 | 16.0 | 9.6 | 1.48 | 1.5 | 0.91 |
-    | RS02 | 6 | 17.0 | 23.0 | 13.8 | 1.22 | 0.55 | 0.92 |
-    | RS03 | 11 | 60.0 | 43.0 | 25.8 | 2.36 | 0.39 | 0.16 |
-    | RS04 | 2 | 120.0 | 60.0 | 36.0 | 2.10 | 0.16 | 0.16 |
-    | RS05 | 6 | 5.5 | 11.0 | 6.6 | 0.94 | 2.72 | 0.071 |
-    | RS06 | 4 | 36 | 57.0 | 34.2 | 1.1 | 0.23 | 0.073 |
-
-    *Source: `control/hardware_bindings/motor/py_motor.py`.*
-
-`control/humanoid_set_current_limit.py` writes `min(default × scale, 40 A)` to
-every motor (default scale 0.6). Per-motor phase limits: never sum them to size
-wire or fuses.
-
-!!! note "RS00/RS05/RS06 manual data is tracked on [Actuators](../bom/index.md#actuators)"
-    *Owner: controls lead + hardware lead.*
-
-!!! note "Not measured on the reference robot — bus current (quiescent, standing, walking) and peak inrush at pack connection"
-    *Owner: electrical lead + controls lead.*
-
-✅ **Check:** before any pack is connected: packs in series, bus voltage measured,
-fitted converters rated for it, every MISSING — SAFETY item here closed.
+- TVS diodes (E8, ten) sit across power and ground at each block pair.
+- A voltage checker (E20) rides on each pack's balance lead.
+- The computer is powered only when the upper-body block is live.

@@ -76,7 +76,7 @@ Cut power, and do not restart to retry, on:
 - anyone calling abort.
 
 Fault came and went? Run the
-[dropout probe](../electrical/index.md#bus-health-and-fault-diagnosis) before
+dropout probe (`humanoid_dropout_probe.py`) before
 any power cycle.
 
 !!! note "Every layer of stopping is software here — confirm each one is armed before you press Enter"

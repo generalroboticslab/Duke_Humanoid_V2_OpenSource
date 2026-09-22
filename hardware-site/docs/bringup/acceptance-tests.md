@@ -74,7 +74,7 @@ python humanoid_profile_motor_latency.py  # 1 % torque, no position command
     ```
 
 2. Wiggle every connector, clamp and limb entry while stirring the limb
-   ([Routing](../electrical/index.md#verifying-a-routing-job)).
+   ([Routing](../electrical/index.md#routing)).
 
 | Pass | Abort |
 | --- | --- |

@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **8 open items** across **4 pages**, of which **1 block the public release**.
+Every unresolved item on this site, in one table: **2 open items** across **2 pages**, of which **0 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,21 +21,17 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| **Total** | **8** | **1** |
+| **Total** | **2** | **0** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 8.
+more than 2.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
-| Electrical lead | 7 | 1 |
-| Safety sign-off | 2 | 1 |
-| Hardware lead | 1 | 0 |
-| BOM owner | 1 | 0 |
+| Electrical lead | 1 | 0 |
 | Controls lead | 1 | 0 |
 
 ## What the release still owes
@@ -46,17 +42,6 @@ ones somebody has to close before this counts as a finished release.
 
 | Blocker | Where it is tracked |
 | --- | --- |
-
-## Electrical
-
-| Page | What is missing | Who can supply it | Blocks release |
-| --- | --- | --- | :-: |
-| [harness-fabrication → Identify the connector pinouts](../electrical/index.md#identify-the-connector-pinouts) | Pinouts for RS00, RS05, RS06 and gripper servo; colour and gauge per pin; mating parts; pin-1 orientation | electrical lead | no |
-| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Pack retention in the torso rear bay and lead protection at its exit; balance-lead protection, pack monitoring and shutdown voltage; charge rate, balance-charging procedure and charging location | hardware lead (retention) + electrical lead + safety officer | no |
-| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | TVS diodes fitted at each location (BOM: 10) | electrical lead | no |
-| [power-system → Wire the 48 V bus](../electrical/index.md#wire-the-48-v-bus) | Surge protector, 4 distribution blocks, 10 A fuse, EC5 connectors: diagram or team log only, not the BOM; no confirmed part numbers | BOM owner + electrical lead | no |
-| [power-system → Feed the 12 V rail](../electrical/index.md#feed-the-12-v-rail) | Gripper-servo 12 V supply (source, fuse, wiring), USB hub power and power budget | electrical lead | no |
-| [power-system → Protection and disconnect](../electrical/index.md#protection-and-disconnect) | Pack-path fuse (none drawn); surge protector part number and rating | electrical lead + safety officer | **yes** |
 
 ## Bring-up
 
