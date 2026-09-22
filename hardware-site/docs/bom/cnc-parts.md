@@ -3,37 +3,36 @@
 {{ bom_count("cnc-parts.csv") }} machined part rows, {{ bom_subtotal("cnc-parts.csv") }}.
 **Qty** and **Unit cost** are the team BOM's; **Team ref** is its line.
 
-Volume, centre of mass and inertia for every part: [part-properties.csv](../data/part-properties.csv){ download="" }.
 
 ## Leg
 
 {{ bom_count("cnc-parts.csv", subassembly="leg") }} rows,
 {{ bom_subtotal("cnc-parts.csv", subassembly="leg") }}.
 
-| Team ref | Part ID | Description | Qty | Unit cost | Line total | Flags | Files |
-| --- | --- | --- | ---: | ---: | ---: | --- | --- |
-{% for r in pd_read_csv("data/cnc-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if r.subassembly == "leg" %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ (("not in the team BOM; " if "Not in the team BOM" in r.notes else "") ~ ("open question; " if "UNVERIFIED" in r.notes else "") ~ ("no price; " if not r.unit_cost_usd else "")).rstrip("; ") or "—" }} | {{ cad_links(r.part_id) }} |
-{% endfor %}| | | **Leg subtotal** | | | **{{ bom_subtotal("cnc-parts.csv", subassembly="leg") }}** | | | |
+| Team ref | Part ID | Description | Qty | Unit cost | Line total | Files |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+{% for r in pd_read_csv("data/cnc-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if r.subassembly == "leg" %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ cad_links(r.part_id) }} |
+{% endfor %}| | | **Leg subtotal** | | | **{{ bom_subtotal("cnc-parts.csv", subassembly="leg") }}** | |
 
 ## Arm
 
 {{ bom_count("cnc-parts.csv", subassembly="arm") }} rows,
 {{ bom_subtotal("cnc-parts.csv", subassembly="arm") }}.
 
-| Team ref | Part ID | Description | Qty | Unit cost | Line total | Flags | Files |
-| --- | --- | --- | ---: | ---: | ---: | --- | --- |
-{% for r in pd_read_csv("data/cnc-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if r.subassembly == "arm" %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ (("not in the team BOM; " if "Not in the team BOM" in r.notes else "") ~ ("open question; " if "UNVERIFIED" in r.notes else "") ~ ("no price; " if not r.unit_cost_usd else "")).rstrip("; ") or "—" }} | {{ cad_links(r.part_id) }} |
-{% endfor %}| | | **Arm subtotal** | | | **{{ bom_subtotal("cnc-parts.csv", subassembly="arm") }}** | | | |
+| Team ref | Part ID | Description | Qty | Unit cost | Line total | Files |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+{% for r in pd_read_csv("data/cnc-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if r.subassembly == "arm" %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ cad_links(r.part_id) }} |
+{% endfor %}| | | **Arm subtotal** | | | **{{ bom_subtotal("cnc-parts.csv", subassembly="arm") }}** | |
 
 ## Body
 
 {{ bom_count("cnc-parts.csv", subassembly="body") }} rows,
 {{ bom_subtotal("cnc-parts.csv", subassembly="body") }}.
 
-| Team ref | Part ID | Description | Qty | Unit cost | Line total | Flags | Files |
-| --- | --- | --- | ---: | ---: | ---: | --- | --- |
-{% for r in pd_read_csv("data/cnc-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if r.subassembly == "body" %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ (("not in the team BOM; " if "Not in the team BOM" in r.notes else "") ~ ("open question; " if "UNVERIFIED" in r.notes else "") ~ ("no price; " if not r.unit_cost_usd else "")).rstrip("; ") or "—" }} | {{ cad_links(r.part_id) }} |
-{% endfor %}| | | **Body subtotal** | | | **{{ bom_subtotal("cnc-parts.csv", subassembly="body") }}** | | | |
+| Team ref | Part ID | Description | Qty | Unit cost | Line total | Files |
+| --- | --- | --- | ---: | ---: | ---: | --- |
+{% for r in pd_read_csv("data/cnc-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if r.subassembly == "body" %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ money_cell(r.unit_cost_usd) }} | {{ line_total_cell(r) }} | {{ cad_links(r.part_id) }} |
+{% endfor %}| | | **Body subtotal** | | | **{{ bom_subtotal("cnc-parts.csv", subassembly="body") }}** | |
 
 ## Summary
 
