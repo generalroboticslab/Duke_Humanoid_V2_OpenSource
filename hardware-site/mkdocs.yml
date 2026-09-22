@@ -7,7 +7,6 @@ site_url: https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/
 
 repo_url: https://github.com/generalroboticslab/duke_humanoid_v2
 repo_name: generalroboticslab/duke_humanoid_v2
-edit_uri: https://github.com/rivery927/Duke_Humanoid_V2_OpenSource/edit/main/hardware-site/docs/
 
 copyright: >-
   Copyright &copy; General Robotics Lab, Duke University —
@@ -28,7 +27,6 @@ theme:
     - search.highlight
     - content.code.copy
     - content.tabs.link
-    - content.action.edit
   logo: assets/brand/grl-logo-white.svg
   favicon: assets/brand/grl-logo-black.svg
   icon:
