@@ -545,7 +545,7 @@
     // own sub-assemblies): it says nothing about where the part sits on the robot.
     const vendorInternal = new Map();
     function isVendorInternal(m) {
-      if (!vendorInternal.has(m)) vendorInternal.set(m, m.meshes.length > 0 && m.meshes.every((x) => String(x.node).startsWith("vendor:")));
+      if (!vendorInternal.has(m)) vendorInternal.set(m, m.meshes.length > 0 && m.meshes.every((x) => (nodeOwner.get(x.node) || ["vendor"])[0] === "vendor"));
       return vendorInternal.get(m);
     }
     function chainHtml(path, skipPath) {
