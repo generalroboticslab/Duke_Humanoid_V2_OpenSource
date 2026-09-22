@@ -212,6 +212,7 @@
 .dh-viewer-legend i { display: inline-block; width: .8em; height: .8em; margin-right: .3em; border-radius: .15em; vertical-align: -.05em; }
 .dh-sw-amber { background: #f2a61a; }
 .dh-sw-red { background: #d91f14; }
+.dh-sw-blue { background: rgba(21, 101, 192, .5); }
 .md-typeset .dh-viewer-note { margin: 0 0 1rem; font-size: .7rem; color: var(--md-default-fg-color--light); }
 #dh-viewer-info { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; padding: .4rem .6rem; border-left: .2rem solid #d91f14; background: var(--md-code-bg-color); line-height: 1.7; }
 
@@ -252,9 +253,9 @@
 .md-typeset .dh-part-row:hover td { background: rgba(242, 166, 26, .18); }
 .md-typeset .dh-part-row:focus-visible { outline: none; }
 .md-typeset .dh-part-row:focus-visible td { box-shadow: inset 0 0 0 .15rem var(--md-accent-fg-color); }
-.md-typeset .dh-part-row.dh-selected td { background: rgba(217, 31, 20, .18); }
+.md-typeset .dh-part-row.dh-selected td { background: rgba(21, 101, 192, .14); }
 .md-typeset .dh-part-row.dh-flash td { animation: dh-flash 1.6s ease-out; }
-@keyframes dh-flash { 0%, 60% { background: rgba(217, 31, 20, .45); } 100% { background: rgba(217, 31, 20, .18); } }
+@keyframes dh-flash { 0%, 60% { background: rgba(21, 101, 192, .38); } 100% { background: rgba(21, 101, 192, .14); } }
 
 /* eye (hide / show the selected part) and "Show hidden (N)" buttons in the viewer bar */
 .md-typeset .dh-viewer-bar .dh-eye, .md-typeset .dh-viewer-bar .dh-unhide { display: inline-flex; align-items: center; gap: .35em; }

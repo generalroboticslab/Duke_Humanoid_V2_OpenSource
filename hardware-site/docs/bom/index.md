@@ -17,7 +17,7 @@ Click **Preview** in any row below to see where that part sits; click a componen
 </model-viewer>
 <div class="dh-viewer-bar">
   <button id="dh-viewer-reset" class="md-button" type="button">Show all</button>
-  <span class="dh-viewer-legend"><span>Colours are the Fusion appearances</span><span><i class="dh-sw-amber"></i>hovered row</span><span><i class="dh-sw-red"></i>selected</span></span>
+  <span class="dh-viewer-legend"><span>Colours are the Fusion appearances</span><span><i class="dh-sw-amber"></i>hovered row</span><span><i class="dh-sw-red"></i>selected on the model</span><span><i class="dh-sw-blue"></i>selected row</span></span>
   <div id="dh-viewer-info" hidden></div>
 </div>
 <p class="dh-viewer-note">Axes are the STEP file axes (right-handed, Z up).</p>
