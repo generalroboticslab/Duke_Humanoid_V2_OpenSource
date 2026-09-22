@@ -1,10 +1,6 @@
 # Bill of materials
 
-Everything in one robot, computed from the CSVs below; *not yet published* means no data exists yet.
-
-Quantities and prices are the team's own bill of materials for the reference robot. **Team ref** in
-each table is the line of that list a row comes from (`E3`, `C21`, `P20`, `H1`);
-[team-map.csv](../data/team-map.csv) lists every line with its CAD part.
+Everything to buy for one robot. Quantities and prices are the team's own bill of materials for the reference robot; **Team ref** is the line of that list a row comes from.
 
 ## Find a part on the robot
 
@@ -27,29 +23,19 @@ Click **Preview** in any row below to see where that part sits; click a componen
 <p class="dh-viewer-note">Axes are the STEP file axes (right-handed, Z up).</p>
 </div>
 
-| Tier | Category | Covers | Subtotal |
-| --- | --- | --- | --- |
-| **Robot** | [Actuators](#actuators) | {{ bom_qty("actuators.csv") }} RobStride units, {{ bom_count("actuators.csv") }} models | {{ bom_subtotal("actuators.csv") }} |
-| | [Electronics](#electronics) | Computer, battery, power conversion, Controller Area Network (CAN) adapters, inertial measurement unit (IMU), cameras | {{ bom_subtotal("electronics.csv") }} |
-| | [CNC parts](#cnc-parts) | {{ bom_count("cnc-parts.csv") }} machined parts | {{ bom_subtotal("cnc-parts.csv") }} |
-| | [Cables and connectors](#cables-and-connectors) | One cable line; connectors, wire, sleeving and heat-shrink are lab consumables, not itemised | {{ bom_subtotal("cables-connectors.csv") }} |
-| | [Fasteners and hardware](#fasteners-and-hardware) | {{ bom_count("fasteners.csv") }} bearing and screw lines | {{ bom_subtotal("fasteners.csv") }} |
-| | [Printed parts](#printed-parts) | {{ bom_count("printed-parts.csv") }} rows of fused-deposition (FDM) and laser-sintered (SLS) prints | {{ bom_subtotal("printed-parts.csv") }} |
-| | **Robot subtotal (a floor, not a price)** | | **{{ bom_total() }}** |
-| **Tools** | Listed with specifications on [Tools](../assembly/index.md#tools); not priced, because what you already own decides the cost | | — |
-| **Optional** | A third camera module, spares and upgrades; quote them from the same vendors as the parts they duplicate | | — |
+| Category | Covers | Subtotal |
+| --- | --- | --- |
+| Category | Covers | Subtotal |
+| --- | --- | --- |
+| [Actuators](#actuators) | {{ bom_qty("actuators.csv") }} RobStride units, {{ bom_count("actuators.csv") }} models | {{ bom_subtotal("actuators.csv") }} |
+| [Electronics](#electronics) | Computer, battery, power conversion, Controller Area Network (CAN) adapters, inertial measurement unit (IMU), cameras | {{ bom_subtotal("electronics.csv") }} |
+| [CNC parts](#cnc-parts) | {{ bom_count("cnc-parts.csv") }} machined parts | {{ bom_subtotal("cnc-parts.csv") }} |
+| [Cables and connectors](#cables-and-connectors) | One cable line; connectors, wire, sleeving and heat-shrink are lab consumables, not itemised | {{ bom_subtotal("cables-connectors.csv") }} |
+| [Fasteners and hardware](#fasteners-and-hardware) | {{ bom_count("fasteners.csv") }} bearing and screw lines | {{ bom_subtotal("fasteners.csv") }} |
+| [Printed parts](#printed-parts) | {{ bom_count("printed-parts.csv") }} rows of fused-deposition (FDM) and laser-sintered (SLS) prints | {{ bom_subtotal("printed-parts.csv") }} |
+| **Robot total** | | **{{ bom_total() }}** |
 
-- The robot subtotal therefore excludes those parts, plus bulk wire, tools, shipping, duty and labour.
-- Prices are the team BOM's as of {{ bom_priced_as_of("actuators.csv") }}; order sequence, vendors and alternates: [Sourcing](#sourcing).
-
-**Data files:**
-[actuators.csv](../data/actuators.csv) ·
-[electronics.csv](../data/electronics.csv) ·
-[cnc-parts.csv](../data/cnc-parts.csv) ·
-[cables-connectors.csv](../data/cables-connectors.csv) ·
-[fasteners.csv](../data/fasteners.csv) ·
-[printed-parts.csv](../data/printed-parts.csv) ·
-[team-map.csv](../data/team-map.csv)
+Prices are the team BOM's as of {{ bom_priced_as_of("actuators.csv") }}. The tables as CSV: [actuators](../data/actuators.csv), [electronics](../data/electronics.csv), [cnc-parts](../data/cnc-parts.csv), [printed-parts](../data/printed-parts.csv), [fasteners](../data/fasteners.csv), [cables-connectors](../data/cables-connectors.csv).
 
 {% include "bom/actuators.md" %}
 

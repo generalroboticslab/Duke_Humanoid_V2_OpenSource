@@ -1,48 +1,17 @@
 # Sourcing
 
-Order these first:
+Order these first — long lead time or supply risk, and no drop-in substitute:
 
 | Item | Why |
 | --- | --- |
-| {{ bom_count("cnc-parts.csv") }} machined parts, {{ bom_subtotal("cnc-parts.csv") }} | Large custom order; lead time not quoted |
-| Intel RealSense D436 ×2 | Supply risk: the RealSense line has had availability gaps |
+| {{ bom_count("cnc-parts.csv") }} machined parts, {{ bom_subtotal("cnc-parts.csv") }} | Large custom order ([CNC guide](../fabrication/index.md#order-the-parts)) |
 | RobStride actuators, {{ bom_qty("actuators.csv") }} units, {{ bom_subtotal("actuators.csv") }} | Supply risk |
-
-!!! note "Yours to determine — quoted lead times, with the quote date, for machining, the D436 and the RobStride actuators"
-    *Owner: hardware lead.*
-
-## Supply-risk parts
-
-{% set risky = pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/electronics.csv", dtype="str", keep_default_na=False).to_dict("records") %}
-| Part ID | Description | Qty | Vendor |
-| --- | --- | ---: | --- |
-{% for r in risky if "SUPPLY RISK" in r.notes %}| `{{ r.part_id }}` | {{ r.description }} | {{ r.qty_per_robot }} | [{{ r.vendor }}]({{ r.vendor_url }}) |
-{% endfor %}
-
-No substitute is drop-in. Another actuator changes the mounting interface, the
-shaft and the Controller Area Network (CAN) configuration. Another camera changes
-the gimbal mount, the perception bridge and the 90° × 65° RGB field of view the
-design assumes.
-
-No alternates are published: buy these from the vendors listed.
+| Intel RealSense D436 ×2 | Supply risk |
 
 ## Vendors
 
-{% set bought = pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/electronics.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/cables-connectors.csv", dtype="str", keep_default_na=False).to_dict("records") %}
+{% set bought = pd_read_csv("data/actuators.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/electronics.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/cables-connectors.csv", dtype="str", keep_default_na=False).to_dict("records") + pd_read_csv("data/fasteners.csv", dtype="str", keep_default_na=False).to_dict("records") %}
 | Vendor | Lines | Part IDs |
 | --- | ---: | --- |
 {% for vendor, items in bought | selectattr("vendor") | groupby("vendor") %}| {{ vendor }} | {{ items | length }} | {{ items | map(attribute="part_id") | join(", ") }} |
 {% endfor %}
-
-Machining vendor: [CNC guide](../fabrication/index.md#order-the-parts).
-
-!!! note "Yours to source — marketplace lines carry a link, not a manufacturer part number"
-    *Owner: hardware lead.*
-
-## Price dates
-
-Every price on this site is the team BOM's, dated
-{{ bom_priced_as_of("actuators.csv") }}.
-
-!!! note "Yours to determine — a re-check of each price against its vendor, with the date it was checked"
-    *Owner: whoever re-sources the parts.*
