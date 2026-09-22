@@ -20,5 +20,5 @@ FDM holes print undersize: ream them to size. Set heat-set inserts with a solder
 
 <figure markdown>
   ![Soldering iron setting a heat-set insert in a printed battery holder](../assets/photos/body-heat-set-inserts.webp){ loading=lazy width="400" }
-  <figcaption>Heat-set insert going into a printed battery holder.</figcaption>
+  <figcaption>A heat-set insert pressed into a printed battery holder with the soldering iron.</figcaption>
 </figure>
