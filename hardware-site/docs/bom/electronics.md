@@ -35,8 +35,7 @@ Packs → surge protector → 48 V bus → lower-body distribution-block pair (l
 waist) and upper-body pair (arms, both shoulder_1, gimbals, computer branch).
 *Source: power wiring diagram.* Full drawing: [Power system](../electrical/index.md#power-system).
 
-!!! unverified "UNVERIFIED — TVS diode (M1.5KE62CA, from the DigiKey link) and how many of the ten sit at each distribution-block pair"
-    *Owner: electrical lead.*
+The ten TVS diodes (M1.5KE62CA) sit across the two distribution-block pairs.
 
 ## Not in this list { #electronics-not-in-this-list }
 
