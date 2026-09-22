@@ -18,7 +18,7 @@ Last worked on: 2026-09-20.
 | Wiring diagrams | `hardware/*.jpg` → `docs/assets/wiring/`, on the electrical pages |
 | CAD downloads (`docs/files/`) | **329 files, 706 MB** (672.9 MiB as `gen_cad_manifest.py` prints it): 1 whole-robot STEP (zip, 34 MB), 80 module STEPs (481 MB), 76 part STEPs (77 MB), 45 printed-part STLs (51 MB), 125 vendor files (55 MB), 2 PDFs under `drawings/`. `.f3z` (319 MB) is release asset `cad-v2.1-rc1` (sha256 `f440621d…`). No per-part drawings exist |
 | Canonical CAD export | `cad/humanoid_2.1_latest_2026-09-19_1607/` — **complete**. Holds `tree.csv` (629 components), `assembly/`, `step/` (410), `print/` (408), `modules/` (128), `joints.csv` (1205), `transforms.csv` (2088) and the export logs |
-| BOM source | **The team's spreadsheet `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` is the parts list** and wins over every other source. `tools/gen_bom.py` writes all six parts CSVs and `team-map.csv` from it. Unpriced rows carry a **blank** cost and render a red TODO, never `$0.00` |
+| BOM source | **The team's spreadsheet `reference/bom/Duke_Humanoid_V2_BOM_WIP.xlsx` is the parts list**; where the robot is known to differ, `QTY_OVERRIDE` / `PRINTED_QTY_OVERRIDE` in `gen_bom.py` publish the robot's count (see *What the team must supply*, item 4). `tools/gen_bom.py` writes all six parts CSVs and `team-map.csv` from it. Unpriced rows carry a **blank** cost and render a red TODO, never `$0.00` |
 | Parts data (generated, `docs/data/`) | `cnc-parts.csv` 35, `printed-parts.csv` 48, `electronics.csv` 14, `actuators.csv` 6, `fasteners.csv` 9, `cables-connectors.csv` 1; `part-properties.csv` 76, `joints.csv` 1205, `modules.csv` 128, `vendor-parts.csv` 287, `cad-files.csv` 329; `team-map.csv` 100 (77 settled, 23 open) |
 | 3D viewer (`docs/assets/viewer/`) | `robot.glb` (2.3 MB, Draco), `parts.json`, `downloads.json`, `vendor-map.json`. Fusion appearance colours, joint axes, preview and download per part, hide/show and x-ray |
 | Code repo (for fact-checking) | Recloned 2026-09-20 to `reference/duke-humanoid-v2/repo/`. Submodules use SSH URLs; clone `duke_humanoid_v2_deploy` and `duke_humanoid_v2_simulation` over HTTPS separately and move them into place. Not in git |
@@ -94,19 +94,24 @@ closes a red box that no amount of document archaeology could.
    assume one. Blocking.
 3. **Joint limits** — the Fusion model has none (see below); the site takes them
    from the MJCF.
-4. **Open BOM questions**, each a box on the page named:
-   - `RS06` count: the team BOM lists 2, the robot has four RS06 joints.
-   - **Bearings**: `H2` (35 × 44 × 5 mm) — team BOM buys 18, Fusion places 26;
-     `H5` (10 × 15 × 4 mm, 2 off) has no component named for it in Fusion.
-   - **AprilTag count**: team BOM line `P15` buys 12 tiles, Fusion places 16.
-   - **Torso plates** `3DP_body06`–`09`: PLA in the team BOM, `ABS Plastic
-     60%infill` in Fusion.
-   - **Cables and connectors**: no team BOM lines for XT30 / XT30(2+2) / GH1.25 /
-     EC5, loom, Ethernet, heat-shrink, bulk wire or CAN termination resistors.
-   - Machined parts with no team BOM line: `CNC_arm05`, `CNC_arm06`, `CNC_arm11`,
-     `CNC_arm12_wrist_pitch`, `CNC_arm13_RS05_shaft_coupler`.
-   - Electronics: fuse and holder, charger, surge protector MPN, distribution
-     terminals; 1 vs 3 48 V→12 V converters; battery retention.
+4. **BOM: decided 2026-09-21 — the robot wins over the spreadsheet.** The site publishes
+   the robot's quantity where the team sheet or the Fusion model disagrees with it, through
+   `QTY_OVERRIDE` / `PRINTED_QTY_OVERRIDE` in `tools/gen_bom.py`; the xlsx is not edited.
+   Corrections the team should carry into the xlsx so the two stop disagreeing:
+   - `E6` RS06: sheet buys 2, robot has 4 (`ankle_2`, `shoulder_2`, both sides).
+   - `P15` AprilTag tiles: sheet 12, booklet and CAD 16.
+   - `P35`/`P36` arm-roll covers: sheet 4 + 4, CAD has three halves × 4 = 12 (`3DP_armP11_shoulder_yaw_cover_c` has no line).
+   - `C25` unit price 57.56 is exactly twice the old machining quote for the same part.
+   - `P28` shank covers: the sheet's 4 is right; the **Fusion model has them on the right leg only** — add the left-leg pair to the CAD.
+   Consumables (XT30 / XT30(2+2) / GH1.25 / EC5, loom, Ethernet, heat-shrink, bulk wire,
+   120 Ω terminators, fuse + holder, filament, SLS powder) are listed without prices by decision.
+   Machined parts are the team BOM's lines only (the five extra CNC rows were dropped).
+
+   **Model ↔ BOM audit (2026-09-21, `tools/build_viewer.py` output vs `docs/data/*.csv` vs the booklet):**
+   - All 75 CNC + printed part ids: BOM quantity = Fusion occurrences, STEP (and STL for prints) present, no two part ids share a byte-identical file.
+   - Every label in the booklet (`[CPEH]n`) is a team BOM line; `team-map.csv` page references all agree with the PDF text. Never drawn in the booklet: `C8`, `C9`, `E8`, `E9`, `E11`, `H6`–`H8` (mapped by name / not drawable).
+   - Fusion components in the model that are **in no BOM at all** — the team must say whether each is a real part on the robot: `150A relay` (interior plate, 87.6 g), `U-joint_type_C_adapter v3` ×2 (camera columns, stainless, 8 g), `casing` ×2 (power-block casing, ABS, 8.7 g — a print?), `dovetail_umi_gripper` ×2 (351 g gripper body — how does it relate to `3DP_grip01`–`06`?). Wires/cable dummies ignored.
+   - Two viewer bugs fixed in `build_viewer.py` (Fusion copy suffix ` (1)` on the second camera column; the D435's internal `Component34`–`37` matched the shoulder covers). **`parts.json` was hand-patched to match; the next Fusion export + `build_viewer.py` run regenerates it properly** (the STL exports are no longer on the Mac — re-export on the Windows machine).
 5. **CAD, remaining**: no per-part drawings, so machined parts are ordered from
    STEP. Slicer plates (3MF) → `docs/files/plates/` if the team has them. The
    `.f3z` must be re-released on the public repo.
