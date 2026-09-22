@@ -103,6 +103,15 @@ FUSION_TO_GLTF = np.array([[0.001, 0, 0, 0], [0, 0, 0.001, 0], [0, -0.001, 0, 0]
 VENDOR_MODEL_NAMES = ("IntelRealsense_D435",)   # vendor sub-assemblies whose children never match a site part
 
 
+def clean_label(name: str) -> str:
+    """A vendor model's Fusion name, fit for the site: no CJK (the site is English), no
+    parenthesised CJK tag (`(开模版)`), no copy suffix, no doubled separators."""
+    name = re.sub(r"\([^()]*[\u4e00-\u9fff][^()]*\)", "", name)
+    name = re.sub(r"[\u4e00-\u9fff]+", "", name)
+    name = strip_copy_suffix(name)
+    return re.sub(r"[ _]{2,}", lambda m: m.group(0)[0], name).strip(" _")
+
+
 def strip_copy_suffix(name: str) -> str:
     """Fusion names a copied component `gimbal_neck (1)`; the part is the same."""
     return re.sub(r" \(\d+\)$", "", name)
@@ -162,9 +171,24 @@ class PartLookup:
         return self.plain.get(key)
 
 
+_CJK_GROUP = re.compile(r"\([^()]*[\u4e00-\u9fff][^()]*\)")
+_CJK = re.compile(r"[\u4e00-\u9fff]+")
+
+
+def clean_path(s: str) -> str:
+    """Occurrence paths are published in parts.json; the site carries no CJK, so a vendor
+    model's `(开模版)` tag is dropped from every path segment (consistently, so prefixes still match)."""
+    return _CJK.sub("", _CJK_GROUP.sub("", s))
+
+
 def read_csv(path: Path) -> list[dict]:
     with open(path, encoding="utf-8-sig", newline="") as fh:
-        return list(csv.DictReader(fh))
+        rows = list(csv.DictReader(fh))
+    for r in rows:
+        for k, v in r.items():
+            if k and "path" in k and v:
+                r[k] = clean_path(v)
+    return rows
 
 
 def team_refs() -> tuple[dict[str, str], dict[str, str]]:
@@ -895,11 +919,11 @@ def main() -> int:
     info = {k: v for k, v in info.items() if k in parts}
     for fn in vendor:
         row = tree.by_file[fn]
-        info["vendor:" + fn] = {"desc": row["fusion_name"], "kind": "vendor", "qty": row["qty"],
+        info["vendor:" + fn] = {"desc": clean_label(row["fusion_name"]), "kind": "vendor", "qty": row["qty"],
                                 "material": row["material"], "team_ref": ref_by_file.get(fn, ""),
                                 "mass_g": fnum(row["mass_g"]),
                                 "bbox": [fnum(row[k]) for k in ("bbox_x_mm", "bbox_y_mm", "bbox_z_mm")],
-                                "fusion_name": row["fusion_name"], "appearance": row["appearance"],
+                                "fusion_name": clean_label(row["fusion_name"]), "appearance": row["appearance"],
                                 "module_path": mod_path(row)}
     pj = out / "parts.json"
     pj.write_text(json.dumps({"parts": parts, "vendor": vendor, "info": info, "hardware": hw_info,

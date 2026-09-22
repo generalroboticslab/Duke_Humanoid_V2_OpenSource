@@ -393,7 +393,14 @@
         const scene = threeScene();
         if (!scene) return null;
         meshMap = new Map();
-        scene.traverse((o) => { if (o.isMesh && o.name) meshMap.set(o.name, o); });
+        // GLTFLoader strips `:` `.` `[` `]` `/` from node names (PropertyBinding.sanitizeNodeName)
+        // and keeps the exported name in userData.name; parts.json and the materials use the
+        // exported name, so index by it first (every `vendor:` node would otherwise be missed).
+        scene.traverse((o) => {
+          if (!o.isMesh) return;
+          if (o.userData && o.userData.name) meshMap.set(o.userData.name, o);
+          if (o.name && !meshMap.has(o.name)) meshMap.set(o.name, o);
+        });
       }
       return meshMap.get(node) || null;
     }
@@ -534,10 +541,17 @@
       return out;
     }
     // "In: Lower body › Left leg › Knee module", each a preview chip with its STEP download.
+    // A module made only of vendor meshes is the inside of a purchased model (an actuator's
+    // own sub-assemblies): it says nothing about where the part sits on the robot.
+    const vendorInternal = new Map();
+    function isVendorInternal(m) {
+      if (!vendorInternal.has(m)) vendorInternal.set(m, m.meshes.length > 0 && m.meshes.every((x) => String(x.node).startsWith("vendor:")));
+      return vendorInternal.get(m);
+    }
     function chainHtml(path, skipPath) {
-      const chain = data.modules.filter((m) => inModule(path, m) && m.path !== skipPath);
+      const chain = data.modules.filter((m) => inModule(path, m) && m.path !== skipPath && !isVendorInternal(m));
       if (!chain.length) return "";
-      return "In: " + chain.map((m) => {
+      return '<span class="dh-info-in-label">In:</span> ' + chain.map((m) => {
         const t = target("module", m.file);
         const dl = downloadsFor([m.file], t ? t.rows : [], 1);
         return `<button type="button" class="dh-chip" data-target="module:${esc(m.file)}" title="Show this module">${esc(m.name)}</button>` +
@@ -545,81 +559,91 @@
       }).join(" › ");
     }
     function chainsHtml(meshes, skipPath) {
-      const seen = new Set(), out = [];
+      const byText = new Map();
       meshes.forEach((m) => {
         const h = m.path ? chainHtml(m.path, skipPath) : "";
-        if (h && !seen.has(h)) { seen.add(h); out.push(h); }
+        if (!h) return;
+        const text = h.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
+        if (!byText.has(text)) byText.set(text, h);
       });
-      return out.slice(0, 3);
+      // A chain that is the start of a longer one (the same module, seen from a parent) adds nothing.
+      const texts = Array.from(byText.keys());
+      const kept = texts.filter((t) => !texts.some((u) => u !== t && u.startsWith(t + " ")));
+      return kept.slice(0, 4).map((t, i) => (i ? '<span class="dh-info-in-pad"></span>' : "") + byText.get(t));
     }
     // Title of an info box: the team BOM line first, bold, then the CAD id. The team
     // calls the part by that number, so it is the primary label; without one the CAD id
     // carries the emphasis on its own.
-    function titleHtml(ref, idHtml) {
-      const r = String(ref || "").trim();
-      return r ? `<strong>${esc(r)}</strong> · ${idHtml}` : `<strong>${idHtml}</strong>`;
+    // ---- the info card: head (team ref · id · kind), name, facts, downloads, where it sits ----
+    const KIND_LABEL = { CNC: "Machined", FDM: "Printed (FDM)", SLS: "Printed (SLS)", vendor: "Purchased", part: "Part" };
+    function card(head, name, facts, dls, chains) {
+      const h = [];
+      h.push(`<div class="dh-info-head">${head}</div>`);
+      if (name) h.push(`<div class="dh-info-name">${name}</div>`);
+      const f = (facts || []).filter(Boolean);
+      if (f.length) h.push(`<div class="dh-info-facts">${f.map((x) => `<span>${x}</span>`).join("")}</div>`);
+      if (dls && dls.length) h.push(`<div class="dh-info-dl">${dls.join(" ")}</div>`);
+      (chains || []).forEach((c) => h.push(`<div class="dh-info-in">${c}</div>`));
+      return h.join("");
     }
-    function facts(info) {
+    function headHtml(ref, idHtml, kind) {
+      const r = String(ref || "").trim();
+      const bits = [r ? `<strong>${esc(r)}</strong>` : "", idHtml, kind ? `<span class="dh-info-kind">${esc(kind)}</span>` : ""];
+      return bits.filter(Boolean).join(" ");
+    }
+    function sizeFacts(info) {
       const bbox = bboxOf(info);
-      return [info.appearance, info.material && info.material !== info.appearance ? info.material : "",
-              info.mass_g !== undefined && info.mass_g !== "" ? `CAD mass ${fmt(info.mass_g)} g` : "",
-              bbox ? `CAD size ${bbox.map(fmt).join(" × ")} mm` : ""].filter(Boolean);
+      return [info.mass_g !== undefined && info.mass_g !== "" ? `${fmt(info.mass_g)} g` : "",
+              bbox ? `${bbox.map(fmt).join(" × ")} mm` : ""];
+    }
+    function qtyFacts(qty, onModel) {
+      const q = String(qty || "").trim();
+      return [q ? `Qty ${esc(q)}` : "", q && String(onModel) === q ? "" : `${onModel} on the model`];
+    }
+    // A vendor STEP keeps its exported file name; the button says what it is instead.
+    function tidyDownloads(dls) {
+      return dls.map((h) => h.replace(/>(<svg[\s\S]*?<\/svg>)([^<]{36,})</, ">$1Vendor STEP<"));
     }
     function infoHtml(t) {
-      const lines = [];
       if (t.kind === "part") {
         const info = data.info[t.id] || {};
-        // BOM quantity; the count on the model is added only when it differs (both values shown).
-        lines.push([titleHtml(info.team_ref, `<code>${esc(t.id)}</code>`), info.qty ? `Qty ${esc(info.qty)}` : "",
-                    String(t.meshes.length) === String(info.qty) ? "" : `${t.meshes.length} on the model`].filter(Boolean).join(" · "));
-        if (info.desc) lines.push(esc(info.desc));
-        // Mass and size are CAD values from the Fusion model (part-properties.csv), not measured.
-        const f = [info.kind].concat(facts(info)).filter(Boolean);
-        if (f.length) lines.push(esc(f.join(" · ")));
-        const dl = downloadsFor([t.id], t.rows);
-        lines.push(dl.length ? dl.join(" ") : "No file on this page.");
-        lines.push(...chainsHtml(t.meshes));
-      } else if (t.kind === "vendor") {
+        return card(headHtml(info.team_ref, `<code>${esc(t.id)}</code>`, KIND_LABEL[info.kind] || info.kind),
+                    info.desc ? esc(info.desc) : "",
+                    [...qtyFacts(info.qty, t.meshes.length), esc(info.material || ""), ...sizeFacts(info)],
+                    downloadsFor([t.id], t.rows), chainsHtml(t.meshes));
+      }
+      if (t.kind === "vendor") {
         // A BOM row target ("bom:<part_id>") stands for every Fusion component of that purchased part.
         const files = t.key.startsWith("bom:") ? (vendorFilesByPart.get(t.id) || []) : [t.id];
         const vi = data.vendorInfo(files[0] || t.id), vm = data.vendorMap[files[0] || t.id];
-        const name = t.key.startsWith("bom:") ? ((vm && vm.description) || t.id) : (vi.name || vi.fusion_name || t.id);
-        lines.push([titleHtml(vi.team_ref, esc(name)), "Purchased part",
-                    t.meshes.length > 1 ? `${t.meshes.length} on the model` : ""].filter(Boolean).join(" · "));
-        const f = facts(vi);
-        if (f.length) lines.push(esc(f.join(" · ")));
+        const facts = [];
+        let head, name;
         if (vm) {
-          const bits = [vm.description ? esc(vm.description) : "", vm.mpn ? `MPN ${esc(vm.mpn)}` : "",
-                        vm.vendor ? (vm.vendor_url ? `<a href="${esc(vm.vendor_url)}" target="_blank" rel="noopener">${esc(vm.vendor)}</a>` : esc(vm.vendor)) : "",
-                        num(vm.qty_in_model) > 1 ? `×${esc(vm.qty_in_model)} on the robot` : ""];
-          // The parts-list page: `page` when given, else the page that renders the BOM CSV.
           const page = pageHref(vm.page || BOM_PAGES[String(vm.bom_file || "").toLowerCase()] || "");
-          if (vm.part_id) bits.push(page ? `<a href="${esc(page)}">Parts list: <code>${esc(vm.part_id)}</code></a>` : `Parts list: <code>${esc(vm.part_id)}</code>`);
-          lines.push(bits.filter(Boolean).join(" · "));
+          const idHtml = vm.part_id ? (page ? `<a href="${esc(page)}"><code>${esc(vm.part_id)}</code></a>` : `<code>${esc(vm.part_id)}</code>`) : "";
+          head = headHtml(vm.team_ref || vi.team_ref, idHtml, "Purchased");
+          name = esc(vm.description || vi.name || vi.fusion_name || t.id);
+          if (!t.key.startsWith("bom:") && t.meshes.length > 1) facts.push(`${t.meshes.length} on the model`);
+          if (vm.mpn) facts.push(`MPN ${esc(vm.mpn)}`);
+          if (vm.vendor) facts.push(vm.vendor_url ? `<a href="${esc(vm.vendor_url)}" target="_blank" rel="noopener">${esc(vm.vendor)}</a>` : esc(vm.vendor));
         } else {
-          lines.push('<strong class="dh-missing">Purchased part — not in the parts list yet</strong>');
+          head = headHtml(vi.team_ref, `<code>${esc(vi.name || vi.fusion_name || t.id)}</code>`, "Purchased");
+          name = '<strong class="dh-missing">Not in the parts list yet</strong>';
+          if (t.meshes.length > 1) facts.push(`${t.meshes.length} on the model`);
         }
-        const dl = downloadsFor([t.id, vm && vm.part_id], t.rows);
-        lines.push(dl.length ? dl.join(" ") : "No STEP on this page.");
-        lines.push(...chainsHtml(t.meshes));
-      } else if (t.kind === "module") {
+        return card(head, name, facts, tidyDownloads(downloadsFor([t.id, vm && vm.part_id], t.rows)), chainsHtml(t.meshes));
+      }
+      if (t.kind === "module") {
         const m = t.module;
         const kids = data.modules.filter((x) => x !== m && inModule(x.path, m)).length;
-        lines.push([`<strong>${esc(m.name)}</strong>`, "Module", num(m.depth) !== null ? `depth ${esc(m.depth)}` : "",
-                    num(m.qty) > 1 ? `×${esc(m.qty)} on the robot` : ""].filter(Boolean).join(" · "));
-        const f = [m.mass_g !== undefined && m.mass_g !== "" ? `CAD mass ${fmt(m.mass_g)} g` : "",
-                   `${t.meshes.length} components on the model`, kids ? `${kids} sub-modules` : ""].filter(Boolean);
-        lines.push(esc(f.join(" · ")));
-        const dl = downloadsFor([m.file], t.rows);
-        lines.push(dl.length ? dl.join(" ") : "No file on this page.");
         const parents = chainHtml(m.path, m.path);
-        if (parents) lines.push(parents);
-      } else {
-        lines.push("<strong>Whole robot</strong> · every component of the Fusion model");
-        const dl = downloadsFor(["robot", "assembly"], t.rows);
-        lines.push(dl.length ? dl.join(" ") : "No file on this page.");
+        return card(headHtml("", `<strong>${esc(m.name)}</strong>`, "Module"), "",
+                    [num(m.qty) > 1 ? `×${esc(m.qty)} on the robot` : "", `${t.meshes.length} components`,
+                     kids ? `${kids} sub-modules` : "", m.mass_g !== undefined && m.mass_g !== "" ? `${fmt(m.mass_g)} g` : ""],
+                    downloadsFor([m.file], t.rows), parents ? [parents] : []);
       }
-      return lines.join("<br>");
+      return card("<strong>Whole robot</strong>", "Every component of the Fusion model", [],
+                  downloadsFor(["robot", "assembly"], t.rows), []);
     }
     box.addEventListener("click", (ev) => {
       const chip = ev.target.closest("[data-target]");

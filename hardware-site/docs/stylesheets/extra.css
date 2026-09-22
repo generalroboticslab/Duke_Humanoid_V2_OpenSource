@@ -214,7 +214,19 @@
 .dh-sw-red { background: #d91f14; }
 .dh-sw-blue { background: rgba(21, 101, 192, .5); }
 .md-typeset .dh-viewer-note { margin: 0 0 1rem; font-size: .7rem; color: var(--md-default-fg-color--light); }
-#dh-viewer-info { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; padding: .4rem .6rem; border-left: .2rem solid #d91f14; background: var(--md-code-bg-color); line-height: 1.7; }
+#dh-viewer-info { flex: 1 1 16rem; min-width: 0; overflow-wrap: anywhere; padding: .5rem .7rem; border-left: .2rem solid #d91f14; background: var(--md-code-bg-color); line-height: 1.5; font-size: .7rem; }
+#dh-viewer-info .dh-info-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35em .5em; font-size: .8rem; }
+#dh-viewer-info .dh-info-head strong { font-size: .9rem; }
+#dh-viewer-info .dh-info-kind { padding: 0 .5em; border-radius: 1em; background: var(--md-default-fg-color--lightest); color: var(--md-default-fg-color--light); font-size: .6rem; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+#dh-viewer-info .dh-info-name { margin-top: .1rem; color: var(--md-default-fg-color); }
+#dh-viewer-info .dh-info-facts { display: flex; flex-wrap: wrap; gap: .1em 0; margin-top: .15rem; color: var(--md-default-fg-color--light); }
+#dh-viewer-info .dh-info-facts span + span::before { content: "·"; margin: 0 .5em; color: var(--md-default-fg-color--lighter); }
+#dh-viewer-info .dh-info-dl { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+#dh-viewer-info .dh-info-in { margin-top: .3rem; color: var(--md-default-fg-color--light); }
+#dh-viewer-info .dh-info-in .dh-chip { margin: .1em 0; }
+#dh-viewer-info .dh-info-in + .dh-info-in { margin-top: .15rem; }
+#dh-viewer-info .dh-info-in-label { display: inline-block; min-width: 1.6em; color: var(--md-default-fg-color--lighter); }
+#dh-viewer-info .dh-info-in-pad { display: inline-block; min-width: 1.6em; margin-right: .25em; }
 
 /* Axis labels: <button slot="hotspot-x|y|z"> children of the viewer, positioned by viewer.js
    from parts.json (class dh-axis-on once a tip position is known). X red, Y green, Z blue. */
