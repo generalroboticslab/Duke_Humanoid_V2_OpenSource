@@ -5,13 +5,11 @@ torso plates, the wrist and shoulder parts, the end-effector attachment, the cov
 camera-column parts, with three filament and powder rows at the end. Material, process, quantity and
 price are the team BOM's where it has a line for the part. **Team ref** is that line. Print settings: [Printing guide](../fabrication/index.md#printing-guide).
 
-**Mass / size** is each part's CAD mass and bounding box from the Fusion model, not a measurement.
-Volume, centre of mass and inertia for every part: [part-properties.csv](../data/part-properties.csv){ download="" }.
 **Qty** is the Fusion occurrence count per robot; the left and right arm and leg designs are separate, so
 their copies of one part are summed. Where the team BOM counts differently, the row's `notes` say both.
 
-| Team ref | Part ID | Description | Material | Process | Qty | Mass / size | Files |
-| --- | --- | --- | --- | --- | ---: | --- | --- |
+| Team ref | Part ID | Description | Material | Process | Qty | Files |
+| --- | --- | --- | --- | --- | ---: | --- |
 {% for r in pd_read_csv("data/printed-parts.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.material or "**TODO**{ .dh-missing }" }} | {{ r.process or "**TODO**{ .dh-missing }" }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ "—" if r.part_id.startswith("MAT_") else part_props(r.part_id) }} | {{ cad_links(r.part_id) }} |
 {% endfor %}| | | **Printed total** | | | **{{ bom_qty("printed-parts.csv") }}** | | **{{ bom_subtotal("printed-parts.csv") }}** | | | |
 
