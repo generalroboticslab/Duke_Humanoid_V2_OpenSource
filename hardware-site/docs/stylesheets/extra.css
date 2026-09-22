@@ -43,7 +43,7 @@
 .md-typeset h3.step {
   display: flex; align-items: center; gap: .5em;
   margin: 1.4em 0 .4em;
-  font-size: 1rem; font-weight: 600; line-height: 1.3;
+  font-size: .85rem; font-weight: 600; line-height: 1.3;
 }
 .md-typeset h3.step + p, .md-typeset h3.step + div, .md-typeset h3.step + table { margin-top: .3em; }
 .md-typeset p.dh-check { margin: .35em 0 0; font-size: .7rem; color: var(--md-default-fg-color--light); }
