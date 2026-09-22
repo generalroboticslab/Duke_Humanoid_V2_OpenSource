@@ -1,214 +1,112 @@
 # Torso and waist
 
-Build the torso that limbs and camera columns bolt to.
+The torso: a machined plate frame carrying the waist actuator, both shoulder-pitch actuators, the electronics and the battery packs, closed by printed covers.
 
 !!! abstract "At a glance"
-    - **You will:** build frame and waist; mount electronics, packs and covers.
-    - **Parts:** RobStride 03 ×1 ([Actuators](../bom/index.md#actuators)); `CNC_body01`–`CNC_body04` ([machined parts](../bom/index.md#cnc-parts)); electronics in steps 5–7 and the computer above them ([Electronics](../bom/index.md#electronics)).
+    - **You will:** build the frame, seat the three actuators, mount the electronics and packs, fit the covers.
     - **Before this:** [Arm](#arm).
 
-!!! note "Read off the model — torso fasteners, mounts and retention"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    - Per step: screws, torque, Loctite 222 use, plate join order and location,
-      squareness tolerance.
-    - No electronics item has a mount in any parts list.
-    - Computer thermal clearance and port orientation are unrecorded.
+{{ step(1, "Set the waist actuator ID") }}
 
-    *Owner: hardware lead, from the computer-aided design (CAD) and a photographed build.*
+| Joint | Actuator | ID | Bus |
+| --- | --- | ---: | --- |
+| `waist` | RobStride 03 | 1 | `can22` (shared with both `shoulder_1`) |
+
+✅ **Check:** answers at ID 1; labelled.
+
+## Frame
+
+<figure markdown>
+  ![Torso frame exploded, parts labelled with team BOM ids](../assets/exploded/team/01-torso-frame.webp){ loading=lazy }
+  <figcaption>The frame: plates C0–C3, interior plate P0, actuators E3, bearings H0.</figcaption>
+</figure>
+
+{{ booklet_parts("p.1") }}
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../assets/exploded/body-frame-poster.webp" aria-label="Exploded view of the torso plate frame"><source src="../assets/exploded/body-frame.mp4" type="video/mp4"><a href="../assets/exploded/body-frame.mp4">MP4</a></video>
-  <figcaption>Frame: plates, four ribbed rails, internal spine, both shoulder-pitch actuators, waist actuator.</figcaption>
-</figure>
-
-{{ step(1, "Configure and label the waist actuator") }}
-
-Set the RobStride 03 to Controller Area Network (CAN) ID 1 on the bench. Label it `waist`.
-
-| Joint | Actuator | CAN ID | Bus | Model limit |
-| --- | --- | --- | --- | --- |
-| `waist` | RobStride 03 | 1 | `can22` (shared with both `shoulder_1`) | ±90° |
-
-✅ **Check:** Answers at ID 1; labelled.
-
-<figure markdown>
-  ![Torso frame exploded, parts labelled with team BOM ids](../assets/exploded/team/01-torso-frame.webp){ loading=lazy }
-  <figcaption>Steps 2–4: plates C0–C3, interior plate (spine) P0, actuators E3, bearings H0. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
+  <figcaption>Plates, interior plate, both shoulder-pitch actuators and the waist actuator. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
 
 {{ step(2, "Assemble the plate frame") }}
 
-<div class="parts-needed" markdown>
+Bolt the two side plates (C2) and the four front/back plates (C3) to the bottom plate (C1); fit the interior plate (P0). Square the frame before anything goes in: every limb and camera references it.
 
-| | |
-| --- | --- |
-| `CNC_body01_x1_bottom_plate` | |
-| `CNC_body02_x2_side_plate` | |
-| `CNC_body04_x4_front_plate` — probably the four ribbed rails **UNVERIFIED**{ .dh-unverified } | |
+✅ **Check:** flat on a surface plate, square, no racking when pushed.
 
-</div>
+{{ step(3, "Seat the waist actuator") }}
 
-Square the frame before anything goes in: every limb and camera references it.
+Seat the actuator (E3) in the bottom plate's round opening, driver board up, output down into the pelvis, with its output shaft (C5), retainer (C4) and bearing (H0) as on the hip joints.
 
-!!! note "Build to the model — the machined-part sheet also lists `B1`–`B3` and `B5_body_shelf`"
-    The published model is what you build to; the team's spreadsheet is a working document and differs here.
-    Probably duplicates of the `CNC_body` plates: do not order both. The CAD's
-    internal spine has no `CNC_body` ID. *Owner: hardware lead.*
+✅ **Check:** turns freely, no axial play; square to the pelvis at zero.
 
-✅ **Check:** Flat on a surface plate, square, no racking when pushed.
+{{ step(4, "Seat the shoulder-pitch actuators and fit the top plate") }}
 
-{{ step(3, "Install the waist actuator") }}
+Seat one shoulder-pitch actuator (E3) in each side plate, output outward, with its bearing (H0). Bolt the top plate (C0) on last: it is the datum for both camera columns.
 
-Seat it in the bottom plate's round opening, driver board up, output down into
-the pelvis through a flange, a ring and a coupler.
+✅ **Check:** flat and square to the frame; both shoulder outputs turn freely.
 
-!!! note "Read off the model — waist flange, ring and coupler"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: hardware lead.*
+## Electronics and packs
 
-✅ **Check:** Turns freely, no axial play; square to the pelvis at zero.
+<figure markdown>
+  ![Torso electronics exploded, parts labelled with team BOM ids](../assets/exploded/team/02-electronics-tray.webp){ loading=lazy }
+  <figcaption>Computer E0 on the interior plate; packs E7; CAN adapters E13, hubs E16, IMU E17, surge protector E18, distribution blocks E19, voltage checkers E20.</figcaption>
+</figure>
 
-{{ step(4, "Fit the top plate") }}
-
-<div class="parts-needed" markdown>
-
-| | |
-| --- | --- |
-| `CNC_body03_x1_top_plate` | |
-
-</div>
-
-It is the datum for both camera columns: yaw axes at y = ±65 mm, z = 0.52 m in
-the base frame ([Head and camera gimbal](#head-and-camera-gimbal)).
-
-✅ **Check:** Flat and square to the frame.
+{{ booklet_parts("p.2") }}
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../assets/exploded/body-front-poster.webp" aria-label="Exploded view of the torso front electronics bay"><source src="../assets/exploded/body-front.mp4" type="video/mp4"><a href="../assets/exploded/body-front.mp4">MP4</a></video>
-  <figcaption>Front bay, identifications <strong class="dh-unverified">UNVERIFIED</strong>: six CAN adapters, mini PC on the spine, two distribution bars, inertial measurement unit (IMU) on the top plate.</figcaption>
+  <figcaption>Front bay: CAN adapters, the computer on the interior plate, distribution blocks. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
-
-<figure markdown>
-  ![Torso electronics exploded, parts labelled with team BOM ids](../assets/exploded/team/02-electronics-tray.webp){ loading=lazy }
-  <figcaption>Steps 5–7, both sides of the torso, and the computer E0 on the spine: packs E7, CAN adapters E13, hubs E16, IMU E17, surge protector E18, distribution blocks E19, voltage checkers E20. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
-</figure>
-
-The computer (MINISFORUM X1-470 mini PC, ×1) sits on the spine above the waist,
-as the two views above place it. Retain it against walking shock, with intake,
-exhaust and ports clear.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1280" height="720"
     poster="../assets/exploded/body-back-poster.webp" aria-label="Exploded view of the torso rear bay with two upright packs"><source src="../assets/exploded/body-back.mp4" type="video/mp4"><a href="../assets/exploded/body-back.mp4">MP4</a></video>
-  <figcaption>Rear bay: two packs upright behind the spine, terminal strip below. No pack retention is drawn.</figcaption>
+  <figcaption>Rear bay: the two packs upright behind the interior plate. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
 
-{{ step(5, "Mount the battery packs") }}
+{{ step(5, "Mount the computer") }}
 
-<div class="parts-needed" markdown>
-
-| | |
-| --- | --- |
-| Zeee 6S 22.2 V 10000 mAh LiPo | 2 |
-
-</div>
-
-!!! danger "Keep both packs disconnected"
-    Until [Pre-power checks](../electrical/index.md#pre-power-checks) pass.
-
-Stand the packs upright, side by side, in the rear bay. They run **in series**
-(one pack's + to the other's −) through a surge protector to the 48 V bus:
-44.4 V nominal, 50.4 V full (computed). *Source: team power wiring diagram.*
-
-!!! note "Pack retention is tracked on [Power system](../electrical/index.md#power-system)"
-    *Owner: hardware lead + electrical.*
-
-✅ **Check:** Packs cannot shift, no lead is taut or on an edge, each pack comes out.
+Bolt the computer (E0) to the interior plate above the waist, intake, exhaust and ports clear.
 
 {{ step(6, "Mount the CAN adapters, hubs and power parts") }}
 
-<div class="parts-needed" markdown>
+Mount the six CAN adapters (E13), three USB hubs (E16), surge protector (E18), four distribution blocks (E19) and two voltage checkers (E20) in the front bay. Label each CAN adapter with its bus before wiring; wire per [Power system](../electrical/index.md#power-system) and [CAN bus](../electrical/index.md#can-bus).
 
-| | |
-| --- | --- |
-| CANable PRO V2.0 — `can9`, `can21`–`can25` | 6 |
-| Vention USB hub | 3 |
-| Waveshare ST/SC bus servo driver board | 2 |
-| Buck converters: DC 20–60 V to 12 V ×1, 60 V to 12 V ×2 | 3 **UNVERIFIED**{ .dh-unverified } |
-| Distribution block pairs, upper and lower body | 2 |
-| Surge protector (pack lead), 10 A fuse (computer branch) | 1 each |
-| TVS diode M1.5KE62CA | 10 |
-
-</div>
-
-Label each CAN adapter with its bus first: a udev rule binds bus name to USB
-serial. Wire per [Power system](../electrical/index.md#power-system) and
-[CAN bus](../electrical/index.md#can-bus). The power diagram draws one buck converter
-(computer only), the bill of materials (BOM) three.
-
-✅ **Check:** Every adapter bus-labelled; no board hangs on its cable; no converter's heat path blocked.
+✅ **Check:** every adapter carries its bus label; no board hangs on its cable.
 
 {{ step(7, "Mount the IMU") }}
 
-<div class="parts-needed" markdown>
+Bolt the IMU (E17) rigidly, its axes parallel to the robot base frame: the control software applies no mounting rotation.
 
-| | |
-| --- | --- |
-| SYD Dynamics TransducerM TM171, 40 × 34 × 12.6 mm, USB-C | 1 |
+✅ **Check:** rigid; axes checked against the frame.
 
-</div>
+{{ step(8, "Fit the battery packs") }}
 
-Mount it rigidly: the control stack treats its orientation as a constant.
+Stand the two packs (E7) upright, side by side, in the rear bay. Leave both disconnected until [Pre-power checks](../electrical/index.md#pre-power-checks) pass.
+
+✅ **Check:** packs cannot shift; no lead is taut or on an edge; each pack comes out.
+
+## Covers
 
 <figure markdown>
-  ![IMU on a printed X-bracket](../assets/photos/body-imu-mount.webp){ loading=lazy }
-  <figcaption>IMU on a printed X-bracket on a machined plate. Same mount on the finished robot: <strong class="dh-unverified">UNVERIFIED</strong>.</figcaption>
+  ![Torso printed plates exploded, parts labelled with team BOM ids](../assets/exploded/team/03-torso-printed-plates.webp){ loading=lazy }
+  <figcaption>Printed covers P1, front plate P2, back plate P3.</figcaption>
 </figure>
 
-!!! note "The IMU screw conflict is tracked on [Electronics](../bom/index.md#electronics)"
-    *Owner: hardware lead.*
-
-Deploy assumes the IMU axes match the robot base frame. It opens the IMU with
-no mounting-rotation offset and writes the IMU orientation directly as the base
-orientation (`deploy/control/humanoid_base.py`, lines 158 and 247); the model
-places `imu_site` at the `base_link` origin with no rotation.
-
-To watch the live IMU orientation, run `python hardware_bindings/imu/py_imu.py`
-from `deploy/control/`: it serves a 3D frame view on port 8080.
-
-**Mount it with its axes parallel to `base_link`, in any position.** The URDF
-places `imu_site` at the `base_link` origin with zero rotation, and the control
-stack writes the IMU orientation straight through as the base orientation with
-no mounting offset — so rotation must be zero, while a position offset does not
-enter the estimate. *Source: `humanoid_v21_full.urdf` (`imu_site_frame`);
-`deploy/control/humanoid_base.py` lines 158 and 247.*
-
-✅ **Check:** Rigid, with axes checked against the robot frame.
-
-{{ step(8, "Fit the pack disconnect") }}
-
-Reachable from outside the working envelope, because pulling it is the third
-and last of the robot's stop layers; the first two are software (the silence failsafe and the CAN watchdog). The robot has no hand e-stop.
-
-✅ **Check:** Reachable without entering the envelope; opening it kills the 48 V bus.
+{{ booklet_parts("p.3") }}
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1248" height="702"
     poster="../assets/exploded/body-cover-poster.webp" aria-label="Exploded view of the torso front and back covers"><source src="../assets/exploded/body-cover.mp4" type="video/mp4"><a href="../assets/exploded/body-cover.mp4">MP4</a></video>
-  <figcaption>Front and back covers: each a perforated frame plus a perforated panel.</figcaption>
+  <figcaption>Front and back covers: each a perforated frame plus a removable panel. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
 
-<figure markdown>
-  ![Torso printed plates exploded, parts labelled with team BOM ids](../assets/exploded/team/03-torso-printed-plates.webp){ loading=lazy }
-  <figcaption>Printed torso plates: covers P1, front plate P2, back plate P3. Labels are the team BOM ids (Team ref column of the parts lists).</figcaption>
-</figure>
+{{ step(9, "Fit the covers") }}
 
-{{ step(9, "Fit the front and back covers") }}
+Fit the two covers (P1) front and back, then the removable front plate (P2) and back plate (P3).
 
-!!! note "Read off the model — torso cover geometry and fixings"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: hardware lead.*
-
-✅ **Check:** Nothing inside moves when the torso is tilted; the waist still turns.
+✅ **Check:** nothing inside moves when the torso is tilted; the waist still turns.

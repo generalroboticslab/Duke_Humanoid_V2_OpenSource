@@ -1,67 +1,50 @@
 # Final integration
 
-Join the subassemblies into one robot, **battery disconnected throughout**.
+Join the subassemblies into one robot, battery disconnected throughout. Two people or a hoist from here on: lift by the top plate.
 
 !!! abstract "At a glance"
-    - **You will:** mount, wire, inspect, weigh and hang the robot.
-    - **Parts:** two legs and two arms, each past its final check; torso complete; two camera columns bench-tested; two grippers with open and closed positions recorded.
-    - **Before this:** [Gripper](#gripper); every actuator labelled with joint, ID and bus; camera and gripper-board serials recorded against their sides.
+    - **You will:** attach legs, arms, camera columns and grippers to the torso, join the harnesses, inspect and hang the robot.
+    - **Before this:** [Gripper](#gripper); every actuator labelled with joint, ID and bus.
 
 {{ step(1, "Support the torso") }}
 
-!!! danger "Two people or a hoist from here on"
-    The robot is 36 kg and 1.2 m tall, and less stable with each limb. Lift by the body top plate.
-
 Support it level, waist free, hips and shoulders reachable.
 
-✅ **Check:** The torso cannot fall or rotate when a limb is offered up.
+✅ **Check:** the torso cannot fall or rotate when a limb is offered up.
 
-{{ step(2, "Attach the first leg") }}
+{{ step(2, "Attach the legs") }}
 
-Bolt the leg to the pelvis, supporting its weight. Joint location
-**UNVERIFIED**{ .dh-unverified } ([Assembly](index.md)).
+Bolt each leg's hip-pitch bracket (C6) to the pelvis, supporting the leg's weight. Check the side: the legs differ by bus and IDs.
 
-!!! note "Read off the model — hip, shoulder and wrist interfaces: screws and locating features"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    *Owner: hardware lead.*
+✅ **Check:** all twelve leg joints move; each harness tail reaches the torso, unconnected.
 
-✅ **Check:** All six joints still move; the harness branch reaches the torso, unconnected.
+{{ step(3, "Attach the arms") }}
 
-{{ step(3, "Attach the second leg") }}
+Bolt each arm to its shoulder-pitch coupler (C27). Check the side: the arms differ by bus, IDs and wrist housing.
 
-Check the side: the legs differ by bus and IDs.
-
-✅ **Check:** Both legs move freely; a dimension measured on both sides matches.
-
-{{ step(4, "Attach both arms") }}
-
-Bolt each arm to its `shoulder_1` output through the square adapter.
-
-✅ **Check:** Each arm moves through its travel without touching the torso or a leg.
+✅ **Check:** each arm moves through its travel without touching the torso or a leg.
 
 <figure markdown>
   <video class="dh-clip" autoplay loop muted playsinline preload="metadata" width="1154" height="650"
     poster="../assets/exploded/camera-mount-poster.webp" aria-label="Whole robot with camera columns and grippers lifting off"><source src="../assets/exploded/camera-mount.mp4" type="video/mp4"><a href="../assets/exploded/camera-mount.mp4">MP4</a></video>
-  <figcaption>Camera columns lift off the top plate; grippers come off the wrists (steps 5 and 6).</figcaption>
+  <figcaption>Camera columns onto the top plate; grippers onto the wrists. Click to pause; drag the bar to scrub.</figcaption>
 </figure>
 
-{{ step(5, "Install the camera columns") }}
+{{ step(4, "Mount the camera columns") }}
 
-Follow [Head and camera gimbal](#head-and-camera-gimbal), step 9.
+Bolt both columns to the top plate as in [Head and camera gimbal](#head-and-camera-gimbal), step 9.
 
-✅ **Check:** Yaw axes 130.00 mm apart; no column touches an arm in any pose.
+✅ **Check:** yaw axes 130 mm apart; no column touches an arm in any pose.
 
-{{ step(6, "Install the grippers") }}
+{{ step(5, "Mount the grippers") }}
 
-Bolt each gripper flange to its `wrist_3` output. Run the servo cable up the arm
-to its driver board.
+Bolt each gripper to its wrist output (P8) as in [Gripper](#gripper), step 7; run the servo cable up the arm to its driver board.
 
-✅ **Check:** Both grippers work; their tags are visible to the cameras in some arm pose.
+✅ **Check:** both grippers work; their tags face the cameras in some arm pose.
 
-{{ step(7, "Join the harnesses") }}
+{{ step(6, "Join the harnesses") }}
 
-Join one branch at a time against the bus table: six buses, two gripper
-links, two camera cables, power.
+Join one branch at a time against the bus table; wiring detail is on [Electrical](../electrical/index.md).
 
 | Bus | Carries |
 | --- | --- |
@@ -70,37 +53,12 @@ links, two camera cables, power.
 | `can24` / `can23` | Left / right leg, IDs 31–36 / 41–46 |
 | `can25` | Camera gimbals, IDs 5–8 |
 
-!!! note "Read off the model — torso harness lengths, routes and service loops"
-    Take it from the published model — see [CAD downloads](../fabrication/index.md#cad-downloads).
-    See [Harness fabrication](../electrical/index.md#harness-fabrication).
-    *Owner: electrical lead.*
+✅ **Check:** every branch is labelled; waist, hips and shoulders move with nothing pulled or pinched.
 
-✅ **Check:** Every branch is labelled; waist, hips and shoulders move with nothing pulled or pinched.
+{{ step(7, "Inspect and hang the robot") }}
 
-{{ step(8, "Inspect the whole robot") }}
+Every joint moves by hand, alone and in combination; no cable is stretched, pinched or kinked in any pose; nothing rattles; lenses clean; packs disconnected. Hang the robot from the top plate with the legs straight.
 
-- every fastener present, none left in the kitting tray;
-- every joint moves by hand, alone and in close combinations;
-- no cable stretched, pinched or kinked in any pose;
-- nothing rattles;
-- lenses clean;
-- packs disconnected.
+✅ **Check:** it hangs level, legs straight.
 
-!!! note "Yours to determine — signed inspection checklist keyed to the fastener schedule"
-    *Owner: hardware lead.*
-
-✅ **Check:** Every item above is confirmed.
-
-{{ step(9, "Weigh and hang the robot") }}
-
-Weigh it: far from 36 kg means a part was missed, doubled or substituted. Hang
-it with the **legs straight**.
-
-!!! note "Not measured on the reference robot — as-built mass by subassembly"
-    *Owner: whoever performs the first documented build.*
-
-✅ **Check:** It hangs level, legs straight, mass recorded.
-
-Next: [Electrical](../electrical/index.md),
-[Pre-power checks](../electrical/index.md#pre-power-checks), then
-[Bring-up](../bringup/index.md).
+Next: [Electrical](../electrical/index.md), then [Bring-up](../bringup/index.md).

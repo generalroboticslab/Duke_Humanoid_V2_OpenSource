@@ -1,6 +1,6 @@
 # Open items — the punch list
 
-Every unresolved item on this site, in one table: **10 open items** across **6 pages**, of which **1 block the public release**.
+Every unresolved item on this site, in one table: **9 open items** across **5 pages**, of which **1 block the public release**.
 
 This page is the team's working list. It is generated from the `MISSING` / `UNVERIFIED`
 blocks on the pages themselves, so it cannot drift away from them: close a block
@@ -21,23 +21,23 @@ that is not here.
 
 | Section | Open items | Blocking release |
 | --- | ---: | ---: |
-| Assembly | 2 | 0 |
+| Assembly | 1 | 0 |
 | Electrical | 6 | 1 |
 | Bring-up | 2 | 0 |
-| **Total** | **10** | **1** |
+| **Total** | **9** | **1** |
 
 ## Who is holding what
 
 An item owned jointly counts once against each role, so this column sums to
-more than 10.
+more than 9.
 
 | Role | Open items | Of those, blocking |
 | --- | ---: | ---: |
 | Electrical lead | 7 | 1 |
-| Hardware lead | 3 | 0 |
+| Hardware lead | 2 | 0 |
 | Safety sign-off | 2 | 1 |
-| Controls lead | 2 | 0 |
 | BOM owner | 1 | 0 |
+| Controls lead | 1 | 0 |
 
 ## What the release still owes
 
@@ -56,7 +56,6 @@ across every step of every limb, and each carries the flag in its own right.
 
 | Page | What is missing | Who can supply it | Blocks release |
 | --- | --- | --- | :-: |
-| [gripper → Set the open and closed positions (step 7)](../assembly/index.md#step-gripper-7) | The uncalibrated service map reports 90 mm; measure the real gap in step 7 | hardware lead + controls | no |
 | [head-and-camera-gimbal → Route the camera cable (step 7)](../assembly/index.md#step-head-and-camera-gimbal-7) | How the camera cable crosses the yaw axis (travel, service loop, retention). | hardware lead | no |
 
 ## Electrical
