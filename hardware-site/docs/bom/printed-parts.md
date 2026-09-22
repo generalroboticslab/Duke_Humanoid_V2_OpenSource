@@ -10,8 +10,10 @@ their copies of one part are summed. Where the team BOM counts differently, the 
 
 | Team ref | Part ID | Description | Material | Process | Qty | Files |
 | --- | --- | --- | --- | --- | ---: | --- |
-{% for r in pd_read_csv("data/printed-parts.csv", dtype="str", keep_default_na=False).to_dict("records") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.material or "**TODO**{ .dh-missing }" }} | {{ r.process or "**TODO**{ .dh-missing }" }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ cad_links(r.part_id) }} |
+{% for r in pd_read_csv("data/printed-parts.csv", dtype="str", keep_default_na=False).to_dict("records") if not r.part_id.startswith("MAT_") %}| {{ team_ref_cell(r) }} | `{{ r.part_id }}` | {{ r.description }} | {{ r.material or "**TODO**{ .dh-missing }" }} | {{ r.process or "**TODO**{ .dh-missing }" }} | {{ r.qty_per_robot or "**TODO**{ .dh-missing }" }} | {{ cad_links(r.part_id) }} |
 {% endfor %}| | | **Printed total** | | | **{{ bom_qty("printed-parts.csv") }}** | |
+
+Materials — PLA and TPU filament, nylon 12 SLS powder — are lab consumables, not itemised.
 
 
 !!! note "Read off the model — Fusion material name per printed part"
