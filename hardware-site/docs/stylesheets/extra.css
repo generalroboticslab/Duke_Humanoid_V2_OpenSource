@@ -286,3 +286,6 @@
 /* The header link is the lab's project page, not a repository: no star / fork facts
    (Material caches them in the browser from the earlier GitHub URL). */
 .md-source__facts { display: none !important; }
+
+/* Header logo a little larger than the theme default (1.2rem). */
+.md-header__button.md-logo img, .md-header__button.md-logo svg { height: 1.6rem; width: auto; }
