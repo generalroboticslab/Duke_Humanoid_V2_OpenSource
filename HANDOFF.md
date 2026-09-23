@@ -328,7 +328,7 @@ generator prints `×` or `·` to a cp1252 console.
 
 Decided 2026-09-20 (Boxi Xia): **Pages public, repository private.** Every push to `main` runs the strict build
 (`.github/workflows/docs.yml` at the repo root — GitHub reads only that location) and deploys to
-`https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/` (Settings → Pages → Source: GitHub Actions).
+`https://generalroboticslab.github.io/Duke_Humanoid_V2_OpenSource/` (Settings → Pages → Source: GitHub Actions).
 Collaborators need only write access. Everything under `docs/files/` is publicly downloadable from the site;
 the 319 MB `.f3z` release asset stays collaborator-only while the repository is private.
 **Do not force-push `main`**: a force push on 2026-09-21 dropped the publish configuration and the live site

@@ -33,7 +33,7 @@ Assembly STEP (zipped: over GitHub's file-size limit) and the Fusion 360 archive
 
 | File | Size | SHA-256 |
 | --- | ---: | --- |
-| [humanoid_2.1_latest.f3z](https://github.com/rivery927/Duke_Humanoid_V2_OpenSource/releases/download/cad-v2.1-rc1/humanoid_2.1_latest.f3z) (101 linked designs included, release `cad-v2.1-rc1`) | 319 MB | `f440621df68f0775f521c87d02f8a644ae0a65f64ef76b385fdd2bc22a04d420` |
+| [humanoid_2.1_latest.f3z](https://github.com/generalroboticslab/Duke_Humanoid_V2_OpenSource/releases/download/cad-v2.1-rc1/humanoid_2.1_latest.f3z) (101 linked designs included, release `cad-v2.1-rc1`) | 319 MB | `f440621df68f0775f521c87d02f8a644ae0a65f64ef76b385fdd2bc22a04d420` |
 
 ### Modules
 

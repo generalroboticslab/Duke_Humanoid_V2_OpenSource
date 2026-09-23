@@ -3,7 +3,7 @@ site_description: >-
   The hardware release for Duke Humanoid V2: bill of materials, fabrication data,
   assembly, wiring and bring-up, so that a second identical robot can be built.
 site_author: General Robotics Lab, Duke University
-site_url: https://rivery927.github.io/Duke_Humanoid_V2_OpenSource/
+site_url: https://generalroboticslab.github.io/Duke_Humanoid_V2_OpenSource/
 
 repo_url: https://generalroboticslab.com/DukeHumanoidV2
 repo_name: GRL project page
